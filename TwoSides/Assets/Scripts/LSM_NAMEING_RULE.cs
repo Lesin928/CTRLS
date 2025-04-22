@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// 스크립트들의 기본 구조를 작성한 클래스.
 /// </summary>
-public class NAMEING_RULE : MonoBehaviour
+public class LSM_NAMEING_RULE : MonoBehaviour
 {
     //public 변수 먼저 선언
     public float moveSpeed = 5f;
