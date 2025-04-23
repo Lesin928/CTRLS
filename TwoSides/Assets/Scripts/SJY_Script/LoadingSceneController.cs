@@ -29,7 +29,7 @@ public class LoadingSceneController : MonoBehaviour
 
     private static LoadingSceneController Create()
     {
-        return Instantiate(Resources.Load<LoadingSceneController>("LoadingUI"));
+        return Instantiate(Resources.Load<LoadingSceneController>("Prefabs/LoadingUI"));
     }
 
     private void Awake()

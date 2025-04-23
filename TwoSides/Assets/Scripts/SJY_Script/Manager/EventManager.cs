@@ -13,38 +13,32 @@ public class EventManager : MonoBehaviour
     private bool isEvent;
     private bool isEventFinished;
     private int scriptIndex;
-    private int maxScriptCount = 2;
-
 
     private void Start()
     {
+        EventScriptManager.Instance.GetScriptId();
         isEventFinished = false;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
-            Event();
+        {
+            Event(id);
+        }
         else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
+        {
             EventPanel.SetActive(false);
+            HUDManager.Instance.ShowHUD();
+        }
     }
 
-    public void Event()
+    public void Event(int id)
     {
-        //랜덤으로 이벤트스크립트 가져오고 사용한 id 제거
-        id = Random.Range(0, maxScriptCount);
         Talk(id);
 
-        //int id;
-        //do
-        //{
-        //    id = Random.Range(0, maxScriptCount);
-        //} while (idCheck[id]);
-
-        //idCheck[id] = true;
-        //Talk(id);
-
         EventPanel.SetActive(isEvent);
+        HUDManager.Instance.HideHUD();
     }
 
     void Talk(int id)

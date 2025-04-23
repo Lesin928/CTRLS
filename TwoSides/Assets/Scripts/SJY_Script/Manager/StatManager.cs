@@ -26,6 +26,23 @@ public class StatManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public static void Init()
+    {
+        if (Instance != null) return;
+
+        UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("StatManager").Completed += handle =>
+        {
+            if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+            {
+                Instantiate(handle.Result);
+            }
+            else
+            {
+                Debug.LogError("Failed to load HUDManager");
+            }
+        };
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))

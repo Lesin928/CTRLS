@@ -4,9 +4,11 @@ using UnityEngine.UI;
 
 public class StoreManager : MonoBehaviour
 {
+    public GameObject Store;
     public Button[] itemButton;
     public Button rerollButton;
     public Text playerGold;
+    public Button exitButton;
 
     private List<ItemData> itemDataList = new List<ItemData>();
     private List<ItemData> currentSelection = new List<ItemData>();
@@ -15,7 +17,17 @@ public class StoreManager : MonoBehaviour
     {
         InitializeItems();
         rerollButton.onClick.AddListener(RerollItems);
+        exitButton.onClick.AddListener(HideStore);
         RerollItems();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Store.SetActive(true);
+            Debug.Log("Store");
+        }
     }
 
     void InitializeItems()
@@ -44,10 +56,11 @@ public class StoreManager : MonoBehaviour
         List<ItemData> copy = new List<ItemData>(itemDataList);
         List<ItemData> result = new List<ItemData>();
 
-        for (int i = 0; i < 4; i++)
+        for (int i = result.Count; i < 5; i++)
         {
             int rand = Random.Range(0, copy.Count);
             result.Add(copy[rand]);
+            copy.RemoveAt(rand);
         }
 
         return result;
@@ -71,13 +84,11 @@ public class StoreManager : MonoBehaviour
     {
         Debug.Log($"구매한 아이템: {item.statType.ToString()}");
 
-        // 여기서 실제 능력치 적용 (예: 플레이어 객체에 접근)
         ApplyItemEffect(item);
     }
 
     void ApplyItemEffect(ItemData item)
     {
-        // 예시: PlayerStatManager 같은 클래스에 적용
         switch (item.statType)
         {
             case StatType.Health:
@@ -91,8 +102,8 @@ public class StoreManager : MonoBehaviour
         }
     }
 
-    void Update()
+    void HideStore()
     {
-
+        Store.SetActive(false);
     }
 }

@@ -1,7 +1,8 @@
 using System.Collections;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,6 +45,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void Init()
+    {
+        if (Instance != null) return;
+
+        Addressables.LoadAssetAsync<GameObject>("GameManager").Completed += handle =>
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                GameObject obj = Instantiate(handle.Result);
+            }
+            else
+            {
+                Debug.LogError("Failed to load GameManager");
+            }
+        };
+    }
+
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
@@ -56,13 +74,10 @@ public class GameManager : MonoBehaviour
         //HUDManager
         if (HUDManager.Instance != null)
         {
-
             HUDManager.Instance.ShowHUD();
             HUDManager.Instance.InitHUD();
 
-
             HUDManager.Instance.StartTrackingTime();
-
         }
 
         //StatManager
@@ -76,16 +91,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(EventScriptManager.Instance.gameObject);
         }
-
-        GameObject prefab = Resources.Load<GameObject>("EventScriptManager");
-        if (prefab != null)
-        {
-            Instantiate(prefab);
-        }
-        else
-        {
-            Debug.LogError("EventScriptManager «¡∏Æ∆’ »Æ¿Œ");
-        }
+        EventScriptManager.Init();
 
         LoadStage(currentStage);
     }
