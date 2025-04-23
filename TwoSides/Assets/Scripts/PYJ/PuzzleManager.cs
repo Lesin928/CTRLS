@@ -33,8 +33,9 @@ public class PuzzleManager : MonoBehaviour
 
 
 
-
+    /// <summary>
     /// 게임 시작 시 퍼즐 생성
+    /// /// </summary>
     void Start()
     {
         CreatePuzzle();
@@ -65,10 +66,16 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+
+
+
+
     /// <summary>
     /// 퍼즐 조각 선택 처리
     /// </summary>
     /// <param name="piece">선택된 퍼즐 조각</param>
+    /// 
+
     public void SelectPiece(PuzzlePiece piece)
     {
         if (selectedPiece == null)
@@ -83,9 +90,16 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+
+
+
+
     /// <summary>
-    /// 두 퍼즐 조각의 이미지와 정답 인덱스를 스왑
-    /// </summary>
+    /// 두 퍼즐 조각의 이미지와 정답 인덱스를 바꾸기
+    /// 
+    /// 두 조각의 그림이 바뀌어야 하고,
+    ///각 조각이 원래 어디 위치에 있어야 했는지도 바뀌어야 퍼즐 완성 여부를 정확히 판단할 수 있음
+
     void SwapPieces(PuzzlePiece a, PuzzlePiece b)
     {
         Sprite tempSprite = a.image.sprite;
@@ -97,6 +111,10 @@ public class PuzzleManager : MonoBehaviour
         b.image.sprite = tempSprite;
         b.CorrectIndex = tempCorrectIndex;
     }
+
+
+
+
 
     /// <summary>
     /// 퍼즐이 완성되었는지 검사
@@ -124,6 +142,8 @@ public class PuzzleManager : MonoBehaviour
             }
         }
     }
+
+
 
 
     /// <summary>

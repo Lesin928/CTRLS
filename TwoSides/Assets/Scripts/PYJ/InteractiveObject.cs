@@ -2,27 +2,48 @@ using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour
 {
-    public GameObject puzzlePanel; // 퍼즐 패널 UI
-    private bool isPlayerInRange = false; // 플레이어가 상호작용 범위 내에 있는지 체크
 
+    // 퍼즐 패널 UI
+    public GameObject puzzlePanel;
+
+    // 플레이어가 상호작용 범위 내에 있는지 체크
+    private bool isPlayerInRange = false;
+
+
+
+
+    /// <summary>
+    /// 퍼즐 패널을 비활성화 (초기 상태)
+    /// </summary>
     private void Start()
     {
-        // 퍼즐 패널을 비활성화 (초기 상태)
+        
         if (puzzlePanel != null)
         {
             puzzlePanel.SetActive(false);
         }
     }
 
+
+
+
+    /// <summary>
+    /// 플레이어가 범위 내에 있고 엔터 키를 누르면 퍼즐 패널을 활성화
+    /// </summary>
     private void Update()
     {
-        // 플레이어가 범위 내에 있고 엔터 키를 누르면 퍼즐 패널을 활성화
+        
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.Return))
         {
             ShowPuzzle();
         }
     }
 
+
+
+    /// <summary>
+    /// 플레이어가 퍼즐 오브젝트와 충돌하였을 때 시작 메시지 출력
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -32,6 +53,12 @@ public class InteractiveObject : MonoBehaviour
         }
     }
 
+
+
+
+    /// <summary>
+    /// 플레이어가 범위 내에 있고 엔터 키를 누르면 퍼즐 패널을 활성화
+    /// </summary>
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -40,9 +67,12 @@ public class InteractiveObject : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 퍼즐 패널을 홯성화
+    /// </summary>
     void ShowPuzzle()
     {
-        // 퍼즐 패널을 활성화
         if (puzzlePanel != null)
         {
             puzzlePanel.SetActive(true);
@@ -50,6 +80,12 @@ public class InteractiveObject : MonoBehaviour
         }
     }
 
+
+
+
+    /// <summary>
+    /// 퍼즐이 완료되면 퍼즐 창을 닫는 메시지 출력
+    /// </summary>
     public void HidePuzzle()
     {
         if (puzzlePanel != null)
