@@ -49,4 +49,13 @@ public class InteractiveObject : MonoBehaviour
             Debug.Log("퍼즐이 시작되었습니다!");
         }
     }
+
+    public void HidePuzzle()
+    {
+        if (puzzlePanel != null)
+        {
+            puzzlePanel.SetActive(false);
+            Debug.Log("퍼즐이 완료되어 창이 닫혔습니다.");
+        }
+    }
 }
