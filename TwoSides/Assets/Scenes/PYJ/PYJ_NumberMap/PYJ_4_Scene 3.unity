@@ -370,8 +370,8 @@ GameObject:
   - component: {fileID: 109169048}
   - component: {fileID: 109169047}
   - component: {fileID: 109169049}
-  m_Layer: 0
-  m_Name: wall
+  m_Layer: 9
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4025,8 +4025,8 @@ GameObject:
   - component: {fileID: 1544689682}
   - component: {fileID: 1544689681}
   - component: {fileID: 1544689683}
-  m_Layer: 0
-  m_Name: map
+  m_Layer: 10
+  m_Name: Thin Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5575,8 +5575,8 @@ GameObject:
   - component: {fileID: 1745671189}
   - component: {fileID: 1745671188}
   - component: {fileID: 1745671187}
-  m_Layer: 0
-  m_Name: floor
+  m_Layer: 8
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9272,37 +9272,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1862040225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1862040226}
-  m_Layer: 0
-  m_Name: Stairs
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1862040226
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1862040225}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1882171548}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1882171547
 GameObject:
   m_ObjectHideFlags: 0
@@ -9332,9 +9301,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1544689680}
-  - {fileID: 1862040226}
   - {fileID: 2028608371}
+  - {fileID: 1544689680}
   - {fileID: 1745671186}
   - {fileID: 109169046}
   m_Father: {fileID: 340376522}

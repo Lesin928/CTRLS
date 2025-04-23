@@ -370,8 +370,8 @@ GameObject:
   - component: {fileID: 109169048}
   - component: {fileID: 109169047}
   - component: {fileID: 109169049}
-  m_Layer: 0
-  m_Name: wall
+  m_Layer: 9
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3461,8 +3461,8 @@ GameObject:
   - component: {fileID: 1745671189}
   - component: {fileID: 1745671188}
   - component: {fileID: 1745671187}
-  m_Layer: 0
-  m_Name: floor
+  m_Layer: 8
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6177,8 +6177,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2047630363}
   - {fileID: 2028608371}
+  - {fileID: 2047630363}
   - {fileID: 1745671186}
   - {fileID: 109169046}
   - {fileID: 2038410923}
@@ -75568,8 +75568,8 @@ GameObject:
   - component: {fileID: 2047630365}
   - component: {fileID: 2047630364}
   - component: {fileID: 2047630366}
-  m_Layer: 0
-  m_Name: map
+  m_Layer: 10
+  m_Name: Thin Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
