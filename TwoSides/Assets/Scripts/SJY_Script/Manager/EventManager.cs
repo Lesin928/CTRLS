@@ -29,7 +29,7 @@ public class EventManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
         {
             EventPanel.SetActive(false);
-            HUDManager.Instance.ShowHUD();
+            HUDManager.Instance.ResumGame();
         }
     }
 
@@ -38,7 +38,7 @@ public class EventManager : MonoBehaviour
         Talk(id);
 
         EventPanel.SetActive(isEvent);
-        HUDManager.Instance.HideHUD();
+        HUDManager.Instance.PauseGame();
     }
 
     void Talk(int id)

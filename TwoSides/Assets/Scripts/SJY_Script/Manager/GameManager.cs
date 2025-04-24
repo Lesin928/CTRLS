@@ -148,6 +148,9 @@ public class GameManager : MonoBehaviour
     public void AddGold(int amount)
     {
         playerGold += amount;
+
+        if (playerGold <= 0)
+            playerGold = 0;
         HUDManager.Instance.AddGold(amount);
     }
 

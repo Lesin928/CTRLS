@@ -136,9 +136,23 @@ public class HUDManager : MonoBehaviour
         isTrackingTime = false;
     }
 
-    public void ResumeTrackingTime()
+    public void ResumTrackingTime()
     {
         isTrackingTime = true;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        HUDManager.Instance?.HideHUD();
+        HUDManager.Instance?.PauseTrackingTime();
+    }
+
+    public void ResumGame()
+    {
+        Time.timeScale = 1f;
+        HUDManager.Instance?.ShowHUD();
+        HUDManager.Instance?.ResumTrackingTime();
     }
 
     private void UpdateTimeText()

@@ -64,16 +64,12 @@ public class StatManager : MonoBehaviour
 
         if (isOpen)
         {
-            Time.timeScale = 0f;
-            HUDManager.Instance?.HideHUD();
-            HUDManager.Instance?.PauseTrackingTime();
+            HUDManager.Instance.PauseGame();
             UpdateStatText();
         }
         else
         {
-            Time.timeScale = 0f;
-            HUDManager.Instance?.ShowHUD();
-            HUDManager.Instance?.ResumeTrackingTime();
+            HUDManager.Instance.ResumGame();
         }
     }
 

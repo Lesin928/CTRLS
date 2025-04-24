@@ -17,7 +17,7 @@ public class StoreManager : MonoBehaviour
     {
         InitializeItems();
         rerollButton.onClick.AddListener(RerollItems);
-        exitButton.onClick.AddListener(HideStore);
+        exitButton.onClick.AddListener(ExitStore);
         RerollItems();
     }
 
@@ -26,6 +26,7 @@ public class StoreManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             Store.SetActive(true);
+            HUDManager.Instance.PauseGame();
             Debug.Log("Store");
         }
     }
@@ -49,6 +50,7 @@ public class StoreManager : MonoBehaviour
     {
         currentSelection = GetRandomItems();
         UpdateItemUI();
+        GameManager.Instance.AddGold(-10);
     }
 
     List<ItemData> GetRandomItems()
@@ -77,6 +79,8 @@ public class StoreManager : MonoBehaviour
             int index = i; // 클로저 문제 방지
             itemButton[i].onClick.RemoveAllListeners();
             itemButton[i].onClick.AddListener(() => OnItemSelected(currentSelection[index]));
+
+            playerGold.text = $"Gold : {GameManager.Instance.playerGold}";
         }
     }
 
@@ -84,6 +88,7 @@ public class StoreManager : MonoBehaviour
     {
         Debug.Log($"구매한 아이템: {item.statType.ToString()}");
 
+        GameManager.Instance.AddGold(-50);
         ApplyItemEffect(item);
     }
 
@@ -102,8 +107,9 @@ public class StoreManager : MonoBehaviour
         }
     }
 
-    void HideStore()
+    void ExitStore()
     {
         Store.SetActive(false);
+        HUDManager.Instance.ResumGame();
     }
 }
