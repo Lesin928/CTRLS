@@ -9,22 +9,27 @@ public class StoreManager : MonoBehaviour
     public Button rerollButton;
     public Text playerGold;
     public Button exitButton;
+    public bool isStoreOpen;
 
     private List<ItemData> itemDataList = new List<ItemData>();
     private List<ItemData> currentSelection = new List<ItemData>();
 
     void Start()
     {
+        isStoreOpen = false;
+
         InitializeItems();
         rerollButton.onClick.AddListener(RerollItems);
         exitButton.onClick.AddListener(ExitStore);
-        RerollItems();
+
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
+            isStoreOpen = !isStoreOpen;
+            RerollItems();
             Store.SetActive(true);
             HUDManager.Instance.PauseGame();
             Debug.Log("Store");
@@ -48,9 +53,16 @@ public class StoreManager : MonoBehaviour
 
     void RerollItems()
     {
+        if (isStoreOpen)
+        {
+            if (GameManager.Instance.playerGold - 10 < 0)
+                return;
+            else
+                GameManager.Instance.SetGold(-10);
+        }
+
         currentSelection = GetRandomItems();
         UpdateItemUI();
-        GameManager.Instance.AddGold(-10);
     }
 
     List<ItemData> GetRandomItems()
@@ -86,9 +98,12 @@ public class StoreManager : MonoBehaviour
 
     void OnItemSelected(ItemData item)
     {
+        if (GameManager.Instance.playerGold - 50 < 0)   //임시로 50    경고음 추가하기
+            return;
+
         Debug.Log($"구매한 아이템: {item.statType.ToString()}");
 
-        GameManager.Instance.AddGold(-50);
+        GameManager.Instance.SetGold(-50);
         ApplyItemEffect(item);
     }
 
@@ -98,11 +113,35 @@ public class StoreManager : MonoBehaviour
         {
             case StatType.Health:
                 Debug.Log($"Health +{item.value}");
-                GameManager.Instance.AddHealth(item.value);
+                GameManager.Instance.SetHealth(item.value);
                 break;
             case StatType.MaxHealth:
                 Debug.Log($"MaxHealth +{item.value}");
-                GameManager.Instance.AddMaxHealth(item.value);
+                GameManager.Instance.SetMaxHealth(item.value);
+                break;
+            case StatType.Armor:
+                Debug.Log($"Armor +{item.value}");
+                GameManager.Instance.SetMaxHealth(item.value);
+                break;
+            case StatType.Attack:
+                Debug.Log($"Attack +{item.value}");
+                GameManager.Instance.SetMaxHealth(item.value);
+                break;
+            case StatType.AttackSpeed:
+                Debug.Log($"AttackSpeed +{item.value}");
+                GameManager.Instance.SetMaxHealth(item.value);
+                break;
+            case StatType.MoveSpeed:
+                Debug.Log($"MoveSpeed +{item.value}");
+                GameManager.Instance.SetMaxHealth(item.value);
+                break;
+            case StatType.Critical:
+                Debug.Log($"Critical +{item.value}");
+                GameManager.Instance.SetMaxHealth(item.value);
+                break;
+            case StatType.CriticalDamage:
+                Debug.Log($"CriticalDamage +{item.value}");
+                GameManager.Instance.SetMaxHealth(item.value);
                 break;
         }
     }

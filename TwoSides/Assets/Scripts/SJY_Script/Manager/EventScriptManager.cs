@@ -8,6 +8,7 @@ public class EventScriptManager : MonoBehaviour
     Dictionary<int, string[]> EventScript;
     private bool[] idCheck;
     private int maxScriptCount = 3;
+    private bool isFirstTime;
 
     private void Awake()
     {
@@ -43,17 +44,18 @@ public class EventScriptManager : MonoBehaviour
 
     private void Start()
     {
+        isFirstTime = true;
         idCheck = new bool[maxScriptCount];
     }
 
     private void GenerateScript()
     {
         EventScript.Add(0, new string[] { "임시 이벤트1",
-            "1. maxHp +10, hp -10\n2. maxHp -10, hp +10"});
+            "1. maxHp +10, hp -10\n\n2. maxHp -10, hp +10"});
         EventScript.Add(1, new string[] { "임시 이벤트2",
-            "1. maxHp +30, hp -30\n2. maxHp -30, hp +30"});
+            "1. maxHp +30, hp -30\n\n2. maxHp -30, hp +30"});
         EventScript.Add(2, new string[] { "임시 이벤트3",
-            "test1\n2. test2"});
+            "1. test1\n\n2. test2"});
     }
 
     public string GetEventScript(int id, int scriptIndex)
@@ -63,7 +65,6 @@ public class EventScriptManager : MonoBehaviour
             idCheck[id] = true;
             return null;
         }
-
         else
             return EventScript[id][scriptIndex];
     }
@@ -72,11 +73,20 @@ public class EventScriptManager : MonoBehaviour
     {
         int id;
 
-        do
+        if (isFirstTime)
         {
+            isFirstTime = false;
             id = Random.Range(0, maxScriptCount);
-        } while (isUsedId(id));
+        }
+        else
+        {
+            do
+            {
+                id = Random.Range(0, maxScriptCount);
+            } while (idCheck[id]);
+        }
 
+        idCheck[id] = true;
         return id;
     }
 
@@ -94,25 +104,25 @@ public class EventScriptManager : MonoBehaviour
             case 0:
                 if (num == 1)
                 {
-                    GameManager.Instance.AddMaxHealth(10);
-                    GameManager.Instance.AddHealth(-10);
+                    GameManager.Instance.SetMaxHealth(10);
+                    GameManager.Instance.SetHealth(-10);
                 }
                 else
                 {
-                    GameManager.Instance.MinusMaxHealth(10);
-                    GameManager.Instance.AddHealth(10);
+                    GameManager.Instance.SetMaxHealth(10);
+                    GameManager.Instance.SetHealth(10);
                 }
                 break;
             case 1:
                 if (num == 1)
                 {
-                    GameManager.Instance.AddMaxHealth(30);
-                    GameManager.Instance.AddHealth(-30);
+                    GameManager.Instance.SetMaxHealth(30);
+                    GameManager.Instance.SetHealth(-30);
                 }
                 else
                 {
-                    GameManager.Instance.MinusMaxHealth(30);
-                    GameManager.Instance.AddHealth(30);
+                    GameManager.Instance.SetMaxHealth(30);
+                    GameManager.Instance.SetHealth(30);
                 }
                 break;
             case 2:

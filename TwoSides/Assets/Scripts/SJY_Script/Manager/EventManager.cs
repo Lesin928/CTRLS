@@ -16,7 +16,7 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        EventScriptManager.Instance.GetScriptId();
+        id = EventScriptManager.Instance.GetScriptId();
         isEventFinished = false;
     }
 
@@ -33,7 +33,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void Event(int id)
+    void Event(int id)
     {
         Talk(id);
 
@@ -62,7 +62,7 @@ public class EventManager : MonoBehaviour
         scriptIndex++;
     }
 
-    public void OnClickButton1()
+    void OnClickButton1()
     {
         isEvent = false;
         isEventFinished = true;
@@ -75,7 +75,7 @@ public class EventManager : MonoBehaviour
         EventText.text = "1번을 선택하셨습니다";
     }
 
-    public void OnClickButton2()
+    void OnClickButton2()
     {
         isEvent = false;
         isEventFinished = true;
