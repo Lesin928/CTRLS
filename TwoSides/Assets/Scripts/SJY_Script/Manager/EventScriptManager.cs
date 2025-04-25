@@ -56,13 +56,16 @@ public class EventScriptManager : MonoBehaviour
             "1. maxHp +30, hp -30\n\n2. maxHp -30, hp +30"});
         EventScript.Add(2, new string[] { "임시 이벤트3",
             "1. test1\n\n2. test2"});
+        EventScript.Add(100, new string[] { "이곳은 튜토리얼 테스트입니다.",
+            "1스테이지에서 열립니다",
+            "마지막 문장입니다"});
     }
 
     public string GetEventScript(int id, int scriptIndex)
     {
         if (scriptIndex == EventScript[id].Length)
         {
-            idCheck[id] = true;
+            //idCheck[id] = true;
             return null;
         }
         else
@@ -88,13 +91,6 @@ public class EventScriptManager : MonoBehaviour
 
         idCheck[id] = true;
         return id;
-    }
-
-    public bool isUsedId(int id)
-    {
-        if (idCheck[id])
-            return true;
-        return false;
     }
 
     public void EventResultUpdate(int id, int num)

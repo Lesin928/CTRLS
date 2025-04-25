@@ -69,7 +69,7 @@ public class LoadingSceneController : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1.5f);
 
         op.allowSceneActivation = true;
     }

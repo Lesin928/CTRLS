@@ -26,9 +26,9 @@ public class StoreManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
         {
-            isStoreOpen = !isStoreOpen;
+            isStoreOpen = true;
             RerollItems();
             Store.SetActive(true);
             HUDManager.Instance.PauseGame();
@@ -148,6 +148,7 @@ public class StoreManager : MonoBehaviour
 
     void ExitStore()
     {
+        isStoreOpen = false;
         Store.SetActive(false);
         HUDManager.Instance.ResumGame();
     }
