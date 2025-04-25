@@ -8,6 +8,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PYJ_Scene/PYJ_Main.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/GameClear.unity
+    guid: f731990da6e215947940bf467667b640
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/GameOver.unity
+    guid: cc62e4466810a6849ad43a99ca37161d
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Stage_1.unity
+    guid: 4dfe0865967d887449af81f422245cfb
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Stage_2.unity
+    guid: c13f0265786edc142b7cd315d6632b99
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Stage_3.unity
+    guid: 85aa6581ce798f446b91b22232a3a357
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Stage_4.unity
+    guid: 69e49526f6621074985e4895599a5a5e
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Title.unity
+    guid: 0b2a49d5d1f8cc9429dda97a591c1b13
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
