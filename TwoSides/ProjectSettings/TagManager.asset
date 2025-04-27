@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - Ground
+  - Wall
+  - Thin Ground
+  - Thin Wall
   - 
   - 
   - 
@@ -41,3 +41,26 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI
+    uniqueID: 1645614111
+    locked: 0
+  - name: Player
+    uniqueID: 3606209835
+    locked: 0
+  - name: Enemy
+    uniqueID: 994003343
+    locked: 0
+  - name: NPC
+    uniqueID: 3930742425
+    locked: 0
+  - name: Object
+    uniqueID: 2287730029
+    locked: 0
+  - name: Background
+    uniqueID: 2606886185
+    locked: 0
+  - name: Sky
+    uniqueID: 1420104031
+    locked: 0
+  m_RenderingLayers:
+  - Default

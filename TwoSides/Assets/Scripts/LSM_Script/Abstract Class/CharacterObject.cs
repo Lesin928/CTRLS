@@ -8,7 +8,7 @@ using UnityEngine;
 /// 캐릭터 능력치 추상 클래스,
 /// 모든 캐릭터는 이 클래스를 상속받아야 함 
 /// </summary>
-public abstract class Character_Stat : MonoBehaviour
+public abstract class CharacterObject : MonoBehaviour
 {
     public float maxHp; //최대체력
     public float currentHp; //현재 체력
@@ -40,5 +40,7 @@ public abstract class Character_Stat : MonoBehaviour
     /// </summary>
     /// <param name="damage"> 공격 주체가 주는 최종데미지 </param>
     public abstract void TakeDamage(float damage);
+
+    public abstract void Die();
 
 }
