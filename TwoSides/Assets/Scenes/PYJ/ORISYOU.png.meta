@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ORISYOU_0: 2721285595868448122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

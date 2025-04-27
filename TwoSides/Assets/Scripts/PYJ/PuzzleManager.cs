@@ -135,7 +135,7 @@ public class PuzzleManager : MonoBehaviour
         {
             Debug.Log("퍼즐 완성!");
             // 퍼즐이 완성되면 퍼즐 패널을 닫는다
-            InteractiveObject interactiveObject = FindObjectOfType<InteractiveObject>();
+            InteractiveObject interactiveObject = Object.FindFirstObjectByType<InteractiveObject>();
             if (interactiveObject != null)
             {
                 interactiveObject.HidePuzzle(); // 퍼즐 패널 숨기기
