@@ -30,5 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SJY_Scene/Title.unity
     guid: 0b2a49d5d1f8cc9429dda97a591c1b13
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 00f4361b353015c418b9931315193562, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
