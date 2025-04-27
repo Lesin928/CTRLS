@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -9,52 +10,56 @@ public class EventManager : MonoBehaviour
     public Button EventButton1;
     public Button EventButton2;
 
+    //이벤트 아닌 일반대화 전용
+    public static int TUTORIAL = 100;
+
     private int id;
-    private bool isEvent;
     private bool isEventFinished;
     private int scriptIndex;
-    private int maxScriptCount = 2;
-
 
     private void Start()
     {
+        // 이벤트맵이 아닌 다른 곳에서 사용시 elseif를 걸어서 사용해 주세요
+        // ex) 보스스테이지 GameManager.Instance.currentStage == 15
+        if (GameManager.Instance.currentStage == 1)
+            id = TUTORIAL;
+        else
+            id = EventScriptManager.Instance.GetScriptId();
         isEventFinished = false;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
-            Event();
+        {
+            Event(id);
+            EventPanel.SetActive(true);
+        }
         else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
-            EventPanel.SetActive(false);
+        {
+            ExitEvent();
+        }
     }
 
-    public void Event()
+    private void ExitEvent()
     {
-        //랜덤으로 이벤트스크립트 가져오고 사용한 id 제거
-        id = Random.Range(0, maxScriptCount);
-        Talk(id);
-
-        //int id;
-        //do
-        //{
-        //    id = Random.Range(0, maxScriptCount);
-        //} while (idCheck[id]);
-
-        //idCheck[id] = true;
-        //Talk(id);
-
-        EventPanel.SetActive(isEvent);
+        EventPanel.SetActive(false);
+        HUDManager.Instance.ResumGame();
     }
 
-    void Talk(int id)
+    void Event(int id)
+    {
+        EventTalk(id);
+
+        HUDManager.Instance.PauseGame();
+    }
+
+    void EventTalk(int id)
     {
         string text = EventScriptManager.Instance.GetEventScript(id, scriptIndex);
 
         if (text == null)
         {
-            scriptIndex = 0;
-
             EventButton1.gameObject.SetActive(true);
             EventButton2.gameObject.SetActive(true);
 
@@ -62,15 +67,18 @@ public class EventManager : MonoBehaviour
             EventButton2.onClick.AddListener(OnClickButton2);
         }
         else
+        {
             EventText.text = text;
+            scriptIndex++;
 
-        isEvent = true;
-        scriptIndex++;
+            //일반 대화 탈출 조건
+            if (id == TUTORIAL && scriptIndex == 3)
+                isEventFinished = true;
+        }
     }
 
-    public void OnClickButton1()
+    void OnClickButton1()
     {
-        isEvent = false;
         isEventFinished = true;
 
         EventButton1.gameObject.SetActive(false);
@@ -81,9 +89,8 @@ public class EventManager : MonoBehaviour
         EventText.text = "1번을 선택하셨습니다";
     }
 
-    public void OnClickButton2()
+    void OnClickButton2()
     {
-        isEvent = false;
         isEventFinished = true;
 
         EventButton1.gameObject.SetActive(false);

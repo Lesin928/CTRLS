@@ -32,9 +32,24 @@ public class HUDManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        //Instance.gameObject.SetActive(true);
-
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public static void Init()
+    {
+        if (Instance != null) return;
+
+        UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("HUDManager").Completed += handle =>
+        {
+            if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+            {
+                Instantiate(handle.Result);
+            }
+            else
+            {
+                Debug.LogError("Failed to load HUDManager");
+            }
+        };
     }
 
     private void Update()
@@ -82,7 +97,7 @@ public class HUDManager : MonoBehaviour
         Debug.Log($"Health: {health}/{maxHealth}");
     }
 
-    public void AddGold(int amount)
+    public void SetGold(int amount)
     {
         gold += amount;
         UpdateHUD();
@@ -121,9 +136,23 @@ public class HUDManager : MonoBehaviour
         isTrackingTime = false;
     }
 
-    public void ResumeTrackingTime()
+    public void ResumTrackingTime()
     {
         isTrackingTime = true;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        HUDManager.Instance?.HideHUD();
+        HUDManager.Instance?.PauseTrackingTime();
+    }
+
+    public void ResumGame()
+    {
+        Time.timeScale = 1f;
+        HUDManager.Instance?.ShowHUD();
+        HUDManager.Instance?.ResumTrackingTime();
     }
 
     private void UpdateTimeText()

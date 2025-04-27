@@ -1,7 +1,8 @@
 using System.Collections;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,10 +10,17 @@ public class GameManager : MonoBehaviour
 
     public int currentStage = 1;
     public int maxStage = 3;
+
     public int playerGold;
+
     public float playerHealth;
     public float maxHealth;
+    public float playerArmor;
     public float playerAttack;
+    public float playerAttackSpeed;
+    public float playerMoveSpeed;
+    public float playerCritical;
+    public float playerCriticalDamage;
 
     //public int stageType;
 
@@ -44,6 +52,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void Init()
+    {
+        if (Instance != null) return;
+
+        Addressables.LoadAssetAsync<GameObject>("GameManager").Completed += handle =>
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                GameObject obj = Instantiate(handle.Result);
+            }
+            else
+            {
+                Debug.LogError("Failed to load GameManager");
+            }
+        };
+    }
+
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
@@ -56,13 +81,10 @@ public class GameManager : MonoBehaviour
         //HUDManager
         if (HUDManager.Instance != null)
         {
-
             HUDManager.Instance.ShowHUD();
             HUDManager.Instance.InitHUD();
 
-
             HUDManager.Instance.StartTrackingTime();
-
         }
 
         //StatManager
@@ -76,16 +98,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(EventScriptManager.Instance.gameObject);
         }
-
-        GameObject prefab = Resources.Load<GameObject>("EventScriptManager");
-        if (prefab != null)
-        {
-            Instantiate(prefab);
-        }
-        else
-        {
-            Debug.LogError("EventScriptManager ÇÁ¸®ÆÕ È®ÀÎ");
-        }
+        EventScriptManager.Init();
 
         LoadStage(currentStage);
     }
@@ -139,10 +152,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => op.isDone);
     }
 
-    public void AddGold(int amount)
+    public void SetGold(int amount)
     {
         playerGold += amount;
-        HUDManager.Instance.AddGold(amount);
+
+        if (playerGold <= 0)
+            playerGold = 0;
+        HUDManager.Instance.SetGold(amount);
     }
 
     public void TakeDamage(float damage)
@@ -156,7 +172,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddHealth(float amount)
+    public void SetHealth(float amount)
     {
         playerHealth += amount;
 
@@ -165,18 +181,17 @@ public class GameManager : MonoBehaviour
             playerHealth = maxHealth;
         }
 
+        if (playerHealth <= 0)
+        {
+            GameOver();
+        }
+
         HUDManager.Instance.SetHealth(playerHealth);
     }
 
-    public void AddMaxHealth(float amount)
+    public void SetMaxHealth(float amount)
     {
         maxHealth += amount;
-        HUDManager.Instance.SetMaxHealth(maxHealth);
-    }
-
-    public void MinusMaxHealth(float amount)
-    {
-        maxHealth -= amount;
         HUDManager.Instance.SetMaxHealth(maxHealth);
 
         if (playerHealth >= maxHealth)
@@ -194,12 +209,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddGold(10);
+            SetGold(10);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            AddHealth(10);
+            SetHealth(10);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -220,12 +235,12 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            AddMaxHealth(10);
+            SetMaxHealth(10);
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            MinusMaxHealth(10);
+            SetMaxHealth(10);
         }
 
         //if (Input.GetKeyDown(KeyCode.T))
