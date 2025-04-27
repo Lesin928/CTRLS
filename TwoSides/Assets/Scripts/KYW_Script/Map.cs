@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
@@ -17,10 +18,14 @@ public class Map : MonoBehaviour
     public GameObject bossPrefab; // 보스 노드 시각화 프리팹
     public RectTransform backgroundBoxPrefab; // 배경 박스 프리팹 (빈 Image UI 등)
     private static bool mapGenerated = false;
+    public int LEVEL; // 인스펙터에서 설정할 레벨
+    private MapNode currentNode; // 현재 선택한 노드
+
     void Start()
     {
         if (mapGenerated) return;
-
+        nodeParent.SetAsLastSibling(); // 🔥 NodePanel을 맨 위로 보낸다
+        lineParent.SetAsFirstSibling(); // 🔥 LinePanel을 맨 뒤로 보낸다
         GenerateGrid();
         GeneratePaths();
         AssignNodeTypes();
@@ -30,6 +35,74 @@ public class Map : MonoBehaviour
         CreateBackgroundBox();
 
         mapGenerated = true;
+    }
+
+    private int previousLevel = -1;
+
+    void Update()
+    {
+        if (LEVEL != previousLevel)
+        {
+            RefreshButtonStates();
+            previousLevel = LEVEL;
+        }
+    }
+
+    void RefreshButtonStates()
+    {
+        // 1. 모든 버튼 비활성화
+        foreach (MapNode node in grid)
+        {
+            if (node == null) continue;
+
+            Button button = node.GetComponentInChildren<Button>();
+            if (button != null)
+            {
+                button.interactable = false;
+            }
+        }
+
+        // 2. currentNode가 null이면(처음 시작) 0층에서 찾기
+        if (currentNode == null)
+        {
+            for (int col = 0; col < columns; col++)
+            {
+                MapNode node = grid[col, LEVEL];
+                if (node == null) continue;
+
+                Button button = node.GetComponentInChildren<Button>();
+                if (button != null)
+                {
+                    button.interactable = true;
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => OnNodeButtonClicked(node));
+                }
+            }
+        }
+        else
+        {
+            // 3. currentNode가 있으면 연결된 노드 중 LEVEL이 맞는 것만 활성화
+            foreach (var nextNode in currentNode.connectedNodes)
+            {
+                if (nextNode == null) continue;
+                if (nextNode.floor != LEVEL) continue; // 🔥 다음 층에 있는 노드만
+
+                Button button = nextNode.GetComponentInChildren<Button>();
+                if (button != null)
+                {
+                    button.interactable = true;
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() => OnNodeButtonClicked(nextNode));
+                }
+            }
+        }
+    }
+
+
+    void OnNodeButtonClicked(MapNode node)
+    {
+        currentNode = node; // 🔥 클릭한 노드를 현재 노드로 설정
+        LEVEL++; // 🔥 LEVEL 올리기
     }
 
 
@@ -108,6 +181,7 @@ public class Map : MonoBehaviour
         Vector2 pos = new Vector2(col * 150f + offsetX, y); // Y는 음수 없음
 
         GameObject obj = Instantiate(nodePrefab, nodeParent);
+        obj.name = $"NODE{floor}";
         RectTransform rt = obj.GetComponent<RectTransform>();
         rt.anchoredPosition = pos;
 
@@ -207,9 +281,9 @@ public class Map : MonoBehaviour
 
     void UpdateNodeVisual(MapNode node)
     {
-        GameObject prefabToUse = null; // 사용할 프리팹
+        GameObject prefabToUse = null;
 
-        switch (node.type) // 노드 타입에 따라 프리팹 선택
+        switch (node.type)
         {
             case NodeType.Battle: prefabToUse = battlePrefab; break;
             case NodeType.Mystery: prefabToUse = mysteryPrefab; break;
@@ -220,12 +294,19 @@ public class Map : MonoBehaviour
 
         if (prefabToUse != null)
         {
-            GameObject visual = Instantiate(prefabToUse, node.transform); // 자식으로 생성
+            GameObject visual = Instantiate(prefabToUse, node.transform);
             RectTransform rt = visual.GetComponent<RectTransform>();
-            rt.anchoredPosition = Vector2.zero; // 중앙 정렬
+            rt.anchoredPosition = Vector2.zero;
 
+            // 🔥 여기서 Button 컴포넌트 활성/비활성 제어 추가
+            UnityEngine.UI.Button button = visual.GetComponent<UnityEngine.UI.Button>();
+            if (button != null)
+            {
+                button.interactable = (node.floor == LEVEL);
+            }
         }
     }
+
     void CreateBackgroundBox()
     {
         float nodeWidth = 150f;
@@ -234,25 +315,23 @@ public class Map : MonoBehaviour
         float mapWidth = columns * nodeWidth;
         float mapHeight = (floors + 1) * nodeHeight;
 
-        // 박스의 중심을 정확히 맞추기
-        // X: 가운데 정렬
-        float offsetX = -mapWidth / 2f + nodeWidth / 2f;
+        // 🔥 중심 기준으로 포지션 (0,10) 조정
+        Vector2 position = new Vector2(0f, 10f);
 
-        // Y: 0층이 Y=0이므로, 맨 위까지 가는 중앙 위치는 /2
-        float offsetY = mapHeight / 2f - nodeHeight / 2f;
+        RectTransform mapPanel = nodeParent.parent.GetComponent<RectTransform>();
+        RectTransform box = Instantiate(backgroundBoxPrefab, mapPanel);
 
-        Vector2 position = new Vector2(mapWidth / 2f + offsetX - 50f, offsetY);
-
-        RectTransform box = Instantiate(backgroundBoxPrefab, nodeParent);
         box.anchoredPosition = position;
 
-        //크기를 정확히 키우기: 노드 전체 영역보다 더 크게 감싸고 싶으면 여유를 추가해도 됨
         float padding = 50f;
         box.sizeDelta = new Vector2(mapWidth + padding, mapHeight + padding);
 
-        // 맨 뒤로 보내기
-        box.SetAsFirstSibling();
+        int linePanelIndex = lineParent.GetSiblingIndex();
+        box.SetSiblingIndex(linePanelIndex);
     }
+
+
+
 
 
 }

@@ -296,6 +296,7 @@ MonoBehaviour:
   treasurePrefab: {fileID: 1244344009070172991, guid: 11b176110e8ed18479e54c5abf3b341d, type: 3}
   bossPrefab: {fileID: 6897683342135397236, guid: 8d4dc64fc22b04148a5983aa90976859, type: 3}
   backgroundBoxPrefab: {fileID: 3921770571248259656, guid: 7dccab7542a27544d9025e0f020ac1c4, type: 3}
+  LEVEL: 0
 --- !u!224 &178857376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -639,6 +640,7 @@ GameObject:
   - component: {fileID: 1311466344}
   - component: {fileID: 1311466343}
   - component: {fileID: 1311466347}
+  - component: {fileID: 1311466348}
   m_Layer: 5
   m_Name: MAPCanvas
   m_TagString: Untagged
@@ -742,6 +744,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e341109dfbcec6443a7f8cc954965b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1311466348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311466342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &1445717972
 GameObject:
   m_ObjectHideFlags: 0
