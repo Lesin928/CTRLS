@@ -1,5 +1,5 @@
 using UnityEngine;
-
+   
 public class PlayerJump : MonoBehaviour
 {
     public float moveSpeed = 5f;
