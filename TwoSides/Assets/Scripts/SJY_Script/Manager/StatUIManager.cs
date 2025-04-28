@@ -10,6 +10,11 @@ public class StatUIManager : MonoBehaviour
 
     public Text healthText;
     public Text attackText;
+    public Text attackSpeedText;
+    public Text criticalText;
+    public Text criticalDamageText;
+    public Text armorText;
+    public Text moveSpeedText;
     public Text goldText;
 
     private bool isOpen = false;
@@ -79,6 +84,11 @@ public class StatUIManager : MonoBehaviour
 
         healthText.text = $"HP : {gm.playerHealth} / {gm.maxHealth}";
         attackText.text = $"Attack : {gm.playerAttack}";
+        attackSpeedText.text = $"AttackSpeed : {gm.playerAttackSpeed}%";
+        criticalText.text = $"Critical : {gm.playerCritical}%";
+        criticalDamageText.text = $"CriticalDamage : {gm.playerCriticalDamage}%";
+        armorText.text = $"Armor : {gm.playerArmor}";
+        moveSpeedText.text = $"MoveSpeed : {gm.playerMoveSpeed}%";
         goldText.text = $"Gold : {gm.playerGold}";
     }
 }
