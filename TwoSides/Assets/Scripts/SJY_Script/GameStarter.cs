@@ -11,7 +11,7 @@ public class GameStarter : MonoBehaviour
 
         GameManager.Init();
         HUDManager.Init();
-        StatManager.Init();
+        StatUIManager.Init();
         OptionUIManager.Init();
     }
 }

@@ -87,10 +87,10 @@ public class GameManager : MonoBehaviour
             HUDManager.Instance.StartTrackingTime();
         }
 
-        //StatManager
-        if (StatManager.Instance != null)
+        //StatUIManager
+        if (StatUIManager.Instance != null)
         {
-            StatManager.Instance.InitStatWindow();
+            StatUIManager.Instance.InitStatWindow();
         }
 
         //EventScriptManager
@@ -224,8 +224,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("CurrentStage : Stage_" + currentStage
-                        + "\nMaxStage : " + maxStage);
+            StartNewGame();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -240,7 +239,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            SetMaxHealth(10);
+            SetMaxHealth(-10);
         }
 
         //if (Input.GetKeyDown(KeyCode.T))

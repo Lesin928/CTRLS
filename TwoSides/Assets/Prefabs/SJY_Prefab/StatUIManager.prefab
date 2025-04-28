@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 524436785032650821}
   - component: {fileID: 9116608544940294003}
   m_Layer: 5
-  m_Name: StatManager
+  m_Name: StatUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &17472428706102023
 RectTransform:
   m_ObjectHideFlags: 0

@@ -45,8 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStage: 1
-  maxStage: 4
+  maxStage: 5
   playerGold: 0
   playerHealth: 0
   maxHealth: 100
-  playerAttack: 0
+  playerArmor: 0
+  playerAttack: 10
+  playerAttackSpeed: 0
+  playerMoveSpeed: 0
+  playerCritical: 0
+  playerCriticalDamage: 0

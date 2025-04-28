@@ -2,9 +2,9 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatManager : MonoBehaviour
+public class StatUIManager : MonoBehaviour
 {
-    public static StatManager Instance;
+    public static StatUIManager Instance;
 
     public GameObject statWindow;
 
@@ -30,7 +30,7 @@ public class StatManager : MonoBehaviour
     {
         if (Instance != null) return;
 
-        UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("StatManager").Completed += handle =>
+        UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("StatUIManager").Completed += handle =>
         {
             if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
             {

@@ -78313,6 +78313,10 @@ PrefabInstance:
       propertyPath: EventButton2
       value: 
       objectReference: {fileID: 431098903}
+    - target: {fileID: 5273644254252142931, guid: 42c049c00514d5b4ba7b44b71bf6e72d, type: 3}
+      propertyPath: fixedEventId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7047202015420114946, guid: 42c049c00514d5b4ba7b44b71bf6e72d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -78365,8 +78369,8 @@ SceneRoots:
   - {fileID: 1788560052}
   - {fileID: 973534990}
   - {fileID: 5670546382267872721}
-  - {fileID: 1223288593}
   - {fileID: 7012738633571505178}
+  - {fileID: 1223288593}
   - {fileID: 537520340}
   - {fileID: 2023814196}
   - {fileID: 315181607}

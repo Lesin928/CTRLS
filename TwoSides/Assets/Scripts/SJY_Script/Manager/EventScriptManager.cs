@@ -5,7 +5,8 @@ public class EventScriptManager : MonoBehaviour
 {
     public static EventScriptManager Instance;
 
-    Dictionary<int, string[]> EventScript;
+    public List<EventData> eventList;
+    private Dictionary<int, string[]> EventScript;
     private bool[] idCheck;
     private int maxScriptCount = 3;
     private bool isFirstTime;
@@ -22,7 +23,11 @@ public class EventScriptManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         EventScript = new Dictionary<int, string[]>();
-        GenerateScript();
+        foreach (var eventData in eventList)
+        {
+            EventScript[eventData.id] = eventData.scripts;
+        }
+        //GenerateScript();
     }
 
     public static void Init()
@@ -48,28 +53,21 @@ public class EventScriptManager : MonoBehaviour
         idCheck = new bool[maxScriptCount];
     }
 
-    private void GenerateScript()
-    {
-        EventScript.Add(0, new string[] { "임시 이벤트1",
-            "1. maxHp +10, hp -10\n\n2. maxHp -10, hp +10"});
-        EventScript.Add(1, new string[] { "임시 이벤트2",
-            "1. maxHp +30, hp -30\n\n2. maxHp -30, hp +30"});
-        EventScript.Add(2, new string[] { "임시 이벤트3",
-            "1. test1\n\n2. test2"});
-        EventScript.Add(100, new string[] { "이곳은 튜토리얼 테스트입니다.",
-            "1스테이지에서 열립니다",
-            "마지막 문장입니다"});
-    }
-
     public string GetEventScript(int id, int scriptIndex)
     {
+        Debug.Log(EventScript[id].GetLength(0));
+
         if (scriptIndex == EventScript[id].Length)
         {
-            //idCheck[id] = true;
             return null;
         }
         else
             return EventScript[id][scriptIndex];
+    }
+
+    public int GetMaxScriptCount(int id)
+    {
+        return EventScript[id].Length;
     }
 
     public int GetScriptId()

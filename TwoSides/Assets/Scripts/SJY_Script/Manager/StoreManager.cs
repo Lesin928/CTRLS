@@ -28,11 +28,12 @@ public class StoreManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
         {
-            isStoreOpen = true;
             RerollItems();
             Store.SetActive(true);
             HUDManager.Instance.PauseGame();
             Debug.Log("Store");
+
+            isStoreOpen = true;
         }
     }
 
@@ -105,6 +106,7 @@ public class StoreManager : MonoBehaviour
 
         GameManager.Instance.SetGold(-50);
         ApplyItemEffect(item);
+        UpdateItemUI();
     }
 
     void ApplyItemEffect(ItemData item)

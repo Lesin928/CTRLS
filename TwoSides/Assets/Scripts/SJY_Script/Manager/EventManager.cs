@@ -11,17 +11,18 @@ public class EventManager : MonoBehaviour
     public Button EventButton2;
 
     //이벤트 아닌 일반대화 전용
-    public static int TUTORIAL = 100;
+    public static int TUTORIAL = 101;
 
+    public int fixedEventId = -1;
     private int id;
     private bool isEventFinished;
     private int scriptIndex;
 
     private void Start()
     {
-        // 이벤트맵이 아닌 다른 곳에서 사용시 elseif를 걸어서 사용해 주세요
-        // ex) 보스스테이지 GameManager.Instance.currentStage == 15
-        if (GameManager.Instance.currentStage == 1)
+        if (fixedEventId > 0)
+            id = fixedEventId;
+        else if (GameManager.Instance.currentStage == 1)
             id = TUTORIAL;
         else
             id = EventScriptManager.Instance.GetScriptId();
@@ -43,15 +44,30 @@ public class EventManager : MonoBehaviour
 
     private void ExitEvent()
     {
+        Debug.Log("이벤트 종료");
         EventPanel.SetActive(false);
         HUDManager.Instance.ResumGame();
     }
 
     void Event(int id)
     {
-        EventTalk(id);
+        if (id > 10)
+            Talk(id);
+        else
+            EventTalk(id);
 
         HUDManager.Instance.PauseGame();
+    }
+
+    void Talk(int id)
+    {
+        int maxIndex = EventScriptManager.Instance.GetMaxScriptCount(id);
+        string text = EventScriptManager.Instance.GetEventScript(id, scriptIndex);
+
+        EventText.text = text;
+        scriptIndex++;
+        if (scriptIndex == maxIndex)
+            isEventFinished = true;
     }
 
     void EventTalk(int id)
@@ -70,10 +86,6 @@ public class EventManager : MonoBehaviour
         {
             EventText.text = text;
             scriptIndex++;
-
-            //일반 대화 탈출 조건
-            if (id == TUTORIAL && scriptIndex == 3)
-                isEventFinished = true;
         }
     }
 
