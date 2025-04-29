@@ -19,15 +19,15 @@ public class SpawnTrigger : MonoBehaviour
     {
         if (canStartSpawning && Input.GetKeyDown(KeyCode.Return))
         {
-            if (!GameManager1.Instance) return;
+            if (!RockManager.Instance) return;
 
-            if (!GameManager1.Instance.IsGameStarted())  // 게임 시작 상태 체크
+            if (!RockManager.Instance.IsGameStarted())  // 게임 시작 상태 체크
             {
-                GameManager1.Instance.StartGame(); // 자동으로 게임 시작
+                RockManager.Instance.StartGame(); // 자동으로 게임 시작
                 Debug.Log("게임 시작!");
             }
 
-            GameManager1.Instance.StartSpawning();
+            RockManager.Instance.StartSpawning();
             canStartSpawning = false;
             Debug.Log("엔터 키 눌림! 바위 떨어지기 시작!");
         }

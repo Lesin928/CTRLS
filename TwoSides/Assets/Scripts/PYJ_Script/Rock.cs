@@ -27,7 +27,7 @@ public class Rock : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager1.Instance.TakeDamage();
+            RockManager.Instance.TakeDamage();
             Destroy(gameObject);
         }
     }

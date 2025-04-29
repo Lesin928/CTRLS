@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager1 : MonoBehaviour
+public class RockManager : MonoBehaviour
 {
     // 싱글턴 패턴
-    public static GameManager1 Instance;
+    public static RockManager Instance;
 
     // 바위 관련 변수들
     public GameObject rockPrefab; // 바위 프리팹
@@ -32,25 +32,43 @@ public class GameManager1 : MonoBehaviour
     [Header("Heart Images")]
     public Image[] hearts; // 체력을 나타내는 하트 UI 이미지 배열
 
-    // 게임 시작 버튼을 눌렀을 때 호출되는 함수
+
+
+
+    /// <summary>
+    /// 게임 시작 버튼을 눌렀을 때 호출되는 함수 
+    /// </summary>
     public void OnStartButtonPressed()
     {
-        GameManager1.Instance.StartGame(); // 게임 시작
+        RockManager.Instance.StartGame(); // 게임 시작
     }
 
-    // 게임이 시작되었는지 확인하는 함수
+
+    /// <summary>
+    /// 게임이 시작되었는지 확인하는 함수
+    /// </summary>
     public bool IsGameStarted()
     {
         return gameStarted;
     }
 
-    // 싱글턴 인스턴스를 설정하는 함수
+
+
+
+    /// <summary>
+    /// 싱글턴 인스턴스를 설정하는 함수
+    /// </summary>
     void Awake()
     {
         Instance = this;
     }
 
-    // 게임 초기화 및 UI 설정
+
+
+
+    /// <summary>
+    /// 게임 초기화 및 UI 설정
+    /// </summary>
     void Start()
     {
         timer = survivalTime; // 타이머 설정 (10초로 설정)
@@ -61,7 +79,12 @@ public class GameManager1 : MonoBehaviour
         gameClearPanel.SetActive(false); // 게임 클리어 패널 숨기기
     }
 
-    // 하트 UI 숨기는 함수
+
+
+    /// <summary>
+    /// 하트 UI 숨기는 함수
+    /// </summary>
+
     void HideHearts()
     {
         foreach (var heart in hearts)
@@ -70,7 +93,12 @@ public class GameManager1 : MonoBehaviour
         }
     }
 
-    // 게임을 시작하는 함수
+
+
+    /// <summary>
+    /// 게임을 시작하는 함수 
+    /// </summary>
+
     public void StartGame()
     {
         gameStarted = true; // 게임 시작 상태로 변경
@@ -79,7 +107,11 @@ public class GameManager1 : MonoBehaviour
         Time.timeScale = 1;  // 게임이 멈추지 않도록 설정
     }
 
-    // 바위 떨어뜨리는 시작을 외부에서 호출할 수 있도록 분리한 함수
+
+
+    /// <summary>
+    /// 바위 떨어뜨리는 시작을 외부에서 호출할 수 있도록 분리한 함수 
+    /// </summary>
     public void StartSpawning()
     {
         if (gameStarted) // 게임이 시작되었다면
@@ -89,7 +121,11 @@ public class GameManager1 : MonoBehaviour
         }
     }
 
-    // 하트 UI를 활성화하는 함수
+
+
+    /// <summary>
+    /// 하트 UI를 활성화하는 함수 
+    /// </summary>
     void ShowHearts()
     {
         foreach (var heart in hearts)
@@ -98,7 +134,11 @@ public class GameManager1 : MonoBehaviour
         }
     }
 
-    // 매 프레임마다 호출되는 Update 함수
+
+
+    /// <summary>
+    /// 매 프레임마다 호출되는 Update 함수 
+    /// </summary>
     void Update()
     {
         // 게임 오버나 게임 클리어 상태에서 엔터 입력 체크
@@ -134,7 +174,11 @@ public class GameManager1 : MonoBehaviour
     }
 
 
-    // 바위를 떨어뜨리는 함수
+
+
+    /// <summary>
+    /// 바위를 떨어뜨리는 함수
+    /// </summary>
     void SpawnRock()
     {
         float xPos = Random.Range(spawnXMin, spawnXMax); // X축 위치 랜덤
@@ -142,7 +186,11 @@ public class GameManager1 : MonoBehaviour
         Instantiate(rockPrefab, spawnPos, Quaternion.identity); // 바위 생성
     }
 
-    // 하트 UI 업데이트 함수
+
+
+    /// <summary>
+    /// 하트 UI 업데이트 함수
+    /// </summary>
     void UpdateHearts()
     {
         for (int i = 0; i < hearts.Length; i++)
@@ -154,7 +202,10 @@ public class GameManager1 : MonoBehaviour
         }
     }
 
-    // 플레이어가 피해를 입을 때 호출되는 함수
+
+    /// <summary>
+    /// 플레이어가 피해를 입을 때 호출되는 함수
+    /// </summary>
     public void TakeDamage()
     {
         Debug.Log("바위 충돌!"); // 디버그 메시지
@@ -168,7 +219,12 @@ public class GameManager1 : MonoBehaviour
         }
     }
 
-    // 체력 텍스트 업데이트 함수
+
+
+
+    /// <summary>
+    /// 체력 텍스트 업데이트 함수
+    /// </summary>
     void UpdateHPText()
     {
         hpText.text = $"♥: {hp}"; // 체력 텍스트 업데이트

@@ -7,10 +7,6 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class PuzzlePiece : MonoBehaviour, IPointerClickHandler
 {
-
-
-
-  
     public int CorrectIndex { get; set; }     // 퍼즐 조각이 원래 있어야 할 인덱스
     public int CurrentIndex { get; set; }     // 퍼즐 조각이 현재 있는 인덱스
 

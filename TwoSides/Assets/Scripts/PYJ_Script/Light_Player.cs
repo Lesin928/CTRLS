@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjectBlinkerSequence : MonoBehaviour
+public class Light_Player : MonoBehaviour
 {
     public float[] blinkIntervals = { 2f, 0.5f, 1f }; // 반복할 간격들
 
