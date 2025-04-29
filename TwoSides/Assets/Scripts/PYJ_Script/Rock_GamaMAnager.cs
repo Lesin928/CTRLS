@@ -27,7 +27,8 @@ public class GameManager1 : MonoBehaviour
     private float timer;
     private bool gameStarted = false; // 게임 시작 여부
 
-
+    [Header("Heart Images")]
+    public Image[] hearts;  // 3개짜리 하트 배열
     public void OnStartButtonPressed()
     {
         GameManager1.Instance.StartGame();
@@ -47,6 +48,15 @@ public class GameManager1 : MonoBehaviour
     {
         timer = survivalTime;
         UpdateHPText();
+        HideHearts(); // << 하트 꺼놓기
+    }
+
+    void HideHearts()
+    {
+        foreach (var heart in hearts)
+        {
+            heart.gameObject.SetActive(false);
+        }
     }
 
     // 게임 시작 버튼을 눌렀을 때 호출되는 함수
@@ -61,11 +71,20 @@ public class GameManager1 : MonoBehaviour
     // 바위 떨어뜨리는 시작을 외부에서 호출할 수 있도록 따로 분리
     public void StartSpawning()
     {
-        if (gameStarted)  // 게임이 시작된 경우에만 바위가 떨어지도록
+        if (gameStarted)
         {
+            ShowHearts(); // << 하트 켜주기
             InvokeRepeating(nameof(SpawnRock), 1f, spawnInterval);
         }
     }
+    void ShowHearts()
+    {
+        foreach (var heart in hearts)
+        {
+            heart.gameObject.SetActive(true);
+        }
+    }
+
 
     void Update()
     {
@@ -87,17 +106,30 @@ public class GameManager1 : MonoBehaviour
         Vector3 spawnPos = new Vector3(xPos, spawnHeight, 0);
         Instantiate(rockPrefab, spawnPos, Quaternion.identity);
     }
+    void UpdateHearts()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < hp)
+                hearts[i].enabled = true;  // 하트 켬
+            else
+                hearts[i].enabled = false; // 하트 끔
+        }
+    }
 
     public void TakeDamage()
     {
         hp--;
         UpdateHPText();
+        UpdateHearts();
+
         if (hp <= 0)
         {
             gameOverPanel.SetActive(true);
             Time.timeScale = 0;
         }
     }
+
 
     void UpdateHPText()
     {
