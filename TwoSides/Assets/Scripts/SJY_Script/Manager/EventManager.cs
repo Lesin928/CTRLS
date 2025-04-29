@@ -49,7 +49,7 @@ public class EventManager : MonoBehaviour
         HUDManager.Instance.ResumGame();
     }
 
-    void Event(int id)
+    private void Event(int id)
     {
         if (id > 10)
             Talk(id);
@@ -59,7 +59,7 @@ public class EventManager : MonoBehaviour
         HUDManager.Instance.PauseGame();
     }
 
-    void Talk(int id)
+    private void Talk(int id)
     {
         int maxIndex = EventScriptManager.Instance.GetMaxScriptCount(id);
         string text = EventScriptManager.Instance.GetEventScript(id, scriptIndex);
@@ -70,7 +70,7 @@ public class EventManager : MonoBehaviour
             isEventFinished = true;
     }
 
-    void EventTalk(int id)
+    private void EventTalk(int id)
     {
         string text = EventScriptManager.Instance.GetEventScript(id, scriptIndex);
 
@@ -89,7 +89,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    void OnClickButton1()
+    private void OnClickButton1()
     {
         isEventFinished = true;
 
@@ -101,7 +101,7 @@ public class EventManager : MonoBehaviour
         EventText.text = "1번을 선택하셨습니다";
     }
 
-    void OnClickButton2()
+    private void OnClickButton2()
     {
         isEventFinished = true;
 

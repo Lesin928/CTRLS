@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+
     private AudioSource BGM;
 
     void Awake()

@@ -7,6 +7,13 @@ using System.Collections;
 public class LoadingSceneController : MonoBehaviour
 {
     private static LoadingSceneController instance;
+
+    [SerializeField]
+    private CanvasGroup cg;
+    [SerializeField]
+    private RectTransform Spinner;
+    private string loadSceneName;
+
     public static LoadingSceneController Instance
     {
         get
@@ -41,13 +48,6 @@ public class LoadingSceneController : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-
-    [SerializeField]
-    private CanvasGroup cg;
-    [SerializeField]
-    private RectTransform Spinner;
-
-    private string loadSceneName;
 
     public void LoadScene(string sceneName)
     {

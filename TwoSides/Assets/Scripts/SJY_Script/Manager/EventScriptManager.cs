@@ -6,6 +6,7 @@ public class EventScriptManager : MonoBehaviour
     public static EventScriptManager Instance;
 
     public List<EventData> eventList;
+
     private Dictionary<int, string[]> EventScript;
     private bool[] idCheck;
     private int maxScriptCount = 3;
@@ -27,7 +28,12 @@ public class EventScriptManager : MonoBehaviour
         {
             EventScript[eventData.id] = eventData.scripts;
         }
-        //GenerateScript();
+    }
+
+    private void Start()
+    {
+        isFirstTime = true;
+        idCheck = new bool[maxScriptCount];
     }
 
     public static void Init()
@@ -45,12 +51,6 @@ public class EventScriptManager : MonoBehaviour
                 Debug.LogError("Failed to load EventScriptManager");
             }
         };
-    }
-
-    private void Start()
-    {
-        isFirstTime = true;
-        idCheck = new bool[maxScriptCount];
     }
 
     public string GetEventScript(int id, int scriptIndex)

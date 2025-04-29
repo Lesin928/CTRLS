@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public int maxStage = 3;
 
     public int playerGold;
-
     public float playerHealth;
     public float maxHealth;
     public float playerArmor;
@@ -22,15 +21,13 @@ public class GameManager : MonoBehaviour
     public float playerCritical;
     public float playerCriticalDamage;
 
-    //public int stageType;
-
-    enum StageType
-    {
-        BATTLE,
-        EVENT,
-        STORE,
-        BOSS
-    };
+    //enum StageType
+    //{
+    //    BATTLE,
+    //    EVENT,
+    //    STORE,
+    //    BOSS
+    //};
 
     private void Awake()
     {
@@ -46,6 +43,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        maxHealth = 100;
+        playerHealth = maxHealth;
+        playerGold = 0;
+        currentStage = 1;
+
         if (SceneManager.GetActiveScene().name == "Title")
         {
             HUDManager.Instance.HideHUD();
@@ -113,12 +115,7 @@ public class GameManager : MonoBehaviour
 
     public void OnStageClear()
     {
-        /*
-        스테이지를 클리어하면 맵이 열리고,
-        맵의 아이콘을 클릭하면 아이콘의 StageType을 받아서
-        LoadStage(cuurentStage, stageType); 으로 바꾸기
-         */
-
+        // 여기서 Map 이 나와야함
         if (currentStage < maxStage)
         {
             currentStage++;
@@ -209,6 +206,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (InputBlocker.blockKeyboardInput) return;
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             SetGold(10);
@@ -243,10 +242,5 @@ public class GameManager : MonoBehaviour
         {
             SetMaxHealth(-10);
         }
-
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    SceneManager.LoadScene("GameClear");
-        //}
     }
 }

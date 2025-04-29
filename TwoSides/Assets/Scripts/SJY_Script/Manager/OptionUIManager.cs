@@ -9,10 +9,10 @@ public class OptionUIManager : MonoBehaviour
 {
     public static OptionUIManager Instance { get; private set; }
 
-    private GameObject optionUIInstance;
     public AudioMixer audioMixer;
     public Slider volumeSlider;
 
+    private GameObject optionUIInstance;
     private static bool isInitialized = false;
 
     public static void Init()
@@ -53,6 +53,7 @@ public class OptionUIManager : MonoBehaviour
         }
 
         optionUIInstance.SetActive(!optionUIInstance.activeSelf);
+        Debug.Log("Option UI ≈‰±€µ : " + optionUIInstance.activeSelf);
     }
 
     public void CloseOptionUI()

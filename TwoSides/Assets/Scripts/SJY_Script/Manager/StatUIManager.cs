@@ -50,6 +50,8 @@ public class StatUIManager : MonoBehaviour
 
     void Update()
     {
+        if (InputBlocker.blockKeyboardInput) return;
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             ToggleStatWindow();

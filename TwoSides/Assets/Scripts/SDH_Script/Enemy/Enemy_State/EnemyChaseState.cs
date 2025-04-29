@@ -1,6 +1,6 @@
-using UnityEditor.Tilemaps;
+//using UnityEditor.Tilemaps;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+//using static UnityEngine.GraphicsBuffer;
 
 public class EnemyChaseState : EnemyState
 {
