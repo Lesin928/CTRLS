@@ -32027,7 +32027,7 @@ GameObject:
   - component: {fileID: 820562258}
   - component: {fileID: 820562257}
   m_Layer: 0
-  m_Name: GameManager1
+  m_Name: RockManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32047,7 +32047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rockPrefab: {fileID: 5222328162114872457, guid: 8ff83d25db952804d9198ce40fdd9cfb, type: 3}
   spawnInterval: 1
-  spawnHeight: 10
+  spawnHeight: 5
   spawnXMin: 20
   spawnXMax: 40
   hp: 3
