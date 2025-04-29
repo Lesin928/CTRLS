@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
         }
         EventScriptManager.Init();
 
+        AudioManager.Instance.ChangeBGM("IngameBGM");
+
         LoadStage(currentStage);
     }
 
