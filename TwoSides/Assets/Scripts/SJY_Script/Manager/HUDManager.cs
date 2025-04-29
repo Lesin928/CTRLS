@@ -63,7 +63,7 @@ public class HUDManager : MonoBehaviour
 
     public void InitHUD()
     {
-        maxHealth = GameManager.Instance.maxHealth;
+        maxHealth = GameManager.Instance.playerMaxHealth;
         health = GameManager.Instance.playerHealth;
         gold = GameManager.Instance.playerGold;
 

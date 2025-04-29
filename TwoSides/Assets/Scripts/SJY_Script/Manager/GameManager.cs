@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public int playerGold;
     public float playerHealth;
-    public float maxHealth;
+    public float playerMaxHealth;
     public float playerArmor;
     public float playerAttack;
     public float playerAttackSpeed;
@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        maxHealth = 100;
-        playerHealth = maxHealth;
+        playerMaxHealth = 100;
+        playerHealth = playerMaxHealth;
         playerGold = 0;
         currentStage = 1;
 
@@ -75,8 +75,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Start New Game");
 
-        maxHealth = 100;
-        playerHealth = maxHealth;
+        playerMaxHealth = 100;
+        playerHealth = playerMaxHealth;
         playerGold = 0;
         currentStage = 1;
 
@@ -151,13 +151,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => op.isDone);
     }
 
-    public void SetGold(int amount)
+    public void SetGold(int value)
     {
-        playerGold += amount;
+        playerGold += value;
 
         if (playerGold <= 0)
             playerGold = 0;
-        HUDManager.Instance.SetGold(amount);
+        HUDManager.Instance.SetGold(value);
     }
 
     public void TakeDamage(float damage)
@@ -171,13 +171,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetHealth(float amount)
+    public void SetHealth(float value)
     {
-        playerHealth += amount;
+        playerHealth += value;
 
-        if (playerHealth >= maxHealth)
+        if (playerHealth >= playerMaxHealth)
         {
-            playerHealth = maxHealth;
+            playerHealth = playerMaxHealth;
         }
 
         if (playerHealth <= 0)
@@ -188,20 +188,51 @@ public class GameManager : MonoBehaviour
         HUDManager.Instance.SetHealth(playerHealth);
     }
 
-    public void SetMaxHealth(float amount)
+    public void SetMaxHealth(float value)
     {
-        maxHealth += amount;
-        HUDManager.Instance.SetMaxHealth(maxHealth);
+        playerMaxHealth += value;
+        HUDManager.Instance.SetMaxHealth(playerMaxHealth);
 
-        if (playerHealth >= maxHealth)
+        if (playerHealth >= playerMaxHealth)
         {
-            playerHealth = maxHealth;
+            playerHealth = playerMaxHealth;
+            HUDManager.Instance.SetHealth(playerHealth);
         }
 
-        if (maxHealth <= 0)
+        if (playerMaxHealth <= 0)
         {
             GameOver();
         }
+    }
+
+    public void SetPlayerArmor(float value)
+    {
+        playerArmor += value;
+    }
+
+    public void SetPlayerAttack(float value)
+    {
+        playerAttack += value;
+    }
+
+    public void SetPlayerAttackSpeed(float value)
+    {
+        playerAttackSpeed += value;
+    }
+
+    public void SetPlayerMoveSpeed(float value)
+    {
+        playerMoveSpeed += value;
+    }
+
+    public void SetPlayerCritical(float value)
+    {
+        playerCritical += value;
+    }
+
+    public void SetPlayerCriticalDamage(float value)
+    {
+        playerCriticalDamage += value;
     }
 
     void Update()

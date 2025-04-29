@@ -84,7 +84,7 @@ public class StatUIManager : MonoBehaviour
     {
         var gm = GameManager.Instance;
 
-        healthText.text = $"HP : {gm.playerHealth} / {gm.maxHealth}";
+        healthText.text = $"HP : {gm.playerHealth} / {gm.playerMaxHealth}";
         attackText.text = $"Attack : {gm.playerAttack}";
         attackSpeedText.text = $"AttackSpeed : {gm.playerAttackSpeed}%";
         criticalText.text = $"Critical : {gm.playerCritical}%";

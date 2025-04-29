@@ -123,27 +123,27 @@ public class StoreManager : MonoBehaviour
                 break;
             case StatType.Armor:
                 Debug.Log($"Armor +{item.value}");
-                GameManager.Instance.SetMaxHealth(item.value);
+                GameManager.Instance.SetPlayerArmor(item.value);
                 break;
             case StatType.Attack:
                 Debug.Log($"Attack +{item.value}");
-                GameManager.Instance.SetMaxHealth(item.value);
+                GameManager.Instance.SetPlayerAttack(item.value);
                 break;
             case StatType.AttackSpeed:
                 Debug.Log($"AttackSpeed +{item.value}");
-                GameManager.Instance.SetMaxHealth(item.value);
+                GameManager.Instance.SetPlayerAttackSpeed(item.value);
                 break;
             case StatType.MoveSpeed:
                 Debug.Log($"MoveSpeed +{item.value}");
-                GameManager.Instance.SetMaxHealth(item.value);
+                GameManager.Instance.SetPlayerMoveSpeed(item.value);
                 break;
             case StatType.Critical:
                 Debug.Log($"Critical +{item.value}");
-                GameManager.Instance.SetMaxHealth(item.value);
+                GameManager.Instance.SetPlayerCritical(item.value);
                 break;
             case StatType.CriticalDamage:
                 Debug.Log($"CriticalDamage +{item.value}");
-                GameManager.Instance.SetMaxHealth(item.value);
+                GameManager.Instance.SetPlayerCriticalDamage(item.value);
                 break;
         }
     }
