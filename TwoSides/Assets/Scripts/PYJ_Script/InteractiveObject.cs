@@ -28,12 +28,11 @@ public class InteractiveObject : MonoBehaviour
 
 
     /// <summary>
-    /// 플레이어가 범위 내에 있고 엔터 키를 누르면 퍼즐 패널을 활성화
+    /// 플레이어가 범위 내에 있고 F 키를 누르면 퍼즐 패널을 활성화
     /// </summary>
     private void Update()
     {
-        
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.Return))
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
         {
             ShowPuzzle();
         }
@@ -49,7 +48,7 @@ public class InteractiveObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true; // 플레이어가 범위 내에 들어왔을 때
-            Debug.Log("퍼즐을 시작하려면 엔터 키를 누르세요.");
+            Debug.Log("퍼즐을 시작하려면 F키를 누르세요.");
         }
     }
 

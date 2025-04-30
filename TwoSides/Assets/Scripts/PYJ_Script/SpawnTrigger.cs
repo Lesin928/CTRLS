@@ -17,7 +17,7 @@ public class SpawnTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (canStartSpawning && Input.GetKeyDown(KeyCode.Return))
+        if (canStartSpawning && Input.GetKeyDown(KeyCode.F))
         {
             if (!RockManager.Instance) return;
 
