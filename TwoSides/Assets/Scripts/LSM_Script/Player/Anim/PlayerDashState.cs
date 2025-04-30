@@ -1,11 +1,13 @@
 using UnityEngine;
-
+// TODO: (추가할일 적는부분)
+// FIXME: (고칠거 적는부분)
+// NOTE : (기타 작성)
 public class PlayerDashState : PlayerState
 {
-    public PlayerDashState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerDashState (PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName) : base(_playerAnim, _stateMachine, _animBoolName)
     {
 
-    }
+    } 
     /*
     public override void Enter()
     {
@@ -37,7 +39,6 @@ public class PlayerDashState : PlayerState
         base.Exit();
         player.SetVelocity(0, rb.linearVelocityY);
 
-    }
+    } 
     */
-
 }

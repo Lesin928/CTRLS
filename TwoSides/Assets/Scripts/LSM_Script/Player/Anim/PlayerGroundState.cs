@@ -1,9 +1,10 @@
 using UnityEngine;
-
+// TODO: (추가할일 적는부분)
+// FIXME: (고칠거 적는부분)
+// NOTE : (기타 작성)
 public class PlayerGroundState : PlayerState
 {
-    public PlayerGroundState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
-        : base(_player, _stateMachine, _animBoolName)
+    public PlayerGroundState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName) : base(_playerAnim, _stateMachine, _animBoolName)
     {
     }
 
@@ -18,45 +19,8 @@ public class PlayerGroundState : PlayerState
     }
 
     public override void Update()
-    {
+    {   
         base.Update();
-        /*
-        if (Input.GetKeyDown(KeyCode.Z))
-            stateMachine.ChangeState(player.blackHole);
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-            stateMachine.ChangeState(player.primaryAttack);
-
-        if (Input.GetMouseButtonDown(1) && HasNoSword())
-            stateMachine.ChangeState(player.aimSword);
-
-
-
-        if (Input.GetKeyDown(KeyCode.F))
-            stateMachine.ChangeState(player.counterAttack);
-
-
-
-
-        if (!player.IsGroundDetected())
-            stateMachine.ChangeState(player.airState);
-
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
-            stateMachine.ChangeState(player.jumpState);*/
-    }
-    /*
-    private bool HasNoSword()
-    {
-        if (!player.sword)
-        {
-            return true;
-        }
-
-        player.sword.GetComponent<Sword_Skill_Controller>().ReturnSword();
-        return false;
-    }
-    */
-
-
+    } 
 
 }

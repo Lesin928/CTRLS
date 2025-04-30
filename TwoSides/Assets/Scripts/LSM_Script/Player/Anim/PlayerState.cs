@@ -1,51 +1,57 @@
 using UnityEngine;
 
+// TODO: (추가할일 적는부분)
+// FIXME: (고칠거 적는부분)
+// NOTE : (기타 작성)
 public class PlayerState
 {
+    #region Components //PlayerAnimation 스크립트의 인스펙터에 있는 컴포넌트들
     protected PlayerStateMachine stateMachine;
-    protected Player player;
-
+    protected PlayerAnimation playerAnimation; 
+    protected PlayerController playerController;    
     protected Rigidbody2D rb;
+    #endregion
 
-    protected float xInput;
-    protected float yInput;
+    #region Variables // 플레이어의 상태를 나타내는 변수들
     private string animBoolName;
+    protected float xInput;
+    protected float yInput;   
 
     protected float stateTimer;
     protected bool triggerCalled;
+    #endregion  
 
-
-    public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
+    public PlayerState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName)
     {
-        this.player = _player;
+        this.playerAnimation = _playerAnim;
         this.stateMachine = _stateMachine;
         this.animBoolName = _animBoolName;
-    }
+    } 
 
     public virtual void Enter()
-    {/*
-        player.anim.SetBool(animBoolName, true);
-        rb = player.rb;
-        triggerCalled = false;*/
+    {   
+        playerAnimation.anim.SetBool(animBoolName, true);
+        rb = playerAnimation.rb;
+        triggerCalled = false; 
     }
 
     public virtual void Update()
-    {/*
-        stateTimer -= Time.deltaTime;
-
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
-        player.anim.SetFloat("yVelocity", rb.linearVelocityY);*/
+    { 
+        //stateTimer -= Time.deltaTime; 
+        playerAnimation.anim.SetFloat("yVelocity", rb.linearVelocityY); 
     }
 
     public virtual void Exit()
     {
-        //player.anim.SetBool(animBoolName, false);
+        playerAnimation.anim.SetBool(animBoolName, false);
     }
 
+    /// <summary>
+    /// 애니메이션이 끝났을 때 호출되는 메셔드
+    /// </summary>
     public virtual void AnimationFinishTrigger()
     {
-        //triggerCalled = true;
+        triggerCalled = true;
     }
 
 
