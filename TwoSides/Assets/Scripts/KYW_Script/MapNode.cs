@@ -1,21 +1,21 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
-// ³ëµåÀÇ Å¸ÀÔ Á¤ÀÇ
+// ë…¸ë“œì˜ íƒ€ì… ì •ì˜
 public enum NodeType { Battle, Treasure, Rest, Mystery, Boss }
 
 public class MapNode : MonoBehaviour
 {
-    public int floor; // ³ëµå°¡ À§Ä¡ÇÑ Ãş Á¤º¸
-    public int column; // ³ëµå°¡ À§Ä¡ÇÑ ¿­ Á¤º¸
-    public NodeType type; // ³ëµåÀÇ Å¸ÀÔ
-    public List<MapNode> connectedNodes = new List<MapNode>(); // ¿¬°áµÈ ´ÙÀ½ ³ëµå ¸ñ·Ï
+    public int floor; // ë…¸ë“œê°€ ìœ„ì¹˜í•œ ì¸µ ì •ë³´
+    public int column; // ë…¸ë“œê°€ ìœ„ì¹˜í•œ ì—´ ì •ë³´
+    public NodeType type; // ë…¸ë“œì˜ íƒ€ì…
+    public List<MapNode> connectedNodes = new List<MapNode>(); // ì—°ê²°ëœ ë‹¤ìŒ ë…¸ë“œ ëª©ë¡
 
-    // ³ëµå¸¦ ÃÊ±âÈ­ÇÏ´Â ÇÔ¼ö
+    // ë…¸ë“œë¥¼ ì´ˆê¸°í™”í•˜ëŠ” í•¨ìˆ˜
     public void Init(int floor, int column, NodeType type)
     {
-        this.floor = floor; // Ãş ¼³Á¤
-        this.column = column; // ¿­ ¼³Á¤
-        this.type = type; // Å¸ÀÔ ¼³Á¤
+        this.floor = floor; // ì¸µ ì„¤ì •
+        this.column = column; // ì—´ ì„¤ì •
+        this.type = type; // íƒ€ì… ì„¤ì •
     }
 }
