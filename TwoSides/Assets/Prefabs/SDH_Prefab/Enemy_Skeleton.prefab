@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.738, y: 1.721, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1594393082361680533}
@@ -57,13 +57,13 @@ MonoBehaviour:
   attackCooldown: 0
   lastTimeAttacked: 0
   groundCheck: {fileID: 7439031002716486439}
-  groundCheckDistance: 0.1
+  groundCheckDistance: 0.2
   wallCheck: {fileID: 5442071203123844409}
   wallCheckDistance: 0.3
   playerCheck: {fileID: 6514745559203059189}
-  playerCheckRadius: 2
+  playerCheckRadius: 4
   attackCheck: {fileID: 7164268008762456834}
-  attackCheckRadius: 0.5
+  attackCheckRadius: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 768
@@ -159,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 1912441224661446242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02599999, z: 0}
+  m_LocalPosition: {x: 0.093, y: 0.025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -221,7 +221,7 @@ Transform:
   m_GameObject: {fileID: 5164334241360954855}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.168, y: -0.2841, z: 0}
+  m_LocalPosition: {x: 0.17, y: -0.285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

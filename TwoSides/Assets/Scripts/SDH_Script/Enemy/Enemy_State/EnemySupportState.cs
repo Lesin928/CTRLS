@@ -120,18 +120,18 @@ public class EnemySupportState : EnemyState
         if (buffPrefab != null)
         {
             // 마법진 생성 및 대상에 붙이기
-            GameObject magicCircle = Object.Instantiate(buffPrefab, targetEnemy.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
-            magicCircle.transform.SetParent(targetEnemy);
+            GameObject buff = Object.Instantiate(buffPrefab, targetEnemy.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+            buff.transform.SetParent(targetEnemy);
 
             // 대상의 콜라이더에 맞춰 마법진 크기 조절
             Collider2D collider = targetEnemy.GetComponent<Collider2D>();
             if (collider != null)
             {
                 float targetScale = collider.bounds.size.y * 1.1f;
-                magicCircle.transform.localScale = new Vector3(targetScale, targetScale, 1f);
+                buff.transform.localScale = new Vector3(targetScale, targetScale, 1f);
             }
 
-            supportedEnemies.Add(targetEnemy, magicCircle);
+            supportedEnemies.Add(targetEnemy, buff);
 
             // 전기 효과 선 생성
             CreateElectricLine(targetEnemy);
@@ -215,11 +215,11 @@ public class EnemySupportState : EnemyState
     {
         Debug.Log($"{targetEnemy.name} 지원 해제");
 
-        if (supportedEnemies.TryGetValue(targetEnemy, out GameObject magicCircle))
+        if (supportedEnemies.TryGetValue(targetEnemy, out GameObject buff))
         {
-            if (magicCircle != null)
+            if (buff != null)
             {
-                Object.Destroy(magicCircle);
+                Object.Destroy(buff);
             }
         }
 
