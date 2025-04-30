@@ -1,28 +1,39 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 화살 발사를 처리하는 클래스입니다.
+/// 목표 위치로 향하는 포물선 궤적을 따라 날아가며, 플레이어와 충돌 시 화살이 플레이어에게 붙습니다.
+/// </summary>
 public class Arrow : MonoBehaviour
 {
     private Rigidbody2D rb;
     private CapsuleCollider2D cd;
 
     [Header("Settings")]
-    [SerializeField] private float gravityScale = 1f;
-    [SerializeField] private float arcHeightRatio = 0.2f; // 전체 거리의 20%를 궤적 높이로
-    [SerializeField] private float lifeTime = 5f;
-    [SerializeField] float flightTime = 1f;
-    private bool hasHit = false;
+    [SerializeField] private float gravityScale = 1f;     // 중력 비율
+    [SerializeField] private float arcHeightRatio = 0.2f; // 궤적 높이 비율 (전체 거리의 20%)
+    [SerializeField] private float lifeTime = 5f;         // 화살의 생명 시간
+    [SerializeField] private float flightTime = 1f;               // 비행 시간
+    private bool hasHit = false;                          // 충돌 여부
 
     void Awake()
     {
+        // 리지드바디와 콜라이더 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
+        // 화살의 속도에 맞춰 회전
         RotateToVelocity(rb.linearVelocity);
     }
 
+    /// <summary>
+    /// 화살을 발사하는 함수입니다.
+    /// 목표 위치를 향해 포물선 궤적을 그리며 날아갑니다.
+    /// </summary>
+    /// <param name="targetPosition">목표 지점의 위치</param>
     public void Shoot(Vector2 targetPosition)
     {
         Vector2 startPosition = transform.position;
@@ -49,9 +60,11 @@ public class Arrow : MonoBehaviour
         rb.gravityScale = gravityScale;
         rb.linearVelocity = velocity;
 
+        // 발사 방향에 맞게 화살 회전
         RotateToVelocity(velocity);
     }
 
+    // 화살의 이동 속도에 맞춰 화살의 회전 방향을 설정하는 함수
     void RotateToVelocity(Vector2 velocity)
     {
         if (velocity.sqrMagnitude > 0.01f)
@@ -61,20 +74,30 @@ public class Arrow : MonoBehaviour
         }
     }
 
+    // 화살이 다른 객체와 충돌할 때 호출되는 함수
+    // 플레이어와 충돌하면 화살이 플레이어에게 붙고, 충돌 후 삭제
     void OnTriggerEnter2D(Collider2D collision)
     {
+        // 이미 충돌한 경우, 추가 충돌을 무시
         if (hasHit) return;
 
+        // 플레이어와 충돌한 경우
         if (collision.CompareTag("Player"))
         {
             hasHit = true;
             cd.enabled = false;
 
+            // 리지드바디를 Kinematic으로 설정하여 물리 반응을 중지
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+            // 화살을 플레이어의 자식 객체로 설정
             transform.parent = collision.transform;
+
+            Debug.Log("공격 성공");
         }
 
+        // 일정 시간이 지나면 화살을 삭제
         Destroy(gameObject, lifeTime);
     }
 }

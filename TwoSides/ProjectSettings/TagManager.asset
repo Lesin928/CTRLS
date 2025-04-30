@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -41,29 +42,29 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UI
-    uniqueID: 1836318077
-    locked: 0
-  - name: Effect
-    uniqueID: 1962466067
-    locked: 0
-  - name: Player
-    uniqueID: 623635149
-    locked: 0
-  - name: Enemy
-    uniqueID: 2212380731
-    locked: 0
-  - name: NPC
-    uniqueID: 3775287333
-    locked: 0
-  - name: BackGround
-    uniqueID: 2489392923
+  - name: Object
+    uniqueID: 2682209665
     locked: 0
   - name: SKY
     uniqueID: 1172172713
     locked: 0
-  - name: Object
-    uniqueID: 2682209665
+  - name: BackGround
+    uniqueID: 2489392923
+    locked: 0
+  - name: NPC
+    uniqueID: 3775287333
+    locked: 0
+  - name: Enemy
+    uniqueID: 2212380731
+    locked: 0
+  - name: Player
+    uniqueID: 623635149
+    locked: 0
+  - name: Effect
+    uniqueID: 1962466067
+    locked: 0
+  - name: UI
+    uniqueID: 1836318077
     locked: 0
   m_RenderingLayers:
   - Default

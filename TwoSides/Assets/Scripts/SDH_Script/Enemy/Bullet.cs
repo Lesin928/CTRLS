@@ -1,6 +1,10 @@
 ﻿using System.Threading;
 using UnityEngine;
 
+/// <summary>
+/// 총알 객체를 처리하는 클래스입니다.
+/// 총알이 발사되고, 목표를 향해 이동하며, 충돌 시 애니메이션과 함께 처리됩니다.
+/// </summary>
 public class Bullet : MonoBehaviour
 {
     // 애니메이터와 리지드바디2D 컴포넌트
@@ -8,8 +12,8 @@ public class Bullet : MonoBehaviour
     protected Rigidbody2D rb;
 
     [Header("Settings")]
-    [SerializeField] float speed = 10f;
-    [SerializeField] float lifeTime = 5f;
+    [SerializeField] float speed = 10f;      // 총알의 이동 속도
+    [SerializeField] float lifeTime = 5f;    // 총알의 생명 시간
 
     void Awake()
     {
@@ -24,6 +28,10 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
+    /// <summary>
+    /// 총알을 발사하는 함수입니다.
+    /// </summary>
+    /// <param name="targetPosition">목표 지점의 위치</param>
     public void Shoot(Vector2 targetPosition)
     {
         // 이동 애니메이션으로 변경
@@ -39,6 +47,7 @@ public class Bullet : MonoBehaviour
         RotateToVelocity(rb.linearVelocity);
     }
 
+    // 총알의 이동 방향에 맞게 회전하는 함수
     void RotateToVelocity(Vector2 velocity)
     {
         if (velocity.sqrMagnitude > 0.01f)
@@ -48,6 +57,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    /// 충돌 처리 함수
     void OnTriggerEnter2D(Collider2D collision)
     {
         anim.SetBool("Move", false);
@@ -61,7 +71,7 @@ public class Bullet : MonoBehaviour
             // 충돌 후 총알 정지
             rb.linearVelocity = Vector2.zero;
 
-            // 몬스터의 TakeDamage 함수 호출하여 피해 주기
+            // 플레이어의 TakeDamage 함수 호출하여 피해 주기
             Player player = collision.GetComponent<Player>();
             if (player != null)
             {
@@ -73,7 +83,7 @@ public class Bullet : MonoBehaviour
         }
 
         // 벽과 충돌한 경우
-        else if(!collision.CompareTag("Enemy"))
+        else if (!collision.CompareTag("Enemy"))
         {
             // 히트 애니메이션 재생
             anim.SetBool("Hit", true);
