@@ -4,8 +4,7 @@ using UnityEngine;
 // NOTE : (기타 작성)
 public class PlayerAttackState : PlayerGroundState
 {
-    public PlayerAttackState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName)
-        : base(_playerAnim, _stateMachine, _animBoolName)
+    public PlayerAttackState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName) : base(_playerAnim, _stateMachine, _playerObject, _animBoolName)
     {
     }
 
@@ -18,15 +17,11 @@ public class PlayerAttackState : PlayerGroundState
 
     public override void Update()
     {
-        base.Update();
-
-
+        base.Update(); 
         player.SetVelocity(xInput * player.moveSpeed, rb.linearVelocityY);
 
         if (xInput == 0 || player.IsWallDetected())
-            stateMachine.ChangeState(player.idleState);
-
-
+            stateMachine.ChangeState(player.idleState); 
 
     }
     */

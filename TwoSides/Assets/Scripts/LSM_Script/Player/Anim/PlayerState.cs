@@ -5,9 +5,10 @@ using UnityEngine;
 // NOTE : (기타 작성)
 public class PlayerState
 {
-    #region Components //PlayerAnimation 스크립트의 인스펙터에 있는 컴포넌트들
+    #region Components //Player의 인스펙터에 있는 컴포넌트들
     protected PlayerStateMachine stateMachine;
     protected PlayerAnimation playerAnimation; 
+    protected PlayerObject playerObject;    
     protected PlayerController playerController;    
     protected Rigidbody2D rb;
     #endregion
@@ -21,11 +22,12 @@ public class PlayerState
     protected bool triggerCalled;
     #endregion  
 
-    public PlayerState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName)
+    public PlayerState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName)
     {
         this.playerAnimation = _playerAnim;
         this.stateMachine = _stateMachine;
         this.animBoolName = _animBoolName;
+        this.playerObject = _playerObject;
     } 
 
     public virtual void Enter()

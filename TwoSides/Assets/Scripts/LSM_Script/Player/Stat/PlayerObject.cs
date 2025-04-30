@@ -31,7 +31,17 @@ public class PlayerObject : CharacterObject
     }
     #endregion
 
+    [Header("대쉬 정보")]
+    private bool isDashing = false;
 
+    public virtual bool GetDashing() 
+    {
+        return isDashing;
+    }
+    public virtual void SetDashing(bool dash)
+    {
+        isDashing = dash;
+    }
 
     private void Awake()
     {

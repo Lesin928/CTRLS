@@ -21,8 +21,9 @@ public class PlayerAnimation : MonoBehaviour
     protected bool facingRight = true;
     #endregion
 
-    #region States // 플레이어의 상태를 관리하는 상태 머신
-    public PlayerStateMachine stateMachine { get; private set; }
+    #region States 
+    public PlayerStateMachine stateMachine { get; private set; } // 플레이어의 상태를 관리하는 상태 머신
+    public PlayerObject playerObject { get; private set; } // 플레이어의 속성을 관리하는 객체 
 
     // 플레이어의 상태 
     public PlayerDashState dashState { get; private set; }
@@ -42,14 +43,15 @@ public class PlayerAnimation : MonoBehaviour
 
         // 상태 머신 인스턴스 생성
         stateMachine = new PlayerStateMachine();
+        playerObject = GetComponentInParent<PlayerObject>(); // 플레이어의 속성을 관리하는 객체 생성
 
         // 각 상태 인스턴스 생성 (this: 플레이어 객체, stateMachine: 상태 머신, "Idle"/"Move": 상태 이름)
-        dashState = new PlayerDashState(this, stateMachine, "Dash"); 
-        idleState = new PlayerIdleState(this, stateMachine, "Idle");
-        moveState = new PlayerMoveState(this, stateMachine, "Move");
-        jumpState = new PlayerJumpState(this, stateMachine, "JumpFall");
-        airState = new PlayerAirState(this, stateMachine, "JumpFall");
-        attackState = new PlayerAttackState(this, stateMachine, "Attack1");
+        dashState = new PlayerDashState(this, stateMachine, playerObject, "Dash"); 
+        idleState = new PlayerIdleState(this, stateMachine, playerObject, "Idle");
+        moveState = new PlayerMoveState(this, stateMachine, playerObject, "Move");
+        jumpState = new PlayerJumpState(this, stateMachine, playerObject, "JumpFall");
+        airState = new PlayerAirState(this, stateMachine, playerObject, "JumpFall");
+        attackState = new PlayerAttackState(this, stateMachine, playerObject, "Attack1");
 
     }
      
@@ -64,15 +66,19 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     #region 플립
-    public virtual void Flip()
+    public void Flip()
     {
         facingDir = facingDir * -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
     }
 
+    public int Getfacing()
+    {
+        return facingDir;
+    }
 
-    public virtual void FlipController(float _x)
+    public void FlipController(float _x)
     {
         if (_x > 0 && !facingRight)
             Flip();

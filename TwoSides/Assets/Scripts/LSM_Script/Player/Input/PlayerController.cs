@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem; 
 using System.Collections;
+using UnityEngine.Rendering;
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
 // NOTE : (기타 작성)
@@ -21,7 +22,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public float dashForce = 10f;
-    private bool isDashing; 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,29 +30,44 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate() //나중에 무브 스테이트로 이동
     {
-        if (!isDashing)
+        //플레이어가 대쉬중이 아니면 이동
+        if (!playerObject.GetDashing())
         {
             rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
-        }
 
-        if(moveInput.x != 0)        
-        {
-            playerAnimation.FlipController(moveInput.x);
-        }        
+            //또한 플레이어가 이동중일 때 방향 전환
+            if (moveInput.x != 0)
+            {
+                playerAnimation.FlipController(moveInput.x);
+            }
+        }
     }
 
-    private void Update() //나중에 무브 스테이트로 이동
+    private void Update() 
     {
-        //플레이어가 움직이지 않고 바닥에 있으면 대기상태로 전환 
-        if (moveInput.x == 0 && playerObject.IsGroundDetected())
-            playerAnimation.stateMachine.ChangeState(playerAnimation.idleState);
+        //플레이어가 바닥에 있고 대쉬중이 아닐 떄
+        if(!!playerObject.GetDashing() && playerObject.IsGroundDetected())
+        {
+            //플레이어가 멈추면 idle, 이동중이면 move
+            if (moveInput.x == 0)
+            {
+                playerAnimation.stateMachine.ChangeState(playerAnimation.idleState);
+            }
+            else
+            {
+                playerAnimation.stateMachine.ChangeState(playerAnimation.moveState);
+            }
+        }  
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log("Move"); 
+        Debug.Log("Move");
         //플레이어가 땅에 있으면 이동상태로 전환
-        playerAnimation.stateMachine.ChangeState(playerAnimation.moveState);
+        if (playerObject.IsGroundDetected())
+        {
+            playerAnimation.stateMachine.ChangeState(playerAnimation.moveState);
+        }            
         moveInput = context.ReadValue<Vector2>();
     }
 
@@ -66,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Dash");
         playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
-        if (!isDashing)
+        if (!playerObject.GetDashing())
         {
             StartCoroutine(Dash());
         }
@@ -87,10 +102,9 @@ public class PlayerController : MonoBehaviour
     } 
     private IEnumerator Dash()
     {
-        isDashing = true;
-        rb.linearVelocity = new Vector2(moveInput.x * dashForce, 0f);
+        playerObject.SetDashing(true);
+        rb.linearVelocity = new Vector2( playerAnimation.Getfacing() * dashForce, 0f);
         yield return new WaitForSeconds(0.2f);
-        isDashing = false;
-    }
-
+        playerObject.SetDashing(false);
+    } 
 }

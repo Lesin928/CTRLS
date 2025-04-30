@@ -4,7 +4,7 @@ using UnityEngine;
 // NOTE : (기타 작성)
 public class PlayerJumpState : PlayerState
 { 
-    public PlayerJumpState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName) : base(_playerAnim, _stateMachine, _animBoolName)
+    public PlayerJumpState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName) : base(_playerAnim, _stateMachine, _playerObject, _animBoolName)
     {
     }
 

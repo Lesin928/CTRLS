@@ -4,7 +4,7 @@ using UnityEngine;
 // NOTE : (기타 작성)
 public class PlayerGroundState : PlayerState
 {
-    public PlayerGroundState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName) : base(_playerAnim, _stateMachine, _animBoolName)
+    public PlayerGroundState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName) : base(_playerAnim, _stateMachine, _playerObject, _animBoolName)
     {
     }
 

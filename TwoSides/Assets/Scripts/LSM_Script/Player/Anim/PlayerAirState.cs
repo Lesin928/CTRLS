@@ -6,7 +6,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 // 플레이어가 공중에 떠있을 때의 상태를 정의하는 클래스
 public class PlayerAirState : PlayerState
 {
-    public PlayerAirState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, string _animBoolName) : base(_playerAnim, _stateMachine, _animBoolName)
+    public PlayerAirState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName) : base(_playerAnim, _stateMachine, _playerObject, _animBoolName)
     {
     }
 
@@ -17,18 +17,8 @@ public class PlayerAirState : PlayerState
      
     public override void Update()
     {
-        base.Update();
-         
-
-        //플레이어가 바닥에 닿으면 Idle 상태로 전환 
-
-        /*
-        if (player.IsGroundDetected())
-            stateMachine.ChangeState(player.idleState);
-
-        if (xInput != 0)
-            player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.linearVelocityY);
-        */
+        base.Update();       
+        //대쉬가 끝났는데 공중에 남아있으면 상태 전환   
     }
     public override void Exit()
     {
