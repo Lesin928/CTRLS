@@ -12,9 +12,8 @@ public class GameManager : MonoBehaviour
     public int maxStage = 3;
 
     public int playerGold;
-
     public float playerHealth;
-    public float maxHealth;
+    public float playerMaxHealth;
     public float playerArmor;
     public float playerAttack;
     public float playerAttackSpeed;
@@ -22,15 +21,13 @@ public class GameManager : MonoBehaviour
     public float playerCritical;
     public float playerCriticalDamage;
 
-    //public int stageType;
-
-    enum StageType
-    {
-        BATTLE,
-        EVENT,
-        STORE,
-        BOSS
-    };
+    //enum StageType
+    //{
+    //    BATTLE,
+    //    EVENT,
+    //    STORE,
+    //    BOSS
+    //};
 
     private void Awake()
     {
@@ -46,6 +43,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        playerMaxHealth = 100;
+        playerHealth = playerMaxHealth;
+        playerGold = 0;
+        currentStage = 1;
+
         if (SceneManager.GetActiveScene().name == "Title")
         {
             HUDManager.Instance.HideHUD();
@@ -73,8 +75,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Start New Game");
 
-        maxHealth = 100;
-        playerHealth = maxHealth;
+        playerMaxHealth = 100;
+        playerHealth = playerMaxHealth;
         playerGold = 0;
         currentStage = 1;
 
@@ -87,10 +89,10 @@ public class GameManager : MonoBehaviour
             HUDManager.Instance.StartTrackingTime();
         }
 
-        //StatManager
-        if (StatManager.Instance != null)
+        //StatUIManager
+        if (StatUIManager.Instance != null)
         {
-            StatManager.Instance.InitStatWindow();
+            StatUIManager.Instance.InitStatWindow();
         }
 
         //EventScriptManager
@@ -99,6 +101,8 @@ public class GameManager : MonoBehaviour
             Destroy(EventScriptManager.Instance.gameObject);
         }
         EventScriptManager.Init();
+
+        AudioManager.Instance.ChangeBGM("IngameBGM");
 
         LoadStage(currentStage);
     }
@@ -111,12 +115,7 @@ public class GameManager : MonoBehaviour
 
     public void OnStageClear()
     {
-        /*
-        스테이지를 클리어하면 맵이 열리고,
-        맵의 아이콘을 클릭하면 아이콘의 StageType을 받아서
-        LoadStage(cuurentStage, stageType); 으로 바꾸기
-         */
-
+        // 여기서 Map 이 나와야함
         if (currentStage < maxStage)
         {
             currentStage++;
@@ -152,13 +151,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => op.isDone);
     }
 
-    public void SetGold(int amount)
+    public void SetGold(int value)
     {
-        playerGold += amount;
+        playerGold += value;
 
         if (playerGold <= 0)
             playerGold = 0;
-        HUDManager.Instance.SetGold(amount);
+        HUDManager.Instance.SetGold(value);
     }
 
     public void TakeDamage(float damage)
@@ -172,13 +171,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetHealth(float amount)
+    public void SetHealth(float value)
     {
-        playerHealth += amount;
+        playerHealth += value;
 
-        if (playerHealth >= maxHealth)
+        if (playerHealth >= playerMaxHealth)
         {
-            playerHealth = maxHealth;
+            playerHealth = playerMaxHealth;
         }
 
         if (playerHealth <= 0)
@@ -189,24 +188,57 @@ public class GameManager : MonoBehaviour
         HUDManager.Instance.SetHealth(playerHealth);
     }
 
-    public void SetMaxHealth(float amount)
+    public void SetMaxHealth(float value)
     {
-        maxHealth += amount;
-        HUDManager.Instance.SetMaxHealth(maxHealth);
+        playerMaxHealth += value;
+        HUDManager.Instance.SetMaxHealth(playerMaxHealth);
 
-        if (playerHealth >= maxHealth)
+        if (playerHealth >= playerMaxHealth)
         {
-            playerHealth = maxHealth;
+            playerHealth = playerMaxHealth;
+            HUDManager.Instance.SetHealth(playerHealth);
         }
 
-        if (maxHealth <= 0)
+        if (playerMaxHealth <= 0)
         {
             GameOver();
         }
     }
 
+    public void SetPlayerArmor(float value)
+    {
+        playerArmor += value;
+    }
+
+    public void SetPlayerAttack(float value)
+    {
+        playerAttack += value;
+    }
+
+    public void SetPlayerAttackSpeed(float value)
+    {
+        playerAttackSpeed += value;
+    }
+
+    public void SetPlayerMoveSpeed(float value)
+    {
+        playerMoveSpeed += value;
+    }
+
+    public void SetPlayerCritical(float value)
+    {
+        playerCritical += value;
+    }
+
+    public void SetPlayerCriticalDamage(float value)
+    {
+        playerCriticalDamage += value;
+    }
+
     void Update()
     {
+        if (InputBlocker.blockKeyboardInput) return;
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             SetGold(10);
@@ -224,8 +256,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("CurrentStage : Stage_" + currentStage
-                        + "\nMaxStage : " + maxStage);
+            StartNewGame();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -240,12 +271,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            SetMaxHealth(10);
+            SetMaxHealth(-10);
         }
-
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    SceneManager.LoadScene("GameClear");
-        //}
     }
 }

@@ -2,14 +2,19 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatManager : MonoBehaviour
+public class StatUIManager : MonoBehaviour
 {
-    public static StatManager Instance;
+    public static StatUIManager Instance;
 
     public GameObject statWindow;
 
     public Text healthText;
     public Text attackText;
+    public Text attackSpeedText;
+    public Text criticalText;
+    public Text criticalDamageText;
+    public Text armorText;
+    public Text moveSpeedText;
     public Text goldText;
 
     private bool isOpen = false;
@@ -30,7 +35,7 @@ public class StatManager : MonoBehaviour
     {
         if (Instance != null) return;
 
-        UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("StatManager").Completed += handle =>
+        UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("StatUIManager").Completed += handle =>
         {
             if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
             {
@@ -45,6 +50,8 @@ public class StatManager : MonoBehaviour
 
     void Update()
     {
+        if (InputBlocker.blockKeyboardInput) return;
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             ToggleStatWindow();
@@ -77,8 +84,13 @@ public class StatManager : MonoBehaviour
     {
         var gm = GameManager.Instance;
 
-        healthText.text = $"HP : {gm.playerHealth} / {gm.maxHealth}";
+        healthText.text = $"HP : {gm.playerHealth} / {gm.playerMaxHealth}";
         attackText.text = $"Attack : {gm.playerAttack}";
+        attackSpeedText.text = $"AttackSpeed : {gm.playerAttackSpeed}%";
+        criticalText.text = $"Critical : {gm.playerCritical}%";
+        criticalDamageText.text = $"CriticalDamage : {gm.playerCriticalDamage}%";
+        armorText.text = $"Armor : {gm.playerArmor}";
+        moveSpeedText.text = $"MoveSpeed : {gm.playerMoveSpeed}%";
         goldText.text = $"Gold : {gm.playerGold}";
     }
 }

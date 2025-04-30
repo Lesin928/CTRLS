@@ -35,6 +35,15 @@ public class HUDManager : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
+    private void Update()
+    {
+        if (isTrackingTime)
+        {
+            playTime += Time.unscaledDeltaTime;
+            UpdateTimeText();
+        }
+    }
+
     public static void Init()
     {
         if (Instance != null) return;
@@ -52,18 +61,9 @@ public class HUDManager : MonoBehaviour
         };
     }
 
-    private void Update()
-    {
-        if (isTrackingTime)
-        {
-            playTime += Time.unscaledDeltaTime;
-            UpdateTimeText();
-        }
-    }
-
     public void InitHUD()
     {
-        maxHealth = GameManager.Instance.maxHealth;
+        maxHealth = GameManager.Instance.playerMaxHealth;
         health = GameManager.Instance.playerHealth;
         gold = GameManager.Instance.playerGold;
 
@@ -106,8 +106,13 @@ public class HUDManager : MonoBehaviour
     private void UpdateHUD()
     {
         if (healthSlider != null)
+        {
             healthSlider.value = health;
-        if (goldText != null) goldText.text = $"Gold: {gold}";
+            healthSlider.maxValue = maxHealth;
+        }
+
+        if (goldText != null)
+            goldText.text = $"Gold: {gold}";
     }
 
     private IEnumerator FadeInHUD()

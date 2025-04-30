@@ -4,7 +4,25 @@ public class TitleButton : MonoBehaviour
 {
     public void StartTitle()
     {
-        // Load the game scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
+
+        HUDManager.Instance.InitHUD();
+        HUDManager.Instance.HideHUD();
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.ChangeBGM("TitleBGM");
+        }
+
+        GameObject go = GameObject.Find("OptionUI(Clone)");
+        if (go != null)
+        {
+            if (go.activeSelf)
+                go.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Option UI가 존재하지 않습니다.");
+        }
     }
 }
