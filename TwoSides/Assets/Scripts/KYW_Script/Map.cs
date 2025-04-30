@@ -13,14 +13,14 @@ public class Map : MonoBehaviour
     private MapNode[,] grid; // 노드를 저장하는 2차원 배열
     public GameObject battlePrefab; // 전투 노드 시각화 프리팹
     public GameObject mysteryPrefab; // 미스터리 노드 시각화 프리팹
-    public GameObject restPrefab; // 휴식 노드 시각화 프리팹
-    public GameObject treasurePrefab; // 보물 노드 시각화 프리팹
+    public GameObject StorePrefab; // 상점 노드 시각화 프리팹
+    public GameObject PuzzlePrefab; // 퍼즐 노드 시각화 프리팹
     public GameObject bossPrefab; // 보스 노드 시각화 프리팹
     public RectTransform backgroundBoxPrefab; // 배경 박스 프리팹 (빈 Image UI 등)
     private static bool mapGenerated = false;
     public int LEVEL; // 인스펙터에서 설정할 레벨
     private MapNode currentNode; // 현재 선택한 노드
-
+    public static RectTransform latestBackgroundBox; // 추가
     void Start()
     {
         if (mapGenerated) return;
@@ -135,42 +135,38 @@ public class Map : MonoBehaviour
 
     void GeneratePaths()
     {
-        HashSet<int> usedStartCols = new HashSet<int>(); // 시작 열 중복 방지용
-
-        for (int path = 0; path < 6; path++) // 6개의 경로 생성
+        for (int col = 0; col < columns; col++) // 0~6까지 7개 라인
         {
-            int col;
-            do
-            {
-                col = Random.Range(0, columns); // 랜덤한 시작 열 선택
-            } while (path < 2 && usedStartCols.Contains(col)); // 앞 2개는 중복 방지
-
-            usedStartCols.Add(col); // 사용한 열 저장
             int currentCol = col;
 
-            for (int floor = 1; floor < floors; floor++) // 각 층마다 노드 생성
+            // 1층에 노드가 없다면 생성
+            if (grid[currentCol, 1] == null)
+                grid[currentCol, 1] = CreateNode(1, currentCol);
+
+            for (int floor = 1; floor < floors; floor++) // 위로 올라가며 노드 생성
             {
                 if (grid[currentCol, floor] == null)
-                    grid[currentCol, floor] = CreateNode(floor, currentCol); // 노드가 없으면 생성
+                    grid[currentCol, floor] = CreateNode(floor, currentCol);
 
-                if (floor < floors - 1) // 마지막 층이 아니면 다음 층 연결
+                if (floor < floors - 1)
                 {
-                    List<int> nextCols = new List<int>(); // 이동 가능한 열
-                    if (currentCol > 0) nextCols.Add(currentCol - 1); // 왼쪽
-                    nextCols.Add(currentCol); // 가운데
-                    if (currentCol < columns - 1) nextCols.Add(currentCol + 1); // 오른쪽
+                    List<int> nextCols = new List<int>();
+                    if (currentCol > 0) nextCols.Add(currentCol - 1);
+                    nextCols.Add(currentCol);
+                    if (currentCol < columns - 1) nextCols.Add(currentCol + 1);
 
-                    int nextCol = nextCols[Random.Range(0, nextCols.Count)]; // 다음 열 선택
+                    int nextCol = nextCols[Random.Range(0, nextCols.Count)];
 
                     if (grid[nextCol, floor + 1] == null)
-                        grid[nextCol, floor + 1] = CreateNode(floor + 1, nextCol); // 다음 층 노드 생성
+                        grid[nextCol, floor + 1] = CreateNode(floor + 1, nextCol);
 
-                    grid[currentCol, floor].connectedNodes.Add(grid[nextCol, floor + 1]); // 노드 연결
-                    currentCol = nextCol; // 현재 열 갱신
+                    grid[currentCol, floor].connectedNodes.Add(grid[nextCol, floor + 1]);
+                    currentCol = nextCol;
                 }
             }
         }
     }
+
 
     MapNode CreateNode(int floor, int col)
     {
@@ -287,8 +283,8 @@ public class Map : MonoBehaviour
         {
             case NodeType.Battle: prefabToUse = battlePrefab; break;
             case NodeType.Mystery: prefabToUse = mysteryPrefab; break;
-            case NodeType.Rest: prefabToUse = restPrefab; break;
-            case NodeType.Treasure: prefabToUse = treasurePrefab; break;
+            case NodeType.Rest: prefabToUse = StorePrefab; break;
+            case NodeType.Treasure: prefabToUse = PuzzlePrefab; break;
             case NodeType.Boss: prefabToUse = bossPrefab; break;
         }
 
@@ -320,7 +316,12 @@ public class Map : MonoBehaviour
 
         RectTransform mapPanel = nodeParent.parent.GetComponent<RectTransform>();
         RectTransform box = Instantiate(backgroundBoxPrefab, mapPanel);
-
+        latestBackgroundBox = box; // 생성한 박스 저장
+        MapController dragHandler = FindAnyObjectByType<MapController>();
+        if (dragHandler != null)
+        {
+            dragHandler.boundaryRect = box; // 🔥 드래그 핸들러에 직접 연결
+        }
         box.anchoredPosition = position;
 
         float padding = 50f;
