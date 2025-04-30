@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 338191781753941291}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0.05, z: 0}
+  m_LocalPosition: {x: -0.16, y: 0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -75,10 +75,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2082586565
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7935115051335420518, guid: 2c283d7d72e0fa148bdf24781e48aaa9, type: 3}
+  m_Sprite: {fileID: 815424164945274260, guid: 1bc2d4bca00a03647b65210b9a8c138c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7430722754555809961}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 7200185600223304764}
   - component: {fileID: 1554696197631303557}
   - component: {fileID: 7137536933490442471}
-  - component: {fileID: 6768775743216477026}
+  - component: {fileID: 3863193615808319527}
   m_Layer: 6
   m_Name: Enemy_EvilEye
   m_TagString: Enemy
@@ -187,7 +187,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1730865803125918934}
   - {fileID: 4981348153097751143}
@@ -210,12 +210,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
-  defaultmoveSpeed: 1.5
+  defaultMoveSpeed: 1.5
   chaseSpeed: 2
-  attackDistance: 4
   attackCooldown: 0
   lastTimeAttacked: 0
-  player: {fileID: 0}
   groundCheck: {fileID: 4981348153097751143}
   groundCheckDistance: 0.1
   wallCheck: {fileID: 7488216464981450779}
@@ -223,16 +221,13 @@ MonoBehaviour:
   playerCheck: {fileID: 7430722754555809961}
   playerCheckRadius: 4
   attackCheck: {fileID: 9112820505190332826}
-  attackCheckRadius: 3.5
+  attackCheckRadius: 3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!50 &7137536933490442471
 Rigidbody2D:
   serializedVersion: 5
@@ -260,8 +255,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &6768775743216477026
-CircleCollider2D:
+--- !u!70 &3863193615808319527
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -294,8 +289,9 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00084373355, y: 0}
-  m_Radius: 0.22683021
+  m_Offset: {x: -0.17693213, y: -0.04569696}
+  m_Size: {x: 0.9691061, y: 0.6239695}
+  m_Direction: 1
 --- !u!1 &3532098130869342824
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 4870029354235296419}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.206, y: 0.081, z: 0}
+  m_LocalPosition: {x: 0.301, y: 0.038, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -383,7 +379,7 @@ Transform:
   m_GameObject: {fileID: 6793925514583421731}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.13, y: 0, z: 0}
+  m_LocalPosition: {x: 0.077, y: -0.092, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -414,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 9002727720368846354}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.228, y: -0.514, z: 0}
+  m_LocalPosition: {x: 0.365, y: -0.514, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
