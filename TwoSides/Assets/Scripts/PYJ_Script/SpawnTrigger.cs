@@ -11,7 +11,7 @@ public class SpawnTrigger : MonoBehaviour
         {
             hasActivated = true;
             canStartSpawning = true;
-            Debug.Log("충돌 완료! 엔터 키를 누르면 바위가 떨어집니다.");
+            Debug.Log("충돌 완료! F 키를 누르면 바위가 떨어집니다.");
         }
     }
 
@@ -29,7 +29,7 @@ public class SpawnTrigger : MonoBehaviour
 
             RockManager.Instance.StartSpawning();
             canStartSpawning = false;
-            Debug.Log("엔터 키 눌림! 바위 떨어지기 시작!");
+            Debug.Log("F키 눌림! 바위 떨어지기 시작!");
         }
     }
 }
