@@ -1,42 +1,24 @@
 using UnityEngine;
 using UnityEngine.Windows;
-
+// TODO: (추가할일 적는부분)
+// FIXME: (고칠거 적는부분)
+// NOTE : (기타 작성)
 public class PlayerIdleState : PlayerGroundState
 {
-    public PlayerIdleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
-        : base(_player, _stateMachine, _animBoolName)
+    public PlayerIdleState(PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName) : base(_playerAnim, _stateMachine, _playerObject, _animBoolName)
     {
-
-    }
-    /*
+    } 
     public override void Enter()
     {
-        base.Enter();
-
-        player.SetZeroVelocity();
+        base.Enter(); 
     }
     public override void Update()
     {
-        base.Update();
-
-
-
-        if (xInput == player.facingDir && player.IsWallDetected())
-            return;
-
-
-
-
-        if (xInput != 0 && !player.isBusy)
-            stateMachine.ChangeState(player.moveState);
-
-
-
+        base.Update(); 
     }
     public override void Exit()
     {
         base.Exit();
-    }
-    */
+    } 
 
 }
