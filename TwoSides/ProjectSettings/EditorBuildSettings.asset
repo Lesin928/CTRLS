@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SJY_Scene/Stage_3.unity
     guid: 85aa6581ce798f446b91b22232a3a357
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Stage_4.unity
+    path: Assets/Scenes/SJY_Scene/Battle0.unity
     guid: 69e49526f6621074985e4895599a5a5e
   - enabled: 1
     path: Assets/Scenes/SJY_Scene/Stage_5.unity

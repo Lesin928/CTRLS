@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
+using Unity.Collections;
 
 public class LoadingSceneController : MonoBehaviour
 {
