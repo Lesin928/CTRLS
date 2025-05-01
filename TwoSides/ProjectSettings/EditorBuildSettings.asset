@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SJY_Scene/Title.unity
     guid: 0b2a49d5d1f8cc9429dda97a591c1b13
   - enabled: 1
+    path: Assets/Scenes/SJY_Scene/KYW_MAP.unity
+    guid: 0eedc241fd03fab4aabbc2cfb6226759
+  - enabled: 1
     path: Assets/Scenes/SJY_Scene/Battle0.unity
     guid: 4dfe0865967d887449af81f422245cfb
   - enabled: 1

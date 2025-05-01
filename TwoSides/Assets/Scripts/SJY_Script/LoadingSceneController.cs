@@ -87,6 +87,8 @@ public class LoadingSceneController : MonoBehaviour
 
             StartCoroutine(Fade(false));
             SceneManager.sceneLoaded -= OnSceneLoaded;
+
+            Debug.Log(GameManager.Instance.isClear);
         }
     }
 

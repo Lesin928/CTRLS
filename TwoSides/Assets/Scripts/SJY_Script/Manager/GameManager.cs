@@ -127,6 +127,8 @@ public class GameManager : MonoBehaviour
 
         //LoadStage(currentStage);
         LoadingSceneController.Instance.LoadScene("Battle0");
+
+
     }
 
     //public void LoadStage(int stageIndex)
@@ -137,13 +139,18 @@ public class GameManager : MonoBehaviour
 
     public void OnStageClear()
     {
-        isClear = true;
-        currentStage++;
-
-        if (currentStage > maxStage)
+        if (isClear)
+            isClear = !isClear;
+        else
         {
-            // 이걸 보스스테이지에서 체크하는 방법으로 바꿔야ㅑ함
-            GameClear();
+            isClear = true;
+            currentStage++;
+
+            if (currentStage > maxStage)
+            {
+                // 이걸 보스스테이지에서 체크하는 방법으로 바꿔야ㅑ함
+                GameClear();
+            }
         }
     }
 
@@ -295,7 +302,9 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
+            Debug.Log(isClear);
             OnStageClear();
+            Debug.Log(isClear);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
