@@ -20,9 +20,5 @@ public class TitleButton : MonoBehaviour
             if (go.activeSelf)
                 go.SetActive(false);
         }
-        else
-        {
-            Debug.LogWarning("Option UI가 존재하지 않습니다.");
-        }
     }
 }

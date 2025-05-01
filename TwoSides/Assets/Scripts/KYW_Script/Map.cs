@@ -1,9 +1,25 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
+    public static Map Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
+    }
+
     public int floors = 15; // 총 층 수
     public int columns = 7; // 총 열 수
     public GameObject nodePrefab; // 기본 노드 프리팹
@@ -41,11 +57,39 @@ public class Map : MonoBehaviour
 
     void Update()
     {
+        string sceneName = "Title";
+        if (sceneName == SceneManager.GetActiveScene().name)
+        {
+            ResetMap();
+        }
+
         if (LEVEL != previousLevel)
         {
             RefreshButtonStates();
             previousLevel = LEVEL;
         }
+    }
+
+    public void ResetMap()
+    {
+        Debug.Log("ResetMap called!"); // 디버그 로그 추가
+
+        // 🔥 기존 노드와 라인 모두 제거
+        foreach (Transform child in nodeParent)
+            Destroy(child.gameObject);
+
+        foreach (Transform child in lineParent)
+            Destroy(child.gameObject);
+
+        // 초기화
+        currentNode = null;
+        previousLevel = -1;
+        LEVEL = 0;
+        grid = null;
+        mapGenerated = false;
+
+        // 맵 다시 생성
+        Start();
     }
 
     void RefreshButtonStates()
