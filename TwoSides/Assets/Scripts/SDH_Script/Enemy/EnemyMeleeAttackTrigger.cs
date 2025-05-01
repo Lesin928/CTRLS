@@ -20,8 +20,8 @@ public class EnemyMeleeAttackTrigger : EnemyAnimationTrigger
         // 공격 범위 내의 객체들을 순회
         foreach (var hit in colliders)
         {
-            // Collider에 Player 컴포넌트가 있을 경우 공격이 성공한 것으로 처리
-            if (hit.GetComponent<Player>() != null)
+            // Collider에 PlayerObject 컴포넌트가 있을 경우 공격이 성공한 것으로 처리
+            if (hit.GetComponent<PlayerObject>() != null)
             {
                 Debug.Log("공격 성공");
             }

@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
 
             // 플레이어의 TakeDamage 함수 호출하여 피해 주기
-            Player player = collision.GetComponent<Player>();
+            PlayerObject player = collision.GetComponent<PlayerObject>();
             if (player != null)
             {
                 Debug.Log("공격 성공");
@@ -83,7 +83,7 @@ public class Bullet : MonoBehaviour
         }
 
         // 벽과 충돌한 경우
-        else if (!collision.CompareTag("Enemy"))
+        else if (collision.CompareTag("Ground"))
         {
             // 히트 애니메이션 재생
             anim.SetBool("Hit", true);

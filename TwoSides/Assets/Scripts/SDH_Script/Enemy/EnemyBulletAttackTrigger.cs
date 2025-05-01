@@ -8,7 +8,6 @@ public class EnemyBulletAttackTrigger : EnemyAnimationTrigger
 {
     [SerializeField] private GameObject bulletPrefab; // 발사할 총알의 프리팹
     [SerializeField] private Transform firePoint;     // 총알이 발사될 위치
-    [SerializeField] private Transform player;        // 플레이어의 위치
 
     // 총알 생성 후 발사 (애니메이션 이벤트에서 호출)
     private void BulletAttackTrigger()
@@ -18,6 +17,6 @@ public class EnemyBulletAttackTrigger : EnemyAnimationTrigger
 
         // 총알의 Bullet 스크립트를 가져와서 발사 방향을 설정
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.Shoot(player.position); // 플레이어 위치로 총알을 발사
+        bulletScript.Shoot(PlayerManager.instance.player.transform.position); // 플레이어 위치로 총알을 발사
     }
 }

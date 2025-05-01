@@ -8,7 +8,6 @@ public class EnemyArrowAttackTrigger : EnemyAnimationTrigger
 {
     [SerializeField] private GameObject arrowPrefab; // 화살 프리팹
     [SerializeField] private Transform firePoint;    // 화살 발사 위치
-    [SerializeField] private Transform player;       // 플레이어의 위치
 
     // 화살 생성 후 발사 (애니메이션 이벤트에서 호출)
     private void ArrowAttackTrigger()
@@ -18,6 +17,6 @@ public class EnemyArrowAttackTrigger : EnemyAnimationTrigger
 
         // 화살 객체의 스크립트를 가져와서 플레이어를 향해 발사
         Arrow arrowScript = arrow.GetComponent<Arrow>();
-        arrowScript.Shoot(player.position);
+        arrowScript.Shoot(PlayerManager.instance.player.transform.position);
     }
 }

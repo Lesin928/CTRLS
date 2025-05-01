@@ -22,34 +22,34 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -7429349752323201602, guid: 9d6d96d356e3c094184ee4c7724c1de7, type: 3}
-    - time: 0.083333336
+    - time: 0.071428575
       value: {fileID: 6108083799309416586, guid: 219f8488ec187e240addab184528813a, type: 3}
-    - time: 0.16666667
+    - time: 0.14285715
       value: {fileID: 8192814095390455151, guid: 37b82dac9e1f24e48a7b224244fc8c70, type: 3}
-    - time: 0.25
+    - time: 0.21428572
       value: {fileID: 40228480174976331, guid: 62a4557f4773b4945b0977ffde51781f, type: 3}
-    - time: 0.33333334
+    - time: 0.2857143
       value: {fileID: -97424515829471113, guid: 0051b5d0699497d4382a288fa294b81f, type: 3}
-    - time: 0.41666666
+    - time: 0.35714287
       value: {fileID: 6090165190778862004, guid: 7682a558ce2e0a54980e723928d3e6b9, type: 3}
-    - time: 0.5
+    - time: 0.42857143
       value: {fileID: 76915299206665187, guid: fce4e64f629a0d14c99b229ad49a7a2a, type: 3}
-    - time: 0.5833333
+    - time: 0.5
       value: {fileID: 6757000326252542270, guid: fe6ff7ae2d04fdd49a3c51e6e8b433fc, type: 3}
-    - time: 0.6666667
+    - time: 0.5714286
       value: {fileID: 1384105754532818508, guid: 14960dc1618895747b870aaf6bfc639c, type: 3}
-    - time: 0.75
+    - time: 0.64285713
       value: {fileID: 175923190870653507, guid: ad7c073f8eb56f14e9110ac5531e6966, type: 3}
-    - time: 0.8333333
+    - time: 0.71428573
       value: {fileID: 8534334332270780206, guid: 5f84ed4dbc61502488d47844a60b1257, type: 3}
-    - time: 0.9166667
+    - time: 0.78571427
       value: {fileID: 6356957425972009650, guid: f4bccdfda4d4bea40b72040453ee1dc0, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 14
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -83,7 +83,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.85714287
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -103,21 +103,21 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.16666667
+  - time: 0.14285715
     functionName: Slash1AttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.75
+  - time: 0.64285713
     functionName: Slash2AttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.9166667
+  - time: 0.78571427
     functionName: AnimationTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

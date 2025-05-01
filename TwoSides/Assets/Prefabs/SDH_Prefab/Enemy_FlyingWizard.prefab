@@ -249,7 +249,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.365, y: -0.005, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3033751141668177005}
@@ -336,9 +336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabc0af1a8bb17741acb54a7e7df0f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
-  defaultMoveSpeed: 1.5
-  chaseSpeed: 3
+  moveSpeed: 3
+  defaultMoveSpeed: 3
+  chaseSpeed: 10
   attackCooldown: 0
   lastTimeAttacked: 0
   groundCheck: {fileID: 4665345172996485987}
@@ -346,7 +346,7 @@ MonoBehaviour:
   wallCheck: {fileID: 5292417583605088614}
   wallCheckDistance: 0.3
   playerCheck: {fileID: 6039397195007320790}
-  playerCheckRadius: 6
+  playerCheckRadius: 7
   attackCheck: {fileID: 8849458480552960660}
   attackCheckRadius: 4
   whatIsGround:

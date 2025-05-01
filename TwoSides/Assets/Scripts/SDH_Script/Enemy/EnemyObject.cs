@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 // TODO:
@@ -9,11 +10,11 @@ using UnityEngine;
 /// 적 오브젝트의 기본 동작을 정의하는 클래스.
 /// 이동, 감지, 공격, 상태 전이 등의 기능을 포함함.
 /// </summary>
-public class EnemyObject : MonoBehaviour
+public class EnemyObject : CharacterObject
 {
     #region [Move Info]
     [Header("Move Info")]
-    public float moveSpeed;        // 현재 이동 속도
+    //public float moveSpeed;        // 현재 이동 속도
     public float defaultMoveSpeed; // 기본 이동 속도
     public float chaseSpeed;       // 추격 시 속도
     #endregion
@@ -48,6 +49,11 @@ public class EnemyObject : MonoBehaviour
     public EnemyStateMachine stateMachine { get; private set; } // 스테이트 머신
     #endregion
 
+    #region [State]
+    public EnemyHitState hitState { get; private set; }   // 피격 상태
+    public EnemyDeadState deadState { get; private set; } // 죽음 상태
+    #endregion
+
     #region [Facing]
     public int facingDir { get; private set; } = 1; // 현재 바라보는 방향 (1: 오른쪽, -1: 왼쪽)
     protected bool facingRight = true;              // 오른쪽 바라보고 있는지 여부
@@ -57,6 +63,10 @@ public class EnemyObject : MonoBehaviour
     protected virtual void Awake()
     {
         stateMachine = new EnemyStateMachine();
+
+        // 상태 인스턴스를 초기화
+        hitState = new EnemyHitState(this, stateMachine, "Hit");
+        deadState = new EnemyDeadState(this, stateMachine, "Dead");
     }
 
     // 컴포넌트 초기화
@@ -70,6 +80,11 @@ public class EnemyObject : MonoBehaviour
     protected virtual void Update()
     {
         stateMachine.currentState?.Update();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TakeDamage(10);
+        }
     }
 
     /// <summary>
@@ -210,4 +225,24 @@ public class EnemyObject : MonoBehaviour
             Gizmos.DrawLine(transform.position, PlayerManager.instance.player.transform.position);
     }
     #endregion
+
+    public override void TakeDamage(float _damage)
+    {
+        currentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)armor + (double)_damage)));
+
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            stateMachine.ChangeState(deadState);
+        }
+        else
+        {
+            stateMachine.ChangeState(hitState);
+        }
+    }
+
+    public override void Die()
+    {
+
+    }
 }
