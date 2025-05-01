@@ -21,7 +21,7 @@ public class EnemyChaseState : EnemyState
     public override void Enter()
     {
         player = PlayerManager.instance.player.transform;
-        enemyBase.moveSpeed = enemyBase.chaseSpeed;
+        enemyBase.MoveSpeed = enemyBase.chaseSpeed;
 
         // 벽이 사이에 있으면 추적 종료
         if (enemyBase.IsWallBetweenPlayer())
@@ -100,7 +100,7 @@ public class EnemyChaseState : EnemyState
         if (Mathf.Abs(xDiff) > 0.05f)
         {
             int moveDir = xDiff > 0 ? 1 : -1; // 이동 방향
-            enemyBase.SetVelocity(enemyBase.moveSpeed * moveDir, rb.linearVelocityY);
+            enemyBase.SetVelocity(enemyBase.MoveSpeed * moveDir, rb.linearVelocityY);
         }
     }
 
@@ -110,7 +110,7 @@ public class EnemyChaseState : EnemyState
     public override void Exit()
     {
         base.Exit();
-        enemyBase.moveSpeed = enemyBase.defaultMoveSpeed;
+        enemyBase.MoveSpeed = enemyBase.defaultMoveSpeed;
     }
 
     // 공격 가능 여부 판단

@@ -28,7 +28,7 @@ public class EnemyPatrolState : EnemyState
         Debug.Log("Patrol");
 
         // 현재 바라보는 방향으로 이동
-        enemyBase.SetVelocity(enemyBase.moveSpeed * enemyBase.facingDir, rb.linearVelocityY);
+        enemyBase.SetVelocity(enemyBase.MoveSpeed * enemyBase.facingDir, rb.linearVelocityY);
 
         // 벽이 있거나 땅이 없으면 방향 전환 및 대기 상태 진입
         if (enemyBase.IsWallDetected() || !enemyBase.IsGroundDetected())

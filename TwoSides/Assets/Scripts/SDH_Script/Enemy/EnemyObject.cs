@@ -227,12 +227,12 @@ public class EnemyObject : CharacterObject
     #endregion
 
     public override void TakeDamage(float _damage)
-    {
-        currentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)armor + (double)_damage)));
+    {        
+        CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
 
-        if (currentHp <= 0)
+        if (CurrentHp <= 0)
         {
-            currentHp = 0;
+            CurrentHp = 0;
             stateMachine.ChangeState(deadState);
         }
         else
@@ -241,7 +241,7 @@ public class EnemyObject : CharacterObject
         }
     }
 
-    public override void Die()
+    protected override void Die()
     {
 
     }
