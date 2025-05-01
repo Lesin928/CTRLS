@@ -5,11 +5,8 @@ using UnityEngine;
 public class PlayerDashState : PlayerState
 {
     public PlayerDashState (PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName) : base(_playerAnim, _stateMachine, _playerObject, _animBoolName)
-    {
-
-    } 
-
-
+    { 
+    }  
     
     public override void Enter()
     {
@@ -23,18 +20,14 @@ public class PlayerDashState : PlayerState
 
     public override void Update()
     {
-        base.Update();
-        Debug.Log(playerObject); 
-        Debug.Log(playerObject.GetDashing());
-
+        base.Update(); 
         if (!playerObject.GetDashing())
-        {
-            if(playerObject.IsGroundDetected())
+        { 
+            if (playerObject.IsGroundDetected())
                 stateMachine.ChangeState(playerAnimation.idleState);
             else
                 stateMachine.ChangeState(playerAnimation.airState);
-        }  
-         
+        }   
         /*
         if (!player.IsGroundDetected() && player.IsWallDetected())
             stateMachine.ChangeState(player.wallSlide);
@@ -48,10 +41,10 @@ public class PlayerDashState : PlayerState
 
 
     public override void Exit()
-    {/*
+    { 
         base.Exit();
-        player.SetVelocity(0, rb.linearVelocityY);
-        */
-    } 
-    
+
+        //player.SetVelocity(0, rb.linearVelocityY);
+    }
+
 }

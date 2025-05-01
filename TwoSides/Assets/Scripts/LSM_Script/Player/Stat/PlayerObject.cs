@@ -52,10 +52,10 @@ public class PlayerObject : CharacterObject
 
     public override void TakeDamage(float damage)     
     {
-
+        base.TakeDamage(damage);
     }
 
-    public override void Die()
+    protected override void Die()
     {
 
     }
