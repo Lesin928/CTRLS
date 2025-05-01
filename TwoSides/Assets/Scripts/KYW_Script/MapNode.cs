@@ -2,7 +2,7 @@
 using UnityEngine;
 
 // 노드의 타입 정의
-public enum NodeType { Battle, Treasure, Rest, Mystery, Boss }
+public enum NodeType { Battle, Puzzle, Store, Mystery, Boss }
 
 public class MapNode : MonoBehaviour
 {

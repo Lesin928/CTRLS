@@ -17,15 +17,15 @@ public class Map : MonoBehaviour
     public GameObject PuzzlePrefab; // 퍼즐 노드 시각화 프리팹
     public GameObject bossPrefab; // 보스 노드 시각화 프리팹
     public RectTransform backgroundBoxPrefab; // 배경 박스 프리팹 (빈 Image UI 등)
-    private static bool mapGenerated = false;
+    public static bool mapGenerated = false;
     public int LEVEL; // 인스펙터에서 설정할 레벨
     private MapNode currentNode; // 현재 선택한 노드
-    public static RectTransform latestBackgroundBox; // 추가
+    public static RectTransform latestBackgroundBox;
     void Start()
     {
         if (mapGenerated) return;
-        nodeParent.SetAsLastSibling(); // 🔥 NodePanel을 맨 위로 보낸다
-        lineParent.SetAsFirstSibling(); // 🔥 LinePanel을 맨 뒤로 보낸다
+        nodeParent.SetAsLastSibling(); // NodePanel을 맨 위로 보낸다
+        lineParent.SetAsFirstSibling(); // LinePanel을 맨 뒤로 보낸다
         GenerateGrid();
         GeneratePaths();
         AssignNodeTypes();
@@ -85,7 +85,7 @@ public class Map : MonoBehaviour
             foreach (var nextNode in currentNode.connectedNodes)
             {
                 if (nextNode == null) continue;
-                if (nextNode.floor != LEVEL) continue; // 🔥 다음 층에 있는 노드만
+                if (nextNode.floor != LEVEL) continue; //  다음 층에 있는 노드만
 
                 Button button = nextNode.GetComponentInChildren<Button>();
                 if (button != null)
@@ -101,8 +101,8 @@ public class Map : MonoBehaviour
 
     void OnNodeButtonClicked(MapNode node)
     {
-        currentNode = node; // 🔥 클릭한 노드를 현재 노드로 설정
-        LEVEL++; // 🔥 LEVEL 올리기
+        currentNode = node; // 클릭한 노드를 현재 노드로 설정
+        LEVEL++; // LEVEL 올리기
     }
 
 
@@ -181,7 +181,7 @@ public class Map : MonoBehaviour
         RectTransform rt = obj.GetComponent<RectTransform>();
         rt.anchoredPosition = pos;
 
-        // 🔥 z값을 0으로 강제 설정
+        // z값을 0으로 강제 설정
         Vector3 localPos = rt.localPosition;
         localPos.z = 0f;
         rt.localPosition = localPos;
@@ -204,15 +204,15 @@ public class Map : MonoBehaviour
                 if (node == null) continue; // 없으면 건너뜀
 
                 if (floor == 1) node.type = NodeType.Battle; // 시작 층은 전투
-                else if (floor == 8) node.type = NodeType.Treasure; // 9층은 보물
-                else if (floor == 14) node.type = NodeType.Rest; // 15층은 휴식
+                else if (floor == 8) node.type = NodeType.Puzzle; // 9층은 보물
+                else if (floor == 14) node.type = NodeType.Store; // 15층은 휴식
                 else
                 {
                     float rand = Random.value; // 랜덤 타입 지정
                     if (rand < 0.5f) node.type = NodeType.Battle;
                     else if (rand < 0.7f) node.type = NodeType.Mystery;
-                    else if (rand < 0.85f) node.type = NodeType.Rest;
-                    else node.type = NodeType.Treasure;
+                    else if (rand < 0.85f) node.type = NodeType.Store;
+                    else node.type = NodeType.Puzzle;
                 }
                 UpdateNodeVisual(node); // 시각 업데이트
             }
@@ -283,8 +283,8 @@ public class Map : MonoBehaviour
         {
             case NodeType.Battle: prefabToUse = battlePrefab; break;
             case NodeType.Mystery: prefabToUse = mysteryPrefab; break;
-            case NodeType.Rest: prefabToUse = StorePrefab; break;
-            case NodeType.Treasure: prefabToUse = PuzzlePrefab; break;
+            case NodeType.Store: prefabToUse = StorePrefab; break;
+            case NodeType.Puzzle: prefabToUse = PuzzlePrefab; break;
             case NodeType.Boss: prefabToUse = bossPrefab; break;
         }
 
@@ -294,7 +294,7 @@ public class Map : MonoBehaviour
             RectTransform rt = visual.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
 
-            // 🔥 여기서 Button 컴포넌트 활성/비활성 제어 추가
+            // 여기서 Button 컴포넌트 활성/비활성 제어 추가
             UnityEngine.UI.Button button = visual.GetComponent<UnityEngine.UI.Button>();
             if (button != null)
             {
@@ -311,7 +311,7 @@ public class Map : MonoBehaviour
         float mapWidth = columns * nodeWidth;
         float mapHeight = (floors + 1) * nodeHeight;
 
-        // 🔥 중심 기준으로 포지션 (0,10) 조정
+        // 중심 기준으로 포지션 (0,10) 조정
         Vector2 position = new Vector2(0f, 10f);
 
         RectTransform mapPanel = nodeParent.parent.GetComponent<RectTransform>();
@@ -320,7 +320,7 @@ public class Map : MonoBehaviour
         MapController dragHandler = FindAnyObjectByType<MapController>();
         if (dragHandler != null)
         {
-            dragHandler.boundaryRect = box; // 🔥 드래그 핸들러에 직접 연결
+            dragHandler.boundaryRect = box; // 드래그 핸들러에 직접 연결
         }
         box.anchoredPosition = position;
 
