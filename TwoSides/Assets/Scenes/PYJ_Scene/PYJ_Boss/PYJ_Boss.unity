@@ -38713,13 +38713,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 0
-  currentHp: 0
-  armor: 0
-  attack: 0
-  attackSpeed: 0
-  moveSpeed: 0
-  critical: 0
-  criticalDamage: 0
   groundCheck: {fileID: 6981607871079530048}
   groundCheckDistance: 0.9
   whatIsGround:
@@ -38851,7 +38844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 7
+  jumpForce: 10
   dashForce: 10
 --- !u!81 &5805304342405646357
 AudioListener:

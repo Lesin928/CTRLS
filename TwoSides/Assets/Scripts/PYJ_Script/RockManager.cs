@@ -164,11 +164,17 @@ public class RockManager : MonoBehaviour
         timer -= Time.deltaTime;
 
         // === 게임 클리어 조건 추가 ===
+        if (timer <= 2f)
+        {
+
+            CancelInvoke(nameof(SpawnRock));  // 바위 생성 중지
+
+        }
+
         if (timer <= 0f)
         {
             timer = 0f;
             gameClearPanel.SetActive(true);   // 게임 클리어 UI 표시
-            CancelInvoke(nameof(SpawnRock));  // 바위 떨어지는 것 중지
             gameStarted = false;              // 게임 종료
         }
     }
