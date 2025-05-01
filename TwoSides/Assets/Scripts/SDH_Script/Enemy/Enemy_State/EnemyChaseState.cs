@@ -7,9 +7,7 @@ using UnityEngine;
 /// </summary>
 public class EnemyChaseState : EnemyState
 {
-
     private Transform player; // 플레이어 위치 정보
-    private int moveDir; // 이동 방향
 
     // EnemyChaseState 생성자
     public EnemyChaseState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName)
@@ -33,7 +31,7 @@ public class EnemyChaseState : EnemyState
         }
 
         // Y축 거리 차이가 크고 땅이 없으면 추적 포기
-        float yDistance = Mathf.Abs(enemyBase.transform.position.y - player.transform.position.y);
+        float yDistance = Mathf.Abs(enemyBase.transform.position.y - player.position.y);
         if (!enemyBase.IsGroundDetected() && yDistance > 0.3f)
         {
             enemyBase.CallIdleState();
@@ -101,7 +99,7 @@ public class EnemyChaseState : EnemyState
         // X축 거리 차이가 0.05 이상일 때만 이동
         if (Mathf.Abs(xDiff) > 0.05f)
         {
-            moveDir = xDiff > 0 ? 1 : -1;
+            int moveDir = xDiff > 0 ? 1 : -1; // 이동 방향
             enemyBase.SetVelocity(enemyBase.moveSpeed * moveDir, rb.linearVelocityY);
         }
     }

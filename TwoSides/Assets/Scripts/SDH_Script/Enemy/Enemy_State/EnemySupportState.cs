@@ -127,7 +127,7 @@ public class EnemySupportState : EnemyState
             Collider2D collider = targetEnemy.GetComponent<Collider2D>();
             if (collider != null)
             {
-                float targetScale = collider.bounds.size.y * 1.1f;
+                float targetScale = collider.bounds.size.y * 0.8f;
                 buff.transform.localScale = new Vector3(targetScale, targetScale, 1f);
             }
 

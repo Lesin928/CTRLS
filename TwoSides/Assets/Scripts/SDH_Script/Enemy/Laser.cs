@@ -27,7 +27,7 @@ public class Laser : MonoBehaviour
         // 플레이어와 충돌했을 경우
         if (collision.CompareTag("Player"))
         {
-            Player player = collision.GetComponent<Player>();
+            PlayerObject player = collision.GetComponent<PlayerObject>();
             if (player != null)
             {
                 Debug.Log("공격 성공");

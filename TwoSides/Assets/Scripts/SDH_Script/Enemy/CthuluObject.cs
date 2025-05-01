@@ -21,7 +21,7 @@ public class CthuluObject : EnemyObject
         idleState = new EnemyIdleState(this, stateMachine, "Idle");
         patrolState = new EnemyPatrolState(this, stateMachine, "Move");
         chaseState = new EnemyChaseState(this, stateMachine, "Fly");
-        attackState = new EnemyAttackState(this, stateMachine, "Attack1");
+        attackState = new EnemyAttackState(this, stateMachine, "Attack");
     }
 
     protected override void Start()

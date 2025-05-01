@@ -13,20 +13,25 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_GUID: 638ba28ebc93cd44989bad59bda0779a
+  m_GUID: 8c40361c52fe2a94dae7de509413717f
   m_SerializeEntries:
-  - m_GUID: 0ed644693bc0a024982861a583673586
+  - m_GUID: 03be31091e96e86449fd638874604d25
     m_Address: HUDManager
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5213dcdc4222b23409cfbb49f767239f
-    m_Address: EventScriptManager
+  - m_GUID: 1e32d74dc3c670f4494a0df8865d5ab4
+    m_Address: StatUIManager
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 78fe9ace1150a73449c7cc71e124c7ed
-    m_Address: StatManager
+  - m_GUID: 377bc15c0360c454c9b222a6e496f77c
+    m_Address: GameManager
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e9d476fde6c4f54f93e08ec36e63511
+    m_Address: EventScriptManager
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -35,14 +40,9 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dcb353687cd8f2646883d50940abcdb0
-    m_Address: GameManager
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: f128499e7ff218943bd974e6109912b0, type: 2}
+  m_Settings: {fileID: 11400000, guid: da65ab2cfe53cf941a7650381cea86c1, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 61ad98026105b034186531a7adde5cbf, type: 2}
-    - {fileID: 11400000, guid: 8419312ec63b5a746966c12ae2268b3b, type: 2}
+    - {fileID: 11400000, guid: efa946e71e0ba204b8c0c2bb60b6823e, type: 2}
+    - {fileID: 11400000, guid: 9a9bfcf8cbc96324ca2972c43b5322f3, type: 2}
