@@ -78,7 +78,7 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
         float fixedX = 0f;
 
-        float minY = viewportSize.y / 2f - boundarySize.y+145f;
+        float minY = viewportSize.y / 2f - boundarySize.y;
         float maxY = viewportSize.y / 2f - 700f;
 
         float clampY = Mathf.Clamp(contentRect.anchoredPosition.y, minY, maxY);

@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 public class Mapbutton : MonoBehaviour
 {
-    public GameObject map; // ¸Ê ÀüÃ¼ UI ¿ÀºêÁ§Æ®
+    public GameObject map;
     public float animationDuration = 0.3f;
 
     private bool isVisible = false;
@@ -11,16 +11,26 @@ public class Mapbutton : MonoBehaviour
 
     private void Start()
     {
-        isVisible = map.activeSelf; // ½ÇÁ¦ »óÅÂ ¹İ¿µ
-        if (map != null)
-        {
-            RectTransform rect = map.GetComponent<RectTransform>();
-            rect.localScale = isVisible ? Vector3.one : new Vector3(0f, 1f, 1f);
-        }
+        if (map == null) return;
+
+        // ì‹¤ì œ í™œì„±í™” ìƒíƒœë¥¼ ë°˜ì˜í•´ì„œ ìŠ¤ì¼€ì¼ ì„¸íŒ…
+        isVisible = map.activeSelf;
+
+        RectTransform rect = map.GetComponent<RectTransform>();
+        rect.localScale = isVisible ? Vector3.one : new Vector3(0f, 1f, 1f);
     }
 
     public void mapsetting()
     {
+        if (map == null) return;
+
+        // mapì˜ ì‹¤ì œ í™œì„±í™” ìƒíƒœ ê¸°ë°˜ìœ¼ë¡œ ê°±ì‹  (ì”¬ ë¡œë“œ í›„ ìƒíƒœ ê¼¬ì„ ë°©ì§€)
+        if (!map.activeSelf)
+        {
+            isVisible = false;
+            map.SetActive(true); // ë°˜ë“œì‹œ ì¼œê³  ì• ë‹ˆë©”ì´ì…˜ ì‹œì‘
+        }
+
         if (animationCoroutine != null)
             StopCoroutine(animationCoroutine);
 
@@ -30,17 +40,12 @@ public class Mapbutton : MonoBehaviour
         }
         else
         {
-            map.SetActive(true);
             animationCoroutine = StartCoroutine(ShowMap());
         }
 
         isVisible = !isVisible;
     }
-    public void button()
-    {
-        int i = 1;
-        i++;
-    }
+
     private IEnumerator ShowMap()
     {
         RectTransform rect = map.GetComponent<RectTransform>();
@@ -49,8 +54,7 @@ public class Mapbutton : MonoBehaviour
         Vector3 endScale = Vector3.one;
 
         rect.localScale = startScale;
-
-        yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ¿¡ MapController ÃÊ±âÈ­µÉ ¼ö ÀÖ°Ô ¿©À¯ ÁÖ±â
+        yield return null;
 
         while (time < animationDuration)
         {
@@ -79,6 +83,6 @@ public class Mapbutton : MonoBehaviour
         }
 
         rect.localScale = endScale;
-        map.SetActive(false);
+        map.SetActive(false); // í™•ì‹¤íˆ êº¼ì¤€ë‹¤
     }
 }
