@@ -12,14 +12,14 @@ public abstract class CharacterObject : MonoBehaviour
 {
     #region Character Info
     [SerializeField]
-    protected float maxHp; //최대체력
-    protected float currentHp; //현재 체력
-    protected float armor; //방어력
-    protected float attack; //공격력
-    protected float attackSpeed; //공격속도 
-    protected float moveSpeed; //이동속도
-    protected float critical; //치명타 확률 
-    protected float criticalDamage; //치명타 피해
+    private float maxHp; //최대체력
+    private float currentHp; //현재 체력
+    private float armor; //방어력
+    private float attack; //공격력
+    private float attackSpeed; //공격속도 
+    private float moveSpeed; //이동속도
+    private float critical; //치명타 확률 
+    private float criticalDamage; //치명타 피해
     #endregion
 
     #region Setters and Getters
@@ -109,15 +109,15 @@ public abstract class CharacterObject : MonoBehaviour
         //legacy code (현재는 사용하지 않음) 크리티컬 확률을 계산하여 데미지에 반영
         //if (UnityEngine.Random.Range(0f, 1f) < _critical)
         //{
-            //_damage *= criticalDamage;
+        //_damage *= criticalDamage;
         //}
-        
-        currentHp -= (float)((double)((Mathf.Pow(_damage, 2f)) / ((double)armor) + (double)_damage));
+        //데미지 * 방어력 반감 계수 ( 데미지 / 데미지 + 아머) 
+        CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
 
         //체력이 0 이하면 Die() 호출
-        if (currentHp <= 0)
+        if (CurrentHp <= 0)
         {
-            currentHp = 0;
+            CurrentHp = 0;
             Die();
         }
     }

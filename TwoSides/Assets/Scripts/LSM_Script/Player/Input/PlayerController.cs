@@ -21,14 +21,15 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 조작 세팅")]
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
-    public float dashForce = 10f;    
+    public float dashForce = 10f;
 
+    #region Dillay
     private float groundIgnoreTimer = 0f;
     private float groundIgnoreDuration = 0.1f; // 딜레이 시간
 
     private float dashCooldownTimer = 0f;
     private float dashCooldownDuration = 1f; // 쿨타임 시간
-
+    #endregion 
 
     private void Awake()
     {
@@ -104,6 +105,10 @@ public class PlayerController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         Debug.Log("Attack! (X 버튼)");
+        if (!playerObject.GetDashing() && playerObject.IsGroundDetected())
+        {
+            playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
+        }
     }
 
     public void OnShift(InputAction.CallbackContext context)
