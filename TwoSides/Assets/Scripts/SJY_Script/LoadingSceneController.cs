@@ -80,6 +80,11 @@ public class LoadingSceneController : MonoBehaviour
     {
         if (arg0.name == loadSceneName)
         {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.InitStageData(loadSceneName);
+            }
+
             StartCoroutine(Fade(false));
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
