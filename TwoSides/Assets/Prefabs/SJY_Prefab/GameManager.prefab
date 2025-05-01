@@ -46,9 +46,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStage: 1
   maxStage: 5
+  stageDataList:
+  - stageName: Battle0
+    monsterCount: 0
+  - stageName: Battle1
+    monsterCount: 0
+  - stageName: Battle2
+    monsterCount: 0
+  - stageName: Battle3
+    monsterCount: 0
+  - stageName: Battle4
+    monsterCount: 0
+  - stageName: Battle5
+    monsterCount: 0
+  - stageName: Battle6
+    monsterCount: 0
+  - stageName: Battle7
+    monsterCount: 0
+  - stageName: Battle8
+    monsterCount: 0
+  - stageName: Battle9
+    monsterCount: 0
+  - stageName: Battle10
+    monsterCount: 0
+  - stageName: Boss
+    monsterCount: 0
+  - stageName: Puzzle0
+    monsterCount: 0
+  - stageName: Puzzle1
+    monsterCount: 0
+  - stageName: Puzzle2
+    monsterCount: 0
+  - stageName: Mystery0
+    monsterCount: 0
+  - stageName: Mystery1
+    monsterCount: 0
+  - stageName: Mystery2
+    monsterCount: 0
+  - stageName: Mystery3
+    monsterCount: 0
+  - stageName: Mystery4
+    monsterCount: 0
+  - stageName: Mystery5
+    monsterCount: 0
+  - stageName: Mystery6
+    monsterCount: 0
+  - stageName: Mystery7
+    monsterCount: 0
+  - stageName: Mystery8
+    monsterCount: 0
+  - stageName: Mystery9
+    monsterCount: 0
+  - stageName: Store
+    monsterCount: 0
+  currentStageData:
+    stageName: 
+    monsterCount: 0
+  isClear: 0
   playerGold: 0
   playerHealth: 0
-  maxHealth: 100
+  playerMaxHealth: 0
   playerArmor: 0
   playerAttack: 10
   playerAttackSpeed: 0

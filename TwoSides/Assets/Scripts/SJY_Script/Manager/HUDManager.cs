@@ -112,7 +112,7 @@ public class HUDManager : MonoBehaviour
         }
 
         if (goldText != null)
-            goldText.text = $"Gold: {gold}";
+            goldText.text = $"{gold}";
     }
 
     private IEnumerator FadeInHUD()
@@ -164,6 +164,6 @@ public class HUDManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(playTime / 60f);
         int seconds = Mathf.FloorToInt(playTime % 60f);
-        timeText.text = $"Time: {minutes:00}:{seconds:00}";
+        timeText.text = $"{minutes:00}:{seconds:00}";
     }
 }

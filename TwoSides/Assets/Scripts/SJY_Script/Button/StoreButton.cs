@@ -6,14 +6,15 @@ public class StoreButton : MonoBehaviour
     private void Awake()
     {
         if (map == null)
-            map = GameObject.Find("MapScrollArea"); // ÀÌ¸§ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ
+            map = GameObject.Find("MapScrollArea"); // ì´ë¦„ ì •í™•íˆ ì¼ì¹˜í•´ì•¼ í•¨
     }
     public void Onclick()
     {
         string sceneName = "Store";
-        int rand = Random.Range(0, 1);  // range ¹Ù²Ù±â
+        int rand = Random.Range(0, 1);  // range ë°”ê¾¸ê¸°
         sceneName += rand.ToString();
         map.SetActive(false);
+
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

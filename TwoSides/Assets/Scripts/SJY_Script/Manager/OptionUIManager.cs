@@ -4,6 +4,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OptionUIManager : MonoBehaviour
 {
@@ -53,7 +54,8 @@ public class OptionUIManager : MonoBehaviour
         }
 
         optionUIInstance.SetActive(!optionUIInstance.activeSelf);
-        Debug.Log("Option UI ≈‰±€µ : " + optionUIInstance.activeSelf);
+        if (SceneManager.GetActiveScene().name != "Title")
+            HUDManager.Instance.PauseGame();
     }
 
     public void CloseOptionUI()
@@ -61,6 +63,8 @@ public class OptionUIManager : MonoBehaviour
         if (optionUIInstance != null)
         {
             optionUIInstance.SetActive(false);
+            if (SceneManager.GetActiveScene().name != "Title")
+                HUDManager.Instance.ResumGame();
         }
     }
 

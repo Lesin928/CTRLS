@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class GameManager : MonoBehaviour
     public int currentStage = 1;
     public int maxStage = 3;
 
+    public List<StageData> stageDataList;
+    public StageData currentStageData;
+    private int deadMonsterCount = 0;
+    public bool isClear = false;
+
+    #region PlayerStat
+    [Header("PlayerStat")]
     public int playerGold;
     public float playerHealth;
     public float playerMaxHealth;
@@ -20,14 +28,7 @@ public class GameManager : MonoBehaviour
     public float playerMoveSpeed;
     public float playerCritical;
     public float playerCriticalDamage;
-
-    //enum StageType
-    //{
-    //    BATTLE,
-    //    EVENT,
-    //    STORE,
-    //    BOSS
-    //};
+    #endregion
 
     private void Awake()
     {
@@ -71,6 +72,26 @@ public class GameManager : MonoBehaviour
         };
     }
 
+    public void InitStageData(string sceneName)
+    {
+        deadMonsterCount = 0;
+        isClear = false;
+
+        currentStageData = stageDataList.Find(data => data.stageName == sceneName);
+
+        if (currentStageData == null)
+            Debug.LogWarning($"[GameManager] {sceneName}에 해당하는 StageData가 없습니다.");
+        else
+            Debug.Log($"[GameManager] {sceneName} 스테이지 데이터 초기화 완료 - 몬스터 수: {currentStageData.monsterCount}");
+
+        if (currentStageData.stageName.Contains("Mystery")
+            || currentStageData.stageName.Contains("Puzzle")
+            || currentStageData.stageName.Contains("Store"))
+        {
+            OnStageClear();
+        }
+    }
+
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
@@ -104,26 +125,37 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.ChangeBGM("IngameBGM");
 
-        LoadStage(currentStage);
+        //LoadStage(currentStage);
+        LoadingSceneController.Instance.LoadScene("Battle0");
     }
 
-    public void LoadStage(int stageIndex)
-    {
-        string sceneName = $"Stage_{stageIndex}";
-        LoadingSceneController.Instance.LoadScene(sceneName);
-    }
+    //public void LoadStage(int stageIndex)
+    //{
+    //    string sceneName = $"Stage_{stageIndex}";
+    //    LoadingSceneController.Instance.LoadScene(sceneName);
+    //}
 
     public void OnStageClear()
     {
-        // 여기서 Map 이 나와야함
-        if (currentStage < maxStage)
+        isClear = true;
+        currentStage++;
+
+        if (currentStage > maxStage)
         {
-            currentStage++;
-            LoadStage(currentStage);
-        }
-        else
-        {
+            // 이걸 보스스테이지에서 체크하는 방법으로 바꿔야ㅑ함
             GameClear();
+        }
+    }
+
+    public void OnMonsterDead()
+    {
+        if (currentStageData == null) return;
+
+        deadMonsterCount++;
+        if (deadMonsterCount >= currentStageData.monsterCount)
+        {
+            OnStageClear();
+            Debug.Log("스테이지 클리어");
         }
     }
 
@@ -151,6 +183,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => op.isDone);
     }
 
+    #region PlayerStat
     public void SetGold(int value)
     {
         playerGold += value;
@@ -234,6 +267,7 @@ public class GameManager : MonoBehaviour
     {
         playerCriticalDamage += value;
     }
+    #endregion
 
     void Update()
     {
