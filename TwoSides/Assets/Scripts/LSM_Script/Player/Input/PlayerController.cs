@@ -22,6 +22,15 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public float dashForce = 10f;
+
+    #region Dillay
+    private float groundIgnoreTimer = 0f;
+    private float groundIgnoreDuration = 0.1f; // 딜레이 시간
+
+    private float dashCooldownTimer = 0f;
+    private float dashCooldownDuration = 1f; // 쿨타임 시간
+    #endregion 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,17 +52,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Update() 
+    private void Update()
     {
+        // 점프 상태에서 상태 전이가 바로 일어나지 않도록 딜레이
+        if (groundIgnoreTimer > 0)
+            groundIgnoreTimer -= Time.deltaTime;
+
+        // 대쉬 쿨타임이 끝나지 않았으면 쿨타임 감소
+        if (dashCooldownTimer > 0)
+            dashCooldownTimer -= Time.deltaTime; 
+
+        bool shouldCheckGround = groundIgnoreTimer <= 0;
+
         //플레이어가 바닥에 있고 대쉬중이 아닐 떄
-        if(!!playerObject.GetDashing() && playerObject.IsGroundDetected())
+        if (!playerObject.GetDashing() && playerObject.IsGroundDetected() && shouldCheckGround)
         {
-            //플레이어가 멈추면 idle, 이동중이면 move
-            if (moveInput.x == 0)
+            //플레이어 입력이 없으면 idle, 있으면 move
+            if (moveInput.x == 0 )
             {
                 playerAnimation.stateMachine.ChangeState(playerAnimation.idleState);
             }
-            else
+            else if (moveInput.x != 0)
             {
                 playerAnimation.stateMachine.ChangeState(playerAnimation.moveState);
             }
@@ -61,34 +80,35 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnMove(InputAction.CallbackContext context)
-    {
-        Debug.Log("Move");
-        //플레이어가 땅에 있으면 이동상태로 전환
-        if (playerObject.IsGroundDetected())
-        {
-            playerAnimation.stateMachine.ChangeState(playerAnimation.moveState);
-        }            
+    {  
         moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Debug.Log("Jump");
-        playerAnimation.stateMachine.ChangeState(playerAnimation.jumpState); 
+        if (playerObject.IsGroundDetected())
+        {
+            groundIgnoreTimer = groundIgnoreDuration;
+            Debug.Log("점프");
+            playerAnimation.stateMachine.ChangeState(playerAnimation.jumpState);
+        }            
     }
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        Debug.Log("Dash");
-        playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
         if (!playerObject.GetDashing())
         {
+            playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
             StartCoroutine(Dash());
         }
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
         Debug.Log("Attack! (X 버튼)");
+        if (!playerObject.GetDashing() && playerObject.IsGroundDetected())
+        {
+            playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
+        }
     }
 
     public void OnShift(InputAction.CallbackContext context)
@@ -99,12 +119,18 @@ public class PlayerController : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext context)
     {
         Debug.Log("Interact! (F 버튼)");
-    } 
+    }
     private IEnumerator Dash()
     {
-        playerObject.SetDashing(true);
-        rb.linearVelocity = new Vector2( playerAnimation.Getfacing() * dashForce, 0f);
+        if (dashCooldownTimer > 0)
+            yield break; // 대쉬 쿨타임이 남아있으면 대쉬를 하지 않음
+        dashCooldownTimer = dashCooldownDuration;
+        playerObject.SetDashing(true); 
+        float originalGravity = rb.gravityScale; 
+        rb.gravityScale = 0;
+        rb.linearVelocity = new Vector2(playerAnimation.Getfacing() * dashForce, 0f);
         yield return new WaitForSeconds(0.2f);
+        rb.gravityScale = originalGravity;
         playerObject.SetDashing(false);
-    } 
+    }
 }
