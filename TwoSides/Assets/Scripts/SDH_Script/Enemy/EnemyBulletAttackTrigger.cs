@@ -16,7 +16,8 @@ public class EnemyBulletAttackTrigger : EnemyAnimationTrigger
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
         // 총알의 Bullet 스크립트를 가져와서 발사 방향을 설정
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
+        bulletScript.SetAttacker(enemy); // 발사자 전달
         bulletScript.Shoot(PlayerManager.instance.player.transform.position); // 플레이어 위치로 총알을 발사
     }
 }

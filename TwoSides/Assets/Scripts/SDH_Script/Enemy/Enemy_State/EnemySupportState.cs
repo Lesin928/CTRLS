@@ -16,22 +16,17 @@ public enum BuffType
 /// </summary>
 public class EnemySupportState : EnemyState
 {
-    private float supportRange;           // 지원 범위
-    private LayerMask enemyLayer;         // 적 레이어 마스크
+    private float supportRange;    // 지원 범위
+    private LayerMask enemyLayer;  // 적 레이어 마스크
     private GameObject buffPrefab; // 마법진 프리팹
-    private BuffType buffType;            // 부여할 버프 타입
+    private BuffType buffType;     // 부여할 버프 타입
 
     // 이미 지원한 적들을 저장 (적 Transform -> 생성된 마법진 오브젝트)
     private Dictionary<Transform, GameObject> supportedEnemies = new();
 
     // EnemySupportState 생성자
-    public EnemySupportState(
-        EnemyObject enemyBase,
-        EnemyStateMachine stateMachine,
-        string animBoolName,
-        float supportRange,
-        GameObject buffPrefab,
-        BuffType buffType)
+    public EnemySupportState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName,
+        float supportRange, GameObject buffPrefab, BuffType buffType)
         : base(enemyBase, stateMachine, animBoolName)
     {
         this.supportRange = supportRange;
@@ -80,7 +75,7 @@ public class EnemySupportState : EnemyState
         List<Transform> enemiesToRemove = new();
         foreach (var supported in supportedEnemies)
         {
-            if (!currentEnemies.Contains(supported.Key))
+            if (supported.Key == null || !currentEnemies.Contains(supported.Key))
             {
                 RemoveSupport(supported.Key);
                 enemiesToRemove.Add(supported.Key);
@@ -92,6 +87,8 @@ public class EnemySupportState : EnemyState
         {
             supportedEnemies.Remove(enemy);
         }
+
+
     }
 
     /// <summary>
@@ -147,7 +144,7 @@ public class EnemySupportState : EnemyState
 
         // 라인 렌더러 및 커스텀 라인 컴포넌트 추가
         LineRenderer lr = lineObj.AddComponent<LineRenderer>();
-        PixelLightningLine pixelLine = lineObj.AddComponent<PixelLightningLine>();
+        EnemyPixelLightningLine pixelLine = lineObj.AddComponent<EnemyPixelLightningLine>();
 
         // 시작/끝 지점 설정
         pixelLine.startPoint = enemyBase.transform;
@@ -228,4 +225,6 @@ public class EnemySupportState : EnemyState
         if (electricLine != null)
             Object.Destroy(electricLine.gameObject);
     }
+
+
 }

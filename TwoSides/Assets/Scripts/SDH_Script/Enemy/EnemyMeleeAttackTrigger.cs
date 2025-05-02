@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 // TODO:
@@ -15,16 +16,14 @@ public class EnemyMeleeAttackTrigger : EnemyAnimationTrigger
     private void MeleeAttackTrigger()
     {
         // 공격 범위 내에 있는 모든 Collider2D 객체를 가져옴
+        // 모든 객체를 가져오는 이유: 범위 안에 공격하는 Enemy도 포함되기 때문에
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.attackCheck.position, enemy.attackCheckRadius);
 
         // 공격 범위 내의 객체들을 순회
         foreach (var hit in colliders)
         {
-            // Collider에 PlayerObject 컴포넌트가 있을 경우 공격이 성공한 것으로 처리
-            if (hit.GetComponent<PlayerObject>() != null)
-            {
-                Debug.Log("공격 성공");
-            }
+            // 플레이어에게 데미지 전달
+            hit.GetComponent<PlayerObject>()?.TakeDamage(enemy.Attack); 
         }
     }
 }

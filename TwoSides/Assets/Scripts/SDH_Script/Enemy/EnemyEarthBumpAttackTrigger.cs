@@ -13,14 +13,12 @@ public class EnemyEarthBumpAttackTrigger : EnemyAnimationTrigger
     /// 지진 범위 공격을 발사 (애니메이션 이벤트에서 호출)
     private void EarthBumpAttackTrigger()
     {
-        // 부모 EnemyObject를 가져옴
-        EnemyObject enemy = GetComponentInParent<EnemyObject>();
-
         // 지진 범위 공격 프리팹을 발사 지점에 생성
         GameObject earthBump = Instantiate(earthBumpPrefab, firePoint.position, Quaternion.identity);
 
         // 지진 범위 공격 객체의 스크립트를 가져와서 활성화
-        EarthBump earthBumpScript = earthBump.GetComponent<EarthBump>();
+        EnemyEarthBump earthBumpScript = earthBump.GetComponent<EnemyEarthBump>();
+        earthBumpScript.SetAttacker(enemy); // 발사자 전달
         earthBumpScript.Active(enemy.facingDir);
     }
 }
