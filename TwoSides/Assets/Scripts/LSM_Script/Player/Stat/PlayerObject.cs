@@ -18,6 +18,7 @@ public class PlayerObject : CharacterObject
     public GameObject attackCollider2;
     public bool isCombo = false;
     public bool isAttack = false;
+    public bool endAttack = false;
     #endregion
 
     #region Player state

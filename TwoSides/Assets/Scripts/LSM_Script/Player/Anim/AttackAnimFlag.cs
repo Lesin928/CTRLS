@@ -11,13 +11,14 @@ public class AttackAnimFlag : MonoBehaviour
     {
         if (playerObject.attackCollider1.activeSelf)
         {
-            playerObject.attackCollider1.SetActive(false); 
+            playerObject.attackCollider1.SetActive(false);
         }
+        playerObject.endAttack = true;
     }
 
     public void SecondAttackFinished()
     {
-        if (playerObject.attackCollider1.activeSelf)
+        if (playerObject.attackCollider2.activeSelf)
         { 
             playerObject.attackCollider2.SetActive(false); 
         }

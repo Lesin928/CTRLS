@@ -20,10 +20,15 @@ public class PlayerAttackState : PlayerState
 
   public override void Update()
     {
-        base.Update();
-        // 상태 타이머 감소        
-        // 공격중이 아닐 때 상태 전이
-        if (!playerObject.isAttack)
+        base.Update(); 
+        // 콤보 상태 전이
+        if(playerObject.isCombo && playerObject.endAttack)
+        {
+            playerAnimation.stateMachine.ChangeState(playerAnimation.comboState);
+        }
+
+        // 공격중이 아니고 콤보중이 아닐 때 상태 전이
+        if (!playerObject.isCombo && !playerObject.isAttack)
         {
             if (playerObject.IsGroundDetected())
             {

@@ -15,13 +15,14 @@ public class PlayerComboState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        playerObject.attackCollider1.SetActive(false);
         playerObject.attackCollider2.SetActive(true); 
     } 
     public override void Update()
     {
         base.Update();  
         // 공격중이 아닐 때 상태전이
-        if (playerObject.isAttack)
+        if (!playerObject.isAttack && !playerObject.isCombo)
         {
             if (playerObject.IsGroundDetected())
             {
@@ -43,6 +44,7 @@ public class PlayerComboState : PlayerState
 
     public override void Exit()
     {
+        playerObject.attackCollider2.SetActive(false);
         base.Exit();
     } 
 }

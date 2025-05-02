@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Combo Attack!!!!!!! ");
                 // 만약 공격중일 경우 콤보 실행 (중복방지는 내부에서 수행)
-                //StartCoroutine(Combo()); 
+                StartCoroutine(Combo()); 
             } 
         }
     }
@@ -147,10 +147,8 @@ public class PlayerController : MonoBehaviour
         {
             yield break;
         } 
-        playerObject.isCombo = true;
-        //이 스테이트 변경을... attack 애니메이션이 끝나고 진행해야 할텐디... 
-        playerAnimation.stateMachine.ChangeState(playerAnimation.comboState);
-        yield return new WaitForSeconds(1f); // 다음 공격까지의 딜레이 시간, 추후 플레이어 속성에 추가, 애니메이션 실행 시간보다 낮아질 수 없음  
+        playerObject.isCombo = true; 
+        yield return new WaitForSeconds(0.5f); // 다음 공격까지의 딜레이 시간, 추후 플레이어 속성에 추가, 애니메이션 실행 시간보다 낮아질 수 없음  
         playerObject.isAttack = false;
         playerObject.isCombo = false;
     }
