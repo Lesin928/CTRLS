@@ -53,7 +53,11 @@ public class Map : MonoBehaviour
         ConnectNodesWithEdges();
         CreateBackgroundBox();
 
+
         mapGenerated = true;
+
+
+
     }
 
     private int previousLevel = -1;
@@ -110,7 +114,7 @@ public class Map : MonoBehaviour
         // 초기화
         currentNode = null;
         previousLevel = -1;
-        LEVEL = 0;
+        LEVEL = 1;
         grid = null;
         mapGenerated = false;
 
