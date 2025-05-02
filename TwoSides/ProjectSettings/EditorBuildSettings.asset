@@ -5,15 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/PYJ/PYJ_Tutorial/PYJ_Main.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/SJY_Scene/Title.unity
     guid: 0b2a49d5d1f8cc9429dda97a591c1b13
-  - enabled: 1
-    path: Assets/Scenes/SJY_Scene/KYW_MAP.unity
-    guid: 0eedc241fd03fab4aabbc2cfb6226759
   - enabled: 1
     path: Assets/Scenes/SJY_Scene/Battle/Battle0.unity
     guid: 4dfe0865967d887449af81f422245cfb
@@ -21,14 +15,74 @@ EditorBuildSettings:
     path: Assets/Scenes/SJY_Scene/Battle/Battle1.unity
     guid: c13f0265786edc142b7cd315d6632b99
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/tmpMystery0.unity
-    guid: 85aa6581ce798f446b91b22232a3a357
+    path: Assets/Scenes/SJY_Scene/Battle/Battle2.unity
+    guid: 056a0ba42d4de874e9c864afb2435a93
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Battle/Battle3.unity
+    guid: d0bceaf775aa26142820af830d6b966b
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Battle/Battle4.unity
+    guid: 113846b7e0123984e9aaac21fb9f417d
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Battle/Battle5.unity
+    guid: 30c6b164234d8d649b9c6762558bcbd0
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Battle/Battle6.unity
+    guid: 2e20ff5fd141d8f42b928315ecaf8360
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Battle/Battle7.unity
+    guid: b32bf567c788e174c86221d9e2506646
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Battle/Battle8.unity
+    guid: 52e1b14f9afdb654bba2df0dc52b0f8a
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Battle/Battle9.unity
+    guid: 4f09d4c05efcc7b42a655c3967b78bdc
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery0.unity
+    guid: 810445f0b6b6ebd4dbecf1ded400832e
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery1.unity
+    guid: c7fd1ed929c90924eab8320998129d53
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery2.unity
+    guid: 767b4f472ae85454c83f733ba28498ac
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery3.unity
+    guid: dc3bdfe20425b794492da4a49b89da50
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery4.unity
+    guid: aca703e2a974c9a4199a3ecd8edc0ac2
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery5.unity
+    guid: e3fce3e4334b44143a91bdf5fe940ade
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery6.unity
+    guid: bab4eb44c96c1bd43af0a08cddf32dd1
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery7.unity
+    guid: 90c6a13d78045d2479835528b86ede6d
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery8.unity
+    guid: 98a8b1a4fe7bdb24b8ea952a8b4a3602
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Mystery/Mystery9.unity
+    guid: 2ce3d045de267b1478fb7f56bea4abc4
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Puzzle/Puzzle0.unity
+    guid: 83cdbe96018898d4e9559da4c6edea8c
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Puzzle/Puzzle1.unity
+    guid: 63f3c20e805aa3c4fbf2a20a8b983ea4
+  - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Puzzle/Puzzle2.unity
+    guid: b86a843b67b5c02418af01b7d1962a01
   - enabled: 1
     path: Assets/Scenes/SJY_Scene/Store.unity
     guid: 69e49526f6621074985e4895599a5a5e
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/tmpMystery1.unity
-    guid: 0487ec8067295e24da585cf379270d82
+    path: Assets/Scenes/SJY_Scene/Boss/Boss.unity
+    guid: 73faa6cb1757f9c478efe72b2fcf554a
   - enabled: 1
     path: Assets/Scenes/SJY_Scene/GameClear.unity
     guid: f731990da6e215947940bf467667b640

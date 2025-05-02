@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
         playerHealth = playerMaxHealth;
         playerGold = 0;
         currentStage = 1;
+        isClear = false;
 
         //HUDManager
         if (HUDManager.Instance != null)

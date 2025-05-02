@@ -480,7 +480,8 @@ MonoBehaviour:
   PuzzlePrefab: {fileID: 1244344009070172991, guid: 11b176110e8ed18479e54c5abf3b341d, type: 3}
   bossPrefab: {fileID: 6897683342135397236, guid: 8d4dc64fc22b04148a5983aa90976859, type: 3}
   backgroundBoxPrefab: {fileID: 3921770571248259656, guid: 7dccab7542a27544d9025e0f020ac1c4, type: 3}
-  LEVEL: 0
+  LEVEL: 1
+  previousInteractionState: 1
 --- !u!222 &9164748398419048706
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -37,6 +37,9 @@ public class Map : MonoBehaviour
     public int LEVEL; // 인스펙터에서 설정할 레벨
     private MapNode currentNode; // 현재 선택한 노드
     public static RectTransform latestBackgroundBox;
+
+    public bool previousInteractionState = true;
+
     void Start()
     {
         if (mapGenerated) return;
@@ -57,16 +60,11 @@ public class Map : MonoBehaviour
 
     void Update()
     {
-        string sceneName = "Title";
-        if (sceneName == SceneManager.GetActiveScene().name)
-        {
-            ResetMap();
-        }
-
-        if (LEVEL != previousLevel)
+        if (LEVEL != previousLevel || GameManager.Instance.isClear != previousInteractionState)
         {
             RefreshButtonStates();
             previousLevel = LEVEL;
+            previousInteractionState = GameManager.Instance.isClear;
         }
     }
 
@@ -84,7 +82,7 @@ public class Map : MonoBehaviour
         // 초기화
         currentNode = null;
         previousLevel = -1;
-        LEVEL = 0;
+        LEVEL = 1;
         grid = null;
         mapGenerated = false;
 
@@ -94,16 +92,17 @@ public class Map : MonoBehaviour
 
     void RefreshButtonStates()
     {
-        // 1. 모든 버튼 비활성화
-        foreach (MapNode node in grid)
+        // 0. 버튼을 아예 막아야 할 때
+        if (!GameManager.Instance.isClear)  // 🔥 전체 비활성화 조건
         {
-            if (node == null) continue;
-
-            Button button = node.GetComponentInChildren<Button>();
-            if (button != null)
+            foreach (MapNode node in grid)
             {
-                button.interactable = false;
+                if (node == null) continue;
+                Button button = node.GetComponentInChildren<Button>();
+                if (button != null)
+                    button.interactable = false;
             }
+            return; // 버튼 다시 열지 않음
         }
 
         // 2. currentNode가 null이면(처음 시작) 0층에서 찾기
@@ -125,11 +124,9 @@ public class Map : MonoBehaviour
         }
         else
         {
-            // 3. currentNode가 있으면 연결된 노드 중 LEVEL이 맞는 것만 활성화
             foreach (var nextNode in currentNode.connectedNodes)
             {
-                if (nextNode == null) continue;
-                if (nextNode.floor != LEVEL) continue; //  다음 층에 있는 노드만
+                if (nextNode == null && nextNode.floor != LEVEL) continue;
 
                 Button button = nextNode.GetComponentInChildren<Button>();
                 if (button != null)
@@ -141,7 +138,6 @@ public class Map : MonoBehaviour
             }
         }
     }
-
 
     void OnNodeButtonClicked(MapNode node)
     {
