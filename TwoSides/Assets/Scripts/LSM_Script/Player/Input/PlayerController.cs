@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate() //나중에 무브 스테이트로 이동
     {
-        //플레이어가 대쉬중이 아니면 이동
-        if (!playerObject.IsDashing)
+        //대쉬 상태, 공격 상태가 아닐 때만 이동
+        if (!playerObject.IsDashing && !playerObject.isAttack)
         {
             rb.linearVelocity = new Vector2(playerObject.MoveInput.x * playerObject.MoveSpeed, rb.linearVelocity.y);
 
@@ -60,13 +60,11 @@ public class PlayerController : MonoBehaviour
 
         bool shouldCheckGround = groundIgnoreTimer <= 0;
 
-    }
-
+    } 
     public void OnMove(InputAction.CallbackContext context)
     {
         playerObject.MoveInput = context.ReadValue<Vector2>();
-    }
-
+    } 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (playerObject.IsGroundDetected())
@@ -75,11 +73,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("점프");
             playerAnimation.stateMachine.ChangeState(playerAnimation.jumpState);
         }
-    }
-
+    } 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (!playerObject.IsDashing)
+        if (!playerObject.IsDashing && !playerObject.isAttack)
         {
             playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
             StartCoroutine(Dash());
@@ -93,7 +90,6 @@ public class PlayerController : MonoBehaviour
             // 만약 공격중이 아닐경우 공격 상태
             if (!playerObject.isAttack) 
             {
-                playerObject.isAttack = true;
                 playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
                 StartCoroutine(Attack());
             }
@@ -136,14 +132,13 @@ public class PlayerController : MonoBehaviour
             playerObject.isAttack = false;
         }        
     }
-
     private IEnumerator Combo()
     {
         // 만약 콤보공격이 수행되고 있는 경우 탈출
         if (playerObject.isCombo)
         {
             yield break;
-        } 
+        }
         playerObject.isCombo = true; 
         yield return new WaitForSeconds(0.5f); // 다음 공격까지의 딜레이 시간, 추후 플레이어 속성에 추가, 애니메이션 실행 시간보다 낮아질 수 없음  
         playerObject.isAttack = false;

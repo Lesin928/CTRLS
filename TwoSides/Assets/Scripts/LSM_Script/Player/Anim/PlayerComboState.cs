@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
@@ -17,6 +18,10 @@ public class PlayerComboState : PlayerState
         base.Enter();
         playerObject.attackCollider1.SetActive(false);
         playerObject.attackCollider2.SetActive(true); 
+        if (playerObject.MoveInput.x != 0)
+        {
+            playerObject.transform.position += new Vector3(playerAnimation.Getfacing() * 1f, 0f, 0f);
+        }
     } 
     public override void Update()
     {

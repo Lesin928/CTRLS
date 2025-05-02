@@ -35228,6 +35228,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1098197125093038800, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098197125093038800, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5ac43d0dee554cf4d8990633dccffbbe, type: 2}
+    - target: {fileID: 1098197125093038800, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4293148247142581802, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
       propertyPath: m_Name
       value: PlayerSet
@@ -35236,6 +35248,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 3.9450066
       objectReference: {fileID: 0}
+    - target: {fileID: 8006281027056663908, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5ac43d0dee554cf4d8990633dccffbbe, type: 2}
     - target: {fileID: 8188914436025667399, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
       propertyPath: attackCollider1
       value: 

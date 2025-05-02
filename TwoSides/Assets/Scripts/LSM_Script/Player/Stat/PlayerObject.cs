@@ -95,7 +95,7 @@ public class PlayerObject : CharacterObject
     private void Start()
     {
         //추후 스크립터블 오브젝트로 세팅
-        jumpForce = 8f; 
+        jumpForce = 10f; 
         dashForce = 15f;
         MoveSpeed = 7f;  
         Attack = 3f;
