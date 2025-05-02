@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3075392830836760461}
   - component: {fileID: 1398218332266769838}
   - component: {fileID: 13649789329537877}
-  - component: {fileID: 1490817717697147829}
+  - component: {fileID: 6495394339039646135}
   - component: {fileID: 8677488624827852063}
   m_Layer: 0
   m_Name: Enemy_Cthulu_Slash2
@@ -112,7 +112,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1490817717697147829
+--- !u!114 &6495394339039646135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8288134731270176189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20678527fd1acb940b75da991d7de6bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 28fb714c225aec246bfd919dae9b1eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &8677488624827852063

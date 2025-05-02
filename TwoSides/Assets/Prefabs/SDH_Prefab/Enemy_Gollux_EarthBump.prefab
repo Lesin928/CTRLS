@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7832777706096736738}
   - component: {fileID: 7734999909589244384}
   - component: {fileID: 6604097281027064881}
-  - component: {fileID: 4723095635274925475}
+  - component: {fileID: 5833878042772297004}
   m_Layer: 12
   m_Name: Enemy_Gollux_EarthBump
   m_TagString: Untagged
@@ -158,7 +158,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.0138004, y: 0.41911614}
   m_EdgeRadius: 0
---- !u!114 &4723095635274925475
+--- !u!114 &5833878042772297004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,6 +167,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8029781589981352134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2ad868a317836341b8e2a4cf18779f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 088755f294a6a2248bc67dd800fa0669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

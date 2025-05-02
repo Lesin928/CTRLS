@@ -15,8 +15,10 @@ public class EnemyArrowAttackTrigger : EnemyAnimationTrigger
         // 화살 프리팹을 발사 지점에 생성
         GameObject arrow = Instantiate(arrowPrefab, firePoint.position, Quaternion.identity);
 
+
         // 화살 객체의 스크립트를 가져와서 플레이어를 향해 발사
-        Arrow arrowScript = arrow.GetComponent<Arrow>();
+        EnemyArrow arrowScript = arrow.GetComponent<EnemyArrow>();
+        arrowScript.SetAttacker(enemy); // 발사자 전달
         arrowScript.Shoot(PlayerManager.instance.player.transform.position);
     }
 }

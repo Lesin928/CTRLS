@@ -20,7 +20,8 @@ public class EnemySlashAttackTrigger : EnemyAnimationTrigger
         GameObject slash = Instantiate(slash1Prefab, firePoint.position, Quaternion.identity);
 
         // Slash 객체의 스크립트를 가져와서 활성화
-        Slash slashScript = slash.GetComponent<Slash>();
+        EnemySlash slashScript = slash.GetComponent<EnemySlash>();
+        slashScript.SetAttacker(enemy); // 발사자 전달
         slashScript.Active(enemy.facingDir);
     }
 
@@ -33,7 +34,8 @@ public class EnemySlashAttackTrigger : EnemyAnimationTrigger
         GameObject slash = Instantiate(slash2Prefab, firePoint.position, Quaternion.identity);
 
         // Slash 객체의 스크립트를 가져와서 활성화
-        Slash slashScript = slash.GetComponent<Slash>();
+        EnemySlash slashScript = slash.GetComponent<EnemySlash>();
+        slashScript.SetAttacker(enemy); // 발사자 전달
         slashScript.Active(enemy.facingDir);
     }
 }
