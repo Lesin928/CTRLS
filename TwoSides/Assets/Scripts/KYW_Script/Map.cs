@@ -1,25 +1,9 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    public static Map Instance;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        //DontDestroyOnLoad(gameObject);
-    }
-
     public int floors = 15; // 총 층 수
     public int columns = 7; // 총 열 수
     public GameObject nodePrefab; // 기본 노드 프리팹
@@ -32,16 +16,11 @@ public class Map : MonoBehaviour
     public GameObject StorePrefab; // 상점 노드 시각화 프리팹
     public GameObject PuzzlePrefab; // 퍼즐 노드 시각화 프리팹
     public GameObject bossPrefab; // 보스 노드 시각화 프리팹
-    public GameObject tutorialPrefab; // 튜토리얼 노드 시각화 프리팹
     public RectTransform backgroundBoxPrefab; // 배경 박스 프리팹 (빈 Image UI 등)
     public static bool mapGenerated = false;
     public int LEVEL; // 인스펙터에서 설정할 레벨
     private MapNode currentNode; // 현재 선택한 노드
     public static RectTransform latestBackgroundBox;
-
-    public GameObject clearMarkPrefab; // X 이미지 프리팹
-    public bool previousInteractionState = true;
-
     void Start()
     {
         if (mapGenerated) return;
@@ -55,100 +34,32 @@ public class Map : MonoBehaviour
         ConnectNodesWithEdges();
         CreateBackgroundBox();
 
-
         mapGenerated = true;
-
-
-
     }
 
     private int previousLevel = -1;
 
     void Update()
     {
-        if (LEVEL != previousLevel || GameManager.Instance.isClear != previousInteractionState)
+        if (LEVEL != previousLevel)
         {
             RefreshButtonStates();
             previousLevel = LEVEL;
-            previousInteractionState = GameManager.Instance.isClear;
         }
-        IsClearCheck();
-
-    }
-
-    private void IsClearCheck()
-    {
-        // isClear 체크 후 currentNode 처리
-        if (GameManager.Instance != null && GameManager.Instance.isClear && currentNode != null)
-        {
-            // 버튼 비활성화
-            Button btn = currentNode.GetComponentInChildren<Button>();
-            if (btn != null)
-            {
-                btn.gameObject.SetActive(false);
-            }
-
-            // X 마크 활성화
-            foreach (Transform child in currentNode.transform)
-            {
-                if (child.name.Contains("ClearMark") || child.name.Contains("X")) // 이름 구분용
-                {
-                    child.gameObject.SetActive(true);
-                }
-            }
-
-            currentNode = null; // 처리 후 초기화 (한 번만 실행되도록)
-        }
-    }
-
-    public void ResetMap()
-    {
-        Debug.Log("ResetMap called!"); // 디버그 로그 추가
-
-        //기존 노드와 라인 모두 제거
-        foreach (Transform child in nodeParent)
-            Destroy(child.gameObject);
-
-        foreach (Transform child in lineParent)
-            Destroy(child.gameObject);
-
-        // 초기화
-        currentNode = null;
-        previousLevel = -1;
-        LEVEL = 1;
-        grid = null;
-        mapGenerated = false;
-
-        // 맵 다시 생성
-        Start();
     }
 
     void RefreshButtonStates()
     {
-        // 0. 버튼을 아예 막아야 할 때
-        if (!GameManager.Instance.isClear)  // 🔥 전체 비활성화 조건
-        {
-            foreach (MapNode node in grid)
-            {
-                if (node == null) continue;
-                Button button = node.GetComponentInChildren<Button>();
-                if (button != null)
-                    button.interactable = false;
-            }
-            return; // 버튼 다시 열지 않음
-        }
-
         // 1. 모든 버튼 비활성화
         foreach (MapNode node in grid)
         {
-            foreach (MapNode node in grid)
+            if (node == null) continue;
+
+            Button button = node.GetComponentInChildren<Button>();
+            if (button != null)
             {
-                if (node == null) continue;
-                Button button = node.GetComponentInChildren<Button>();
-                if (button != null)
-                    button.interactable = false;
+                button.interactable = false;
             }
-            return; // 버튼 다시 열지 않음
         }
 
         // 2. currentNode가 null이면(처음 시작) 0층에서 찾기
@@ -170,9 +81,11 @@ public class Map : MonoBehaviour
         }
         else
         {
+            // 3. currentNode가 있으면 연결된 노드 중 LEVEL이 맞는 것만 활성화
             foreach (var nextNode in currentNode.connectedNodes)
             {
-                if (nextNode == null && nextNode.floor != LEVEL) continue;
+                if (nextNode == null) continue;
+                if (nextNode.floor != LEVEL) continue; //  다음 층에 있는 노드만
 
                 Button button = nextNode.GetComponentInChildren<Button>();
                 if (button != null)
@@ -185,10 +98,10 @@ public class Map : MonoBehaviour
         }
     }
 
+
     void OnNodeButtonClicked(MapNode node)
     {
         currentNode = node; // 클릭한 노드를 현재 노드로 설정
-        Debug.Log(currentNode);
         LEVEL++; // LEVEL 올리기
     }
 
@@ -275,15 +188,11 @@ public class Map : MonoBehaviour
 
         MapNode node = obj.GetComponent<MapNode>();
         node.Init(floor, col, NodeType.Mystery);
-        if (clearMarkPrefab != null)
-        {
-            GameObject clearMark = Instantiate(clearMarkPrefab, node.transform);
-            RectTransform rtf = clearMark.GetComponent<RectTransform>();
-            rtf.anchoredPosition = Vector2.zero;
-            clearMark.SetActive(false); // 처음에는 비활성화
-        }
         return node;
     }
+
+
+
 
     void AssignNodeTypes()
     {
@@ -348,20 +257,19 @@ public class Map : MonoBehaviour
         int startCol = columns / 2; // 중앙 열
         int startFloor = 0;
 
-        // 튜토리얼 노드 생성
-        MapNode tutorialNode = CreateNode(startFloor, startCol);
-        tutorialNode.type = NodeType.Tutorial;
-        UpdateNodeVisual(tutorialNode);
+        MapNode startNode = CreateNode(startFloor, startCol);
+        startNode.type = NodeType.Battle;
+        UpdateNodeVisual(startNode);
 
-        grid[startCol, startFloor] = tutorialNode;
+        grid[startCol, startFloor] = startNode;
 
-        // 1층 노드와 연결
+        // 1층에 연결 가능한 노드가 있으면 연결
         for (int col = 0; col < columns; col++)
         {
             MapNode upperNode = grid[col, 1]; // 1층 노드
             if (upperNode != null)
             {
-                tutorialNode.connectedNodes.Add(upperNode);
+                startNode.connectedNodes.Add(upperNode);
             }
         }
     }
@@ -378,7 +286,6 @@ public class Map : MonoBehaviour
             case NodeType.Store: prefabToUse = StorePrefab; break;
             case NodeType.Puzzle: prefabToUse = PuzzlePrefab; break;
             case NodeType.Boss: prefabToUse = bossPrefab; break;
-            case NodeType.Tutorial: prefabToUse = tutorialPrefab; break;
         }
 
         if (prefabToUse != null)
@@ -387,9 +294,8 @@ public class Map : MonoBehaviour
             RectTransform rt = visual.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
 
-
             // 여기서 Button 컴포넌트 활성/비활성 제어 추가
-            Button button = visual.GetComponent<Button>();
+            UnityEngine.UI.Button button = visual.GetComponent<UnityEngine.UI.Button>();
             if (button != null)
             {
                 button.interactable = (node.floor == LEVEL);
@@ -424,5 +330,9 @@ public class Map : MonoBehaviour
         int linePanelIndex = lineParent.GetSiblingIndex();
         box.SetSiblingIndex(linePanelIndex);
     }
+
+
+
+
 
 }
