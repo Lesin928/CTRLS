@@ -159,13 +159,14 @@ GameObject:
   - component: {fileID: 4654945584725794470}
   - component: {fileID: 8007557934478936996}
   - component: {fileID: 8605323163632218166}
+  - component: {fileID: 2558791275025130712}
   m_Layer: 5
   m_Name: MapScrollArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7612652742048857813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ MonoBehaviour:
   dragSpeed: 1
   zoomSpeed: 1
   minZoom: 0.5
-  maxZoom: 2
+  maxZoom: 1.5
 --- !u!222 &8605323163632218166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -226,6 +227,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3500728093878132706}
   m_CullTransparentMesh: 1
+--- !u!114 &2558791275025130712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3500728093878132706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -7003812050070908464, guid: 070f1e64cc26390428362cc161d504c0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4494833338994980023
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,14 +313,14 @@ GameObject:
   - component: {fileID: 2435086934191321049}
   - component: {fileID: 4740080934229212304}
   - component: {fileID: 1960055580899063154}
-  - component: {fileID: 9221567921732502969}
+  - component: {fileID: 6035667777527596155}
   m_Layer: 5
   m_Name: MAPCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6977071446008180010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -374,7 +405,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &9221567921732502969
+--- !u!114 &6035667777527596155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,6 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6629587544895758729}
   - component: {fileID: 698671836589726730}
+  - component: {fileID: 9164748398419048706}
   m_Layer: 0
   m_Name: MapPanel
   m_TagString: Untagged
@@ -447,8 +479,18 @@ MonoBehaviour:
   StorePrefab: {fileID: 1126113119096072434, guid: d4175b4267bb6834880f64a7b81d43fb, type: 3}
   PuzzlePrefab: {fileID: 1244344009070172991, guid: 11b176110e8ed18479e54c5abf3b341d, type: 3}
   bossPrefab: {fileID: 6897683342135397236, guid: 8d4dc64fc22b04148a5983aa90976859, type: 3}
+  tutorialPrefab: {fileID: 3251062447081164433, guid: 1520475d187de004681291ceb3d9c2f0, type: 3}
   backgroundBoxPrefab: {fileID: 3921770571248259656, guid: 7dccab7542a27544d9025e0f020ac1c4, type: 3}
-  LEVEL: 0
+  LEVEL: 1
+  clearMarkPrefab: {fileID: 3251062447081164433, guid: 83bf4333ac067234b9a6136043679c64, type: 3}
+--- !u!222 &9164748398419048706
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064733936983026331}
+  m_CullTransparentMesh: 1
 --- !u!1 &9216926763953363871
 GameObject:
   m_ObjectHideFlags: 0

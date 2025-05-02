@@ -13,16 +13,17 @@ public class TitleButton : MonoBehaviour
         {
             AudioManager.Instance.ChangeBGM("TitleBGM");
         }
-
+        GameObject Mapbtn = GameObject.Find("HideMap");
         GameObject go = GameObject.Find("OptionUI(Clone)");
         if (go != null)
         {
             if (go.activeSelf)
+            {
                 go.SetActive(false);
-        }
-        else
-        {
-            Debug.LogWarning("Option UI가 존재하지 않습니다.");
+                Mapbtn.SetActive(false);
+            }
+
+
         }
     }
 }
