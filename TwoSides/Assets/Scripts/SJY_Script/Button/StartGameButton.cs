@@ -5,10 +5,14 @@ public class StartGameButton : MonoBehaviour
 {
     public void OnClickStartGame()
     {
-        Debug.Log("Start Game Button Clicked!");
         GameManager.Instance.StartNewGame();
 
 
+        if (Map.Instance == null)
+        {
+            Debug.LogWarning("Map instance is null. Cannot reset map.");
+            return;
+        }
         Map.Instance.ResetMap();
     }
 }

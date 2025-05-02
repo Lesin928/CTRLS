@@ -4,18 +4,21 @@ using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     public int currentStage = 1;
-    public int maxStage = 3;
+    public int maxStage = 15;
 
     public List<StageData> stageDataList;
     public StageData currentStageData;
     private int deadMonsterCount = 0;
     public bool isClear = false;
+
+    //public GameObject mapButton;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -50,9 +53,28 @@ public class GameManager : MonoBehaviour
         currentStage = 1;
 
         if (SceneManager.GetActiveScene().name == "Title")
-        {
             HUDManager.Instance.HideHUD();
-        }
+        //{
+        //    if (mapButton != null)
+        //    {
+        //        Debug.Log("MapButton is inactive in GameManager.");
+        //        mapButton.SetActive(false);
+        //    }
+
+        //    else
+        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
+        //}
+        //else
+        //{
+        //    if (mapButton != null)
+        //    {
+        //        Debug.Log("MapButton is active in GameManager.");
+        //        mapButton.SetActive(true);
+        //    }
+
+        //    else
+        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
+        //}
     }
 
     public static void Init()
@@ -131,12 +153,6 @@ public class GameManager : MonoBehaviour
 
 
     }
-
-    //public void LoadStage(int stageIndex)
-    //{
-    //    string sceneName = $"Stage_{stageIndex}";
-    //    LoadingSceneController.Instance.LoadScene(sceneName);
-    //}
 
     public void OnStageClear()
     {
