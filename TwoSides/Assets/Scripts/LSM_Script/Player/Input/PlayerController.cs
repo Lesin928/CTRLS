@@ -93,15 +93,12 @@ public class PlayerController : MonoBehaviour
             // 만약 공격중이 아닐경우 공격 상태
             if (!playerObject.isAttack) 
             {
-                Debug.Log("Attack!!!!!!! ");
                 playerObject.isAttack = true;
                 playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
                 StartCoroutine(Attack());
             }
             else if (playerObject.isAttack)
             {
-                Debug.Log("Combo Attack!!!!!!! ");
-                // 만약 공격중일 경우 콤보 실행 (중복방지는 내부에서 수행)
                 StartCoroutine(Combo()); 
             } 
         }
