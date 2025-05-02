@@ -23,7 +23,7 @@ public class PlayerStateMachine
     /// <param name="_newState">변경 할 상태 변수</param>
     public void ChangeState(PlayerState _newState)
     {
-        Debug.Log("ChangeState : " + _newState.ToString());
+        // Debug.Log("ChangeState : " + _newState.ToString());
         currentState.Exit();
         currentState = _newState;
         currentState.Enter();

@@ -38,8 +38,10 @@ public class Map : MonoBehaviour
     public int LEVEL; // 인스펙터에서 설정할 레벨
     private MapNode currentNode; // 현재 선택한 노드
     public static RectTransform latestBackgroundBox;
+
     public GameObject clearMarkPrefab; // X 이미지 프리팹
     public bool previousInteractionState = true;
+
     void Start()
     {
         if (mapGenerated) return;
@@ -64,7 +66,6 @@ public class Map : MonoBehaviour
 
     void Update()
     {
-
         if (LEVEL != previousLevel || GameManager.Instance.isClear != previousInteractionState)
         {
             RefreshButtonStates();
@@ -140,13 +141,14 @@ public class Map : MonoBehaviour
         // 1. 모든 버튼 비활성화
         foreach (MapNode node in grid)
         {
-            if (node == null) continue;
-
-            Button button = node.GetComponentInChildren<Button>();
-            if (button != null)
+            foreach (MapNode node in grid)
             {
-                button.interactable = false;
+                if (node == null) continue;
+                Button button = node.GetComponentInChildren<Button>();
+                if (button != null)
+                    button.interactable = false;
             }
+            return; // 버튼 다시 열지 않음
         }
 
         // 2. currentNode가 null이면(처음 시작) 0층에서 찾기
@@ -182,7 +184,6 @@ public class Map : MonoBehaviour
             }
         }
     }
-
 
     void OnNodeButtonClicked(MapNode node)
     {

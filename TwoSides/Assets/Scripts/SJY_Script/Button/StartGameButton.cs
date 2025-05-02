@@ -1,28 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartGameButton : MonoBehaviour
 {
-    public Map mapScript;
-
     public void OnClickStartGame()
     {
         GameManager.Instance.StartNewGame();
 
+
+        if (Map.Instance == null)
+        {
+            Debug.LogWarning("Map instance is null. Cannot reset map.");
+            return;
+        }
         Map.Instance.ResetMap();
-
-        //GameObject go = GameObject.Find("MAPCanvas");
-
-        //Map component = go.GetComponentInChildren<Map>();
-
-        ////mapScript = go.GetComponent<Map>();
-
-        //if (component != null)
-        //{
-        //    component.ResetMap();
-        //}
-        //else
-        //{
-        //    Debug.LogError("Map script not found!");
-        //}
     }
 }

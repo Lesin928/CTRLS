@@ -320,7 +320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6977071446008180010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &4740080934229212304
 MonoBehaviour:
@@ -482,7 +482,11 @@ MonoBehaviour:
   tutorialPrefab: {fileID: 3251062447081164433, guid: 1520475d187de004681291ceb3d9c2f0, type: 3}
   backgroundBoxPrefab: {fileID: 3921770571248259656, guid: 7dccab7542a27544d9025e0f020ac1c4, type: 3}
   LEVEL: 1
+
+  previousInteractionState: 1
+
   clearMarkPrefab: {fileID: 3251062447081164433, guid: 83bf4333ac067234b9a6136043679c64, type: 3}
+
 --- !u!222 &9164748398419048706
 CanvasRenderer:
   m_ObjectHideFlags: 0

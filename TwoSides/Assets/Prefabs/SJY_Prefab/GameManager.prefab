@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35570ff41ec81d4c923fa9c4d003082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6547563998224700839, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
   currentStage: 1
-  maxStage: 5
+  maxStage: 15
   stageDataList:
   - stageName: Battle0
     monsterCount: 0
@@ -104,6 +103,7 @@ MonoBehaviour:
     stageName: 
     monsterCount: 0
   isClear: 0
+  mapButton: {fileID: 6547563998224700839, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
   playerGold: 0
   playerHealth: 0
   playerMaxHealth: 0
