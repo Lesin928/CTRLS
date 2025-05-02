@@ -1,16 +1,21 @@
 using UnityEngine;
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
+
+/// <summary>
+/// ìƒíƒœ ë¨¸ì‹ ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
+/// </summary>
 public class PlayerStateMachine
 {
-    //ÇöÀçÀÇ »óÅÂ¸¦ ³ªÅ¸³»´Â º¯¼ö
+    //í˜„ì¬ì˜ ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜
     public PlayerState currentState { get; private set; }
 
     /// <summary>
-    /// »óÅÂ ¸Ó½ÅÀ» ÃÊ±âÈ­ÇÏ´Â ¸Ş¼­µå
+    /// ìƒíƒœ ë¨¸ì‹ ì„ ì´ˆê¸°í™”í•˜ëŠ” ë©”ì„œë“œ
     /// </summary>
-    /// <param name="_startState">ÃÊ±â »óÅÂ·Î ÁöÁ¤ÇÒ º¯¼ö</param>
+    /// <param name="_startState">ì´ˆê¸° ìƒíƒœë¡œ ì§€ì •í•  ë³€ìˆ˜</param>
     public void Initialize(PlayerState _startState)
     {
         currentState = _startState;
@@ -18,12 +23,11 @@ public class PlayerStateMachine
     }
 
     /// <summary>
-    /// »óÅÂ¸¦ º¯°æÇÏ´Â ¸Ş¼­µå
+    /// ìƒíƒœë¥¼ ë³€ê²½í•˜ëŠ” ë©”ì„œë“œ
     /// </summary>
-    /// <param name="_newState">º¯°æ ÇÒ »óÅÂ º¯¼ö</param>
+    /// <param name="_newState">ë³€ê²½ í•  ìƒíƒœ ë³€ìˆ˜</param>
     public void ChangeState(PlayerState _newState)
-    {
-        // Debug.Log("ChangeState : " + _newState.ToString());
+    { 
         currentState.Exit();
         currentState = _newState;
         currentState.Enter();

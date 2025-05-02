@@ -10,16 +10,15 @@ using UnityEngine;
 /// </summary>
 public abstract class CharacterObject : MonoBehaviour
 {
-    #region Character Info
-    [SerializeField]
-    private float maxHp; //최대체력
-    private float currentHp; //현재 체력
-    private float armor; //방어력
-    private float attack; //공격력
-    private float attackSpeed; //공격속도 
-    private float moveSpeed; //이동속도
-    private float critical; //치명타 확률 
-    private float criticalDamage; //치명타 피해
+    #region Character Info    
+    [SerializeField] private float maxHp; //최대체력
+    [SerializeField] private float currentHp; //현재 체력
+    [SerializeField] private float armor; //방어력
+    [SerializeField] private float attack; //공격력
+    [SerializeField] private float attackSpeed; //공격속도 
+    [SerializeField] private float moveSpeed; //이동속도
+    [SerializeField] private float critical; //치명타 확률 
+    [SerializeField] private float criticalDamage; //치명타 피해
     #endregion
 
     #region Setters and Getters

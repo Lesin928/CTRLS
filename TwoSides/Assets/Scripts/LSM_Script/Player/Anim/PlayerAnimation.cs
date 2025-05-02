@@ -1,11 +1,12 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
 // NOTE : (기타 작성)
 
+/// <summary>
+/// 플레이어 애니메이션을 관리하는 클래스
+/// </summary>
 public class PlayerAnimation : MonoBehaviour
 {
     #region Components //PlayerAnimation 스크립트의 인스펙터에 있는 컴포넌트들
@@ -32,6 +33,7 @@ public class PlayerAnimation : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerAirState airState { get; private set; }
     public PlayerAttackState attackState { get; private set; }
+    public PlayerComboState comboState { get; private set; }
 
     #endregion
 
@@ -52,6 +54,7 @@ public class PlayerAnimation : MonoBehaviour
         jumpState = new PlayerJumpState(this, stateMachine, playerObject, "JumpFall");
         airState = new PlayerAirState(this, stateMachine, playerObject, "JumpFall");
         attackState = new PlayerAttackState(this, stateMachine, playerObject, "Attack1");
+        comboState = new PlayerComboState(this, stateMachine, playerObject, "Attack2");
 
     }
      
