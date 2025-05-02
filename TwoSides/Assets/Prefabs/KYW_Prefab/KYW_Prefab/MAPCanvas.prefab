@@ -479,9 +479,14 @@ MonoBehaviour:
   StorePrefab: {fileID: 1126113119096072434, guid: d4175b4267bb6834880f64a7b81d43fb, type: 3}
   PuzzlePrefab: {fileID: 1244344009070172991, guid: 11b176110e8ed18479e54c5abf3b341d, type: 3}
   bossPrefab: {fileID: 6897683342135397236, guid: 8d4dc64fc22b04148a5983aa90976859, type: 3}
+  tutorialPrefab: {fileID: 3251062447081164433, guid: 1520475d187de004681291ceb3d9c2f0, type: 3}
   backgroundBoxPrefab: {fileID: 3921770571248259656, guid: 7dccab7542a27544d9025e0f020ac1c4, type: 3}
   LEVEL: 1
+
   previousInteractionState: 1
+
+  clearMarkPrefab: {fileID: 3251062447081164433, guid: 83bf4333ac067234b9a6136043679c64, type: 3}
+
 --- !u!222 &9164748398419048706
 CanvasRenderer:
   m_ObjectHideFlags: 0
