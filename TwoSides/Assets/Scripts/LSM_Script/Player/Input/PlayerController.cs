@@ -1,27 +1,23 @@
 using UnityEngine;
 using UnityEngine.InputSystem; 
 using System.Collections;
-using UnityEngine.Rendering;
+
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
 // NOTE : (기타 작성)
+
+/// <summary>
+/// 플레이어의 입력을 처리하는 클래스
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
-
     #region Components //PlayerAnimation 스크립트의 인스펙터에 있는 컴포넌트들
     protected PlayerStateMachine stateMachine;
     protected PlayerAnimation playerAnimation;
     protected PlayerObject playerObject;
 
     private Rigidbody2D rb;
-    private Vector2 moveInput;
     #endregion
-
-    //임시 코드
-    [Header("플레이어 조작 세팅")]
-    public float moveSpeed = 5f;
-    public float jumpForce = 7f;
-    public float dashForce = 10f;
 
     #region Dillay
     private float groundIgnoreTimer = 0f;
@@ -35,19 +31,19 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
-        playerObject = GetComponent<PlayerObject>(); 
+        playerObject = GetComponent<PlayerObject>();
     }
     private void FixedUpdate() //나중에 무브 스테이트로 이동
     {
         //플레이어가 대쉬중이 아니면 이동
-        if (!playerObject.GetDashing())
+        if (!playerObject.IsDashing)
         {
-            rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(playerObject.MoveInput.x * playerObject.MoveSpeed, rb.linearVelocity.y);
 
             //또한 플레이어가 이동중일 때 방향 전환
-            if (moveInput.x != 0)
+            if (playerObject.MoveInput.x != 0)
             {
-                playerAnimation.FlipController(moveInput.x);
+                playerAnimation.FlipController(playerObject.MoveInput.x);
             }
         }
     }
@@ -60,28 +56,15 @@ public class PlayerController : MonoBehaviour
 
         // 대쉬 쿨타임이 끝나지 않았으면 쿨타임 감소
         if (dashCooldownTimer > 0)
-            dashCooldownTimer -= Time.deltaTime; 
+            dashCooldownTimer -= Time.deltaTime;
 
         bool shouldCheckGround = groundIgnoreTimer <= 0;
 
-        //플레이어가 바닥에 있고 대쉬중이 아닐 떄
-        if (!playerObject.GetDashing() && playerObject.IsGroundDetected() && shouldCheckGround)
-        {
-            //플레이어 입력이 없으면 idle, 있으면 move
-            if (moveInput.x == 0 )
-            {
-                playerAnimation.stateMachine.ChangeState(playerAnimation.idleState);
-            }
-            else if (moveInput.x != 0)
-            {
-                playerAnimation.stateMachine.ChangeState(playerAnimation.moveState);
-            }
-        }  
     }
 
     public void OnMove(InputAction.CallbackContext context)
-    {  
-        moveInput = context.ReadValue<Vector2>();
+    {
+        playerObject.MoveInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -91,23 +74,36 @@ public class PlayerController : MonoBehaviour
             groundIgnoreTimer = groundIgnoreDuration;
             Debug.Log("점프");
             playerAnimation.stateMachine.ChangeState(playerAnimation.jumpState);
-        }            
+        }
     }
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (!playerObject.GetDashing())
+        if (!playerObject.IsDashing)
         {
             playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
             StartCoroutine(Dash());
         }
     }
     public void OnAttack(InputAction.CallbackContext context)
-    {
-        Debug.Log("Attack! (X 버튼)");
-        if (!playerObject.GetDashing() && playerObject.IsGroundDetected())
+    { 
+        if (context.phase != InputActionPhase.Performed) return; 
+        if (!playerObject.IsDashing)
         {
-            playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
+            // 만약 공격중이 아닐경우 공격 상태
+            if (!playerObject.isAttack) 
+            {
+                Debug.Log("Attack!!!!!!! ");
+                playerObject.isAttack = true;
+                playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
+                StartCoroutine(Attack());
+            }
+            else if (playerObject.isAttack)
+            {
+                Debug.Log("Combo Attack!!!!!!! ");
+                // 만약 공격중일 경우 콤보 실행 (중복방지는 내부에서 수행)
+                //StartCoroutine(Combo()); 
+            } 
         }
     }
 
@@ -118,19 +114,45 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("Interact! (F 버튼)");
+        if (GameManager.Instance.isClear)
+            Debug.Log("Interact! (F 버튼)");
     }
     private IEnumerator Dash()
     {
         if (dashCooldownTimer > 0)
             yield break; // 대쉬 쿨타임이 남아있으면 대쉬를 하지 않음
         dashCooldownTimer = dashCooldownDuration;
-        playerObject.SetDashing(true); 
-        float originalGravity = rb.gravityScale; 
+        playerObject.IsDashing = true;
+        float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
-        rb.linearVelocity = new Vector2(playerAnimation.Getfacing() * dashForce, 0f);
+        rb.linearVelocity = new Vector2(playerAnimation.Getfacing() * playerObject.DashForce, 0f);
         yield return new WaitForSeconds(0.2f);
         rb.gravityScale = originalGravity;
-        playerObject.SetDashing(false);
+        playerObject.IsDashing = false;
+    }
+    private IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(0.7f); // 콤보 2까지의 딜레이 시간
+        if (!playerObject.isCombo)
+        {
+            //시간 내에 콤보가 수행되지 않으면 공격 종료
+            playerObject.isAttack = false;
+        }        
+    }
+
+    private IEnumerator Combo()
+    {
+        // 만약 콤보공격이 수행되고 있는 경우 탈출
+        if (playerObject.isCombo)
+        {
+            yield break;
+        } 
+        playerObject.isCombo = true;
+        //이 스테이트 변경을... attack 애니메이션이 끝나고 진행해야 할텐디... 
+        playerAnimation.stateMachine.ChangeState(playerAnimation.comboState);
+        yield return new WaitForSeconds(1f); // 다음 공격까지의 딜레이 시간, 추후 플레이어 속성에 추가, 애니메이션 실행 시간보다 낮아질 수 없음  
+        playerObject.isAttack = false;
+        playerObject.isCombo = false;
     }
 }
+    

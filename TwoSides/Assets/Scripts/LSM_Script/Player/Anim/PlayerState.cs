@@ -3,6 +3,10 @@ using UnityEngine;
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
 // NOTE : (기타 작성)
+
+/// <summary>
+/// 플레이어의 상태를 나타내는 클래스 
+/// </summary>
 public class PlayerState
 {
     #region Components //Player의 인스펙터에 있는 컴포넌트들
