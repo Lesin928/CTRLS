@@ -9,7 +9,6 @@ public class EnemyLaserAttackTrigger : EnemyAnimationTrigger
     [SerializeField] private GameObject laserActivePrefab; // 레이저 활성화 프리팹
     [SerializeField] private GameObject laserPrefab;       // 레이저 발사 프리팹
     [SerializeField] private Transform firePoint;          // 레이저 발사 위치
-    [SerializeField] private Transform player;             // 플레이어의 위치
 
     // LaserActive 오브젝트(마법진)를 생성 (애니메이션 이벤트에서 호출)
     private void LaserActiveTrigger()
@@ -21,14 +20,12 @@ public class EnemyLaserAttackTrigger : EnemyAnimationTrigger
     // Laser 오브젝트를 생성 ( 애니메이션 이벤트에서 호출)
     private void LaserAttackTrigger()
     {
-        // 부모 EnemyObject를 가져옴
-        EnemyObject enemy = GetComponentInParent<EnemyObject>();
-
         // 레이저 프리팹을 발사 지점에 생성
         GameObject laser = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
 
         // 레이저 객체의 스크립트를 가져와서 레이저를 발사
-        Laser laserScript = laser.GetComponent<Laser>();
+        EnemyLaser laserScript = laser.GetComponent<EnemyLaser>();
+        laserScript.SetAttacker(enemy); // 발사자 전달
         laserScript.Shoot(enemy.facingDir);
     }
 }

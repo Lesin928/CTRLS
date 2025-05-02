@@ -3,8 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class InputBlockerManager : MonoBehaviour
 {
+    private static InputBlockerManager Instance;
+
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 

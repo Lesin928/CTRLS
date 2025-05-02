@@ -69,7 +69,7 @@ public class HUDManager : MonoBehaviour
 
         UpdateHUD();
 
-        if (canvasGroup != null)
+        if (canvasGroup != null && gameObject.activeSelf)
         {
             canvasGroup.alpha = 0f;
             StartCoroutine(FadeInHUD());

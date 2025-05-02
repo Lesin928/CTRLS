@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8059691839488778212}
   - component: {fileID: 4478713145832826377}
   - component: {fileID: 6736540066791371723}
-  - component: {fileID: 3538231342197222927}
+  - component: {fileID: 6415370500435046141}
   - component: {fileID: 4600175715287113732}
   m_Layer: 12
   m_Name: Enemy_FlyingWizard_Laser
@@ -112,7 +112,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3538231342197222927
+--- !u!114 &6415370500435046141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2861856477896846592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16d3506da542f534ba897ea7f1627dad, type: 3}
+  m_Script: {fileID: 11500000, guid: c9a36766f798649418700f09501b5625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &4600175715287113732

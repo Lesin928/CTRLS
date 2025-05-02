@@ -34,6 +34,14 @@ public class HealBuffWizardObject : EnemyObject
         base.Update();
     }
 
+    /// <summary>
+    /// Hit -> Support
+    /// </summary>
+    public override void ExitPlayerDetection()
+    {
+        stateMachine.ChangeState(supportState);
+    }
+
     protected override void OnDrawGizmos()
     {
         // 지원 범위를 시각화

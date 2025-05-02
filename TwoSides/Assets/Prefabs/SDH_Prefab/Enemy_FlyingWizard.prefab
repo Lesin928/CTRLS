@@ -219,7 +219,6 @@ MonoBehaviour:
   laserActivePrefab: {fileID: 2730070342534615961, guid: d55d31e34b57cb044a3b26c383f15729, type: 3}
   laserPrefab: {fileID: 2861856477896846592, guid: a26c060efe1cfb74aaec2e66038f4ada, type: 3}
   firePoint: {fileID: 6132436056668896239}
-  player: {fileID: 0}
 --- !u!1 &6696287364730080268
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +335,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabc0af1a8bb17741acb54a7e7df0f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 100
+  currentHp: 100
+  armor: 0
+  attack: 0
+  attackSpeed: 0
   moveSpeed: 3
+  critical: 0
+  criticalDamage: 0
   defaultMoveSpeed: 3
   chaseSpeed: 10
   attackCooldown: 0

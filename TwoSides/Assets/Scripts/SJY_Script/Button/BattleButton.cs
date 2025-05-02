@@ -12,7 +12,7 @@ public class BattleButton : MonoBehaviour
     public void Onclick()
     {
         string sceneName = "Battle";
-        int rand = Random.Range(0, 1);
+        int rand = Random.Range(0, 10);
         sceneName += rand.ToString();
         map.SetActive(false);
         LoadingSceneController.Instance.LoadScene(sceneName);

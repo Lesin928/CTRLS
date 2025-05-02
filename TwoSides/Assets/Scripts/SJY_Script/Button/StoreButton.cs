@@ -11,8 +11,6 @@ public class StoreButton : MonoBehaviour
     public void Onclick()
     {
         string sceneName = "Store";
-        int rand = Random.Range(0, 1);  // range 바꾸기
-        sceneName += rand.ToString();
         map.SetActive(false);
 
         LoadingSceneController.Instance.LoadScene(sceneName);

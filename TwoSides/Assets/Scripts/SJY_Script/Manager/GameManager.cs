@@ -4,18 +4,21 @@ using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     public int currentStage = 1;
-    public int maxStage = 3;
+    public int maxStage = 15;
 
     public List<StageData> stageDataList;
     public StageData currentStageData;
     private int deadMonsterCount = 0;
     public bool isClear = false;
+
+    //public GameObject mapButton;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -50,9 +53,28 @@ public class GameManager : MonoBehaviour
         currentStage = 1;
 
         if (SceneManager.GetActiveScene().name == "Title")
-        {
             HUDManager.Instance.HideHUD();
-        }
+        //{
+        //    if (mapButton != null)
+        //    {
+        //        Debug.Log("MapButton is inactive in GameManager.");
+        //        mapButton.SetActive(false);
+        //    }
+
+        //    else
+        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
+        //}
+        //else
+        //{
+        //    if (mapButton != null)
+        //    {
+        //        Debug.Log("MapButton is active in GameManager.");
+        //        mapButton.SetActive(true);
+        //    }
+
+        //    else
+        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
+        //}
     }
 
     public static void Init()
@@ -100,6 +122,7 @@ public class GameManager : MonoBehaviour
         playerHealth = playerMaxHealth;
         playerGold = 0;
         currentStage = 1;
+        isClear = false;
 
         //HUDManager
         if (HUDManager.Instance != null)
@@ -127,23 +150,24 @@ public class GameManager : MonoBehaviour
 
         //LoadStage(currentStage);
         LoadingSceneController.Instance.LoadScene("Battle0");
-    }
 
-    //public void LoadStage(int stageIndex)
-    //{
-    //    string sceneName = $"Stage_{stageIndex}";
-    //    LoadingSceneController.Instance.LoadScene(sceneName);
-    //}
+
+    }
 
     public void OnStageClear()
     {
-        isClear = true;
-        currentStage++;
-
-        if (currentStage > maxStage)
+        if (isClear)
+            isClear = !isClear;
+        else
         {
-            // 이걸 보스스테이지에서 체크하는 방법으로 바꿔야ㅑ함
-            GameClear();
+            isClear = true;
+            currentStage++;
+
+            if (currentStage > maxStage)
+            {
+                // 이걸 보스스테이지에서 체크하는 방법으로 바꿔야ㅑ함
+                GameClear();
+            }
         }
     }
 
@@ -295,7 +319,9 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
+            Debug.Log(isClear);
             OnStageClear();
+            Debug.Log(isClear);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
