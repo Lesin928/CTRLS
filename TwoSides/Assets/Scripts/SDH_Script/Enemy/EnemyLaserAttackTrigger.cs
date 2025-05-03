@@ -1,3 +1,4 @@
+using System.Net;
 using UnityEngine;
 
 /// <summary>
@@ -11,14 +12,17 @@ public class EnemyLaserAttackTrigger : EnemyAnimationTrigger
     [SerializeField] private Transform firePoint;          // 레이저 발사 위치
 
     // LaserActive 오브젝트(마법진)를 생성 (애니메이션 이벤트에서 호출)
-    private void LaserActiveTrigger()
+    private void LaserMagicTrigger()
     {
         // LaserActive(마법진) 프리팹을 발사 지점에 생성
-        Instantiate(laserActivePrefab, firePoint.position, Quaternion.identity);
+        GameObject magic = Instantiate(laserActivePrefab, firePoint.position, Quaternion.identity);
+
+        EnemyLaserMagic magicScript = magic.GetComponent<EnemyLaserMagic>();
+        magicScript.SetAttackTrigger(this);
     }
 
-    // Laser 오브젝트를 생성 ( 애니메이션 이벤트에서 호출)
-    private void LaserAttackTrigger()
+    // Laser 오브젝트를 생성
+    public void LaserAttackTrigger()
     {
         // 레이저 프리팹을 발사 지점에 생성
         GameObject laser = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);

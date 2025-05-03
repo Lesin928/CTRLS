@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 493406239307648836}
   - component: {fileID: 7364139731209042475}
   m_Layer: 12
-  m_Name: Enemy_FlyingWizard_LaserActivate
+  m_Name: Enemy_FlyingWizard_LaserMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,10 +75,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 623635149
-  m_SortingLayer: 6
+  m_SortingLayerID: 1962466067
+  m_SortingLayer: 7
   m_SortingOrder: 10
-  m_Sprite: {fileID: -6257051202229970853, guid: b1aaa606d66f9644ab787b3885cf89b3, type: 3}
+  m_Sprite: {fileID: 377356858819631056, guid: 804eb03ec7d52c749be01abcddc973c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

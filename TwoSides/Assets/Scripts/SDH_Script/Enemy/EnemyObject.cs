@@ -59,6 +59,9 @@ public class EnemyObject : CharacterObject
     protected bool facingRight = true;              // 오른쪽 바라보고 있는지 여부
     #endregion
 
+    // 플래시 이펙트
+    [SerializeField] private EnemyFlashEffect flashEffect;
+
     // 스테이트 머신 초기화
     protected virtual void Awake()
     {
@@ -74,17 +77,13 @@ public class EnemyObject : CharacterObject
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        flashEffect = GetComponentInChildren<EnemyFlashEffect>();
     }
 
     // 현재 상태 갱신
     protected virtual void Update()
     {
         stateMachine.currentState?.Update();
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(10);
-        }
     }
 
     /// <summary>
@@ -229,7 +228,7 @@ public class EnemyObject : CharacterObject
     public override void TakeDamage(float _damage)
     {        
         CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
-
+        flashEffect.Flash();
         if (CurrentHp <= 0)
         {
             CurrentHp = 0;
@@ -237,7 +236,8 @@ public class EnemyObject : CharacterObject
         }
         else
         {
-            stateMachine.ChangeState(hitState);
+            if(!stateMachine.isAttacking) // 공격 중이 아니라면 hitState로 전환
+                stateMachine.ChangeState(hitState);
         }
     }
 
