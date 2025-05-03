@@ -20,31 +20,35 @@ public class Map : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
     }
 
-    public int floors = 15; // 총 층 수
-    public int columns = 7; // 총 열 수
-    public GameObject nodePrefab; // 기본 노드 프리팹
-    public RectTransform nodeParent; // 노드를 생성할 부모 오브젝트 (UI용)
-    public GameObject linePrefab; // 선(LineRenderer 또는 UI 라인) 프리팹
-    public RectTransform lineParent; // 선을 생성할 부모 오브젝트
-    private MapNode[,] grid; // 노드를 저장하는 2차원 배열
-    public GameObject battlePrefab; // 전투 노드 시각화 프리팹
-    public GameObject mysteryPrefab; // 미스터리 노드 시각화 프리팹
-    public GameObject StorePrefab; // 상점 노드 시각화 프리팹
-    public GameObject PuzzlePrefab; // 퍼즐 노드 시각화 프리팹
-    public GameObject bossPrefab; // 보스 노드 시각화 프리팹
-    public GameObject tutorialPrefab; // 튜토리얼 노드 시각화 프리팹
-    public RectTransform backgroundBoxPrefab; // 배경 박스 프리팹 (빈 Image UI 등)
+    public int floors = 15;
+    public int columns = 7;
+    public GameObject nodePrefab;
+    public RectTransform nodeParent;
+    public GameObject linePrefab;
+    public RectTransform lineParent;
+    private MapNode[,] grid;
+    public GameObject battlePrefab;
+    public GameObject mysteryPrefab;
+    public GameObject StorePrefab;
+    public GameObject PuzzlePrefab;
+    public GameObject bossPrefab;
+    public GameObject tutorialPrefab;
+    public RectTransform backgroundBoxPrefab;
     public static bool mapGenerated = false;
-    public int LEVEL; // 인스펙터에서 설정할 레벨
-    private MapNode currentNode; // 현재 선택한 노드
+    public int LEVEL;
+    private MapNode currentNode;
     public static RectTransform latestBackgroundBox;
-    public GameObject clearMarkPrefab; // X 이미지 프리팹
+    public GameObject clearMarkPrefab;
     public bool previousInteractionState = true;
+
+    public GameObject redDotPrefab; // ✅ 추가
+    private GameObject redDotInstance; // ✅ 추가
+
     void Start()
     {
         if (mapGenerated) return;
-        nodeParent.SetAsLastSibling(); // NodePanel을 맨 위로 보낸다
-        lineParent.SetAsFirstSibling(); // LinePanel을 맨 뒤로 보낸다
+        nodeParent.SetAsLastSibling();
+        lineParent.SetAsFirstSibling();
         GenerateGrid();
         GeneratePaths();
         AssignNodeTypes();
@@ -53,103 +57,97 @@ public class Map : MonoBehaviour
         ConnectNodesWithEdges();
         CreateBackgroundBox();
 
-
         mapGenerated = true;
-
-
-
     }
 
     private int previousLevel = -1;
 
     void Update()
     {
-
         if (LEVEL != previousLevel || GameManager.Instance.isClear != previousInteractionState)
         {
             RefreshButtonStates();
             previousLevel = LEVEL;
             previousInteractionState = GameManager.Instance.isClear;
         }
-        IsClearCheck();
 
+        IsClearCheck();
+        UpdateRedDot(); // ✅ 추가
+    }
+
+    void UpdateRedDot() // ✅ 빨간 점 갱신 함수
+    {
+        if (redDotInstance != null)
+        {
+            Destroy(redDotInstance);
+            redDotInstance = null;
+        }
+
+        if (!GameManager.Instance.isClear && currentNode != null && redDotPrefab != null)
+        {
+            redDotInstance = Instantiate(redDotPrefab, currentNode.transform);
+            RectTransform rt = redDotInstance.GetComponent<RectTransform>();
+            rt.anchoredPosition = Vector2.zero;
+        }
     }
 
     private void IsClearCheck()
     {
-        // isClear 체크 후 currentNode 처리
         if (GameManager.Instance != null && GameManager.Instance.isClear && currentNode != null)
         {
-            // 버튼 비활성화
             Button btn = currentNode.GetComponentInChildren<Button>();
             if (btn != null)
-            {
                 btn.gameObject.SetActive(false);
-            }
 
-            // X 마크 활성화
             foreach (Transform child in currentNode.transform)
             {
-                if (child.name.Contains("ClearMark") || child.name.Contains("X")) // 이름 구분용
-                {
+                if (child.name.Contains("ClearMark") || child.name.Contains("X"))
                     child.gameObject.SetActive(true);
-                }
             }
 
-            currentNode = null; // 처리 후 초기화 (한 번만 실행되도록)
+            currentNode = null;
         }
     }
 
     public void ResetMap()
     {
-        Debug.Log("ResetMap called!"); // 디버그 로그 추가
+        Debug.Log("ResetMap called!");
 
-        //기존 노드와 라인 모두 제거
         foreach (Transform child in nodeParent)
             Destroy(child.gameObject);
 
         foreach (Transform child in lineParent)
             Destroy(child.gameObject);
 
-        // 초기화
         currentNode = null;
         previousLevel = -1;
         LEVEL = 1;
         grid = null;
         mapGenerated = false;
 
-        // 맵 다시 생성
         Start();
     }
 
     void RefreshButtonStates()
     {
-        // 0. 버튼을 아예 막아야 할 때
-        if (!GameManager.Instance.isClear)  // 🔥 전체 비활성화 조건
+        if (!GameManager.Instance.isClear)
         {
             foreach (MapNode node in grid)
             {
                 if (node == null) continue;
                 Button button = node.GetComponentInChildren<Button>();
-                if (button != null)
-                    button.interactable = false;
+                if (button != null) button.interactable = false;
             }
-            return; // 버튼 다시 열지 않음
+            return;
         }
 
-        // 1. 모든 버튼 비활성화
         foreach (MapNode node in grid)
         {
             if (node == null) continue;
-
             Button button = node.GetComponentInChildren<Button>();
-            if (button != null)
-            {
-                button.interactable = false;
-            }
+            if (button != null) button.interactable = false;
         }
 
-        // 2. currentNode가 null이면(처음 시작) 0층에서 찾기
         if (currentNode == null)
         {
             for (int col = 0; col < columns; col++)
@@ -183,53 +181,49 @@ public class Map : MonoBehaviour
         }
     }
 
-
     void OnNodeButtonClicked(MapNode node)
     {
-        currentNode = node; // 클릭한 노드를 현재 노드로 설정
+        currentNode = node;
         Debug.Log(currentNode);
-        LEVEL++; // LEVEL 올리기
+        LEVEL++;
     }
-
 
     void GenerateGrid()
     {
-        grid = new MapNode[columns, floors + 1]; // 보스층까지 포함한 그리드 배열 초기화
+        grid = new MapNode[columns, floors + 1];
     }
 
     void AddBossNode()
     {
-        int bossCol = columns / 2; // 중앙 열에 배치
-        int bossFloor = floors;    // 마지막 층(16층)
+        int bossCol = columns / 2;
+        int bossFloor = floors;
 
-        MapNode bossNode = CreateNode(bossFloor, bossCol); // 보스 노드 생성
-        bossNode.type = NodeType.Boss; // 타입 설정
-        UpdateNodeVisual(bossNode); // 시각 업데이트
+        MapNode bossNode = CreateNode(bossFloor, bossCol);
+        bossNode.type = NodeType.Boss;
+        UpdateNodeVisual(bossNode);
 
-        // 마지막 층 바로 아래 층의 모든 노드와 연결
         for (int col = 0; col < columns; col++)
         {
-            MapNode fromNode = grid[col, floors - 1]; // 15층 노드
+            MapNode fromNode = grid[col, floors - 1];
             if (fromNode != null)
             {
-                fromNode.connectedNodes.Add(bossNode); // 보스 노드로 연결
+                fromNode.connectedNodes.Add(bossNode);
             }
         }
 
-        grid[bossCol, bossFloor] = bossNode; // 그리드에 보스 노드 저장
+        grid[bossCol, bossFloor] = bossNode;
     }
 
     void GeneratePaths()
     {
-        for (int col = 0; col < columns; col++) // 0~6까지 7개 라인
+        for (int col = 0; col < columns; col++)
         {
             int currentCol = col;
 
-            // 1층에 노드가 없다면 생성
             if (grid[currentCol, 1] == null)
                 grid[currentCol, 1] = CreateNode(1, currentCol);
 
-            for (int floor = 1; floor < floors; floor++) // 위로 올라가며 노드 생성
+            for (int floor = 1; floor < floors; floor++)
             {
                 if (grid[currentCol, floor] == null)
                     grid[currentCol, floor] = CreateNode(floor, currentCol);
@@ -253,118 +247,117 @@ public class Map : MonoBehaviour
         }
     }
 
-
     MapNode CreateNode(int floor, int col)
     {
-        float mapWidth = columns * 150f; // 전체 가로 크기
-        float offsetX = -mapWidth / 2f + 150f / 2f; // 가로 중앙 정렬
+        float mapWidth = columns * 150f;
+        float offsetX = -mapWidth / 2f + 150f / 2f;
 
-        float y = floor * 150f; // 아래(0층) 기준으로 위로 올라감
-        Vector2 pos = new Vector2(col * 150f + offsetX, y); // Y는 음수 없음
+        float y = floor * 150f;
+        Vector2 pos = new Vector2(col * 150f + offsetX, y);
 
         GameObject obj = Instantiate(nodePrefab, nodeParent);
         obj.name = $"NODE{floor}";
         RectTransform rt = obj.GetComponent<RectTransform>();
         rt.anchoredPosition = pos;
 
-        // z값을 0으로 강제 설정
         Vector3 localPos = rt.localPosition;
         localPos.z = 0f;
         rt.localPosition = localPos;
 
         MapNode node = obj.GetComponent<MapNode>();
         node.Init(floor, col, NodeType.Mystery);
+
         if (clearMarkPrefab != null)
         {
             GameObject clearMark = Instantiate(clearMarkPrefab, node.transform);
             RectTransform rtf = clearMark.GetComponent<RectTransform>();
             rtf.anchoredPosition = Vector2.zero;
-            clearMark.SetActive(false); // 처음에는 비활성화
+            clearMark.SetActive(false);
         }
+
         return node;
     }
 
     void AssignNodeTypes()
     {
-        for (int floor = 0; floor < floors; floor++) // 모든 층 반복
+        for (int floor = 0; floor < floors; floor++)
         {
-            for (int col = 0; col < columns; col++) // 모든 열 반복
+            for (int col = 0; col < columns; col++)
             {
-                MapNode node = grid[col, floor]; // 현재 노드
-                if (node == null) continue; // 없으면 건너뜀
+                MapNode node = grid[col, floor];
+                if (node == null) continue;
 
-                if (floor == 1) node.type = NodeType.Battle; // 시작 층은 전투
-                else if (floor == 8) node.type = NodeType.Puzzle; // 9층은 보물
-                else if (floor == 14) node.type = NodeType.Store; // 15층은 휴식
+                if (floor == 1) node.type = NodeType.Battle;
+                else if (floor == 8) node.type = NodeType.Puzzle;
+                else if (floor == 14) node.type = NodeType.Store;
                 else
                 {
-                    float rand = Random.value; // 랜덤 타입 지정
+                    float rand = Random.value;
                     if (rand < 0.5f) node.type = NodeType.Battle;
                     else if (rand < 0.7f) node.type = NodeType.Mystery;
                     else if (rand < 0.85f) node.type = NodeType.Store;
                     else node.type = NodeType.Puzzle;
                 }
-                UpdateNodeVisual(node); // 시각 업데이트
+
+                UpdateNodeVisual(node);
             }
         }
     }
 
     void ConnectNodesWithEdges()
     {
-        foreach (MapNode node in grid) // 모든 노드 순회
+        foreach (MapNode node in grid)
         {
-            if (node == null) continue; // 없으면 건너뜀
+            if (node == null) continue;
 
             RectTransform nodeRT = node.GetComponent<RectTransform>();
-            Vector2 from = nodeRT.anchoredPosition; // 시작 위치
+            Vector2 from = nodeRT.anchoredPosition;
 
-            foreach (MapNode next in node.connectedNodes) // 연결된 노드 순회
+            foreach (MapNode next in node.connectedNodes)
             {
                 RectTransform nextRT = next.GetComponent<RectTransform>();
-                Vector2 to = nextRT.anchoredPosition; // 끝 위치
+                Vector2 to = nextRT.anchoredPosition;
 
-                CreateLine(from, to); // 라인 생성
+                CreateLine(from, to);
             }
         }
     }
 
     void CreateLine(Vector2 from, Vector2 to)
     {
-        GameObject lineObj = Instantiate(linePrefab, lineParent); // 라인 오브젝트 생성
+        GameObject lineObj = Instantiate(linePrefab, lineParent);
         RectTransform rt = lineObj.GetComponent<RectTransform>();
 
-        Vector2 direction = to - from; // 방향 벡터
-        float length = direction.magnitude; // 선 길이
+        Vector2 direction = to - from;
+        float length = direction.magnitude;
 
-        rt.sizeDelta = new Vector2(length, 5f); // 선 길이 및 두께 설정
-        rt.pivot = new Vector2(0, 0.5f); // 회전 기준점
-        rt.anchoredPosition = from; // 시작 위치 설정
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 각도 계산
-        rt.localRotation = Quaternion.Euler(0, 0, angle); // 회전 적용
+        rt.sizeDelta = new Vector2(length, 5f);
+        rt.pivot = new Vector2(0, 0.5f);
+        rt.anchoredPosition = from;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rt.localRotation = Quaternion.Euler(0, 0, angle);
     }
+
     void AddStartNode()
     {
-        int startCol = columns / 2; // 중앙 열
+        int startCol = columns / 2;
         int startFloor = 0;
 
-        // 튜토리얼 노드 생성
         MapNode tutorialNode = CreateNode(startFloor, startCol);
         tutorialNode.type = NodeType.Tutorial;
         UpdateNodeVisual(tutorialNode);
 
         grid[startCol, startFloor] = tutorialNode;
 
-        // 1층 노드와 연결
         for (int col = 0; col < columns; col++)
         {
-            MapNode upperNode = grid[col, 1]; // 1층 노드
+            MapNode upperNode = grid[col, 1];
             if (upperNode != null)
             {
                 tutorialNode.connectedNodes.Add(upperNode);
             }
         }
     }
-
 
     void UpdateNodeVisual(MapNode node)
     {
@@ -386,8 +379,6 @@ public class Map : MonoBehaviour
             RectTransform rt = visual.GetComponent<RectTransform>();
             rt.anchoredPosition = Vector2.zero;
 
-
-            // 여기서 Button 컴포넌트 활성/비활성 제어 추가
             Button button = visual.GetComponent<Button>();
             if (button != null)
             {
@@ -404,16 +395,15 @@ public class Map : MonoBehaviour
         float mapWidth = columns * nodeWidth;
         float mapHeight = (floors + 1) * nodeHeight;
 
-        // 중심 기준으로 포지션 (0,10) 조정
         Vector2 position = new Vector2(0f, 10f);
 
         RectTransform mapPanel = nodeParent.parent.GetComponent<RectTransform>();
         RectTransform box = Instantiate(backgroundBoxPrefab, mapPanel);
-        latestBackgroundBox = box; // 생성한 박스 저장
+        latestBackgroundBox = box;
         MapController dragHandler = FindAnyObjectByType<MapController>();
         if (dragHandler != null)
         {
-            dragHandler.boundaryRect = box; // 드래그 핸들러에 직접 연결
+            dragHandler.boundaryRect = box;
         }
         box.anchoredPosition = position;
 
@@ -423,5 +413,4 @@ public class Map : MonoBehaviour
         int linePanelIndex = lineParent.GetSiblingIndex();
         box.SetSiblingIndex(linePanelIndex);
     }
-
 }
