@@ -11,6 +11,8 @@ using System.Collections;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
+    public GameObject player;
+
     #region Components
     private PlayerStateMachine stateMachine;
     private PlayerAnimation playerAnimation;
@@ -98,8 +100,10 @@ public class PlayerController : MonoBehaviour
     }
     public void OnShift(InputAction.CallbackContext context)
     {
-        Debug.Log("Shift! (Shift 버튼)");
-        playerObject.TakeDamage(1f); // 테스트용
+        if (context.phase != InputActionPhase.Performed) return;
+        //Debug.Log("Shift! (Shift 버튼)");
+        Debug.Log("플레이어 복제");
+        GameObject hit = Instantiate(player, transform.position + new Vector3(1f,0,0), Quaternion.identity);
     }
     public void OnInteract(InputAction.CallbackContext context)
     {

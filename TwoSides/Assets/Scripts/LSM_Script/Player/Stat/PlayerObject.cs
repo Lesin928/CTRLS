@@ -16,7 +16,7 @@ public class PlayerObject : CharacterObject
     protected PlayerObject playerObject;
     protected Rigidbody2D rb;
     public GameObject attackCollider1;
-    public GameObject attackCollider2;
+    public GameObject attackCollider2; 
     #endregion
 
     #region Player Info   
@@ -26,9 +26,9 @@ public class PlayerObject : CharacterObject
     [SerializeField] private float invincibilityDuration; //추후 스크립터블 오브젝트로 세팅
     [SerializeField] private bool isCombo = false; //콤보 중
     [SerializeField] private bool isAttack = false; //공격 중
-    [SerializeField] private bool endAttack = false; //공격 종료 
     [SerializeField] private bool isDashing = false; //대쉬 중
     [SerializeField] private bool isinvincibility = false; //무적 중
+    [SerializeField] private bool endAttack = false; //공격 종료 
     #endregion
 
     #region Setter & Getter
