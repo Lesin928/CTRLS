@@ -12,7 +12,7 @@ public class EnemyBossHammerAttackTrigger : EnemyAnimationTrigger
     [SerializeField] private Transform firePoint;    // 공격 발사 위치
     [SerializeField] private Transform handPoint;    // 손 위치
 
-    private void HammerAttackTrigger()
+    public void HammerAttackTrigger()
     {
         // 부모 EnemyObject를 가져옴
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
@@ -28,8 +28,10 @@ public class EnemyBossHammerAttackTrigger : EnemyAnimationTrigger
 
     private void HammerMagicTrigger()
     {
-        // Magic 프리팹을 발사 지점에 생성
-        Instantiate(magicPrefab, handPoint.position, Quaternion.identity);
+        GameObject magic = Instantiate(magicPrefab, handPoint.position, Quaternion.identity);
+
+        EnemyBossHammerMagic magicScript = magic.GetComponent<EnemyBossHammerMagic>();
+        magicScript.SetAttackTrigger(this);
     }
 
     // 애니메이션이 완료되었을 때 호출되는 메서드

@@ -45,9 +45,6 @@ public class EnemyBullet : MonoBehaviour
     /// <param name="targetPosition">목표 지점의 위치</param>
     public void Shoot(Vector2 targetPosition)
     {
-        // 이동 애니메이션으로 변경
-        anim.SetBool("Move", true);
-
         // 현재 위치에서 목표 위치까지의 방향 계산
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
 
@@ -70,9 +67,7 @@ public class EnemyBullet : MonoBehaviour
 
     /// 충돌 처리 함수
     void OnTriggerEnter2D(Collider2D collision)
-    {
-        anim.SetBool("Move", false);
-
+    {   
         // 플레이어와 충돌한 경우
         if (collision.CompareTag("Player"))
         {

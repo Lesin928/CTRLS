@@ -22,30 +22,38 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 3257990544654421829, guid: 3b43ab2c8181a4e458647c92a12029cc, type: 3}
-    - time: 0.1
+    - time: 0.125
       value: {fileID: 8286214613863519802, guid: ac22e844f36cf3a408709c9bcbe49083, type: 3}
-    - time: 0.2
+    - time: 0.25
       value: {fileID: -3452518282940628945, guid: 60fd3310b444aa248adf35d68cf8040b, type: 3}
-    - time: 0.3
+    - time: 0.375
       value: {fileID: 4973865432535796746, guid: d6b71e93c0dfe2344b44669936d60dbd, type: 3}
-    - time: 0.4
-      value: {fileID: 3604549927315904487, guid: 3767d8908dceb874c9de95a2454eeb23, type: 3}
     - time: 0.5
+      value: {fileID: 3604549927315904487, guid: 3767d8908dceb874c9de95a2454eeb23, type: 3}
+    - time: 0.625
       value: {fileID: 9220817655116953058, guid: 26ac5b109d6204e4f972b95d2fb0abd8, type: 3}
-    - time: 0.6
+    - time: 0.75
       value: {fileID: -4964075321577430548, guid: a80c67cfe0ad3bb4196fec10979b4ab1, type: 3}
-    - time: 0.7
+    - time: 0.875
       value: {fileID: -4964075321577430548, guid: a80c67cfe0ad3bb4196fec10979b4ab1, type: 3}
-    - time: 0.8
+    - time: 1
       value: {fileID: -1370911530976567860, guid: 9857de6c03dca8e4384cca73f22e6583, type: 3}
-    - time: 0.9
+    - time: 1.125
       value: {fileID: 4397446114642172498, guid: 1f753163c7d948a4c8bbbe024af5404a, type: 3}
+    - time: 1.25
+      value: {fileID: -8794925151841889587, guid: c0b2d949567c4814db3ffb34b284a66a, type: 3}
+    - time: 1.375
+      value: {fileID: 5777389114641315368, guid: 677ac345aac24814f94c06a67845ddc8, type: 3}
+    - time: 1.5
+      value: {fileID: 140490405473307179, guid: c94101a8471ffe940b912e9802107579, type: 3}
+    - time: 1.625
+      value: {fileID: 6276261735365323200, guid: 7f3e95192ba76fb45a7e3656512ba6b8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 10
+  m_SampleRate: 8
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -72,12 +80,16 @@ AnimationClip:
     - {fileID: -4964075321577430548, guid: a80c67cfe0ad3bb4196fec10979b4ab1, type: 3}
     - {fileID: -1370911530976567860, guid: 9857de6c03dca8e4384cca73f22e6583, type: 3}
     - {fileID: 4397446114642172498, guid: 1f753163c7d948a4c8bbbe024af5404a, type: 3}
+    - {fileID: -8794925151841889587, guid: c0b2d949567c4814db3ffb34b284a66a, type: 3}
+    - {fileID: 5777389114641315368, guid: 677ac345aac24814f94c06a67845ddc8, type: 3}
+    - {fileID: 140490405473307179, guid: c94101a8471ffe940b912e9802107579, type: 3}
+    - {fileID: 6276261735365323200, guid: 7f3e95192ba76fb45a7e3656512ba6b8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 1.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -97,21 +109,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.3
+  - time: 0.25
     functionName: HammerMagicTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
-    functionName: HammerAttackTrigger
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.9
+  - time: 1.625
     functionName: HammerAnimationTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

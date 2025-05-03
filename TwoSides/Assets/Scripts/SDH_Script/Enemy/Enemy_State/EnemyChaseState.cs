@@ -37,7 +37,13 @@ public class EnemyChaseState : EnemyState
             enemyBase.CallIdleState();
             return;
         }
+        float xDistance = Mathf.Abs(player.transform.position.x - enemyBase.transform.position.x);
 
+        if (xDistance < 0.3f)
+        {
+            enemyBase.CallIdleState();
+            return;
+        }
         base.Enter();
     }
 

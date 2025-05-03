@@ -5,7 +5,7 @@ using UnityEngine;
 /// 적의 Slash 공격 이펙트를 처리하는 클래스입니다.
 /// 애니메이션 이벤트를 통해 활성화되며, 플레이어와 충돌 시 처리 로직을 수행합니다.
 /// </summary>
-public class EnemyBossSlash : MonoBehaviour
+public class EnemyBossMeteor : MonoBehaviour
 {
     private EnemyObject attacker;
     private bool isEnabled;
@@ -28,7 +28,6 @@ public class EnemyBossSlash : MonoBehaviour
         scale.x = Mathf.Abs(scale.x) * facingDir;
         transform.localScale = scale;
     }
-
     private void EnableAttack()
     {
         isEnabled = true;
@@ -44,7 +43,7 @@ public class EnemyBossSlash : MonoBehaviour
     // 플레이어와 충돌 시 호출
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && isEnabled)
+        if (collision.CompareTag("Player"))
         {
             // 플레이어에게 데미지 전달
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
