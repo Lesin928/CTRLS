@@ -12,6 +12,7 @@ public class PushableObject : MonoBehaviour
         if (rb != null)
         {
             rb.AddForce(force, ForceMode2D.Impulse); // 밀려나는 힘 적용 
+            Debug.Log("밀림");
         }
     }
 }
