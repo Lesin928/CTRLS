@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 // TODO: (추가할일 적는부분)
@@ -16,18 +17,54 @@ public class PlayerObject : CharacterObject
     protected Rigidbody2D rb;
     public GameObject attackCollider1;
     public GameObject attackCollider2;
-    public bool isCombo = false;
-    public bool isAttack = false;
-    public bool endAttack = false;
     #endregion
 
-    #region Player state
-    [Header("플레이어 스탯")]
-    [SerializeField] public float jumpForce; //추후 스크립터블 오브젝트로 세팅
-    [SerializeField] public float dashForce; //추후 스크립터블 오브젝트로 세팅
+    #region Player Info   
+    [Header("플레이어 정보")]
+    [SerializeField] private float jumpForce; //추후 스크립터블 오브젝트로 세팅
+    [SerializeField] private float dashForce; //추후 스크립터블 오브젝트로 세팅
+    [SerializeField] private float invincibilityDuration; //추후 스크립터블 오브젝트로 세팅
+    [SerializeField] private bool isCombo = false; //콤보 중
+    [SerializeField] private bool isAttack = false; //공격 중
+    [SerializeField] private bool endAttack = false; //공격 종료 
+    [SerializeField] private bool isDashing = false; //대쉬 중
+    [SerializeField] private bool isinvincibility = false; //무적 중
     #endregion
 
     #region Setter & Getter
+    public virtual bool IsInvincibility
+    {
+        get => isinvincibility;
+        set
+        {
+            isinvincibility = value;
+            if (isinvincibility)
+            {
+                StartCoroutine(DisableInvincibility(invincibilityDuration)); // 0.5초 후에 무적 해제
+            }
+        }
+    }
+    public virtual bool IsCombo
+    {
+        get => isCombo;
+        set => isCombo = value;
+    }
+    public virtual bool IsAttack
+    {
+        get => isAttack;
+        set => isAttack = value;
+    }
+    public virtual bool EndAttack
+    {
+        get => endAttack;
+        set => endAttack = value;
+    }
+    public virtual bool IsDashing
+    {
+        get => isDashing;
+        set => isDashing = value;
+    }
+
     public virtual Vector2 MoveInput
     {
         get => moveInput;
@@ -36,7 +73,6 @@ public class PlayerObject : CharacterObject
             moveInput = value;
         }
     }
-
     public virtual float JumpForce
     {
         get => jumpForce;
@@ -45,7 +81,6 @@ public class PlayerObject : CharacterObject
             jumpForce = value; 
         }
     }
-
     public virtual float DashForce
     {
         get => dashForce;
@@ -53,33 +88,23 @@ public class PlayerObject : CharacterObject
         {
             dashForce = value; 
         }
-    }
-    public virtual bool IsDashing
-    {
-        get => isDashing;
-        set => isDashing = value;
-    }
+    } 
     #endregion
 
-    #region Collision
-    [Header("충돌 정보")]
-    //public Transform attackCheck;
-    //public float attackCheckRadius;
-
+    #region Collision Info  
+    [Header("충돌 정보")]  
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] private Vector2 moveInput;
-    [SerializeField] private bool isDashing = false;
     #endregion
-     
+    
     #region 충돌 함수
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-        //Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
     #endregion
       
@@ -103,7 +128,10 @@ public class PlayerObject : CharacterObject
 
     public override void TakeDamage(float damage)     
     {
-        base.TakeDamage(damage);
+        if (isinvincibility) return; //무적 중이면 데미지 무시
+        IsInvincibility = true; //무적 상태로 변경
+        base.TakeDamage(damage);        
+        GetComponentInChildren<HitAnim>().Flash();
     }
 
     protected override void Die()
@@ -111,4 +139,9 @@ public class PlayerObject : CharacterObject
 
     }
 
+    private IEnumerator DisableInvincibility(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        IsInvincibility = false;
+    } 
 }

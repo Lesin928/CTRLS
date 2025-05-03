@@ -13,7 +13,7 @@ public class AttackAnimFlag : MonoBehaviour
         {
             playerObject.attackCollider1.SetActive(false);
         }
-        playerObject.endAttack = true;
+        playerObject.EndAttack = true;
     }
 
     public void SecondAttackFinished()
