@@ -101,9 +101,7 @@ public class PlayerController : MonoBehaviour
     public void OnShift(InputAction.CallbackContext context)
     {
         if (context.phase != InputActionPhase.Performed) return;
-        //Debug.Log("Shift! (Shift 버튼)");
-        Debug.Log("플레이어 복제");
-        GameObject hit = Instantiate(player, transform.position + new Vector3(1f,0,0), Quaternion.identity);
+        Debug.Log("Shift! (Shift 버튼)");        
     }
     public void OnInteract(InputAction.CallbackContext context)
     {

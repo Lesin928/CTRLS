@@ -10,9 +10,8 @@ public class PlayerDontDestroyOnLoad : MonoBehaviour
         
         // 씬 이동 시 중복 방지
         if (p != null && p != this)
-        {
-            Debug.Log("중복 플레이어 감지, Destroy");   
-            //Destroy(gameObject);
+        { 
+            Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
