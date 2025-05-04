@@ -186,6 +186,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         HUDManager.Instance.HideHUD();
+        HideMapController.shouldShowHideMap = false;
         StartCoroutine(GameOverRoutine());
     }
 
@@ -198,6 +199,7 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         HUDManager.Instance.HideHUD();
+        HideMapController.shouldShowHideMap = false;
         StartCoroutine(GameClearRoutine());
     }
 
@@ -332,6 +334,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             SetMaxHealth(-10);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            GameClear();
         }
     }
 }

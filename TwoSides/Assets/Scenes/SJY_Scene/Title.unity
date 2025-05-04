@@ -787,6 +787,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 698671836589726730, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
+      propertyPath: redDotPrefab
+      value: 
+      objectReference: {fileID: 3251062447081164433, guid: 89418119d3678e14898add1cd249ca99, type: 3}
+    - target: {fileID: 698671836589726730, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
+      propertyPath: clearMarkPrefab
+      value: 
+      objectReference: {fileID: 3251062447081164433, guid: 83bf4333ac067234b9a6136043679c64, type: 3}
+    - target: {fileID: 698671836589726730, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
+      propertyPath: previousInteractionState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6547563998224700839, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
       propertyPath: m_Name
       value: MAPCanvas

@@ -7,7 +7,7 @@ public class StartGameButton : MonoBehaviour
     {
         GameManager.Instance.StartNewGame();
 
-
+        HideMapController.shouldShowHideMap = true;
         if (Map.Instance == null)
         {
             Debug.LogWarning("Map instance is null. Cannot reset map.");
