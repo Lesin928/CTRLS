@@ -12,7 +12,7 @@ public class EnemyBossSlashAttackTrigger : EnemyAnimationTrigger
     [SerializeField] private Transform firePoint;    // 공격 발사 위치
     [SerializeField] private Transform handPoint;    // 손 위치
 
-    private void SlashAttackTrigger()
+    public void SlashAttackTrigger()
     {
         // 부모 EnemyObject를 가져옴
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
@@ -28,8 +28,10 @@ public class EnemyBossSlashAttackTrigger : EnemyAnimationTrigger
 
     private void SlashMagicTrigger()
     {
-        // Magic 프리팹을 발사 지점에 생성
-        Instantiate(magicPrefab, handPoint.position, Quaternion.identity);
+        GameObject magic = Instantiate(magicPrefab, handPoint.position, Quaternion.identity);
+
+        EnemyBossSlashMagic magicScript = magic.GetComponent<EnemyBossSlashMagic>();
+        magicScript.SetAttackTrigger(this);
     }
 
     private void SlashAnimationTrigger()

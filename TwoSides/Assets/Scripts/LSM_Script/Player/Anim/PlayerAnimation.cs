@@ -11,9 +11,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     #region Components //PlayerAnimation 스크립트의 인스펙터에 있는 컴포넌트들
     public Animator anim { get; private set; }
-    public Rigidbody2D rb { get; private set; }
-
-    //public EntityFX fx { get; private set; }
+    public Rigidbody2D rb { get; private set; } 
     public SpriteRenderer sr { get; private set; }
     #endregion
 
@@ -55,7 +53,6 @@ public class PlayerAnimation : MonoBehaviour
         airState = new PlayerAirState(this, stateMachine, playerObject, "JumpFall");
         attackState = new PlayerAttackState(this, stateMachine, playerObject, "Attack1");
         comboState = new PlayerComboState(this, stateMachine, playerObject, "Attack2");
-
     }
      
     protected void Start()
@@ -67,7 +64,6 @@ public class PlayerAnimation : MonoBehaviour
     { 
         stateMachine.currentState.Update();  
     }
-
     #region 플립
     public void Flip()
     {
@@ -75,21 +71,17 @@ public class PlayerAnimation : MonoBehaviour
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
     }
-
     public int Getfacing()
     {
         return facingDir;
     }
-
     public void FlipController(float _x)
     {
         if (_x > 0 && !facingRight)
             Flip();
         else if (_x < 0 && facingRight)
             Flip();
-
     }
-
     #endregion
 
 }

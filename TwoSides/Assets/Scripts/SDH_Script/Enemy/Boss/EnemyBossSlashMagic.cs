@@ -7,9 +7,18 @@ using UnityEngine;
 /// </summary>
 public class EnemyBossSlashMagic : MonoBehaviour
 {
+    private EnemyBossSlashAttackTrigger attackTrigger;
+
+    public void SetAttackTrigger(EnemyBossSlashAttackTrigger trigger)
+    {
+        attackTrigger = trigger;
+    }
+
     // 애니메이션 이벤트에서 호출되어 이펙트 오브젝트를 파괴
     private void DestroyTrigger()
     {
+        // 슬래시 공격 트리거 호출
+        attackTrigger.SlashAttackTrigger();
         Destroy(gameObject);
     }
 }

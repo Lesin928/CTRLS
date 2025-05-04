@@ -16,7 +16,7 @@ public class PlayerJumpState : PlayerState
         base.Enter();
         if (Mathf.Abs(rb.linearVelocity.y) < 0.01f)
         {
-            rb.AddForce(Vector2.up * playerObject.jumpForce, ForceMode2D.Impulse); 
+            rb.AddForce(Vector2.up * playerObject.JumpForce, ForceMode2D.Impulse); 
         } 
     } 
     public override void Exit()

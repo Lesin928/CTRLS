@@ -15,8 +15,6 @@ public class PlayerDashState : PlayerState
     {
         base.Enter(); 
     }
-
-
     public override void Update()
     {
         base.Update(); 

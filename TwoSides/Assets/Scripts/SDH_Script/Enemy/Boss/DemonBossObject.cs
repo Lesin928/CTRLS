@@ -12,6 +12,7 @@ public class DemonBossObject : EnemyObject
     public EnemyChaseState chaseState { get; private set; }   // 추격 상태
     public EnemyAttackState attack1State { get; private set; } // 공격 상태
     public EnemyAttackState attack2State { get; private set; } // 공격 상태
+    public EnemyAttackState attack3State { get; private set; } // 공격 상태
     #endregion
 
     protected override void Awake()
@@ -24,6 +25,7 @@ public class DemonBossObject : EnemyObject
         chaseState = new EnemyChaseState(this, stateMachine, "Move");
         attack1State = new EnemyAttackState(this, stateMachine, "Attack1");
         attack2State = new EnemyAttackState(this, stateMachine, "Attack2");
+        attack3State = new EnemyAttackState(this, stateMachine, "Attack3");
     }
 
     protected override void Start()
@@ -63,13 +65,17 @@ public class DemonBossObject : EnemyObject
     {
         float rand = Random.value; // 0.0f ~ 1.0f 사이의 float
 
-        if (rand < 0.7f)
+        if (rand < 0.33f)
         {
-            stateMachine.ChangeState(attack1State); // 70%
+            stateMachine.ChangeState(attack1State); // 33%
+        }
+        else if (rand < 0.66f)
+        {
+            stateMachine.ChangeState(attack2State); // 33%
         }
         else
         {
-            stateMachine.ChangeState(attack2State); // 30%
+            stateMachine.ChangeState(attack3State); // 34%
         }
     }
 

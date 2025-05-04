@@ -17,6 +17,7 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        stateMachine.isAttacking = true;
     }
 
     /// <summary>
@@ -44,5 +45,6 @@ public class EnemyAttackState : EnemyState
 
         // 공격 후 마지막 공격 시간을 갱신
         enemyBase.lastTimeAttacked = Time.time;
+        stateMachine.isAttacking = false;
     }
 }

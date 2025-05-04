@@ -103,7 +103,7 @@ public abstract class CharacterObject : MonoBehaviour
     /// 피격 함수
     /// </summary>
     /// <param name="_damage"> 공격 주체가 주는 최종 데미지 </param> 
-    public virtual void TakeDamage(float _damage) 
+    public virtual void TakeDamage(float _damage)
     {
         //legacy code (현재는 사용하지 않음) 크리티컬 확률을 계산하여 데미지에 반영
         //if (UnityEngine.Random.Range(0f, 1f) < _critical)
@@ -125,5 +125,4 @@ public abstract class CharacterObject : MonoBehaviour
     /// 해당 캐릭터가 죽었을 때 호출되는 함수
     /// </summary>
     protected abstract void Die();
-
 }

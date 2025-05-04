@@ -11,11 +11,12 @@ using System.Collections;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    #region Components //PlayerAnimation 스크립트의 인스펙터에 있는 컴포넌트들
-    protected PlayerStateMachine stateMachine;
-    protected PlayerAnimation playerAnimation;
-    protected PlayerObject playerObject;
+    public GameObject player;
 
+    #region Components
+    private PlayerStateMachine stateMachine;
+    private PlayerAnimation playerAnimation;
+    private PlayerObject playerObject;
     private Rigidbody2D rb;
     #endregion
 
@@ -35,8 +36,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate() //나중에 무브 스테이트로 이동
     {
-        //플레이어가 대쉬중이 아니면 이동
-        if (!playerObject.IsDashing)
+        //대쉬 상태, 공격 상태가 아닐 때만 이동
+        if (!playerObject.IsDashing && !playerObject.IsAttack)
         {
             rb.linearVelocity = new Vector2(playerObject.MoveInput.x * playerObject.MoveSpeed, rb.linearVelocity.y);
 
@@ -47,7 +48,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void Update()
     {
         // 점프 상태에서 상태 전이가 바로 일어나지 않도록 딜레이
@@ -59,14 +59,11 @@ public class PlayerController : MonoBehaviour
             dashCooldownTimer -= Time.deltaTime;
 
         bool shouldCheckGround = groundIgnoreTimer <= 0;
-
-    }
-
+    } 
     public void OnMove(InputAction.CallbackContext context)
     {
         playerObject.MoveInput = context.ReadValue<Vector2>();
-    }
-
+    } 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (playerObject.IsGroundDetected())
@@ -75,11 +72,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("점프");
             playerAnimation.stateMachine.ChangeState(playerAnimation.jumpState);
         }
-    }
-
+    } 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (!playerObject.IsDashing)
+        if (!playerObject.IsDashing && !playerObject.IsAttack)
         {
             playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
             StartCoroutine(Dash());
@@ -91,27 +87,22 @@ public class PlayerController : MonoBehaviour
         if (!playerObject.IsDashing)
         {
             // 만약 공격중이 아닐경우 공격 상태
-            if (!playerObject.isAttack) 
+            if (!playerObject.IsAttack) 
             {
-                Debug.Log("Attack!!!!!!! ");
-                playerObject.isAttack = true;
                 playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
                 StartCoroutine(Attack());
             }
-            else if (playerObject.isAttack)
+            else if (playerObject.IsAttack)
             {
-                Debug.Log("Combo Attack!!!!!!! ");
-                // 만약 공격중일 경우 콤보 실행 (중복방지는 내부에서 수행)
-                //StartCoroutine(Combo()); 
+                StartCoroutine(Combo()); 
             } 
         }
     }
-
     public void OnShift(InputAction.CallbackContext context)
     {
-        Debug.Log("Shift! (Shift 버튼)");
+        if (context.phase != InputActionPhase.Performed) return;
+        Debug.Log("Shift! (Shift 버튼)");        
     }
-
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (GameManager.Instance.isClear)
@@ -133,26 +124,22 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Attack()
     {
         yield return new WaitForSeconds(0.7f); // 콤보 2까지의 딜레이 시간
-        if (!playerObject.isCombo)
+        if (!playerObject.IsCombo)
         {
             //시간 내에 콤보가 수행되지 않으면 공격 종료
-            playerObject.isAttack = false;
+            playerObject.IsAttack = false;
         }        
     }
-
     private IEnumerator Combo()
     {
         // 만약 콤보공격이 수행되고 있는 경우 탈출
-        if (playerObject.isCombo)
+        if (playerObject.IsCombo)
         {
             yield break;
-        } 
-        playerObject.isCombo = true;
-        //이 스테이트 변경을... attack 애니메이션이 끝나고 진행해야 할텐디... 
-        playerAnimation.stateMachine.ChangeState(playerAnimation.comboState);
-        yield return new WaitForSeconds(1f); // 다음 공격까지의 딜레이 시간, 추후 플레이어 속성에 추가, 애니메이션 실행 시간보다 낮아질 수 없음  
-        playerObject.isAttack = false;
-        playerObject.isCombo = false;
+        }
+        playerObject.IsCombo = true; 
+        yield return new WaitForSeconds(0.5f);// 다음 공격까지의 딜레이 시간, 추후 플레이어 속성에 추가, 애니메이션 실행 시간보다 낮아질 수 없음  
+        playerObject.IsAttack = false;
+        playerObject.IsCombo = false;
     }
 }
-    

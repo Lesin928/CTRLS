@@ -8,6 +8,7 @@ using UnityEngine;
 public class EnemyBossSlash : MonoBehaviour
 {
     private EnemyObject attacker;
+    private bool isEnabled;
 
     /// <summary>
     /// 공격을 발사한 EnemyObject를 가져오는 함수입니다.
@@ -28,10 +29,22 @@ public class EnemyBossSlash : MonoBehaviour
         transform.localScale = scale;
     }
 
+    private void EnableAttack()
+    {
+        isEnabled = true;
+        Debug.Log(isEnabled);
+    }
+
+    private void DisableAttack()
+    {
+        isEnabled = false;
+        Debug.Log(isEnabled);
+    }
+
     // 플레이어와 충돌 시 호출
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && isEnabled)
         {
             // 플레이어에게 데미지 전달
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
