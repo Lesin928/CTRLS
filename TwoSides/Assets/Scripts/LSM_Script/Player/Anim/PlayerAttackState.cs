@@ -18,7 +18,10 @@ public class PlayerAttackState : PlayerState
         base.Enter();        
         playerObject.attackCollider1.SetActive(true); //데미지 판정
         playerObject.IsAttack = true;
-        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); //미끄러짐 방지
+        if (playerObject.IsGroundDetected())
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); //미끄러짐 방지
+        }        
         if (playerObject.MoveInput.x != 0) //공격 중 이동
         {
             playerObject.transform.position += new Vector3(playerAnimation.Getfacing() * 1f, 0f, 0f);
@@ -55,9 +58,6 @@ public class PlayerAttackState : PlayerState
     public override void Exit()
     {
         base.Exit();
-    }
-
-
-
-
+        playerObject.attackCollider1.SetActive(false); //데미지 판정
+    } 
 }

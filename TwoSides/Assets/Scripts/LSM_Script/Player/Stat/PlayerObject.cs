@@ -23,7 +23,7 @@ public class PlayerObject : CharacterObject
     [Header("플레이어 정보")]
     [SerializeField] private float jumpForce; //추후 스크립터블 오브젝트로 세팅
     [SerializeField] private float dashForce; //추후 스크립터블 오브젝트로 세팅
-    [SerializeField] private float invincibilityDuration; //추후 스크립터블 오브젝트로 세팅
+    [SerializeField] private float invincibilityDuration = 0.5f; //추후 스크립터블 오브젝트로 세팅
     [SerializeField] private bool isCombo = false; //콤보 중
     [SerializeField] private bool isAttack = false; //공격 중
     [SerializeField] private bool isDashing = false; //대쉬 중
