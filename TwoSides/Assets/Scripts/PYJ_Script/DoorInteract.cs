@@ -2,36 +2,53 @@ using UnityEngine;
 
 public class DoorInteract : Interactive
 {
-    private bool isOpen = false;
+    private Collider2D doorCollider;
 
     private void Start()
     {
-        if (!DoorManager.Instance.IsGameCleared)
+        doorCollider = GetComponent<Collider2D>();
+        if (doorCollider == null)
         {
-            GetComponent<Collider>().enabled = false; // 상호작용 막기
+            Debug.LogError("Collider2D 컴포넌트가 없습니다!");
+        }
+
+        doorCollider.enabled = false; // 시작 시 콜라이더 비활성화
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager 인스턴스가 null입니다!");
+            return;
+        }
+
+        if (doorCollider == null)
+        {
+            Debug.LogError("doorCollider가 null입니다!");
+            return;
+        }
+
+        if (GameManager.Instance.isClear && !doorCollider.enabled)
+        {
+            doorCollider.enabled = true;
+            Debug.Log("클리어 상태 감지됨 → 문 콜라이더 활성화");
         }
     }
 
-    public void EnableInteraction()
-    {
-        GetComponent<Collider>().enabled = true;
-    }
 
     public override void PressF()
     {
-        if (!DoorManager.Instance.IsGameCleared)
-        {
-            Debug.Log("게임을 클리어해야 문을 열 수 있습니다.");
-            return;
-        }
+        // GameManager.Instance.isClear 값 확인
+        Debug.Log("PressF 호출 시 isClear 값: " + GameManager.Instance.isClear);
 
-        if (isOpen)
+        if (GameManager.Instance.isClear)
         {
-            Debug.Log("문은 이미 열려 있습니다.");
-            return;
+            Debug.Log("문 개방! 다음 맵으로 이동합니다.");
         }
-
-        Debug.Log("문이 열립니다.");
-        isOpen = true;
+        else
+        {
+            Debug.Log("몬스터가 아직 남았다...");
+        }
     }
 }
