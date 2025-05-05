@@ -335,9 +335,9 @@ public class GameManager : MonoBehaviour
         {
             SetMaxHealth(-10);
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        /*if (Input.GetKeyDown(KeyCode.A))
         {
             GameClear();
-        }
+        }*/
     }
 }
