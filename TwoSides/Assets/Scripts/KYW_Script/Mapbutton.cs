@@ -7,10 +7,19 @@ public class Mapbutton : MonoBehaviour
 {
     public GameObject map;
     public float animationDuration = 0.3f;
-
+    public static Mapbutton Instance;
     private bool isVisible = false;
     private Coroutine animationCoroutine;
     public Button aButton; // 인스펙터에서 연결
+    public bool clearOn = true;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            return;
+        }
+        Instance = this;
+    }
     private void Start()
     {
         if (map == null) return;
@@ -28,13 +37,14 @@ public class Mapbutton : MonoBehaviour
     {
         GameClearAutoButton();
     }
-
+    
     private void GameClearAutoButton()
     {
         //조건이 만족되면 A 버튼 클릭
-        if (GameManager.Instance.isClear)
+        if (GameManager.Instance.isClear &&  clearOn && !map.activeSelf)
         {
             aButton.onClick.Invoke(); //코드에서 클릭 실행
+            clearOn = false;
         }
     }
 
