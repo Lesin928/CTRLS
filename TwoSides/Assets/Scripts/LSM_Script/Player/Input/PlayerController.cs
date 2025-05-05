@@ -59,11 +59,11 @@ public class PlayerController : MonoBehaviour
             dashCooldownTimer -= Time.deltaTime;
 
         bool shouldCheckGround = groundIgnoreTimer <= 0;
-    } 
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         playerObject.MoveInput = context.ReadValue<Vector2>();
-    } 
+    }
     public void OnJump(InputAction.CallbackContext context)
     {
         if (playerObject.IsGroundDetected())
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("점프");
             playerAnimation.stateMachine.ChangeState(playerAnimation.jumpState);
         }
-    } 
+    }
     public void OnDash(InputAction.CallbackContext context)
     {
         if (!playerObject.IsDashing && !playerObject.IsAttack)
@@ -82,31 +82,40 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void OnAttack(InputAction.CallbackContext context)
-    { 
-        if (context.phase != InputActionPhase.Performed) return; 
+    {
+        if (context.phase != InputActionPhase.Performed) return;
         if (!playerObject.IsDashing)
         {
             // 만약 공격중이 아닐경우 공격 상태
-            if (!playerObject.IsAttack) 
+            if (!playerObject.IsAttack)
             {
                 playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
                 StartCoroutine(Attack());
             }
             else if (playerObject.IsAttack)
             {
-                StartCoroutine(Combo()); 
-            } 
+                StartCoroutine(Combo());
+            }
         }
     }
     public void OnShift(InputAction.CallbackContext context)
     {
-        if (context.phase != InputActionPhase.Performed) return;
-        Debug.Log("Shift! (Shift 버튼)");        
+        Debug.Log("Shift! (Shift 버튼)");
+
+
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.isClear)
-            Debug.Log("Interact! (F 버튼)");
+        if (context.phase != InputActionPhase.Performed) return;        
+        //만약 플레이어의 콜라이더가 Interactive를 상속한 오브젝트와 접해있을 경우
+        if(playerObject.IObject != null)
+        {
+            playerObject.IObject.GetComponent<Interactive>().PressF();
+        }
+        else
+        {
+            Debug.Log("Interact! (F 버튼) - 대상 없음");
+        }
     }
     private IEnumerator Dash()
     {
@@ -128,7 +137,7 @@ public class PlayerController : MonoBehaviour
         {
             //시간 내에 콤보가 수행되지 않으면 공격 종료
             playerObject.IsAttack = false;
-        }        
+        }
     }
     private IEnumerator Combo()
     {
@@ -137,9 +146,9 @@ public class PlayerController : MonoBehaviour
         {
             yield break;
         }
-        playerObject.IsCombo = true; 
+        playerObject.IsCombo = true;
         yield return new WaitForSeconds(0.5f);// 다음 공격까지의 딜레이 시간, 추후 플레이어 속성에 추가, 애니메이션 실행 시간보다 낮아질 수 없음  
         playerObject.IsAttack = false;
         playerObject.IsCombo = false;
-    }
+    } 
 }

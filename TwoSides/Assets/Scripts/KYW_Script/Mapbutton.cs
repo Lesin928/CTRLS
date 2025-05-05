@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Mapbutton : MonoBehaviour
 {
     public GameObject map;
     public float animationDuration = 0.3f;
-
+    public static Mapbutton Instance;
     private bool isVisible = false;
     private Coroutine animationCoroutine;
-
+    public Button aButton; // 인스펙터에서 연결
+    public bool clearOn = true;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            return;
+        }
+        Instance = this;
+    }
     private void Start()
     {
         if (map == null) return;
@@ -19,6 +29,23 @@ public class Mapbutton : MonoBehaviour
 
         RectTransform rect = map.GetComponent<RectTransform>();
         rect.localScale = isVisible ? Vector3.one : new Vector3(0f, 1f, 1f);
+
+    }
+    
+
+    void Update()
+    {
+        GameClearAutoButton();
+    }
+    
+    private void GameClearAutoButton()
+    {
+        //조건이 만족되면 A 버튼 클릭
+        if (GameManager.Instance.isClear &&  clearOn && !map.activeSelf)
+        {
+            aButton.onClick.Invoke(); //코드에서 클릭 실행
+            clearOn = false;
+        }
     }
 
     public void mapsetting()
