@@ -25,7 +25,6 @@ public class EnemyAttackState : EnemyState
     /// </summary>
     public override void Update()
     {
-        Debug.Log("Attack");
         base.Update();
 
         // 공격 중에는 속도를 0으로 설정하여 멈춤 상태 유지

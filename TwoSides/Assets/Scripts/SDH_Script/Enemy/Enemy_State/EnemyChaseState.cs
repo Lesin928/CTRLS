@@ -1,6 +1,4 @@
-//using UnityEditor.Tilemaps;
 using UnityEngine;
-//using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
 /// 적의 추격 상태를 담당하는 클래스
@@ -39,11 +37,6 @@ public class EnemyChaseState : EnemyState
         }
         float xDistance = Mathf.Abs(player.transform.position.x - enemyBase.transform.position.x);
 
-        if (xDistance < 0.3f)
-        {
-            enemyBase.CallIdleState();
-            return;
-        }
         base.Enter();
     }
 
@@ -52,7 +45,6 @@ public class EnemyChaseState : EnemyState
     /// </summary>
     public override void Update()
     {
-        Debug.Log("Chase");
         base.Update();
 
         float distance = Vector2.Distance(enemyBase.transform.position, player.position);
@@ -88,7 +80,8 @@ public class EnemyChaseState : EnemyState
                     int dir = xDiff > 0 ? 1 : -1;
 
                     // 방향 다르면 전환
-                    if (dir != enemyBase.facingDir)
+                    // X축 거리 차이가 Enemy의 collider의 x 크기 이상일 때만 이동
+                    if (dir != enemyBase.facingDir && Mathf.Abs(xDiff) > enemyBase.colliderWidth)
                         enemyBase.Flip();
 
                     enemyBase.CallAttackState();
@@ -102,8 +95,8 @@ public class EnemyChaseState : EnemyState
             return;
         }
 
-        // X축 거리 차이가 0.05 이상일 때만 이동
-        if (Mathf.Abs(xDiff) > 0.05f)
+        // X축 거리 차이가 Enemy의 collider의 x 크기 이상일 때만 이동
+        if (Mathf.Abs(xDiff) > enemyBase.colliderWidth)
         {
             int moveDir = xDiff > 0 ? 1 : -1; // 이동 방향
             enemyBase.SetVelocity(enemyBase.MoveSpeed * moveDir, rb.linearVelocityY);

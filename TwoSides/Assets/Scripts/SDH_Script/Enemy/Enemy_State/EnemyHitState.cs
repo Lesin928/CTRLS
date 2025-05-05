@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 적의 피격 상태 클래스
+/// </summary>
 public class EnemyHitState : EnemyState
 {
     public EnemyHitState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
@@ -23,8 +26,6 @@ public class EnemyHitState : EnemyState
     /// </summary>
     public override void Update()
     {
-        Debug.Log("Hit");
-
         base.Update();
 
         if (triggerCalled)

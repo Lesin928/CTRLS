@@ -25,7 +25,6 @@ public class EnemyPatrolState : EnemyState
     public override void Update()
     {
         base.Update();
-        Debug.Log("Patrol");
 
         // 현재 바라보는 방향으로 이동
         enemyBase.SetVelocity(enemyBase.MoveSpeed * enemyBase.facingDir, rb.linearVelocityY);

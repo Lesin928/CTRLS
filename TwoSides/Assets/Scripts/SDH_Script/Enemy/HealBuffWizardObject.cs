@@ -42,9 +42,9 @@ public class HealBuffWizardObject : EnemyObject
         stateMachine.ChangeState(supportState);
     }
 
+    // 지원 범위를 시각화
     protected override void OnDrawGizmos()
     {
-        // 지원 범위를 시각화
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, supportRange);
     }

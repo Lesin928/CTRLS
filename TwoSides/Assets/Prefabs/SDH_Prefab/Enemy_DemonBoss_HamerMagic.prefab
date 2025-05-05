@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7196206060474143869}
   - component: {fileID: 1193846048825219367}
   - component: {fileID: 7749829879784910023}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy_DemonBoss_HamerMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
