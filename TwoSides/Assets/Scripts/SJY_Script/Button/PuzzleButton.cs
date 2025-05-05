@@ -14,6 +14,8 @@ public class PuzzleButton : MonoBehaviour
         int rand = Random.Range(0, 3);  // range ¹Ù²Ù±â
         sceneName += rand.ToString();
         map.SetActive(false);
+        GameManager.Instance.isClear = false;
+        Mapbutton.Instance.clearOn = true;
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

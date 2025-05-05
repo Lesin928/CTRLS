@@ -8,7 +8,7 @@ public class TitleButton : MonoBehaviour
 
         HUDManager.Instance.InitHUD();
         HUDManager.Instance.HideHUD();
-
+        HideMapController.shouldShowHideMap = false;
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.ChangeBGM("TitleBGM");

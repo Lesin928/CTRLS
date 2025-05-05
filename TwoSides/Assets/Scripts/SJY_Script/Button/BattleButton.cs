@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BattleButton : MonoBehaviour
 {
+    public static GameManager Instance;
     public GameObject map; // 연결 안 해도 됨
-
     private void Awake()
     {
         if (map == null)
@@ -14,6 +14,8 @@ public class BattleButton : MonoBehaviour
         string sceneName = "Battle";
         int rand = Random.Range(0, 10);
         sceneName += rand.ToString();
+        GameManager.Instance.isClear = false;
+        Mapbutton.Instance.clearOn = true;
         map.SetActive(false);
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
