@@ -14,7 +14,8 @@ public class PlayerObject : CharacterObject
     protected PlayerStateMachine stateMachine;
     protected PlayerAnimation playerAnimation;
     protected PlayerObject playerObject;
-    protected Rigidbody2D rb;
+    protected GameObject iObject;
+    protected Rigidbody2D rb;    
     public GameObject attackCollider1;
     public GameObject attackCollider2; 
     #endregion
@@ -32,6 +33,11 @@ public class PlayerObject : CharacterObject
     #endregion
 
     #region Setter & Getter
+    public virtual GameObject IObject
+    {
+        get => iObject;
+        set => iObject = value;
+    }
     public virtual bool IsInvincibility
     {
         get => isinvincibility;
@@ -143,5 +149,21 @@ public class PlayerObject : CharacterObject
     {
         yield return new WaitForSeconds(delay);
         IsInvincibility = false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interactive"))
+        {
+            //대상 게임 오브젝트가 Interactive 태그를 가지고 있을 경우, 저장
+            IObject = collision.gameObject;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interactive"))
+        {
+            //대상 게임 오브젝트가 Interactive 태그를 가지고 있을 경우, 해제
+            IObject = null;
+        }
     } 
 }
