@@ -14,7 +14,8 @@ public class PlayerObject : CharacterObject
     protected PlayerStateMachine stateMachine;
     protected PlayerAnimation playerAnimation;
     protected PlayerObject playerObject;
-    protected Rigidbody2D rb;
+    protected GameObject iObject;
+    protected Rigidbody2D rb;    
     public GameObject attackCollider1;
     public GameObject attackCollider2; 
     #endregion
@@ -23,7 +24,7 @@ public class PlayerObject : CharacterObject
     [Header("플레이어 정보")]
     [SerializeField] private float jumpForce; //추후 스크립터블 오브젝트로 세팅
     [SerializeField] private float dashForce; //추후 스크립터블 오브젝트로 세팅
-    [SerializeField] private float invincibilityDuration; //추후 스크립터블 오브젝트로 세팅
+    [SerializeField] private float invincibilityDuration = 0.5f; //추후 스크립터블 오브젝트로 세팅
     [SerializeField] private bool isCombo = false; //콤보 중
     [SerializeField] private bool isAttack = false; //공격 중
     [SerializeField] private bool isDashing = false; //대쉬 중
@@ -32,6 +33,11 @@ public class PlayerObject : CharacterObject
     #endregion
 
     #region Setter & Getter
+    public virtual GameObject IObject
+    {
+        get => iObject;
+        set => iObject = value;
+    }
     public virtual bool IsInvincibility
     {
         get => isinvincibility;
@@ -143,5 +149,21 @@ public class PlayerObject : CharacterObject
     {
         yield return new WaitForSeconds(delay);
         IsInvincibility = false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interactive"))
+        {
+            //대상 게임 오브젝트가 Interactive 태그를 가지고 있을 경우, 저장
+            IObject = collision.gameObject;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interactive"))
+        {
+            //대상 게임 오브젝트가 Interactive 태그를 가지고 있을 경우, 해제
+            IObject = null;
+        }
     } 
 }

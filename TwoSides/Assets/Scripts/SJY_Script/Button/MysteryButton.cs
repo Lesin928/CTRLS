@@ -14,6 +14,8 @@ public class MysteryButton : MonoBehaviour
         int rand = Random.Range(0, 10);  // range ¹Ù²Ù±â
         sceneName += rand.ToString();
         map.SetActive(false);
+        GameManager.Instance.isClear = false;
+        Mapbutton.Instance.clearOn = true;
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

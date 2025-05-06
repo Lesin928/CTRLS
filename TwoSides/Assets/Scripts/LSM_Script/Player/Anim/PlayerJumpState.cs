@@ -13,6 +13,7 @@ public class PlayerJumpState : PlayerState
         : base(_playerAnim, _stateMachine, _playerObject, _animBoolName) { }
     public override void Enter()
     {
+        playerObject.IsAttack = false;
         base.Enter();
         if (Mathf.Abs(rb.linearVelocity.y) < 0.01f)
         {

@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerAnimation : MonoBehaviour
 {
-    #region Components //PlayerAnimation 스크립트의 인스펙터에 있는 컴포넌트들
+    #region Components  
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; } 
     public SpriteRenderer sr { get; private set; }
