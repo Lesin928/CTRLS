@@ -21,5 +21,27 @@ public class SkillAnimFlag : MonoBehaviour
     public void SkillkFinished()
     { 
         playerObject.IsSkill = false;
+    }
+
+    /// <summary>
+    /// 스킬이 내려찍을 때 수행되는 매서드
+    /// </summary>
+    public void Strike()
+    { 
+        if (playerObject.skillCollider.activeSelf)
+        {
+            playerObject.skillCollider.SetActive(true);
+        }
     } 
+    /// <summary>
+    /// 내려찍기가 끝날 때 수행되는 메서드
+    /// </summary>
+    public void StrikeFinished()
+    {
+        if (playerObject.skillCollider.activeSelf)
+        {
+            playerObject.skillCollider.SetActive(false);
+        }
+
+    }
 }

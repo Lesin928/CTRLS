@@ -42,6 +42,7 @@ public class PlayerSkillState : PlayerState
     } 
     public override void Exit()
     {
+        playerObject.IsSkill = false;
         base.Exit();
     }
 

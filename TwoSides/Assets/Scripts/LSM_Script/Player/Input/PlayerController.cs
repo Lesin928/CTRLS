@@ -59,12 +59,24 @@ public class PlayerController : MonoBehaviour
         if (dashCooldownTimer > 0)
             dashCooldownTimer -= Time.deltaTime;
 
+        // 스킬 쿨타임이 끝나지 않았으면 쿨타임 감소
+        if (skillCooldownTimer > 0)
+            skillCooldownTimer -= Time.deltaTime;
+
         bool shouldCheckGround = groundIgnoreTimer <= 0;
     }
+
+    /// <summary>
+    /// 키보드 좌우 방향키 입력을 처리하는 메서드
+    /// </summary>
     public void OnMove(InputAction.CallbackContext context)
     {
         playerObject.MoveInput = context.ReadValue<Vector2>();
     }
+
+    /// <summary>
+    /// 키보드 C 입력을 처리하는 메서드
+    /// </summary>
     public void OnJump(InputAction.CallbackContext context)
     {
         if (playerObject.IsGroundDetected())
@@ -74,6 +86,10 @@ public class PlayerController : MonoBehaviour
             playerAnimation.stateMachine.ChangeState(playerAnimation.jumpState);
         }
     }
+
+    /// <summary>
+    /// 키보드 Space 입력을 처리하는 메서드
+    /// </summary>
     public void OnDash(InputAction.CallbackContext context)
     {
         if (!playerObject.IsDashing && !playerObject.IsAttack)
@@ -82,6 +98,10 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
     }
+
+    /// <summary>
+    /// 키보드 C 입력을 처리하는 메서드
+    /// </summary>
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.phase != InputActionPhase.Performed) return;
@@ -118,16 +138,13 @@ public class PlayerController : MonoBehaviour
     }    
     public void OnSkill(InputAction.CallbackContext context)
     {
-        //if (context.phase != InputActionPhase.Performed) return;
-        Debug.Log("Skill! (Z 버튼)");
-        if (!playerObject.IsDashing)
-        {
-            // 만약 스킬중이 아닐경우 스킬상태
-            if (!playerObject.IsSkill)
-            {
-                playerAnimation.stateMachine.ChangeState(playerAnimation.skillState);
-            }
-        }
+        //프레스 입력인지 확인
+        if (context.phase != InputActionPhase.Performed) return;        
+        if (dashCooldownTimer > 0) return; // 쿨타임 남아있으면 리턴
+        if (playerObject.IsDashing) return; // 대쉬중이면 리턴
+        if (playerObject.IsSkill) return; // 스킬 사용중이면 리턴
+        // 만약 스킬중이 아닐경우 스킬상태
+        playerAnimation.stateMachine.ChangeState(playerAnimation.skillState);
     }
     private IEnumerator Dash()
     {

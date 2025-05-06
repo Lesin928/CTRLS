@@ -17,7 +17,8 @@ public class PlayerObject : CharacterObject
     protected GameObject iObject;
     protected Rigidbody2D rb;    
     public GameObject attackCollider1;
-    public GameObject attackCollider2; 
+    public GameObject attackCollider2;
+    public GameObject skillCollider;
     #endregion
 
     #region Player Info   
