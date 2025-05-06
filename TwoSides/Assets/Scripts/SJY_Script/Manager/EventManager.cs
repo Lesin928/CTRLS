@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
 {
+    public static EventManager Instance { get; private set; }
+
     public GameObject EventPanel;
     public Text EventText;
     public Button EventButton1;
@@ -15,8 +17,19 @@ public class EventManager : MonoBehaviour
 
     public int fixedEventId = -1;
     private int id;
-    private bool isEventFinished;
+    public bool isEventFinished;
     private int scriptIndex;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -29,20 +42,33 @@ public class EventManager : MonoBehaviour
         isEventFinished = false;
     }
 
-    private void Update()
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
+    //    {
+    //        StartEvent();
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
+    //    {
+    //        ExitEvent();
+    //    }
+    //}
+
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
+        if (Instance == this)
         {
-            Event(id);
-            EventPanel.SetActive(true);
-        }
-        else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
-        {
-            ExitEvent();
+            Instance = null;
         }
     }
 
-    private void ExitEvent()
+    public void StartEvent()
+    {
+        Event(id);
+        EventPanel.SetActive(true);
+    }
+
+    public void ExitEvent()
     {
         Debug.Log("이벤트 종료");
         EventPanel.SetActive(false);
@@ -96,9 +122,9 @@ public class EventManager : MonoBehaviour
         EventButton1.gameObject.SetActive(false);
         EventButton2.gameObject.SetActive(false);
 
-        EventScriptManager.Instance.EventResultUpdate(id, 1);
+        string resaultText = EventScriptManager.Instance.EventResultUpdate(id, 1);
 
-        EventText.text = "1번을 선택하셨습니다";
+        EventText.text = resaultText;
     }
 
     private void OnClickButton2()
@@ -108,8 +134,8 @@ public class EventManager : MonoBehaviour
         EventButton1.gameObject.SetActive(false);
         EventButton2.gameObject.SetActive(false);
 
-        EventScriptManager.Instance.EventResultUpdate(id, 2);
+        string resaultText = EventScriptManager.Instance.EventResultUpdate(id, 2);
 
-        EventText.text = "2번을 선택하셨습니다";
+        EventText.text = resaultText;
     }
 }

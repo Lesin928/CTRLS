@@ -11,7 +11,7 @@ public class MysteryButton : MonoBehaviour
     public void Onclick()
     {
         string sceneName = "Mystery";
-        int rand = Random.Range(0, 10);  // range 바꾸기
+        int rand = Random.Range(0, 1);  // range 바꾸기
         sceneName += rand.ToString();
         map.SetActive(false);
         GameManager.Instance.isClear = false;
