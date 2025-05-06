@@ -49,13 +49,26 @@ public class EnemyEarthBump : MonoBehaviour
     // 플레이어와 충돌 시 호출
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // 플레이어와 충돌했을 경우
         if (collision.CompareTag("Player"))
         {
-            // 플레이어에게 데미지 전달
-            collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
+            var player = collision.GetComponent<PlayerObject>();
+            if (player != null)
+            {
+                player.TakeDamage(attacker.Attack);
+
+                var rb = collision.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    Vector2 knockbackDir = Vector2.up;
+
+                    float knockbackPower = 20f;
+
+                    rb.linearVelocity = knockbackDir * knockbackPower;
+                }
+            }
         }
     }
+
 
     // 애니메이션 이벤트에서 호출되어 오브젝트를 삭제함
     private void DestroyTrigger()

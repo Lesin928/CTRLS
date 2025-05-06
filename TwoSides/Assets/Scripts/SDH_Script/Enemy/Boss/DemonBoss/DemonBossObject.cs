@@ -55,7 +55,6 @@ public class DemonBossObject : EnemyObject
 
     protected override void Update()
     {
-        Debug.Log(Mathf.Abs(transform.position.x - PlayerManager.instance.player.transform.position.x));
         base.Update();
     }
 
@@ -96,46 +95,28 @@ public class DemonBossObject : EnemyObject
         float distanceX = Mathf.Abs(transform.position.x - PlayerManager.instance.player.transform.position.x);
         float rand = Random.value; // 0.0f ~ 1.0f ªÁ¿Ã¿« float
 
-        stateMachine.ChangeState(attack6State);
-
-        /*
         if (closeRangeDetected())
             stateMachine.ChangeState(attack4State);
         else if(midRangeDetected())
         {
             if (rand < 0.20f)
-            {
                 stateMachine.ChangeState(attack1State);
-            }
             else if (rand < 0.40f)
-            {
                 stateMachine.ChangeState(attack2State);
-            }
             else if (rand < 0.60f)
-            {
                 stateMachine.ChangeState(attack3State);
-            }
             else if (rand < 0.80f)
-            {
                 stateMachine.ChangeState(attack5State);
-            }
             else
-            {
                 stateMachine.ChangeState(attack6State);
-            }
         }
         else if (longRangeDetected())
         {
             if (rand < 0.5f)
-            {
                 stateMachine.ChangeState(attack2State);
-            }
             else
-            {
                 stateMachine.ChangeState(attack5State);
-            }
         }
-        */
     }
 
     /// <summary>

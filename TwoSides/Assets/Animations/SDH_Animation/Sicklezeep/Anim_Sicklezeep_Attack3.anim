@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Anim_FlyingWizard_Dead
+  m_Name: Anim_Sicklezeep_Attack3
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,23 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1468123747512870243, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
+      value: {fileID: 3497257870353944077, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
     - time: 0.125
-      value: {fileID: 5532836258712456462, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
+      value: {fileID: 3169604456136925415, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
     - time: 0.25
-      value: {fileID: 1471012554362657987, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
+      value: {fileID: 5275629633912481110, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
     - time: 0.375
-      value: {fileID: -5630107698284359285, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - time: 0.5
-      value: {fileID: -6871159906884924370, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - time: 0.625
-      value: {fileID: 3683523671445925190, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - time: 0.75
-      value: {fileID: 4411263150289198911, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - time: 0.875
-      value: {fileID: 3018418318639465562, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - time: 1
-      value: {fileID: 9001105823508036209, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
+      value: {fileID: 9128720003803641419, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -60,21 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1468123747512870243, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: 5532836258712456462, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: 1471012554362657987, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: -5630107698284359285, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: -6871159906884924370, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: 3683523671445925190, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: 4411263150289198911, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: 3018418318639465562, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
-    - {fileID: 9001105823508036209, guid: c16aa9a9055d0b041b6d542397a96b49, type: 3}
+    - {fileID: 3497257870353944077, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
+    - {fileID: 3169604456136925415, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
+    - {fileID: 5275629633912481110, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
+    - {fileID: 9128720003803641419, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.125
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -94,7 +79,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1
+  - time: 0.125
+    functionName: MeleeAttackTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.375
     functionName: AnimationTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
