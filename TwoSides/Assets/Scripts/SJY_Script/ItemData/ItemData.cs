@@ -12,11 +12,14 @@ public enum StatType
     Critical,
     CriticalDamage
 }
-
-[CreateAssetMenu(fileName = "NewItem", menuName = "Item/ItemData")]
-public class ItemData : ScriptableObject
+public class ItemData
 {
     public StatType statType;
     public float value;
-    public Sprite icon;
+
+    public ItemData(StatType statType, float value)
+    {
+        this.statType = statType;
+        this.value = value;
+    }
 }

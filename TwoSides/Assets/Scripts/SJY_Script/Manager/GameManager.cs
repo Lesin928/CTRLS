@@ -106,7 +106,8 @@ public class GameManager : MonoBehaviour
         else
             Debug.Log($"[GameManager] {sceneName} 스테이지 데이터 초기화 완료 - 몬스터 수: {currentStageData.monsterCount}");
 
-        if (currentStageData.stageName.Contains("Puzzle")
+        if (currentStageData.stageName.Contains("Mystery")
+            || currentStageData.stageName.Contains("Puzzle")
             || currentStageData.stageName.Contains("Store"))
         {
             OnStageClear();
