@@ -33277,7 +33277,7 @@ GameObject:
   - component: {fileID: 629176288}
   m_Layer: 0
   m_Name: Skull 0021_0
-  m_TagString: Untagged
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
