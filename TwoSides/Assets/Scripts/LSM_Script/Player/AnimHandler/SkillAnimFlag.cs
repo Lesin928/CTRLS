@@ -13,26 +13,18 @@ public class SkillAnimFlag : MonoBehaviour
     private void Awake()
     {
         playerObject = GetComponentInParent<PlayerObject>();
-    }
-    /// <summary>
-    /// 스킬 사용이 끝나면 메시지를 전달하는 메서드
-    /// 무조건 애니메이션 이벤트로 사용하여야 함.
-    /// </summary>
-    public void SkillkFinished()
-    { 
-        playerObject.IsSkill = false;
-    }
-
+    } 
     /// <summary>
     /// 스킬이 내려찍을 때 수행되는 매서드
     /// </summary>
     public void Strike()
     { 
-        if (playerObject.skillCollider.activeSelf)
+        if (!playerObject.skillCollider.activeSelf)
         {
             playerObject.skillCollider.SetActive(true);
         }
     } 
+
     /// <summary>
     /// 내려찍기가 끝날 때 수행되는 메서드
     /// </summary>
@@ -42,6 +34,7 @@ public class SkillAnimFlag : MonoBehaviour
         {
             playerObject.skillCollider.SetActive(false);
         }
+        playerObject.IsSkill = false;
 
     }
 }

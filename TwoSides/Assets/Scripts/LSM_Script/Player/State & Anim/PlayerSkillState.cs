@@ -45,5 +45,4 @@ public class PlayerSkillState : PlayerState
         playerObject.IsSkill = false;
         base.Exit();
     }
-
 }

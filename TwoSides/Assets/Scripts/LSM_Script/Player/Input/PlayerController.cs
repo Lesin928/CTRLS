@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
 
     private float dashCooldownTimer = 0f;
     private float dashCooldownDuration = 1f; // 쿨타임 시간
-    private float skillCooldownTimer = 3f; // 스킬 쿨타임 시간    
+
+    private float skillCooldownTimer = 0f; // 스킬 쿨타임 시간    
+    private float skillCooldownDuration = 3f; // 스킬 쿨타임 시간    
     #endregion 
 
     private void Awake()
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate() //나중에 무브 스테이트로 이동
     {
         //대쉬 상태, 공격 상태가 아닐 때만 이동
-        if (!playerObject.IsDashing && !playerObject.IsAttack)
+        if (!playerObject.IsDashing && !playerObject.IsAttack && !playerObject.IsSkill)
         {
             rb.linearVelocity = new Vector2(playerObject.MoveInput.x * playerObject.MoveSpeed, rb.linearVelocity.y);
 
@@ -79,7 +81,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (playerObject.IsGroundDetected())
+        if (playerObject.IsGroundDetected() && !playerObject.IsSkill)
         {
             groundIgnoreTimer = groundIgnoreDuration;
             Debug.Log("점프");
@@ -105,24 +107,30 @@ public class PlayerController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.phase != InputActionPhase.Performed) return;
-        if (!playerObject.IsDashing)
+        if (playerObject.IsDashing) return;
+        if (playerObject.IsSkill) return;
+        // 만약 공격중이 아닐경우 공격 상태
+        if (!playerObject.IsAttack)
         {
-            // 만약 공격중이 아닐경우 공격 상태
-            if (!playerObject.IsAttack)
-            {
-                playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
-                StartCoroutine(Attack());
-            }
-            else if (playerObject.IsAttack)
-            {
-                StartCoroutine(Combo());
-            }
+            playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
+            StartCoroutine(Attack());
         }
+        else if (playerObject.IsAttack)
+        {
+            StartCoroutine(Combo());
+        }
+        
     }
+    /// <summary>
+    /// 키보드 Shift 입력을 처리하는 메서드
+    /// </summary>
     public void OnShift(InputAction.CallbackContext context)
     {
         Debug.Log("Shift! (Shift 버튼)");  
-    }
+    } 
+    /// <summary>
+    /// 키보드 F 입력을 처리하는 메서드
+    /// </summary>
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.phase != InputActionPhase.Performed) return;        
@@ -135,17 +143,21 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Interact! (F 버튼) - 대상 없음");
         }
-    }    
+    }
+    /// <summary>
+    /// 키보드 Z 입력을 처리하는 메서드
+    /// </summary>
     public void OnSkill(InputAction.CallbackContext context)
     {
         //프레스 입력인지 확인
-        if (context.phase != InputActionPhase.Performed) return;        
-        if (dashCooldownTimer > 0) return; // 쿨타임 남아있으면 리턴
-        if (playerObject.IsDashing) return; // 대쉬중이면 리턴
+        if (context.phase != InputActionPhase.Performed) return;
         if (playerObject.IsSkill) return; // 스킬 사용중이면 리턴
+        if (playerObject.IsDashing) return; // 대쉬중이면 리턴
+        if (skillCooldownTimer > 0) return; // 쿨타임 남아있으면 리턴
         // 만약 스킬중이 아닐경우 스킬상태
+        skillCooldownTimer = skillCooldownDuration;
         playerAnimation.stateMachine.ChangeState(playerAnimation.skillState);
-    }
+    } 
     private IEnumerator Dash()
     {
         if (dashCooldownTimer > 0)

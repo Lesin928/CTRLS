@@ -36,7 +36,7 @@ public class DaggerSkill : MonoBehaviour
             PushAttack(collision);
 
             // ««∞› ¿Ã∆Â∆Æ  
-            // HitPoint(collision);
+            HitPoint(collision);
         }
     }
 
