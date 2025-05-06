@@ -17,6 +17,7 @@ public class EventManager : MonoBehaviour
     private int id;
     private bool isEventFinished;
     private int scriptIndex;
+    private string resultText;
 
     private void Start()
     {
@@ -45,8 +46,11 @@ public class EventManager : MonoBehaviour
     private void ExitEvent()
     {
         Debug.Log("이벤트 종료");
+
         EventPanel.SetActive(false);
         HUDManager.Instance.ResumGame();
+
+        //GameManager.Instance.OnStageClear();
     }
 
     private void Event(int id)
@@ -96,7 +100,7 @@ public class EventManager : MonoBehaviour
         EventButton1.gameObject.SetActive(false);
         EventButton2.gameObject.SetActive(false);
 
-        EventScriptManager.Instance.EventResultUpdate(id, 1);
+        resultText = EventScriptManager.Instance.EventResultUpdate(id, 1);
 
         EventText.text = "1번을 선택하셨습니다";
     }
@@ -108,8 +112,8 @@ public class EventManager : MonoBehaviour
         EventButton1.gameObject.SetActive(false);
         EventButton2.gameObject.SetActive(false);
 
-        EventScriptManager.Instance.EventResultUpdate(id, 2);
+        resultText = EventScriptManager.Instance.EventResultUpdate(id, 2);
 
-        EventText.text = "2번을 선택하셨습니다";
+        EventText.text = resultText;
     }
 }

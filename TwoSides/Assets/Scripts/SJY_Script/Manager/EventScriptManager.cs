@@ -55,8 +55,6 @@ public class EventScriptManager : MonoBehaviour
 
     public string GetEventScript(int id, int scriptIndex)
     {
-        Debug.Log(EventScript[id].GetLength(0));
-
         if (scriptIndex == EventScript[id].Length)
         {
             return null;
@@ -91,20 +89,23 @@ public class EventScriptManager : MonoBehaviour
         return id;
     }
 
-    public void EventResultUpdate(int id, int num)
+    public string EventResultUpdate(int id, int num)
     {
+        string resultText = "tmpText";
+
+
+
         switch (id)
         {
             case 0:
                 if (num == 1)
                 {
-                    GameManager.Instance.SetMaxHealth(10);
-                    GameManager.Instance.SetHealth(-10);
+                    GameManager.Instance.SetHealth(10);
+                    resultText = "고픈 배가 조금은 찼다.\t이성 +10 체력 +10";
                 }
                 else
                 {
-                    GameManager.Instance.SetMaxHealth(10);
-                    GameManager.Instance.SetHealth(10);
+                    resultText = "남의 것을 빼앗고 싶진 않다.\t감성 +20";
                 }
                 break;
             case 1:
@@ -130,5 +131,7 @@ public class EventScriptManager : MonoBehaviour
                 }
                 break;
         }
+
+        return resultText;
     }
 }

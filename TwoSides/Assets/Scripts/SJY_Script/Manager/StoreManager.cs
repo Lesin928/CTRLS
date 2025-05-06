@@ -26,6 +26,7 @@ public class StoreManager : MonoBehaviour
 
     void Update()
     {
+        // Store 열기 상호작용으로 바꿔야함
         if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
         {
             RerollItems();

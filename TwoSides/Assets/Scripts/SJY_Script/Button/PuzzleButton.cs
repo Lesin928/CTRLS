@@ -11,7 +11,7 @@ public class PuzzleButton : MonoBehaviour
     public void Onclick()
     {
         string sceneName = "Puzzle";
-        int rand = Random.Range(0, 3);  // range 바꾸기
+        int rand = Random.Range(0, 1);  // range 바꾸기
         sceneName += rand.ToString();
         map.SetActive(false);
         GameManager.Instance.isClear = false;
