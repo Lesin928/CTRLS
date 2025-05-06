@@ -6,7 +6,7 @@ public class Apple : Interactive
 
     public override void PressF()
     {
-        Debug.Log("사과를 만졌따.");
+        Debug.Log("사과를 만졌다.");
 
         if (panelToShow != null)
         {
