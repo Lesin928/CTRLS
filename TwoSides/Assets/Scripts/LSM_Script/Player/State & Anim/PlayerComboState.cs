@@ -18,7 +18,7 @@ public class PlayerComboState : PlayerState
         base.Enter();
         playerObject.attackCollider1.SetActive(false); //이전 공격 판정 비활성화
         playerObject.attackCollider2.SetActive(true); //콤보 데미지 판정
-        if (playerObject.MoveInput.x != 0) //공격시 이동
+        if (playerObject.MoveInput.x != 0 && playerObject.IsGroundDetected()) //공격시 이동
         {   
             playerObject.transform.position += new Vector3(playerAnimation.Getfacing() * 1f, 0f, 0f); 
         }

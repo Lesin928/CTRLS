@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-// TODO: (추가할일 적는부분)
-// FIXME: (고칠거 적는부분)
+// TODO: 리펙토링,DaethState 구현, Shift 구현
+// FIXME:  Set Get 추가
 // NOTE : (기타 작성)
 
 /// <summary>
@@ -22,12 +22,13 @@ public class PlayerObject : CharacterObject
 
     #region Player Info   
     [Header("플레이어 정보")]
-    [SerializeField] private float jumpForce; //추후 스크립터블 오브젝트로 세팅
-    [SerializeField] private float dashForce; //추후 스크립터블 오브젝트로 세팅
-    [SerializeField] private float invincibilityDuration = 0.5f; //추후 스크립터블 오브젝트로 세팅
+    [SerializeField] private float jumpForce; //추후 세팅
+    [SerializeField] private float dashForce; //추후 세팅
+    [SerializeField] private float invincibilityDuration = 0.5f; //추후 세팅
     [SerializeField] private bool isCombo = false; //콤보 중
     [SerializeField] private bool isAttack = false; //공격 중
     [SerializeField] private bool isDashing = false; //대쉬 중
+    [SerializeField] private bool isSkill = false; // 스킬 사용 중
     [SerializeField] private bool isinvincibility = false; //무적 중
     [SerializeField] private bool endAttack = false; //공격 종료 
     #endregion
@@ -59,6 +60,11 @@ public class PlayerObject : CharacterObject
     {
         get => isAttack;
         set => isAttack = value;
+    }
+    public virtual bool IsSkill
+    {
+        get => isSkill;
+        set => isSkill = value;
     }
     public virtual bool EndAttack
     {
@@ -125,7 +131,7 @@ public class PlayerObject : CharacterObject
 
     private void Start()
     {
-        //추후 스크립터블 오브젝트로 세팅
+        //추후 세팅
         jumpForce = 10f; 
         dashForce = 15f;
         MoveSpeed = 7f;  
@@ -140,7 +146,7 @@ public class PlayerObject : CharacterObject
         GetComponentInChildren<HitAnim>().Flash();
     }
 
-    protected override void Die()
+    protected override void Die() //추후 Death 스테이트 구현
     {
 
     }

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private float dashCooldownTimer = 0f;
     private float dashCooldownDuration = 1f; // 쿨타임 시간
+    private float skillCooldownTimer = 3f; // 스킬 쿨타임 시간    
     #endregion 
 
     private void Awake()
@@ -100,9 +101,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnShift(InputAction.CallbackContext context)
     {
-        Debug.Log("Shift! (Shift 버튼)");
-
-
+        Debug.Log("Shift! (Shift 버튼)");  
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -115,6 +114,19 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.Log("Interact! (F 버튼) - 대상 없음");
+        }
+    }    
+    public void OnSkill(InputAction.CallbackContext context)
+    {
+        //if (context.phase != InputActionPhase.Performed) return;
+        Debug.Log("Skill! (Z 버튼)");
+        if (!playerObject.IsDashing)
+        {
+            // 만약 스킬중이 아닐경우 스킬상태
+            if (!playerObject.IsSkill)
+            {
+                playerAnimation.stateMachine.ChangeState(playerAnimation.skillState);
+            }
         }
     }
     private IEnumerator Dash()

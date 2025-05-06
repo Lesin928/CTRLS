@@ -32,6 +32,7 @@ public class PlayerAnimation : MonoBehaviour
     public PlayerAirState airState { get; private set; }
     public PlayerAttackState attackState { get; private set; }
     public PlayerComboState comboState { get; private set; }
+    public PlayerSkillState skillState { get; private set; }
 
     #endregion
 
@@ -53,6 +54,7 @@ public class PlayerAnimation : MonoBehaviour
         airState = new PlayerAirState(this, stateMachine, playerObject, "JumpFall");
         attackState = new PlayerAttackState(this, stateMachine, playerObject, "Attack1");
         comboState = new PlayerComboState(this, stateMachine, playerObject, "Attack2");
+        skillState = new PlayerSkillState(this, stateMachine, playerObject, "Skill");
     }
      
     protected void Start()
