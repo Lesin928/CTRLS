@@ -11,14 +11,13 @@ public class StoreManager : MonoBehaviour
     public Button exitButton;
     public bool isStoreOpen;
 
-    private List<ItemData> itemDataList = new List<ItemData>();
+    public List<ItemData> itemDataList;
     private List<ItemData> currentSelection = new List<ItemData>();
 
     void Start()
     {
         isStoreOpen = false;
 
-        InitializeItems();
         rerollButton.onClick.AddListener(RerollItems);
         exitButton.onClick.AddListener(ExitStore);
 
@@ -35,21 +34,6 @@ public class StoreManager : MonoBehaviour
 
             isStoreOpen = true;
         }
-    }
-
-    void InitializeItems()
-    {
-        itemDataList = new List<ItemData>()
-        {
-            new ItemData(StatType.Health, 10f),
-            new ItemData(StatType.MaxHealth, 10f),
-            new ItemData(StatType.Armor, 10f),
-            new ItemData(StatType.Attack, 10f),
-            new ItemData(StatType.AttackSpeed, 10f),
-            new ItemData(StatType.MoveSpeed, 10f),
-            new ItemData(StatType.Critical, 10f),
-            new ItemData(StatType.CriticalDamage, 10f),
-        };
     }
 
     void RerollItems()
@@ -87,7 +71,10 @@ public class StoreManager : MonoBehaviour
         {
             var item = currentSelection[i];
             var text = itemButton[i].GetComponentInChildren<Text>();
+            var icon = itemButton[i].transform.Find("IconImage").GetComponent<Image>();
+
             text.text = $"{item.statType.ToString()}";
+            icon.sprite = item.icon;
 
             int index = i; // 클로저 문제 방지
             itemButton[i].onClick.RemoveAllListeners();

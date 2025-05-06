@@ -54,3 +54,12 @@ MonoBehaviour:
   playerGold: {fileID: 0}
   exitButton: {fileID: 0}
   isStoreOpen: 0
+  itemDataList:
+  - {fileID: 11400000, guid: eef56f40f4362704eb5001ef48dab233, type: 2}
+  - {fileID: 11400000, guid: 31e000c8c90582d47a1f82711c786fde, type: 2}
+  - {fileID: 11400000, guid: c8fa1ca5d57b2ec44aada1adf1670eae, type: 2}
+  - {fileID: 11400000, guid: 00e755d3d3f8ee345b1c422bd4255084, type: 2}
+  - {fileID: 11400000, guid: 0d8854f82d9581e47b79747691c1c44d, type: 2}
+  - {fileID: 11400000, guid: 7c4c87168b189274b9347db1b47843af, type: 2}
+  - {fileID: 11400000, guid: fe0f922b0664a85479c7c556a908c828, type: 2}
+  - {fileID: 11400000, guid: 77f206929fb73f2498d3eff747a83d36, type: 2}
