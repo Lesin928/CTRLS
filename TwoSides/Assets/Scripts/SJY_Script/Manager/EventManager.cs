@@ -25,8 +25,7 @@ public class EventManager : MonoBehaviour
             id = fixedEventId;
         else if (GameManager.Instance.currentStage == 1)
             id = TUTORIAL;
-        //else
-        //    id = EventScriptManager.Instance.GetScriptId();
+
         isEventFinished = false;
     }
 
