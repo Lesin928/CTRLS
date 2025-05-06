@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Apple : Interactive
+public class InteractObject : Interactive
 {
     public GameObject panelToShow;  // 인스펙터에서 연결할 패널
 
