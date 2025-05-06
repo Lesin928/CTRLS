@@ -3665,9 +3665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db588b7486480964dad0fa5d29e2b526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 7
-  dashForce: 10
+  player: {fileID: 0}
 --- !u!114 &890467488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3807,11 +3805,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 0
+  currentHp: 0
+  armor: 0
+  attack: 0
+  attackSpeed: 0
+  moveSpeed: 0
+  critical: 0
+  criticalDamage: 0
+  attackCollider1: {fileID: 0}
+  attackCollider2: {fileID: 0}
+  jumpForce: 0
+  dashForce: 0
+  invincibilityDuration: 0.5
+  isCombo: 0
+  isAttack: 0
+  isDashing: 0
+  isinvincibility: 0
+  endAttack: 0
   groundCheck: {fileID: 976973463}
   groundCheckDistance: 0.9
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1280
+  moveInput: {x: 0, y: 0}
 --- !u!50 &890467490
 Rigidbody2D:
   serializedVersion: 5

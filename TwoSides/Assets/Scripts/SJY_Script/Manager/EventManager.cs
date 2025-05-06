@@ -21,12 +21,12 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        if (fixedEventId > 0)
+        if (fixedEventId >= 0)
             id = fixedEventId;
         else if (GameManager.Instance.currentStage == 1)
             id = TUTORIAL;
-        else
-            id = EventScriptManager.Instance.GetScriptId();
+        //else
+        //    id = EventScriptManager.Instance.GetScriptId();
         isEventFinished = false;
     }
 
@@ -50,7 +50,7 @@ public class EventManager : MonoBehaviour
         EventPanel.SetActive(false);
         HUDManager.Instance.ResumGame();
 
-        //GameManager.Instance.OnStageClear();
+        GameManager.Instance.OnStageClear();
     }
 
     private void Event(int id)
@@ -102,7 +102,7 @@ public class EventManager : MonoBehaviour
 
         resultText = EventScriptManager.Instance.EventResultUpdate(id, 1);
 
-        EventText.text = "1번을 선택하셨습니다";
+        EventText.text = resultText;
     }
 
     private void OnClickButton2()
