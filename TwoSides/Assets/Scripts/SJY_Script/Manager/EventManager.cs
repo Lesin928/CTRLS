@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
 {
+    public static EventManager Instance { get; private set; }
+
     public GameObject EventPanel;
     public Text EventText;
     public Button EventButton1;
@@ -14,9 +16,20 @@ public class EventManager : MonoBehaviour
     public static int TUTORIAL = 101;
 
     public int fixedEventId = -1;
+    public bool isEventFinished;
     private int id;
-    private bool isEventFinished;
     private int scriptIndex;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -33,8 +46,7 @@ public class EventManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
         {
-            Event(id);
-            EventPanel.SetActive(true);
+            EventStart();
         }
         else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
         {
@@ -42,11 +54,26 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void ExitEvent()
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
+    public void ExitEvent()
     {
         Debug.Log("이벤트 종료");
         EventPanel.SetActive(false);
         HUDManager.Instance.ResumGame();
+    }
+
+    public void EventStart()
+    {
+        //isEventFinished = true;
+        Event(id);
+        EventPanel.SetActive(true);
     }
 
     private void Event(int id)

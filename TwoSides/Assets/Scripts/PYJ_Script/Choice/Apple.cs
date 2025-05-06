@@ -10,7 +10,10 @@ public class Apple : Interactive
 
         if (panelToShow != null)
         {
-            panelToShow.SetActive(true); // 패널 표시
+            if (EventManager.Instance.isEventFinished == false)
+                EventManager.Instance.EventStart();
+            else
+                EventManager.Instance.ExitEvent();
         }
         else
         {

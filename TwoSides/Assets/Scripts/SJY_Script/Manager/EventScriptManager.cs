@@ -62,7 +62,7 @@ public class EventScriptManager : MonoBehaviour
             return null;
         }
         else
-            return EventScript[id][scriptIndex];
+            return EventScript[id][scriptIndex].Replace("\\n", "\n");
     }
 
     public int GetMaxScriptCount(int id)
