@@ -44,11 +44,13 @@ public class DoorInteract : Interactive
 
         if (GameManager.Instance.isClear)
         {
-            Debug.Log("문 개방! 다음 맵으로 이동합니다.");
+            Debug.Log("문 개방! 다음 맵으로 이동합니다.");//지도 열리게 
+            Mapbutton.Instance.clearOn = true;
+            Mapbutton.Instance.GameClearAutoButton();
         }
         else
         {
-            Debug.Log("몬스터가 아직 남았다...");
+            Debug.Log("몬스터가 아직 남았다...");//아직 못함
         }
     }
 }

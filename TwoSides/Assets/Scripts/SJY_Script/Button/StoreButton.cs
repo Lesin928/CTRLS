@@ -13,7 +13,7 @@ public class StoreButton : MonoBehaviour
         string sceneName = "Store";
         map.SetActive(false);
         GameManager.Instance.isClear = false;
-        Mapbutton.Instance.clearOn = true;
+        Mapbutton.Instance.clearOn = false;
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

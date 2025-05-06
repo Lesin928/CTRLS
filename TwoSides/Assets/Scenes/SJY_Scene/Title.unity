@@ -807,6 +807,10 @@ PrefabInstance:
       propertyPath: aButton
       value: 
       objectReference: {fileID: 1286123327}
+    - target: {fileID: 5825562085262974021, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
+      propertyPath: clearOn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6547563998224700839, guid: e3acb1d3a9a2f3a4eb45a09e38a7be66, type: 3}
       propertyPath: m_Name
       value: MAPCanvas
