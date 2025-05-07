@@ -33,6 +33,7 @@ public class PlayerAnimation : MonoBehaviour
     public PlayerAttackState attackState { get; private set; }
     public PlayerComboState comboState { get; private set; }
     public PlayerSkillState skillState { get; private set; }
+    public PlayerDeathState deathState { get; private set; }
 
     #endregion
 
@@ -55,6 +56,7 @@ public class PlayerAnimation : MonoBehaviour
         attackState = new PlayerAttackState(this, stateMachine, playerObject, "Attack1");
         comboState = new PlayerComboState(this, stateMachine, playerObject, "Attack2");
         skillState = new PlayerSkillState(this, stateMachine, playerObject, "Skill");
+        deathState = new PlayerDeathState(this, stateMachine, playerObject, "Death");
     }
      
     protected void Start()

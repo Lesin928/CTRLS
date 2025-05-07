@@ -31,6 +31,7 @@ public class PlayerObject : CharacterObject
     [SerializeField] private bool isDashing = false; //대쉬 중
     [SerializeField] private bool isSkill = false; // 스킬 사용 중
     [SerializeField] private bool isinvincibility = false; //무적 중
+    [SerializeField] private bool isDeath = false; //사망중
     [SerializeField] private bool endAttack = false; //공격 종료 
     #endregion
 
@@ -57,6 +58,12 @@ public class PlayerObject : CharacterObject
         get => isCombo;
         set => isCombo = value;
     }
+    public virtual bool IsDeath
+    {
+        get => isDeath;
+        set => isDeath = value;
+    }
+
     public virtual bool IsAttack
     {
         get => isAttack;
@@ -132,11 +139,24 @@ public class PlayerObject : CharacterObject
 
     private void Start()
     {
-        //추후 세팅
-        jumpForce = 10f; 
-        dashForce = 15f;
-        MoveSpeed = 7f;  
-        Attack = 3f;
+        //플레이어 초기 세팅
+        MaxHp = 100f; //체력  
+        CurrentHp = 100f; //체력
+        Attack = 5f; //공격력
+        Armor = 3f; //방어력
+        AttackSpeed = 1f; //공격속도
+        MoveSpeed = 7f;
+        Critical = 0.1f; //치명타 확률
+        CriticalDamage = 2f; //치명타 피해 배율
+        jumpForce = 13f; // 점프 힘
+        dashForce = 15f; // 대쉬 힘
+
+        //플레이어 위치 초기화 
+        GameObject spawnPoint = GameObject.Find("SpawnPoint");
+        if (spawnPoint != null && spawnPoint.CompareTag("StartingPoint"))        
+        {
+            transform.position = spawnPoint.transform.position;
+        }
     }   
 
     public override void TakeDamage(float damage)     
@@ -149,7 +169,8 @@ public class PlayerObject : CharacterObject
 
     protected override void Die() //추후 Death 스테이트 구현
     {
-
+        IsDeath = true; //사망 상태로 변경
+        playerAnimation.stateMachine.ChangeState(playerAnimation.deathState); 
     }
 
     private IEnumerator DisableInvincibility(float delay)
