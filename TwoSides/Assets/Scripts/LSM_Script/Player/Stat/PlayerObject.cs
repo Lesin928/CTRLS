@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-// TODO: ¸®ÆåÅä¸µ,DaethState ±¸Çö, Shift ±¸Çö
-// FIXME:  Set Get Ãß°¡
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: ï¿½ï¿½ï¿½ï¿½ï¿½ä¸µ,DaethState ï¿½ï¿½ï¿½ï¿½, Shift ï¿½ï¿½ï¿½ï¿½
+// FIXME:  Set Get ï¿½ß°ï¿½
+// NOTE : (ï¿½ï¿½Å¸ ï¿½Û¼ï¿½)
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾îÀÇ ¼Ó¼ºÀ» °ü¸®ÇÏ´Â Å¬·¡½º
+/// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class PlayerObject : CharacterObject
 {
@@ -15,24 +15,24 @@ public class PlayerObject : CharacterObject
     protected PlayerAnimation playerAnimation;
     protected PlayerObject playerObject;
     protected GameObject iObject;
-    protected Rigidbody2D rb;    
+    protected Rigidbody2D rb;
     public GameObject attackCollider1;
     public GameObject attackCollider2;
     public GameObject skillCollider;
     #endregion
 
     #region Player Info   
-    [Header("ÇÃ·¹ÀÌ¾î Á¤º¸")]
-    [SerializeField] private float jumpForce; //ÃßÈÄ ¼¼ÆÃ
-    [SerializeField] private float dashForce; //ÃßÈÄ ¼¼ÆÃ
-    [SerializeField] private float invincibilityDuration = 0.5f; //ÃßÈÄ ¼¼ÆÃ
-    [SerializeField] private bool isCombo = false; //ÄÞº¸ Áß
-    [SerializeField] private bool isAttack = false; //°ø°Ý Áß
-    [SerializeField] private bool isDashing = false; //´ë½¬ Áß
-    [SerializeField] private bool isSkill = false; // ½ºÅ³ »ç¿ë Áß
-    [SerializeField] private bool isinvincibility = false; //¹«Àû Áß
-    [SerializeField] private bool isDeath = false; //»ç¸ÁÁß
-    [SerializeField] private bool endAttack = false; //°ø°Ý Á¾·á 
+    [Header("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    [SerializeField] private float jumpForce; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float dashForce; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float invincibilityDuration = 0.5f; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private bool isCombo = false; //ï¿½Þºï¿½ ï¿½ï¿½
+    [SerializeField] private bool isAttack = false; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    [SerializeField] private bool isDashing = false; //ï¿½ë½¬ ï¿½ï¿½
+    [SerializeField] private bool isSkill = false; // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ ï¿½ï¿½
+    [SerializeField] private bool isinvincibility = false; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    [SerializeField] private bool isDeath = false; //ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private bool endAttack = false; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
     #endregion
 
     #region Setter & Getter
@@ -49,7 +49,7 @@ public class PlayerObject : CharacterObject
             isinvincibility = value;
             if (isinvincibility)
             {
-                StartCoroutine(DisableInvincibility(invincibilityDuration)); // 0.5ÃÊ ÈÄ¿¡ ¹«Àû ÇØÁ¦
+                StartCoroutine(DisableInvincibility(invincibilityDuration)); // 0.5ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
         }
     }
@@ -98,7 +98,7 @@ public class PlayerObject : CharacterObject
         get => jumpForce;
         set
         {
-            jumpForce = value; 
+            jumpForce = value;
         }
     }
     public virtual float DashForce
@@ -106,20 +106,20 @@ public class PlayerObject : CharacterObject
         get => dashForce;
         set
         {
-            dashForce = value; 
+            dashForce = value;
         }
-    } 
+    }
     #endregion
 
     #region Collision Info  
-    [Header("Ãæµ¹ Á¤º¸")]  
+    [Header("ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] private Vector2 moveInput;
     #endregion
-    
-    #region Ãæµ¹ ÇÔ¼ö
+
+    #region ï¿½æµ¹ ï¿½Ô¼ï¿½
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
     protected virtual void OnDrawGizmos()
@@ -127,7 +127,7 @@ public class PlayerObject : CharacterObject
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
     }
     #endregion
-      
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -139,30 +139,31 @@ public class PlayerObject : CharacterObject
 
     private void Start()
     {
-        //ÇÃ·¹ÀÌ¾î ÃÊ±â ¼¼ÆÃ
-        MaxHp = 100f; //Ã¼·Â  
-        CurrentHp = 100f; //Ã¼·Â
-        Attack = 5f; //°ø°Ý·Â
-        Armor = 3f; //¹æ¾î·Â
-        AttackSpeed = 1f; //°ø°Ý¼Óµµ
+        //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½
+        MaxHp = 100f; //Ã¼ï¿½ï¿½  
+        CurrentHp = 100f; //Ã¼ï¿½ï¿½
+        Attack = 5f; //ï¿½ï¿½ï¿½Ý·ï¿½
+        Armor = 3f; //ï¿½ï¿½ï¿½ï¿½
+        AttackSpeed = 1f; //ï¿½ï¿½ï¿½Ý¼Óµï¿½
         MoveSpeed = 7f;
-        Critical = 0.1f; //Ä¡¸íÅ¸ È®·ü
-        CriticalDamage = 2f; //Ä¡¸íÅ¸ ÇÇÇØ ¹èÀ²
-        jumpForce = 13f; // Á¡ÇÁ Èû
-        dashForce = 15f; // ´ë½¬ Èû 
+        Critical = 0.1f; //Ä¡ï¿½ï¿½Å¸ È®ï¿½ï¿½
+        CriticalDamage = 2f; //Ä¡ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        jumpForce = 13f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+        dashForce = 15f; // ï¿½ë½¬ ï¿½ï¿½ 
     }   
 
-    public override void TakeDamage(float damage)     
+    public override void TakeDamage(float damage)
     {
-        if (isinvincibility) return; //¹«Àû ÁßÀÌ¸é µ¥¹ÌÁö ¹«½Ã
-        IsInvincibility = true; //¹«Àû »óÅÂ·Î º¯°æ
-        base.TakeDamage(damage);        
+        if (isinvincibility) return; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        IsInvincibility = true; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
+        base.TakeDamage(damage);
+        GameManager.Instance.TakeDamage();
         GetComponentInChildren<HitAnim>().Flash();
     }
 
-    protected override void Die() //ÃßÈÄ Death ½ºÅ×ÀÌÆ® ±¸Çö
+    protected override void Die() //ï¿½ï¿½ï¿½ï¿½ Death ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     {
-        IsDeath = true; //»ç¸Á »óÅÂ·Î º¯°æ
+        IsDeath = true; //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         playerAnimation.stateMachine.ChangeState(playerAnimation.deathState); 
     }
 
@@ -175,7 +176,7 @@ public class PlayerObject : CharacterObject
     {
         if (collision.CompareTag("Interactive"))
         {
-            //´ë»ó °ÔÀÓ ¿ÀºêÁ§Æ®°¡ Interactive ÅÂ±×¸¦ °¡Áö°í ÀÖÀ» °æ¿ì, ÀúÀå
+            //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Interactive ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½
             IObject = collision.gameObject;
         }
     }
@@ -183,8 +184,8 @@ public class PlayerObject : CharacterObject
     {
         if (collision.CompareTag("Interactive"))
         {
-            //´ë»ó °ÔÀÓ ¿ÀºêÁ§Æ®°¡ Interactive ÅÂ±×¸¦ °¡Áö°í ÀÖÀ» °æ¿ì, ÇØÁ¦
+            //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Interactive ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½
             IObject = null;
         }
-    } 
+    }
 }

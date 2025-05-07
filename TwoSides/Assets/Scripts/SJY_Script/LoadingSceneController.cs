@@ -53,6 +53,10 @@ public class LoadingSceneController : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         gameObject.SetActive(true);
+
+        if (HUDManager.Instance != null)
+            HUDManager.Instance.HideHUD();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         loadSceneName = sceneName;
         StartCoroutine(LoadSceneProcess());
@@ -75,12 +79,12 @@ public class LoadingSceneController : MonoBehaviour
         op.allowSceneActivation = true;
     }
 
-
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         if (arg0.name == loadSceneName)
         {
-            if (GameManager.Instance != null)
+            if (GameManager.Instance != null && loadSceneName != "Title"
+                && loadSceneName != "GameClear" && loadSceneName != "GameOver")
             {
                 GameManager.Instance.InitStageData(loadSceneName);
             }
@@ -93,6 +97,9 @@ public class LoadingSceneController : MonoBehaviour
             {
                 GameManager.Instance.isClear = false;
             }
+
+            if (HUDManager.Instance != null)
+                HUDManager.Instance.ShowHUD();
         }
     }
 
