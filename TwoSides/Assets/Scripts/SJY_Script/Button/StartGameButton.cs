@@ -16,7 +16,7 @@ public class StartGameButton : MonoBehaviour
         GameManager.Instance.StartNewGame();
 
         HideMapController.shouldShowHideMap = true;
-
+        if (Map.Instance != null)
         Map.Instance.ResetMap();
     }
 }

@@ -46839,7 +46839,7 @@ MonoBehaviour:
   hpText: {fileID: 471661662}
   gameOverPanel: {fileID: 637447805}
   gameClearPanel: {fileID: 1896507921}
-  survivalTime: 10
+  survivalTime: 15
   hearts:
   - {fileID: 1187381979}
   - {fileID: 1655039621}
@@ -49008,7 +49008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912cb03fb0d74a3449d08fdbd24b9084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPanel: {fileID: 0}
 --- !u!1001 &1074668862
 PrefabInstance:
   m_ObjectHideFlags: 0

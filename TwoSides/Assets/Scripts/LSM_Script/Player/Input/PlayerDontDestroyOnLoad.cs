@@ -31,6 +31,7 @@ public class PlayerDontDestroyOnLoad : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (this == null) return;
         // 씬 이동 시 플레이어 위치 초기화
         player.transform.localPosition = Vector3.zero;
 
