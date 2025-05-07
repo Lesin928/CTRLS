@@ -101,11 +101,14 @@ public class RockManager : MonoBehaviour
 
     public void StartGame()
     {
-        gameStarted = true; // 게임 시작 상태로 변경
-        gameOverPanel.SetActive(false); // 게임 오버 패널 숨기기
-        gameClearPanel.SetActive(false); // 게임 클리어 패널 숨기기
-        Time.timeScale = 1;  // 게임이 멈추지 않도록 설정
+        gameStarted = true;
+        gameOverPanel.SetActive(false);
+        gameClearPanel.SetActive(false);
+        Time.timeScale = 1;
+
+        StartSpawning(); // 이 줄 추가!
     }
+
 
 
 
