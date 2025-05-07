@@ -97,7 +97,7 @@ public class DemonBossObject : EnemyObject
 
         if (closeRangeDetected())
             stateMachine.ChangeState(attack4State);
-        else if(midRangeDetected())
+        else if (midRangeDetected())
         {
             if (rand < 0.20f)
                 stateMachine.ChangeState(attack1State);
@@ -112,10 +112,12 @@ public class DemonBossObject : EnemyObject
         }
         else if (longRangeDetected())
         {
-            if (rand < 0.5f)
+            if (rand < 0.33f)
                 stateMachine.ChangeState(attack2State);
-            else
+            else if (rand < 0.66f)
                 stateMachine.ChangeState(attack5State);
+            else
+                stateMachine.ChangeState(attack6State);
         }
     }
 

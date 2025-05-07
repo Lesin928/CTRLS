@@ -11,7 +11,8 @@ public class EnemyBossVortex : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = true;
     }
 
     /// <summary>
@@ -36,13 +37,14 @@ public class EnemyBossVortex : MonoBehaviour
     // 공격 활성화 (애니메이션 이벤트에서 호출)
     private void EnableAttack()
     {
-        GetComponent<Collider2D>().enabled = true;
+        GetComponent<CapsuleCollider2D>().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = false;
     }
 
     // 공격 비활성화 (애니메이션 이벤트에서 호출)
     private void DisableAttack()
     {
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     // 플레이어와 충돌 시 호출

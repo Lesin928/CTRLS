@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: -2082586565
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3169604456136925415, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
+  m_Sprite: {fileID: 5324771255001798805, guid: 2de18d2e98f37f047982c11167b0e933, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,6 +164,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.28, y: -0.252, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4955974930439699251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4662707208504581083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2926375684102001462}
+  m_Layer: 0
+  m_Name: DashAttackCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2926375684102001462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662707208504581083}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.036, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -298,6 +329,7 @@ Transform:
   - {fileID: 954613318976236186}
   - {fileID: 8170488036302055576}
   - {fileID: 3134048550375408978}
+  - {fileID: 2926375684102001462}
   - {fileID: 736922738672736659}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -318,11 +350,11 @@ MonoBehaviour:
   armor: 0
   attack: 10
   attackSpeed: 0
-  moveSpeed: 5
+  moveSpeed: 2
   critical: 0
   criticalDamage: 0
-  defaultMoveSpeed: 5
-  chaseSpeed: 6
+  defaultMoveSpeed: 2
+  chaseSpeed: 3
   attackCooldown: 1
   lastTimeAttacked: 0
   groundCheck: {fileID: 954613318976236186}
@@ -343,6 +375,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   flashEffect: {fileID: 3914279006183112274}
+  dashAttackCheck: {fileID: 2926375684102001462}
+  dashAttackBoxSize: {x: 16, y: 2}
 --- !u!50 &9181076574523232445
 Rigidbody2D:
   serializedVersion: 5
