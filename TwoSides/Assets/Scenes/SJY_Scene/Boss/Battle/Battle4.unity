@@ -6879,6 +6879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307406607}
+  - component: {fileID: 1307406611}
   - component: {fileID: 1307406610}
   - component: {fileID: 1307406609}
   - component: {fileID: 1307406608}
@@ -7130,6 +7131,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1307406611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307406606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79471a12ec109b546922bb80dde4eb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!1 &1348280444
 GameObject:
   m_ObjectHideFlags: 0
@@ -77160,6 +77174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1762075332}
+  - component: {fileID: 1762075336}
   - component: {fileID: 1762075335}
   - component: {fileID: 1762075334}
   - component: {fileID: 1762075333}
@@ -77397,6 +77412,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1762075336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762075331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79471a12ec109b546922bb80dde4eb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!1 &1872124375
 GameObject:
   m_ObjectHideFlags: 0
