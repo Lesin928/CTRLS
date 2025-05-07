@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 13649789329537877}
   - component: {fileID: 6495394339039646135}
   - component: {fileID: 8677488624827852063}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy_Cthulu_Slash2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

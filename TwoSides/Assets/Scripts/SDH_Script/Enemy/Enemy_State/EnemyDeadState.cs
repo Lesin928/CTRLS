@@ -1,6 +1,9 @@
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// 적의 죽음 상태 클래스
+/// </summary>
 public class EnemyDeadState : EnemyState
 {
     public EnemyDeadState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
@@ -24,8 +27,6 @@ public class EnemyDeadState : EnemyState
     /// </summary>
     public override void Update()
     {
-        Debug.Log("Dead");
-
         base.Update();
 
         //GameManager.Instance.OnMonsterDead();

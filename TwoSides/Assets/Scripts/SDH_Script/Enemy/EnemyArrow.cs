@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public class EnemyArrow : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private CapsuleCollider2D cd;
+    private Rigidbody2D rb; // Rigidbody2D 컴포넌트
+    private Collider2D cd;  // Collider2D 컴포넌트
 
     [Header("Settings")]
     [SerializeField] private float gravityScale = 1f;     // 중력 비율
@@ -20,7 +20,7 @@ public class EnemyArrow : MonoBehaviour
 
     void Awake()
     {
-        // 리지드바디와 콜라이더 컴포넌트 가져오기
+        // 애니메이터, 리지드바디2D, 콜라이더 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<CapsuleCollider2D>();
     }

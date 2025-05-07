@@ -11,31 +11,30 @@ public class EnemySlashAttackTrigger : EnemyAnimationTrigger
     [SerializeField] private GameObject slash2Prefab; // Slash2 공격 프리팹
     [SerializeField] private Transform firePoint;     // 공격 발사 위치
 
-    private void Slash1AttackTrigger()
+    // Slash 공격을 생성하고 방향 및 공격자를 설정하는 공통 함수
+    private void TriggerSlashAttack(GameObject slashPrefab)
     {
-        // 부모 EnemyObject를 가져옴
+        // 부모 오브젝트에서 EnemyObject 컴포넌트를 가져옴
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Slash 프리팹을 발사 지점에 생성
-        GameObject slash = Instantiate(slash1Prefab, firePoint.position, Quaternion.identity);
+        // Slash 프리팹을 발사 위치에 생성
+        GameObject slash = Instantiate(slashPrefab, firePoint.position, Quaternion.identity);
 
-        // Slash 객체의 스크립트를 가져와서 활성화
+        // 생성된 Slash 오브젝트에 공격자와 방향 설정
         EnemySlash slashScript = slash.GetComponent<EnemySlash>();
-        slashScript.SetAttacker(enemy); // 발사자 전달
-        slashScript.Active(enemy.facingDir);
+        slashScript.SetAttacker(enemy);
+        slashScript.SetDirection(enemy.facingDir);
     }
 
+    // Slash1 공격을 생성하는 애니메이션 이벤트용 함수
+    private void Slash1AttackTrigger()
+    {
+        TriggerSlashAttack(slash1Prefab);
+    }
+
+    // Slash2 공격을 생성하는 애니메이션 이벤트용 함수
     private void Slash2AttackTrigger()
     {
-        // 부모 EnemyObject를 가져옴
-        EnemyObject enemy = GetComponentInParent<EnemyObject>();
-
-        // Slash 프리팹을 발사 지점에 생성
-        GameObject slash = Instantiate(slash2Prefab, firePoint.position, Quaternion.identity);
-
-        // Slash 객체의 스크립트를 가져와서 활성화
-        EnemySlash slashScript = slash.GetComponent<EnemySlash>();
-        slashScript.SetAttacker(enemy); // 발사자 전달
-        slashScript.Active(enemy.facingDir);
+        TriggerSlashAttack(slash2Prefab);
     }
 }

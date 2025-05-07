@@ -144,6 +144,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3ea44a7-f88e-4c5e-9713-bb8fe66f53f9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -245,6 +254,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c69bb51a-3c5c-4054-89a1-137207cbd2ad"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -276,6 +296,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PC_PlayerAction_Attack = m_PC_PlayerAction.FindAction("Attack", throwIfNotFound: true);
         m_PC_PlayerAction_Shift = m_PC_PlayerAction.FindAction("Shift", throwIfNotFound: true);
         m_PC_PlayerAction_Interact = m_PC_PlayerAction.FindAction("Interact", throwIfNotFound: true);
+        m_PC_PlayerAction_Skill = m_PC_PlayerAction.FindAction("Skill", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -362,6 +383,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PC_PlayerAction_Attack;
     private readonly InputAction m_PC_PlayerAction_Shift;
     private readonly InputAction m_PC_PlayerAction_Interact;
+    private readonly InputAction m_PC_PlayerAction_Skill;
     /// <summary>
     /// Provides access to input actions defined in input action map "PC_PlayerAction".
     /// </summary>
@@ -397,6 +419,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PC_PlayerAction/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_PC_PlayerAction_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "PC_PlayerAction/Skill".
+        /// </summary>
+        public InputAction @Skill => m_Wrapper.m_PC_PlayerAction_Skill;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -441,6 +467,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Skill.started += instance.OnSkill;
+            @Skill.performed += instance.OnSkill;
+            @Skill.canceled += instance.OnSkill;
         }
 
         /// <summary>
@@ -470,6 +499,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Skill.started -= instance.OnSkill;
+            @Skill.performed -= instance.OnSkill;
+            @Skill.canceled -= instance.OnSkill;
         }
 
         /// <summary>
@@ -565,5 +597,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Skill" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkill(InputAction.CallbackContext context);
     }
 }

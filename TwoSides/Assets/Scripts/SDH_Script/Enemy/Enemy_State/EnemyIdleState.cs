@@ -30,8 +30,6 @@ public class EnemyIdleState : EnemyState
     /// </summary>
     public override void Update()
     {
-        Debug.Log("Idle");
-
         base.Update();
 
         if (stateTimer < 0)

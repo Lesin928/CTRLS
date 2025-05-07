@@ -7,8 +7,12 @@ using UnityEngine;
 /// </summary>
 public class EnemySlash : MonoBehaviour
 {
-    private EnemyObject attacker;
-    private bool isEnabled;
+    private EnemyObject attacker; // 공격을 발사한 적 객체
+
+    private void Start()
+    {
+        GetComponent<Collider2D>().enabled = false;
+    }
 
     /// <summary>
     /// 공격을 발사한 EnemyObject를 가져오는 함수입니다.
@@ -22,30 +26,31 @@ public class EnemySlash : MonoBehaviour
     /// 적의 바라보는 방향에 맞춰 이펙트 방향을 설정합니다.
     /// </summary>
     /// <param name="facingDir">적이 바라보는 방향 (1 또는 -1)</param>
-    public void Active(int facingDir)
+    public void SetDirection(int facingDir)
     {
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * facingDir;
         transform.localScale = scale;
     }
 
+    // 공격 활성화 (애니메이션 이벤트에서 호출)
     private void EnableAttack()
     {
-        isEnabled = true;
-        Debug.Log(isEnabled);
+        GetComponent<Collider2D>().enabled = true;
     }
 
+    // 공격 비활성화 (애니메이션 이벤트에서 호출)
     private void DisableAttack()
     {
-        isEnabled = false;
-        Debug.Log(isEnabled);
+        GetComponent<Collider2D>().enabled = false;
     }
 
     // 플레이어와 충돌 시 호출
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && isEnabled)
+        if (collision.CompareTag("Player"))
         {
+            
             // 플레이어에게 데미지 전달
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }

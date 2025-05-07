@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 적의 피격 상태 클래스
+/// </summary>
 public class EnemyHitState : EnemyState
 {
     public EnemyHitState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
@@ -16,6 +19,9 @@ public class EnemyHitState : EnemyState
 
         // 정지 상태로 전환
         enemyBase.SetZeroVelocity();
+
+        // 대기 시간 설정
+        stateTimer = 1f;
     }
 
     /// <summary>
@@ -23,11 +29,9 @@ public class EnemyHitState : EnemyState
     /// </summary>
     public override void Update()
     {
-        Debug.Log("Hit");
-
         base.Update();
 
-        if (triggerCalled)
+        if (triggerCalled || stateTimer < 0) // stateTimer < 0 조건은 Hit State 고정 버그 때문에 넣음
             enemyBase.ExitPlayerDetection();
     }
 

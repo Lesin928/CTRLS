@@ -25,19 +25,6 @@ public class AttackBuffWizardObject : EnemyObject
     {
         base.Start();
 
-        /*
-        GameObject buff = Object.Instantiate(buffPrefab, transform.position + new Vector3(0f, 0.35f, 0f), Quaternion.identity);
-        buff.transform.SetParent(transform);
-
-        // 대상의 콜라이더에 맞춰 마법진 크기 조절
-        Collider2D collider = rb.GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            float targetScale = collider.bounds.size.y * 1.1f;
-            buff.transform.localScale = new Vector3(targetScale, targetScale, 1f);
-        }
-        */
-
         // 시작 시 지원 상태로 초기화
         stateMachine.Initialize(supportState);
     }
@@ -55,9 +42,9 @@ public class AttackBuffWizardObject : EnemyObject
         stateMachine.ChangeState(supportState);
     }
 
+    // 지원 범위 시각화
     protected override void OnDrawGizmos()
     {
-        // 지원 범위 시각화
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, supportRange);
     }
