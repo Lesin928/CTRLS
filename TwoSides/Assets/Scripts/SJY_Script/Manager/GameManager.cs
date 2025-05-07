@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerPrefab;
     public PlayerObject playerObject;
+    public GameObject go;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -89,9 +90,10 @@ public class GameManager : MonoBehaviour
         if (currentStageData.stageName == "Battle0")
         {
             //플레이어 프리팹 생성
-            Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+            go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
-            playerObject = playerPrefab.GetComponentInChildren<PlayerObject>();
+            //playerObject = playerPrefab.GetComponentInChildren<PlayerObject>();
+            playerObject = go.GetComponentInChildren<PlayerObject>();
             if (playerObject == null)
             {
                 Debug.LogError("PlayerObject not found in PlayerSet hierarchy");
@@ -225,10 +227,9 @@ public class GameManager : MonoBehaviour
         HUDManager.Instance.SetGold(value);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float hp)
     {
-        playerHealth = playerObject.CurrentHp;
-        HUDManager.Instance.SetHealth(playerHealth);
+        playerHealth = hp;
 
         if (playerHealth <= 0)
         {
@@ -316,7 +317,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SetGold(10);
+            SetPlayerAttack(10);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
