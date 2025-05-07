@@ -4,39 +4,40 @@ public class InteractiveAble : MonoBehaviour
 {
     public GameObject F;
 
-    //ÇØ´ç ¿ÀºêÁ§Æ®°¡ È°¼ºÈ­ µÇ¾úÀ» ¶§
+    //í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ê°€ í™œì„±í™” ë˜ì—ˆì„ ë•Œ
     private void OnEnable()
     {
-        // FÅ° ÀÌ¹ÌÁö ¼û±è
+        // Fí‚¤ ì´ë¯¸ì§€ ìˆ¨ê¹€
         F.SetActive(false);
-        // ÇöÀç ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®¿Í Ãæµ¹ÁßÀÏ ¶§
+        // í˜„ì¬ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ì™€ ì¶©ëŒì¤‘ì¼ ë•Œ
         if (Physics2D.OverlapCircle(transform.position, 0.1f, LayerMask.GetMask("Player")) != null)
         {
-            // FÅ° ÀÌ¹ÌÁö ¶ç¿ò
+            // Fí‚¤ ì´ë¯¸ì§€ ë„ì›€
             F.SetActive(true);
         }
     }
     private void OnDisable()
     {
-        // FÅ° ÀÌ¹ÌÁö ¼û±è
+        // Fí‚¤ ì´ë¯¸ì§€ ìˆ¨ê¹€
         F.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÁßÀÏ ¶§
+        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒì¤‘ì¼ ë•Œ
         if (collision.CompareTag("Player"))
         {
-            // FÅ° ÀÌ¹ÌÁö ¶ç¿ò
+            // Fí‚¤ ì´ë¯¸ì§€ ë„ì›€
             F.SetActive(true);
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÀÌ ³¡³µÀ» ¶§
+        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒì´ ëë‚¬ì„ ë•Œ
         if (collision.CompareTag("Player"))
         {
-            // FÅ° ÀÌ¹ÌÁö ¼û±è
+            // Fí‚¤ ì´ë¯¸ì§€ ìˆ¨ê¹€
             F.SetActive(false);
         }
-    }   
+    }
 }

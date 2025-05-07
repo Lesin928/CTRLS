@@ -82,13 +82,13 @@ public class GameManager : MonoBehaviour
         currentStageData = stageDataList.Find(data => data.stageName == sceneName);
 
         if (currentStageData == null)
-            Debug.LogWarning($"[GameManager] {sceneName}¿¡ ÇØ´çÇÏ´Â StageData°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning($"[GameManager] {sceneName}ì— í•´ë‹¹í•˜ëŠ” StageDataê°€ ì—†ìŠµë‹ˆë‹¤.");
         else
-            Debug.Log($"[GameManager] {sceneName} ½ºÅ×ÀÌÁö µ¥ÀÌÅÍ ÃÊ±âÈ­ ¿Ï·á - ¸ó½ºÅÍ ¼ö: {currentStageData.monsterCount}");
+            Debug.Log($"[GameManager] {sceneName} ìŠ¤í…Œì´ì§€ ë°ì´í„° ì´ˆê¸°í™” ì™„ë£Œ - ëª¬ìŠ¤í„° ìˆ˜: {currentStageData.monsterCount}");
 
         if (currentStageData.stageName == "Tutorial")
         {
-            //ÇÃ·¹ÀÌ¾î ÇÁ¸®ÆÕ »ı¼º
+            //í”Œë ˆì´ì–´ í”„ë¦¬íŒ¹ ìƒì„±
             go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
             playerObject = go.GetComponentInChildren<PlayerObject>();
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
         if (deadMonsterCount >= currentStageData.monsterCount)
         {
             OnStageClear();
-            Debug.Log("½ºÅ×ÀÌÁö Å¬¸®¾î");
+            Debug.Log("ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´");
         }
     }
 
@@ -245,6 +245,7 @@ public class GameManager : MonoBehaviour
         if (playerHealth >= playerMaxHealth)
         {
             playerHealth = playerMaxHealth;
+            playerObject.CurrentHp = playerHealth;
         }
 
         if (playerHealth <= 0)
@@ -315,20 +316,35 @@ public class GameManager : MonoBehaviour
     {
         if (InputBlocker.blockKeyboardInput) return;
 
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    SetPlayerAttack(10);
+        //}
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SetPlayerAttack(10);
+            SetMaxHealth(10);
         }
-
         if (Input.GetKeyDown(KeyCode.W))
+        {
+            SetMaxHealth(-10);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
         {
             SetHealth(10);
         }
-
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartNewGame();
+            SetHealth(-10);
         }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            SetGold(1000);
+        }
+
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    StartNewGame();
+        //}
 
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -337,14 +353,8 @@ public class GameManager : MonoBehaviour
             Debug.Log(isClear);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SetMaxHealth(10);
-        }
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            SetMaxHealth(-10);
-        }
+
+
     }
 }
