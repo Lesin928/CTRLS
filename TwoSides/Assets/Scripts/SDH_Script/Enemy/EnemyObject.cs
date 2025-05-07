@@ -7,14 +7,13 @@ using UnityEngine;
 // NOTE:
 
 /// <summary>
-/// 적 오브젝트의 기본 동작을 정의하는 클래스.
-/// 이동, 감지, 공격, 상태 전이 등의 기능을 포함함.
+/// 적 오브젝트의 기본 동작을 정의하는 클래스입니다.
+/// 이동, 감지, 공격, 상태 전이 등의 기능을 포함합니다.
 /// </summary>
 public class EnemyObject : CharacterObject
 {
     #region [Move Info]
     [Header("Move Info")]
-    //public float moveSpeed;        // 현재 이동 속도
     public float defaultMoveSpeed; // 기본 이동 속도
     public float chaseSpeed;       // 추격 시 속도
     #endregion
@@ -29,20 +28,30 @@ public class EnemyObject : CharacterObject
     [Header("Collider Info")]
     [SerializeField] protected Transform groundCheck;     // 지면 감지 위치
     [SerializeField] protected float groundCheckDistance; // 지면 감지 거리
+    [Space]
     [SerializeField] protected Transform wallCheck;       // 벽 감지 위치
     [SerializeField] protected float wallCheckDistance;   // 벽 감지 거리
+    [Space]
     [SerializeField] protected Transform playerCheck;     // 플레이어 감지 위치
     [SerializeField] protected float playerCheckRadius;   // 플레이어 감지 반경
+    [Space]
     public Transform attackCheck;                         // 공격 판정 위치
     public float attackCheckRadius;                       // 공격 판정 반경
     [Space]
-    [SerializeField] protected LayerMask whatIsGround; // 지면 레이어
-    [SerializeField] protected LayerMask whatIsPlayer; // 플레이어 레이어
+    [SerializeField] protected LayerMask whatIsGround;    // 지면 레이어
+    [SerializeField] protected LayerMask whatIsWall;      // 벽 레이어
+    [SerializeField] protected LayerMask whatIsPlayer;    // 플레이어 레이어
+    #endregion
+
+    #region [Flash Effect]
+    [Header("Flash Effect")]
+    [SerializeField] private EnemyFlashEffect flashEffect; // 플래시 이펙트
     #endregion
 
     #region [Components]
     public Animator anim { get; private set; }  // 애니메이터 컴포넌트
     public Rigidbody2D rb { get; private set; } // Rigidbody2D 컴포넌트
+    public Collider2D col { get; private set; } // Collider2D 컴포넌트
     #endregion
 
     #region [StateMachine]
@@ -59,8 +68,7 @@ public class EnemyObject : CharacterObject
     protected bool facingRight = true;              // 오른쪽 바라보고 있는지 여부
     #endregion
 
-    // 플래시 이펙트
-    [SerializeField] private EnemyFlashEffect flashEffect;
+    public float colliderWidth { get; private set; }
 
     // 스테이트 머신 초기화
     protected virtual void Awake()
@@ -78,6 +86,8 @@ public class EnemyObject : CharacterObject
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         flashEffect = GetComponentInChildren<EnemyFlashEffect>();
+        col = GetComponent<Collider2D>();
+        colliderWidth = col.bounds.size.x;
     }
 
     // 현재 상태 갱신
@@ -225,24 +235,31 @@ public class EnemyObject : CharacterObject
     }
     #endregion
 
+    /// <summary>
+    /// 데미지를 받아 현재 체력을 계산하고 상태를 전환합니다.
+    /// </summary>
+    /// <param name="_damage">플레이어의 데미지 값</param>
     public override void TakeDamage(float _damage)
-    {        
+    {
+        // 방어력과 데미지를 고려한 체력 감소 계산
         CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
-        flashEffect.Flash();
-        if (CurrentHp <= 0)
+
+        flashEffect.Flash(); // 피격 시 플래시 효과 실행
+
+        if (CurrentHp <= 0)  // 체력이 0 이하이면 죽은 상태로 전환
         {
             CurrentHp = 0;
             stateMachine.ChangeState(deadState);
         }
-        else
+        else // 체력이 남아 있고 공격 중이 아니라면 피격 상태로 전환
         {
-            if(!stateMachine.isAttacking) // 공격 중이 아니라면 hitState로 전환
+            if (!stateMachine.isAttacking)
                 stateMachine.ChangeState(hitState);
         }
     }
 
+    // 사망 시 처리 로직 (EnemyObject에서는 사용 X)
     protected override void Die()
     {
-
     }
 }

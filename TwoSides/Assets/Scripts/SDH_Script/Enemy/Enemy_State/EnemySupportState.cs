@@ -12,7 +12,7 @@ public enum BuffType
 }
 
 /// <summary>
-/// 주변 아군에게 버프를 부여하는 적의 상태
+/// 주변 아군에게 버프를 부여하는 적의 상태 클래스
 /// </summary>
 public class EnemySupportState : EnemyState
 {
@@ -49,7 +49,6 @@ public class EnemySupportState : EnemyState
     /// </summary>
     public override void Update()
     {
-        Debug.Log("Support");
         base.Update();
 
         // 지원 범위 내의 적들을 감지
@@ -225,6 +224,4 @@ public class EnemySupportState : EnemyState
         if (electricLine != null)
             Object.Destroy(electricLine.gameObject);
     }
-
-
 }

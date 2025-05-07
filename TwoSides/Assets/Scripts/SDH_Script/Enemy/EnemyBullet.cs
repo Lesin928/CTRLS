@@ -13,8 +13,8 @@ public class EnemyBullet : MonoBehaviour
     protected Rigidbody2D rb;
 
     [Header("Settings")]
-    [SerializeField] float speed = 10f;      // 총알의 이동 속도
-    [SerializeField] float lifeTime = 5f;    // 총알의 생명 시간
+    [SerializeField] float speed = 10f;   // 총알의 이동 속도
+    [SerializeField] float lifeTime = 5f; // 총알의 생명 시간
 
     private EnemyObject attacker;
 
@@ -77,6 +77,9 @@ public class EnemyBullet : MonoBehaviour
             // 충돌 후 총알 정지
             rb.linearVelocity = Vector2.zero;
 
+            // 콜라이더 비활성화
+            GetComponent<Collider2D>().enabled = false;
+
             // 플레이어에게 데미지 전달
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
@@ -89,6 +92,9 @@ public class EnemyBullet : MonoBehaviour
 
             // 충돌 후 총알 정지
             rb.linearVelocity = Vector2.zero;
+
+            // 콜라이더 비활성화
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 

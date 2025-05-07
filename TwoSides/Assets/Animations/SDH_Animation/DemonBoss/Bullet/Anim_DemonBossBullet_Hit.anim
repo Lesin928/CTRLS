@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Anim_DemonBossBullet_Hit
+  serializedVersion: 7
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves:
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 734921443871284771, guid: ceb67e69db6fd3a4cb5050f7f793e2c7, type: 3}
+    - time: 0.083333336
+      value: {fileID: 2656154264633674181, guid: 4149c8f853a925c4bab1cee439cdec58, type: 3}
+    - time: 0.16666667
+      value: {fileID: 2819930445710378775, guid: 47468650d0b8e6d4fa7f1689b0d24d65, type: 3}
+    - time: 0.25
+      value: {fileID: 4105677564670704765, guid: 3671f600c72fb0d4bb723b85edcdcf73, type: 3}
+    - time: 0.33333334
+      value: {fileID: 1085366320161256188, guid: f106ad3b97191ce44b8bbec523a90441, type: 3}
+    - time: 0.41666666
+      value: {fileID: 8254359074528771835, guid: f4a29775f08326840a68ec22fe338254, type: 3}
+    - time: 0.5
+      value: {fileID: 540237191306650401, guid: 910f509f2b73f394b9a89843c053b3be, type: 3}
+    - time: 0.5833333
+      value: {fileID: -1478767890369487409, guid: eed0290a5a35ea7478902a763fe9ad13, type: 3}
+    - time: 0.6666667
+      value: {fileID: -5428976676156183313, guid: dc8d50093db6f3d49824048becfa45a2, type: 3}
+    - time: 0.75
+      value: {fileID: 3606151909249849053, guid: 968f0f95c58d0bf47992b3f3202fbe75, type: 3}
+    - time: 0.8333333
+      value: {fileID: 2357385956728538252, guid: 8a1d65f72196baf4d8c8921c5ae6985d, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  m_SampleRate: 12
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    pptrCurveMapping:
+    - {fileID: 734921443871284771, guid: ceb67e69db6fd3a4cb5050f7f793e2c7, type: 3}
+    - {fileID: 2656154264633674181, guid: 4149c8f853a925c4bab1cee439cdec58, type: 3}
+    - {fileID: 2819930445710378775, guid: 47468650d0b8e6d4fa7f1689b0d24d65, type: 3}
+    - {fileID: 4105677564670704765, guid: 3671f600c72fb0d4bb723b85edcdcf73, type: 3}
+    - {fileID: 1085366320161256188, guid: f106ad3b97191ce44b8bbec523a90441, type: 3}
+    - {fileID: 8254359074528771835, guid: f4a29775f08326840a68ec22fe338254, type: 3}
+    - {fileID: 540237191306650401, guid: 910f509f2b73f394b9a89843c053b3be, type: 3}
+    - {fileID: -1478767890369487409, guid: eed0290a5a35ea7478902a763fe9ad13, type: 3}
+    - {fileID: -5428976676156183313, guid: dc8d50093db6f3d49824048becfa45a2, type: 3}
+    - {fileID: 3606151909249849053, guid: 968f0f95c58d0bf47992b3f3202fbe75, type: 3}
+    - {fileID: 2357385956728538252, guid: 8a1d65f72196baf4d8c8921c5ae6985d, type: 3}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 0.9166666
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_Events:
+  - time: 0.8333333
+    functionName: DestroyTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

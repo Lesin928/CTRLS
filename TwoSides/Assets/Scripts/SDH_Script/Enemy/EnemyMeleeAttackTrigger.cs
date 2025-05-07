@@ -2,10 +2,6 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-// TODO:
-// FIXME:
-// NOTE: 공격 범위 처리 방식 리팩토링 예정
-
 /// <summary>
 /// 적의 근접 공격 애니메이션 트리거를 처리하는 클래스입니다.
 /// 공격 범위 내에 플레이어가 있으면 공격 성공 메시지를 출력합니다.

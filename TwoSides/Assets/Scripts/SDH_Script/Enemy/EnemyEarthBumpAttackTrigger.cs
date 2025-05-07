@@ -19,6 +19,6 @@ public class EnemyEarthBumpAttackTrigger : EnemyAnimationTrigger
         // 지진 범위 공격 객체의 스크립트를 가져와서 활성화
         EnemyEarthBump earthBumpScript = earthBump.GetComponent<EnemyEarthBump>();
         earthBumpScript.SetAttacker(enemy); // 발사자 전달
-        earthBumpScript.Active(enemy.facingDir);
+        earthBumpScript.SetDirection(enemy.facingDir);// 방향 설정
     }
 }
