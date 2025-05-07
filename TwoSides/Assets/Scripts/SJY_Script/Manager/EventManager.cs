@@ -73,6 +73,8 @@ public class EventManager : MonoBehaviour
         Debug.Log("이벤트 종료");
         EventPanel.SetActive(false);
         HUDManager.Instance.ResumGame();
+
+        GameManager.Instance.OnStageClear();
     }
 
     private void Event(int id)

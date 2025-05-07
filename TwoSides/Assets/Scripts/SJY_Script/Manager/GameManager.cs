@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private int deadMonsterCount = 0;
     public bool isClear = false;
 
-    //public GameObject mapButton;
+    public PlayerObject playerObject;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -54,27 +54,6 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Title")
             HUDManager.Instance.HideHUD();
-        //{
-        //    if (mapButton != null)
-        //    {
-        //        Debug.Log("MapButton is inactive in GameManager.");
-        //        mapButton.SetActive(false);
-        //    }
-
-        //    else
-        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
-        //}
-        //else
-        //{
-        //    if (mapButton != null)
-        //    {
-        //        Debug.Log("MapButton is active in GameManager.");
-        //        mapButton.SetActive(true);
-        //    }
-
-        //    else
-        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
-        //}
     }
 
     public static void Init()
@@ -117,6 +96,8 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
+
+        playerObject = Object.FindAnyObjectByType<PlayerObject>();
 
         playerMaxHealth = 100;
         playerHealth = playerMaxHealth;
@@ -165,7 +146,6 @@ public class GameManager : MonoBehaviour
 
             if (currentStage > maxStage)
             {
-                // 이걸 보스스테이지에서 체크하는 방법으로 바꿔야ㅑ함
                 GameClear();
             }
         }
@@ -233,6 +213,7 @@ public class GameManager : MonoBehaviour
     public void SetHealth(float value)
     {
         playerHealth += value;
+        playerObject.CurrentHp = playerHealth;
 
         if (playerHealth >= playerMaxHealth)
         {
@@ -250,11 +231,13 @@ public class GameManager : MonoBehaviour
     public void SetMaxHealth(float value)
     {
         playerMaxHealth += value;
+        playerObject.MaxHp = playerMaxHealth;
         HUDManager.Instance.SetMaxHealth(playerMaxHealth);
 
         if (playerHealth >= playerMaxHealth)
         {
             playerHealth = playerMaxHealth;
+            playerObject.CurrentHp = playerHealth;
             HUDManager.Instance.SetHealth(playerHealth);
         }
 
@@ -267,31 +250,37 @@ public class GameManager : MonoBehaviour
     public void SetPlayerArmor(float value)
     {
         playerArmor += value;
+        playerObject.Armor = playerArmor;
     }
 
     public void SetPlayerAttack(float value)
     {
         playerAttack += value;
+        playerObject.Attack = playerAttack;
     }
 
     public void SetPlayerAttackSpeed(float value)
     {
         playerAttackSpeed += value;
+        playerObject.AttackSpeed = playerAttackSpeed;
     }
 
     public void SetPlayerMoveSpeed(float value)
     {
         playerMoveSpeed += value;
+        playerObject.MoveSpeed = playerMoveSpeed;
     }
 
     public void SetPlayerCritical(float value)
     {
         playerCritical += value;
+        playerObject.Critical = playerCritical;
     }
 
     public void SetPlayerCriticalDamage(float value)
     {
         playerCriticalDamage += value;
+        playerObject.CriticalDamage = playerCriticalDamage;
     }
     #endregion
 
