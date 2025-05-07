@@ -9,24 +9,29 @@ using UnityEngine;
 /// </summary>
 public class PlayerDontDestroyOnLoad : MonoBehaviour
 {
-    public PlayerDontDestroyOnLoad p;
+    private PlayerDontDestroyOnLoad p;
+    //플레이어 오브젝트
+    private GameObject player;
 
     private void Awake()
     {
         p = FindAnyObjectByType<PlayerDontDestroyOnLoad>();
-        
+        //자식 오브젝트중 플레이어 오브젝트의 Transform 컴포넌트를 가져옴
+        player = GameObject.Find("Player");
+
         // 씬 이동 시 중복 방지
         if (p != null && p != this)
-        { 
+        {
             Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
     }
-
     private void Start()
     {
-        //플레이어 위치 초기화 
+        // 씬 이동 시 플레이어 위치 초기화
+        player.transform.localPosition = Vector3.zero;
+
         GameObject spawnPoint = GameObject.Find("Starting_Point");
         if (spawnPoint != null && spawnPoint.CompareTag("StartingPoint"))
         {
