@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
 // NOTE : (기타 작성)
@@ -26,8 +27,9 @@ public class PlayerDontDestroyOnLoad : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    private void Start()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // 씬 이동 시 플레이어 위치 초기화
         player.transform.localPosition = Vector3.zero;
