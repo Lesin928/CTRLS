@@ -56,12 +56,23 @@ public class PuzzleManager1 : MonoBehaviour
 
     void Update()
     {
-        // ÆÛÁñÀÌ Å¬¸®¾îµÇÁö ¾Ê¾Ò°í ÆÛÁñÃ¢ÀÌ ¿­·Á ÀÖÀ» ¶§ F Å°·Î ´Ý±â
-        if (Input.GetKeyDown(KeyCode.F) && !puzzleCleared && puzzlePanel.activeSelf)
+        if (puzzleCleared) return;
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            puzzlePanel.SetActive(false); // ÆÛÁñ Ã¢ ´Ý±â
+            if (puzzlePanel.activeSelf)
+            {
+                puzzlePanel.SetActive(false); // ÆÐ³Î ´Ý±â
+                Debug.Log("ÆÛÁñ Ã¢ ´Ý±â");
+            }
+            else
+            {
+                puzzlePanel.SetActive(true); // ÆÐ³Î ¿­±â
+                Debug.Log("ÆÛÁñ Ã¢ ¿­±â");
+            }
         }
     }
+
 
 
     /// <summary>

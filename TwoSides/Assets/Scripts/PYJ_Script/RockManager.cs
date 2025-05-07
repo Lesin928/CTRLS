@@ -101,11 +101,14 @@ public class RockManager : MonoBehaviour
 
     public void StartGame()
     {
-        gameStarted = true; // 게임 시작 상태로 변경
-        gameOverPanel.SetActive(false); // 게임 오버 패널 숨기기
-        gameClearPanel.SetActive(false); // 게임 클리어 패널 숨기기
-        Time.timeScale = 1;  // 게임이 멈추지 않도록 설정
+        gameStarted = true;
+        gameOverPanel.SetActive(false);
+        gameClearPanel.SetActive(false);
+        Time.timeScale = 1;
+
+        StartSpawning(); // 이 줄 추가!
     }
+
 
 
 
@@ -126,6 +129,14 @@ public class RockManager : MonoBehaviour
     void StopSpawning()
     {
         CancelInvoke(nameof(SpawnRock));
+
+        // 게임 오버 상태면 클리어 처리하지 않음
+        if (hp <= 0)
+        {
+            Debug.Log("게임 오버 상태이므로 클리어 처리 안 함");
+            return;
+        }
+
         gameClearPanel.SetActive(true); // 클리어 UI 표시
         Debug.Log("게임 클리어 - 돌 스폰 중지");
     }
@@ -212,18 +223,25 @@ public class RockManager : MonoBehaviour
     /// <summary>
     /// 플레이어가 피해를 입을 때 호출되는 함수
     /// </summary>
-    public void TakeDamage()
+    public void TakeDamage2()
     {
-        Debug.Log("바위 충돌!"); // 디버그 메시지
-        hp--; // 체력 감소
-        UpdateHPText(); // 체력 텍스트 업데이트
-        UpdateHearts(); // 하트 UI 업데이트
+        Debug.Log("바위 충돌!");
+        hp--;
+        UpdateHPText();
+        UpdateHearts();
 
         if (hp <= 0)
         {
-            gameOverPanel.SetActive(true); // 게임 오버 패널 표시
+            gameOverPanel.SetActive(true);
+
+            // 클리어 방지를 위해 예약된 StopSpawning 취소
+            CancelInvoke(nameof(StopSpawning));
+
+            // 바위 생성도 멈춤
+            CancelInvoke(nameof(SpawnRock));
         }
     }
+
 
 
 

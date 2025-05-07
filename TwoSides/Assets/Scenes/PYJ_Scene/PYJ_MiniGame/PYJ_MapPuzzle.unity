@@ -31353,11 +31353,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6642513903006819401, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.396651
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6642513903006819401, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19961977
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33380,6 +33380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1bedb050e7e3045b605fae187a04a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzlePanel: {fileID: 1397973148}
   piecePrefab: {fileID: 6138534453614429779, guid: 5d28bcf6852d2e345a00acf1ba1ddeab, type: 3}
   puzzleParent: {fileID: 1397973149}
   puzzleSprites:
@@ -33584,7 +33585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42090b43e8a046447b172f9faea7db28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzlePanel: {fileID: 1397973148}
 --- !u!1001 &1081338917
 PrefabInstance:
   m_ObjectHideFlags: 0
