@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     private int deadMonsterCount = 0;
     public bool isClear = false;
 
-    //public GameObject mapButton;
+    public GameObject playerPrefab;
+    public PlayerObject playerObject;
+    public GameObject go;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -31,6 +33,8 @@ public class GameManager : MonoBehaviour
     public float playerMoveSpeed;
     public float playerCritical;
     public float playerCriticalDamage;
+    public float playerjumpForce;
+    public float playerDashForce;
     #endregion
 
     private void Awake()
@@ -51,30 +55,6 @@ public class GameManager : MonoBehaviour
         playerHealth = playerMaxHealth;
         playerGold = 0;
         currentStage = 1;
-
-        if (SceneManager.GetActiveScene().name == "Title")
-            HUDManager.Instance.HideHUD();
-        //{
-        //    if (mapButton != null)
-        //    {
-        //        Debug.Log("MapButton is inactive in GameManager.");
-        //        mapButton.SetActive(false);
-        //    }
-
-        //    else
-        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
-        //}
-        //else
-        //{
-        //    if (mapButton != null)
-        //    {
-        //        Debug.Log("MapButton is active in GameManager.");
-        //        mapButton.SetActive(true);
-        //    }
-
-        //    else
-        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
-        //}
     }
 
     public static void Init()
@@ -106,11 +86,20 @@ public class GameManager : MonoBehaviour
         else
             Debug.Log($"[GameManager] {sceneName} 스테이지 데이터 초기화 완료 - 몬스터 수: {currentStageData.monsterCount}");
 
-        if (currentStageData.stageName.Contains("Mystery")
-            || currentStageData.stageName.Contains("Puzzle")
-            || currentStageData.stageName.Contains("Store"))
+        if (currentStageData.stageName == "Tutorial")
         {
-            OnStageClear();
+            //플레이어 프리팹 생성
+            go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+
+            //playerObject = playerPrefab.GetComponentInChildren<PlayerObject>();
+            playerObject = go.GetComponentInChildren<PlayerObject>();
+            if (playerObject == null)
+            {
+                Debug.LogError("PlayerObject not found in PlayerSet hierarchy");
+                return;
+            }
+
+            SetUpPlayerStats();
         }
     }
 
@@ -118,9 +107,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Start New Game");
 
-        playerMaxHealth = 100;
-        playerHealth = playerMaxHealth;
-        playerGold = 0;
         currentStage = 1;
         isClear = false;
 
@@ -149,9 +135,36 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.ChangeBGM("IngameBGM");
 
         //LoadStage(currentStage);
-        LoadingSceneController.Instance.LoadScene("Battle0");
+        //LoadingSceneController.Instance.LoadScene("Battle0");
+        LoadingSceneController.Instance.LoadScene("Tutorial");
 
 
+    }
+    private void SetUpPlayerStats()
+    {
+        playerMaxHealth = 100;
+        playerHealth = playerMaxHealth;
+        playerAttack = 5f;
+        playerArmor = 3f;
+        playerAttackSpeed = 1f;
+        playerCritical = 0.1f;
+        playerCriticalDamage = 2f;
+        playerMoveSpeed = 7f;
+        playerjumpForce = 13f;
+        playerDashForce = 15f;
+
+        playerObject.MaxHp = playerMaxHealth;
+        playerObject.CurrentHp = playerHealth;
+        playerObject.Armor = playerArmor;
+        playerObject.Attack = playerAttack;
+        playerObject.AttackSpeed = playerAttackSpeed;
+        playerObject.Critical = playerCritical;
+        playerObject.CriticalDamage = playerCriticalDamage;
+        playerObject.MoveSpeed = playerMoveSpeed;
+        playerObject.JumpForce = playerjumpForce;
+        playerObject.DashForce = playerDashForce;
+
+        playerGold = 0;
     }
 
     public void OnStageClear()
@@ -163,9 +176,8 @@ public class GameManager : MonoBehaviour
             isClear = true;
             currentStage++;
 
-            if (currentStage > maxStage)
+            if (currentStage > maxStage && Mapbutton.Instance.clearOn)
             {
-                // 이걸 보스스테이지에서 체크하는 방법으로 바꿔야ㅑ함
                 GameClear();
             }
         }
@@ -219,10 +231,9 @@ public class GameManager : MonoBehaviour
         HUDManager.Instance.SetGold(value);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float hp)
     {
-        playerHealth -= damage;
-        HUDManager.Instance.SetHealth(playerHealth);
+        playerHealth = hp;
 
         if (playerHealth <= 0)
         {
@@ -233,6 +244,7 @@ public class GameManager : MonoBehaviour
     public void SetHealth(float value)
     {
         playerHealth += value;
+        playerObject.CurrentHp = playerHealth;
 
         if (playerHealth >= playerMaxHealth)
         {
@@ -250,11 +262,13 @@ public class GameManager : MonoBehaviour
     public void SetMaxHealth(float value)
     {
         playerMaxHealth += value;
+        playerObject.MaxHp = playerMaxHealth;
         HUDManager.Instance.SetMaxHealth(playerMaxHealth);
 
         if (playerHealth >= playerMaxHealth)
         {
             playerHealth = playerMaxHealth;
+            playerObject.CurrentHp = playerHealth;
             HUDManager.Instance.SetHealth(playerHealth);
         }
 
@@ -267,31 +281,37 @@ public class GameManager : MonoBehaviour
     public void SetPlayerArmor(float value)
     {
         playerArmor += value;
+        playerObject.Armor = playerArmor;
     }
 
     public void SetPlayerAttack(float value)
     {
         playerAttack += value;
+        playerObject.Attack = playerAttack;
     }
 
     public void SetPlayerAttackSpeed(float value)
     {
         playerAttackSpeed += value;
+        playerObject.AttackSpeed = playerAttackSpeed;
     }
 
     public void SetPlayerMoveSpeed(float value)
     {
         playerMoveSpeed += value;
+        playerObject.MoveSpeed = playerMoveSpeed;
     }
 
     public void SetPlayerCritical(float value)
     {
         playerCritical += value;
+        playerObject.Critical = playerCritical;
     }
 
     public void SetPlayerCriticalDamage(float value)
     {
         playerCriticalDamage += value;
+        playerObject.CriticalDamage = playerCriticalDamage;
     }
     #endregion
 
@@ -301,17 +321,12 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SetGold(10);
+            SetPlayerAttack(10);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             SetHealth(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(10);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -335,9 +350,5 @@ public class GameManager : MonoBehaviour
         {
             SetMaxHealth(-10);
         }
-        /*if (Input.GetKeyDown(KeyCode.A))
-        {
-            GameClear();
-        }*/
     }
 }

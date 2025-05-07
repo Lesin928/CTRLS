@@ -21,6 +21,7 @@ public class StoreManager : MonoBehaviour
         rerollButton.onClick.AddListener(RerollItems);
         exitButton.onClick.AddListener(ExitStore);
 
+        GameManager.Instance.isClear = true;
     }
 
     void Update()

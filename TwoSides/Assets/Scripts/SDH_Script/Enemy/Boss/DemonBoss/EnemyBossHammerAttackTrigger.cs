@@ -1,20 +1,20 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ Slash °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç Æ®¸®°Å¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// °ø°Ý ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖÀ¸¸é °ø°Ý ¼º°ø ¸Þ½ÃÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.
+/// ï¿½ï¿½ï¿½ï¿½ Slash ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 /// </summary>
 public class EnemyBossHammerAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject hamerPrefab; // Hammer ÇÁ¸®ÆÕ
-    [SerializeField] private GameObject magicPrefab; // Magic ÇÁ¸®ÆÕ
-    [SerializeField] private Transform firePoint;    // °ø°Ý ¹ß»ç À§Ä¡
-    [SerializeField] private Transform handPoint;    // ¼Õ À§Ä¡
+    [SerializeField] private GameObject hamerPrefab; // Hammer ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private GameObject magicPrefab; // Magic ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Transform firePoint;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
+    [SerializeField] private Transform handPoint;    // ï¿½ï¿½ ï¿½ï¿½Ä¡
 
-    // HammerMagic ¿ÀºêÁ§Æ®(¸¶¹ýÁø)¸¦ »ý¼º (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
+    // HammerMagic ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
     private void HammerMagicTrigger()
     {
-        // HammerMagic(¸¶¹ýÁø) ÇÁ¸®ÆÕÀ» handPoint¿¡ »ý¼º
+        // HammerMagic(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ handPointï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject magic = Instantiate(magicPrefab, handPoint.position, Quaternion.identity);
 
         EnemyBossHammerMagic magicScript = magic.GetComponent<EnemyBossHammerMagic>();
@@ -22,27 +22,27 @@ public class EnemyBossHammerAttackTrigger : EnemyAnimationTrigger
     }
 
     /// <summary>
-    /// ½ÇÁ¦ Hammer¸¦ ¹ß»çÇÏ´Â Æ®¸®°ÅÀÔ´Ï´Ù.
-    /// EnemyBossHammerMagic DestroyTrigger()¿¡¼­ È£ÃâµË´Ï´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ Hammerï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+    /// EnemyBossHammerMagic DestroyTrigger()ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ë´Ï´ï¿½.
     /// </summary>
     public void HammerAttackTrigger()
     {
-        // ºÎ¸ð EnemyObject¸¦ °¡Á®¿È
+        // ï¿½Î¸ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Hammer ÇÁ¸®ÆÕÀ» ¹ß»ç ÁöÁ¡¿¡ »ý¼º
+        // Hammer ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject hammer = Instantiate(hamerPrefab, firePoint.position, Quaternion.identity);
 
-        // Hammer °´Ã¼ÀÇ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í¼­ È°¼ºÈ­
+        // Hammer ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ È°ï¿½ï¿½È­
         EnemyBossHammer hammerScript = hammer.GetComponent<EnemyBossHammer>();
-        hammerScript.SetAttacker(enemy); // ¹ß»çÀÚ Àü´Þ
+        hammerScript.SetAttacker(enemy); // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         hammerScript.SetDirection(enemy.facingDir);
     }
 
-    // ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¿Ï·áµÇ¾úÀ» ¶§ È£ÃâµÇ´Â ¸Þ¼­µå
+    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     private void HammerAnimationTrigger()
     {
-        // ÀûÀÇ ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¿Ï·áµÇ¾úÀ½À» ¾Ë¸®´Â ¸Þ¼­µå¸¦ È£Ãâ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½å¸¦ È£ï¿½ï¿½
         enemy.AnimationFinishTrigger();
     }
 }

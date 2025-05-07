@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SJY_Scene/Title.unity
     guid: 0b2a49d5d1f8cc9429dda97a591c1b13
   - enabled: 1
+    path: Assets/Scenes/SJY_Scene/Tutorial.unity
+    guid: edd27611d17a31f4983f1b5cbf197ac3
+  - enabled: 1
     path: Assets/Scenes/SJY_Scene/Battle/Battle0.unity
     guid: 4dfe0865967d887449af81f422245cfb
   - enabled: 1
@@ -38,7 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SJY_Scene/Battle/Battle9.unity
     guid: 4f09d4c05efcc7b42a655c3967b78bdc
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SJY_Scene/Mystery/Mystery0.unity
     guid: 810445f0b6b6ebd4dbecf1ded400832e
   - enabled: 1

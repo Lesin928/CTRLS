@@ -1,30 +1,30 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ Smash °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç Æ®¸®°Å¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// °ø°Ý ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖÀ¸¸é °ø°Ý ¼º°ø ¸Þ½ÃÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.
+/// ï¿½ï¿½ï¿½ï¿½ Smash ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 /// </summary>
 public class EnemyBossSmashAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject smashPrefab; // Smash ÇÁ¸®ÆÕ
-    [SerializeField] private Transform firePoint;    // °ø°Ý ¹ß»ç À§Ä¡
+    [SerializeField] private GameObject smashPrefab; // Smash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Transform firePoint;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
 
-    private GameObject smash; // »ý¼ºµÈ smash ¿ÀºêÁ§Æ® ÀúÀå
+    private GameObject smash; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ smash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
     /// <summary>
-    /// Smash¸¦ È°¼ºÈ­ÇÏ´Â Æ®¸®°ÅÀÔ´Ï´Ù.
+    /// Smashï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ï´ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
     /// </summary>
     private void SmashAttackTrigger()
     {
-        // ºÎ¸ð EnemyObject¸¦ °¡Á®¿È
+        // ï¿½Î¸ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Smash ÇÁ¸®ÆÕÀ» ¹ß»ç ÁöÁ¡¿¡ »ý¼º
+        // Smash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         smash = Instantiate(smashPrefab, firePoint.position, Quaternion.identity);
 
-        // Slash °´Ã¼ÀÇ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í¼­ È°¼ºÈ­
+        // Slash ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ È°ï¿½ï¿½È­
         EnemyBossSmash smashScript = smash.GetComponent<EnemyBossSmash>();
-        smashScript.SetAttacker(enemy); // ¹ß»çÀÚ Àü´Þ
+        smashScript.SetAttacker(enemy); // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         smashScript.SetDirection(enemy.facingDir);
     }
 
@@ -32,7 +32,7 @@ public class EnemyBossSmashAttackTrigger : EnemyAnimationTrigger
     {
         if (smash != null)
         {
-            Destroy(smash); // ¾Ö´Ï¸ÞÀÌ¼Ç ³¡³¯ ¶§ »èÁ¦
+            Destroy(smash); // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             smash = null;
         }
     }
@@ -49,7 +49,7 @@ public class EnemyBossSmashAttackTrigger : EnemyAnimationTrigger
 
     private void SmashAnimationTrigger()
     {
-        // ÀûÀÇ ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¿Ï·áµÇ¾úÀ½À» ¾Ë¸®´Â ¸Þ¼­µå¸¦ È£Ãâ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½å¸¦ È£ï¿½ï¿½
         enemy.AnimationFinishTrigger();
     }
 }

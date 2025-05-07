@@ -1,35 +1,35 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ Meteor °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç Æ®¸®°Å¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// °ø°Ý ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖÀ¸¸é °ø°Ý ¼º°ø ¸Þ½ÃÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.
+/// ï¿½ï¿½ï¿½ï¿½ Meteor ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 /// </summary>
 public class EnemyBossMeteorAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject meteorPrefab; // Meteor ÇÁ¸®ÆÕ
-    [SerializeField] private Transform firePoint;     // °ø°Ý ¹ß»ç À§Ä¡
+    [SerializeField] private GameObject meteorPrefab; // Meteor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Transform firePoint;     // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
 
     /// <summary>
-    /// ½ÇÁ¦ Meteor¸¦ ¹ß»çÇÏ´Â Æ®¸®°ÅÀÔ´Ï´Ù.
-    /// ¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®·Î È£ÃâµË´Ï´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ Meteorï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+    /// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ È£ï¿½ï¿½Ë´Ï´ï¿½.
     /// </summary>
     private void MeteorAttackTrigger()
     {
-        // ºÎ¸ð EnemyObject¸¦ °¡Á®¿È
+        // ï¿½Î¸ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Meteor ÇÁ¸®ÆÕÀ» ¹ß»ç ÁöÁ¡¿¡ »ý¼º
+        // Meteor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject meteor = Instantiate(meteorPrefab, firePoint.position, Quaternion.identity);
 
-        // Meteor °´Ã¼ÀÇ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í¼­ È°¼ºÈ­
+        // Meteor ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ È°ï¿½ï¿½È­
         EnemyBossMeteor meteorScript = meteor.GetComponent<EnemyBossMeteor>();
-        meteorScript.SetAttacker(enemy); // ¹ß»çÀÚ Àü´Þ
+        meteorScript.SetAttacker(enemy); // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         meteorScript.SetDirection(enemy.facingDir);
     }
 
     private void MeteorAnimationTrigger()
     {
-        // ÀûÀÇ ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¿Ï·áµÇ¾úÀ½À» ¾Ë¸®´Â ¸Þ¼­µå¸¦ È£Ãâ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½å¸¦ È£ï¿½ï¿½
         enemy.AnimationFinishTrigger();
     }
 }

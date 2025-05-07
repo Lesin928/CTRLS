@@ -1,15 +1,15 @@
 using UnityEngine;
 
 /// <summary>
-/// BossÀÇ Slash °ø°Ý ÀÌÆåÆ®¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¸¦ ÅëÇØ È°¼ºÈ­µÇ¸ç, ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã Ã³¸® ·ÎÁ÷À» ¼öÇàÇÕ´Ï´Ù.
+/// Bossï¿½ï¿½ Slash ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 /// </summary>
 public class EnemyBossSmash : MonoBehaviour
 {
-    private EnemyObject attacker; // °ø°ÝÀ» ¹ß»çÇÑ Àû °´Ã¼
+    private EnemyObject attacker; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼
 
     /// <summary>
-    /// °ø°ÝÀ» ¹ß»çÇÑ EnemyObject¸¦ °¡Á®¿À´Â ÇÔ¼öÀÔ´Ï´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
@@ -17,9 +17,9 @@ public class EnemyBossSmash : MonoBehaviour
     }
 
     /// <summary>
-    /// ÀûÀÇ ¹Ù¶óº¸´Â ¹æÇâ¿¡ ¸ÂÃç ÀÌÆåÆ® ¹æÇâÀ» ¼³Á¤ÇÕ´Ï´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
-    /// <param name="facingDir">ÀûÀÌ ¹Ù¶óº¸´Â ¹æÇâ (1 ¶Ç´Â -1)</param>
+    /// <param name="facingDir">ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (1 ï¿½Ç´ï¿½ -1)</param>
     public void SetDirection(int facingDir)
     {
         Vector3 scale = transform.localScale;
@@ -27,12 +27,12 @@ public class EnemyBossSmash : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã È£Ãâ
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ È£ï¿½ï¿½
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // ÇÃ·¹ÀÌ¾î¿¡°Ô µ¥¹ÌÁö Àü´Þ
+            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }

@@ -1,25 +1,25 @@
 using UnityEngine;
 
 /// <summary>
-/// º¸½ºÀÇ Slash °ø°Ý ÀÌÆåÆ®¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¸¦ ÅëÇØ È°¼ºÈ­µÇ¸ç, ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã Ã³¸® ·ÎÁ÷À» ¼öÇàÇÕ´Ï´Ù.
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Slash ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 /// </summary>
 public class EnemyBossSlashMagic : MonoBehaviour
 {
-    private EnemyBossSlashAttackTrigger attackTrigger; // Slash °ø°ÝÀ» Æ®¸®°ÅÇÏ´Â ÂüÁ¶ º¯¼ö
+    private EnemyBossSlashAttackTrigger attackTrigger; // Slash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     /// <summary>
-    /// Slash °ø°Ý Æ®¸®°Å¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+    /// Slash ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
     public void SetAttackTrigger(EnemyBossSlashAttackTrigger trigger)
     {
         attackTrigger = trigger;
     }
 
-    // ¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÇ¾î °ø°ÝÀ» ½ÇÇàÇÏ°í ¿ÀºêÁ§Æ®¸¦ »èÁ¦ÇÔ
+    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void DestroyTrigger()
     {
-        attackTrigger.SlashAttackTrigger(); // Slash °ø°Ý ½ÇÇà
+        attackTrigger.SlashAttackTrigger(); // Slash ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Destroy(gameObject);
     }
 }

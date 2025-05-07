@@ -1,8 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// DemonBoss ¿ÀºêÁ§Æ®ÀÇ »óÅÂ ¹× Çàµ¿À» Á¤ÀÇÇÑ Å¬·¡½ºÀÔ´Ï´Ù.
-/// EnemyObject¸¦ »ó¼ÓÇÏ¸ç, »óÅÂ ¸Ó½ÅÀ» ÅëÇØ Idle, Patrol, Chase, Attack »óÅÂ¸¦ °ü¸®ÇÕ´Ï´Ù.
+/// DemonBoss ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+/// EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Idle, Patrol, Chase, Attack ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 /// </summary>
 public class DemonBossObject : EnemyObject
 {
@@ -17,22 +17,22 @@ public class DemonBossObject : EnemyObject
     [SerializeField] Vector2 longAttackCheckSize;
 
     #region State
-    public EnemyIdleState idleState { get; private set; }     // ´ë±â »óÅÂ
-    public EnemyPatrolState patrolState { get; private set; } // ¼øÂû »óÅÂ
-    public EnemyChaseState chaseState { get; private set; }   // Ãß°Ý »óÅÂ
-    public EnemyAttackState attack1State { get; private set; } // °ø°Ý »óÅÂ
-    public EnemyAttackState attack2State { get; private set; } // °ø°Ý »óÅÂ
-    public EnemyAttackState attack3State { get; private set; } // °ø°Ý »óÅÂ
-    public EnemyAttackState attack4State { get; private set; } // °ø°Ý »óÅÂ
-    public EnemyAttackState attack5State { get; private set; } // °ø°Ý »óÅÂ
-    public EnemyAttackState attack6State { get; private set; } // °ø°Ý »óÅÂ
+    public EnemyIdleState idleState { get; private set; }     // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyPatrolState patrolState { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyChaseState chaseState { get; private set; }   // ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyAttackState attack1State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyAttackState attack2State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyAttackState attack3State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyAttackState attack4State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyAttackState attack5State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyAttackState attack6State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
 
-        // »óÅÂ ÀÎ½ºÅÏ½º ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½Ê±ï¿½È­
         idleState = new EnemyIdleState(this, stateMachine, "Idle");
         patrolState = new EnemyPatrolState(this, stateMachine, "Move");
         chaseState = new EnemyChaseState(this, stateMachine, "Move");
@@ -48,7 +48,7 @@ public class DemonBossObject : EnemyObject
     {
         base.Start();
 
-        // ½ÃÀÛ ½Ã Idle »óÅÂ·Î ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Idle ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ê±ï¿½È­
         stateMachine.Initialize(idleState);
     }
 
@@ -58,19 +58,19 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// SlimeBoss -> DemonBoss ÀüÈ¯½Ã ¹æÇâ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+    /// SlimeBoss -> DemonBoss ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
     /// </summary>
-    /// <param name="direction">SlimeBossÀÇ ¹æÇâ°ª</param>
+    /// <param name="direction">SlimeBossï¿½ï¿½ ï¿½ï¿½ï¿½â°ª</param>
     public void InitFacingDir(int direction)
     {
         if (facingDir != direction)
         {
-            Flip(); // ¹æÇâÀÌ ´Ù¸£¸é µÚÁý±â
+            Flip(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ Å½ÁöµÇ¾úÀ» ¶§ Ãß°Ý »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// ï¿½Ã·ï¿½ï¿½Ì¾î°¡ Å½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
     /// </summary>
     public override void EnterPlayerDetection()
     {
@@ -78,7 +78,7 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î¸¦ Å½ÁöÇÏÁö ¸øÇÒ °æ¿ì ¼øÂû »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Å½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
     /// </summary>
     public override void ExitPlayerDetection()
     {
@@ -86,13 +86,13 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// È£Ãâ ½Ã °ø°Ý »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
-    /// °ø°Ý ÆÐÅÏÀ» ·£´ýÀ¸·Î È£ÃâÇÕ´Ï´Ù.
+    /// È£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
     public override void CallAttackState()
     {
         float distanceX = Mathf.Abs(transform.position.x - PlayerManager.instance.player.transform.position.x);
-        float rand = Random.value; // 0.0f ~ 1.0f »çÀÌÀÇ float
+        float rand = Random.value; // 0.0f ~ 1.0f ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ float
 
         if (closeRangeDetected())
             stateMachine.ChangeState(attack4State);
@@ -121,7 +121,7 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// È£Ãâ ½Ã ´ë±â »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// È£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
     /// </summary>
     public override void CallIdleState()
     {

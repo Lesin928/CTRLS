@@ -1,13 +1,13 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ Slash °ø°Ý ÀÌÆåÆ®¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¸¦ ÅëÇØ È°¼ºÈ­µÇ¸ç, ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã Ã³¸® ·ÎÁ÷À» ¼öÇàÇÕ´Ï´Ù.
+/// ï¿½ï¿½ï¿½ï¿½ Slash ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 /// </summary>
 public class EnemyBossHammer : MonoBehaviour
 {
-    [SerializeField] GameObject hurricanePrefab; // Hurricane ÇÁ¸®ÆÕ
-    private EnemyObject attacker;                // °ø°ÝÀ» ¹ß»çÇÑ Àû °´Ã¼
+    [SerializeField] GameObject hurricanePrefab; // Hurricane ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private EnemyObject attacker;                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼
 
     private void Start()
     {
@@ -15,29 +15,29 @@ public class EnemyBossHammer : MonoBehaviour
     }
 
     /// <summary>
-    /// °ø°ÝÀ» ¹ß»çÇÑ EnemyObject¸¦ °¡Á®¿À´Â ÇÔ¼öÀÔ´Ï´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
         attacker = enemy;
     }
 
-    // °ø°Ý È°¼ºÈ­ (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
+    // ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
     private void EnableAttack()
     {
         GetComponent<Collider2D>().enabled = true;
     }
 
-    // °ø°Ý ºñÈ°¼ºÈ­ (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
     private void DisableAttack()
     {
         GetComponent<Collider2D>().enabled = false;
     }
 
     /// <summary>
-    /// ÀûÀÇ ¹Ù¶óº¸´Â ¹æÇâ¿¡ ¸ÂÃç ÀÌÆåÆ® ¹æÇâÀ» ¼³Á¤ÇÕ´Ï´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
-    /// <param name="facingDir">ÀûÀÌ ¹Ù¶óº¸´Â ¹æÇâ (1 ¶Ç´Â -1)</param>
+    /// <param name="facingDir">ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (1 ï¿½Ç´ï¿½ -1)</param>
     public void SetDirection(int facingDir)
     {
         Vector3 scale = transform.localScale;
@@ -45,28 +45,28 @@ public class EnemyBossHammer : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã È£Ãâ
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ È£ï¿½ï¿½
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // ÇÃ·¹ÀÌ¾î¿¡°Ô µ¥¹ÌÁö Àü´Þ
+            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }
 
     private void SpawnHurricaneTrigger()
     {
-        // Slash ÇÁ¸®ÆÕÀ» ¹ß»ç ÁöÁ¡¿¡ »ý¼º
+        // Slash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject hurricane = Instantiate(hurricanePrefab, transform.position, Quaternion.identity);
 
-        // Slash °´Ã¼ÀÇ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í¼­ È°¼ºÈ­
+        // Slash ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ È°ï¿½ï¿½È­
         EnemyBossHurricane hurricaneScript = hurricane.GetComponent<EnemyBossHurricane>();
-        hurricaneScript.SetAttacker(attacker); // ¹ß»çÀÚ Àü´Þ
+        hurricaneScript.SetAttacker(attacker); // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         hurricaneScript.SetDirection(attacker.facingDir);
     }
 
-    // ¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÇ¾î ÀÌÆåÆ® ¿ÀºêÁ§Æ®¸¦ ÆÄ±«
+    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ä±ï¿½
     private void DestroyTrigger()
     {
         Destroy(gameObject);

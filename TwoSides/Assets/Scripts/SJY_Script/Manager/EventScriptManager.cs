@@ -55,6 +55,9 @@ public class EventScriptManager : MonoBehaviour
 
     public string GetEventScript(int id, int scriptIndex)
     {
+        if (EventScript.ContainsKey(id) == false)
+            return null;
+
         if (scriptIndex == EventScript[id].Length)
         {
             return null;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
 // NOTE : (기타 작성)
@@ -9,24 +10,32 @@ using UnityEngine;
 /// </summary>
 public class PlayerDontDestroyOnLoad : MonoBehaviour
 {
-    public PlayerDontDestroyOnLoad p;
+    private PlayerDontDestroyOnLoad p;
+    //플레이어 오브젝트
+    private GameObject player;
 
     private void Awake()
     {
         p = FindAnyObjectByType<PlayerDontDestroyOnLoad>();
-        
+        //자식 오브젝트중 플레이어 오브젝트의 Transform 컴포넌트를 가져옴
+        player = GameObject.Find("Player");
+
         // 씬 이동 시 중복 방지
         if (p != null && p != this)
-        { 
+        {
             Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
-    private void Start()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //플레이어 위치 초기화 
+        // 씬 이동 시 플레이어 위치 초기화
+        if (this == null)
+            return;
+        player.transform.localPosition = Vector3.zero;
+
         GameObject spawnPoint = GameObject.Find("Starting_Point");
         if (spawnPoint != null && spawnPoint.CompareTag("StartingPoint"))
         {

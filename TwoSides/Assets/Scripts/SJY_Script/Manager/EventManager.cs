@@ -19,6 +19,7 @@ public class EventManager : MonoBehaviour
     private int id;
     public bool isEventFinished;
     private int scriptIndex;
+    public bool isEventTalk = false;
 
     private void Awake()
     {
@@ -36,23 +37,26 @@ public class EventManager : MonoBehaviour
         if (fixedEventId > 0)
             id = fixedEventId;
         else if (GameManager.Instance.currentStage == 1)
+        {
             id = TUTORIAL;
+            isEventTalk = true;
+        }
         else
             id = EventScriptManager.Instance.GetScriptId();
         isEventFinished = false;
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
-    //    {
-    //        StartEvent();
-    //    }
-    //    else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
-    //    {
-    //        ExitEvent();
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
+        {
+            StartEvent();
+        }
+        else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
+        {
+            ExitEvent();
+        }
+    }
 
     private void OnDestroy()
     {
@@ -72,7 +76,30 @@ public class EventManager : MonoBehaviour
     {
         Debug.Log("이벤트 종료");
         EventPanel.SetActive(false);
-        HUDManager.Instance.ResumGame();
+        //HUDManager.Instance.ResumGame();
+
+
+        if (isEventTalk)
+        {
+            GameManager.Instance.OnStageClear();
+        }
+        else
+        {
+            id++;
+            scriptIndex = 0;
+            isEventFinished = false;
+
+            if (EventScriptManager.Instance.GetEventScript(id, scriptIndex) == null)
+            {
+                Debug.Log("저스트이벤트 종료");
+                isEventFinished = true;
+                GameManager.Instance.OnStageClear();
+                // return;
+            }
+
+            //StartEvent();
+        }
+
     }
 
     private void Event(int id)
@@ -82,7 +109,7 @@ public class EventManager : MonoBehaviour
         else
             EventTalk(id);
 
-        HUDManager.Instance.PauseGame();
+        //HUDManager.Instance.PauseGame();
     }
 
     private void Talk(int id)
