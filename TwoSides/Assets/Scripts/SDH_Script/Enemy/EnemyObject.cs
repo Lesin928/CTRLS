@@ -176,7 +176,6 @@ public class EnemyObject : CharacterObject
     /// </summary>
     public void Flip()
     {
-
         facingDir *= -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
