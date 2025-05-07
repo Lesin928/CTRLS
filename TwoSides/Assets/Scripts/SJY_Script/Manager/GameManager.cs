@@ -91,17 +91,29 @@ public class GameManager : MonoBehaviour
         {
             OnStageClear();
         }
+
+        if (currentStageData.stageName == "Battle0")
+        {
+            GameObject playerSet = GameObject.Find("PlayerSet");
+            if (playerSet == null)
+            {
+                Debug.LogError("PlayerSet not found in scene");
+                return;
+            }
+
+            playerObject = playerSet.GetComponentInChildren<PlayerObject>();
+            if (playerObject == null)
+            {
+                Debug.LogError("PlayerObject not found in PlayerSet hierarchy");
+                return;
+            }
+        }
     }
 
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
-
-        playerObject = Object.FindAnyObjectByType<PlayerObject>();
-
-        playerMaxHealth = 100;
-        playerHealth = playerMaxHealth;
-        playerGold = 0;
+        SetUpPlayerStats();
         currentStage = 1;
         isClear = false;
 
@@ -133,6 +145,28 @@ public class GameManager : MonoBehaviour
         LoadingSceneController.Instance.LoadScene("Battle0");
 
 
+    }
+    private void SetUpPlayerStats()
+    {
+        playerMaxHealth = 100;
+        playerHealth = playerMaxHealth;
+        playerAttack = 5f;
+        playerArmor = 3f;
+        playerAttackSpeed = 1f;
+        playerCritical = 0.1f;
+        playerCriticalDamage = 2f;
+
+        playerObject.MaxHp = playerMaxHealth;
+        playerObject.CurrentHp = playerHealth;
+        playerObject.Armor = playerArmor;
+        playerObject.Attack = playerAttack;
+        playerObject.AttackSpeed = playerAttackSpeed;
+        playerObject.Critical = playerCritical;
+        playerObject.CriticalDamage = playerCriticalDamage;
+
+        //추후 MoveSpeed 세팅
+
+        playerGold = 0;
     }
 
     public void OnStageClear()
@@ -199,9 +233,9 @@ public class GameManager : MonoBehaviour
         HUDManager.Instance.SetGold(value);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage()
     {
-        playerHealth -= damage;
+        playerHealth = playerObject.CurrentHp;
         HUDManager.Instance.SetHealth(playerHealth);
 
         if (playerHealth <= 0)
@@ -298,11 +332,6 @@ public class GameManager : MonoBehaviour
             SetHealth(10);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(10);
-        }
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartNewGame();
@@ -324,9 +353,5 @@ public class GameManager : MonoBehaviour
         {
             SetMaxHealth(-10);
         }
-        /*if (Input.GetKeyDown(KeyCode.A))
-        {
-            GameClear();
-        }*/
     }
 }

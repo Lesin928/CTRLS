@@ -15,7 +15,7 @@ public class PlayerObject : CharacterObject
     protected PlayerAnimation playerAnimation;
     protected PlayerObject playerObject;
     protected GameObject iObject;
-    protected Rigidbody2D rb;    
+    protected Rigidbody2D rb;
     public GameObject attackCollider1;
     public GameObject attackCollider2;
     public GameObject skillCollider;
@@ -91,7 +91,7 @@ public class PlayerObject : CharacterObject
         get => jumpForce;
         set
         {
-            jumpForce = value; 
+            jumpForce = value;
         }
     }
     public virtual float DashForce
@@ -99,19 +99,19 @@ public class PlayerObject : CharacterObject
         get => dashForce;
         set
         {
-            dashForce = value; 
+            dashForce = value;
         }
-    } 
+    }
     #endregion
 
     #region Collision Info  
-    [Header("충돌 정보")]  
+    [Header("충돌 정보")]
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] private Vector2 moveInput;
     #endregion
-    
+
     #region 충돌 함수
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
@@ -120,7 +120,7 @@ public class PlayerObject : CharacterObject
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
     }
     #endregion
-      
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -133,17 +133,18 @@ public class PlayerObject : CharacterObject
     private void Start()
     {
         //추후 세팅
-        jumpForce = 10f; 
+        jumpForce = 10f;
         dashForce = 15f;
-        MoveSpeed = 7f;  
+        MoveSpeed = 7f;
         Attack = 3f;
-    }   
+    }
 
-    public override void TakeDamage(float damage)     
+    public override void TakeDamage(float damage)
     {
         if (isinvincibility) return; //무적 중이면 데미지 무시
         IsInvincibility = true; //무적 상태로 변경
-        base.TakeDamage(damage);        
+        base.TakeDamage(damage);
+        GameManager.Instance.TakeDamage();
         GetComponentInChildren<HitAnim>().Flash();
     }
 
@@ -172,5 +173,5 @@ public class PlayerObject : CharacterObject
             //대상 게임 오브젝트가 Interactive 태그를 가지고 있을 경우, 해제
             IObject = null;
         }
-    } 
+    }
 }
