@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate() //나중에 무브 스테이트로 이동
     {
+        if(playerObject.IsDeath) return; //사망 상태
+
         //대쉬 상태, 공격 상태가 아닐 때만 이동
         if (!playerObject.IsDashing && !playerObject.IsAttack && !playerObject.IsSkill)
         {
@@ -73,6 +75,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (playerObject.IsDeath) return; //사망 상태
         playerObject.MoveInput = context.ReadValue<Vector2>();
     }
 
@@ -81,6 +84,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (playerObject.IsDeath) return; //사망 상태
         if (playerObject.IsGroundDetected() && !playerObject.IsSkill)
         {
             groundIgnoreTimer = groundIgnoreDuration;
@@ -94,6 +98,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (playerObject.IsDeath) return; //사망 상태
         if (!playerObject.IsDashing && !playerObject.IsAttack)
         {
             playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
@@ -106,6 +111,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (playerObject.IsDeath) return; //사망 상태
         if (context.phase != InputActionPhase.Performed) return;
         if (playerObject.IsDashing) return;
         if (playerObject.IsSkill) return;
@@ -126,6 +132,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnShift(InputAction.CallbackContext context)
     {
+        if (playerObject.IsDeath) return; //사망 상태 
         Debug.Log("Shift! (Shift 버튼)");  
     } 
     /// <summary>
@@ -133,6 +140,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (playerObject.IsDeath) return; //사망 상태
         if (context.phase != InputActionPhase.Performed) return;        
         //만약 플레이어의 콜라이더가 Interactive를 상속한 오브젝트와 접해있을 경우
         if(playerObject.IObject != null)
@@ -149,6 +157,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnSkill(InputAction.CallbackContext context)
     {
+        if (playerObject.IsDeath) return; //사망 상태
         //프레스 입력인지 확인
         if (context.phase != InputActionPhase.Performed) return;
         if (playerObject.IsSkill) return; // 스킬 사용중이면 리턴
