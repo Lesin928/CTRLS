@@ -20,7 +20,7 @@ public class PlayerDeathState : PlayerState
         base.Update(); 
     } 
     public override void Exit()
-    { 
+    {
         base.Exit();
     }
 }

@@ -23,4 +23,14 @@ public class PlayerDontDestroyOnLoad : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+
+    private void Start()
+    {
+        //플레이어 위치 초기화 
+        GameObject spawnPoint = GameObject.Find("Starting_Point");
+        if (spawnPoint != null && spawnPoint.CompareTag("StartingPoint"))
+        {
+            transform.position = spawnPoint.transform.position;
+        }
+    }
 }

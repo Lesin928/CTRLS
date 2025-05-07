@@ -149,14 +149,7 @@ public class PlayerObject : CharacterObject
         Critical = 0.1f; //치명타 확률
         CriticalDamage = 2f; //치명타 피해 배율
         jumpForce = 13f; // 점프 힘
-        dashForce = 15f; // 대쉬 힘
-
-        //플레이어 위치 초기화 
-        GameObject spawnPoint = GameObject.Find("SpawnPoint");
-        if (spawnPoint != null && spawnPoint.CompareTag("StartingPoint"))        
-        {
-            transform.position = spawnPoint.transform.position;
-        }
+        dashForce = 15f; // 대쉬 힘 
     }   
 
     public override void TakeDamage(float damage)     
