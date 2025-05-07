@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,6 +40,7 @@ public class Map : MonoBehaviour
     public static RectTransform latestBackgroundBox;
     public GameObject clearMarkPrefab;
     public bool previousInteractionState = true;
+    //public bool doorConnected = false; // ✅ 추가
 
     public GameObject redDotPrefab; // ✅ 추가
     private GameObject redDotInstance; // ✅ 추가

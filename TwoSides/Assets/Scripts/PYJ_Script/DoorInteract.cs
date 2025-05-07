@@ -9,48 +9,49 @@ public class DoorInteract : Interactive
         doorCollider = GetComponent<Collider2D>();
         if (doorCollider == null)
         {
-            Debug.LogError("Collider2D ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù!");
+            Debug.LogError("Collider2D ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤!");
         }
 
-        doorCollider.enabled = false; // ½ÃÀÛ ½Ã Äİ¶óÀÌ´õ ºñÈ°¼ºÈ­
+        doorCollider.enabled = false; // ì‹œì‘ ì‹œ ì½œë¼ì´ë” ë¹„í™œì„±í™”
     }
 
     private void Update()
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager ÀÎ½ºÅÏ½º°¡ nullÀÔ´Ï´Ù!");
+            Debug.LogError("GameManager ì¸ìŠ¤í„´ìŠ¤ê°€ nullì…ë‹ˆë‹¤!");
             return;
         }
 
         if (doorCollider == null)
         {
-            Debug.LogError("doorCollider°¡ nullÀÔ´Ï´Ù!");
+            Debug.LogError("doorColliderê°€ nullì…ë‹ˆë‹¤!");
             return;
         }
 
         if (GameManager.Instance.isClear && !doorCollider.enabled)
         {
             doorCollider.enabled = true;
-            Debug.Log("Å¬¸®¾î »óÅÂ °¨ÁöµÊ ¡æ ¹® Äİ¶óÀÌ´õ È°¼ºÈ­");
+            Debug.Log("í´ë¦¬ì–´ ìƒíƒœ ê°ì§€ë¨ â†’ ë¬¸ ì½œë¼ì´ë” í™œì„±í™”");
         }
     }
 
 
     public override void PressF()
     {
-        // GameManager.Instance.isClear °ª È®ÀÎ
-        Debug.Log("PressF È£Ãâ ½Ã isClear °ª: " + GameManager.Instance.isClear);
+        // GameManager.Instance.isClear ê°’ í™•ì¸
+        Debug.Log("PressF í˜¸ì¶œ ì‹œ isClear ê°’: " + GameManager.Instance.isClear);
 
         if (GameManager.Instance.isClear)
         {
-            Debug.Log("¹® °³¹æ! ´ÙÀ½ ¸ÊÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù.");//Áöµµ ¿­¸®°Ô 
+            Debug.Log("ë¬¸ ê°œë°©! ë‹¤ìŒ ë§µìœ¼ë¡œ ì´ë™í•©ë‹ˆë‹¤.");//ì§€ë„ ì—´ë¦¬ê²Œ 
             Mapbutton.Instance.clearOn = true;
+            //Map.Instance.doorConnected = true;
             Mapbutton.Instance.GameClearAutoButton();
         }
         else
         {
-            Debug.Log("¸ó½ºÅÍ°¡ ¾ÆÁ÷ ³²¾Ò´Ù...");//¾ÆÁ÷ ¸øÇÔ
+            Debug.Log("ëª¬ìŠ¤í„°ê°€ ì•„ì§ ë‚¨ì•˜ë‹¤...");//ì•„ì§ ëª»í•¨
         }
     }
 }

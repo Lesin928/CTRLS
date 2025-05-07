@@ -25,6 +25,7 @@ public class BattleButton : MonoBehaviour
         sceneName += rand.ToString();
         GameManager.Instance.isClear = false;
         Mapbutton.Instance.clearOn = false;
+        //Map.Instance.doorConnected = false;
         map.SetActive(false);
         LoadingSceneController.Instance.LoadScene(sceneName);
     }

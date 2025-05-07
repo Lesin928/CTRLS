@@ -8,7 +8,7 @@ public class MysteryButton : MonoBehaviour
     private void Awake()
     {
         if (map == null)
-            map = GameObject.Find("MapScrollArea"); // ÀÌ¸§ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ
+            map = GameObject.Find("MapScrollArea"); // ì´ë¦„ ì •í™•íˆ ì¼ì¹˜í•´ì•¼ í•¨
 
         isUsed[0] = true;
     }
@@ -27,6 +27,7 @@ public class MysteryButton : MonoBehaviour
         map.SetActive(false);
         GameManager.Instance.isClear = false;
         Mapbutton.Instance.clearOn = false;
+        //Map.Instance.doorConnected = false;
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

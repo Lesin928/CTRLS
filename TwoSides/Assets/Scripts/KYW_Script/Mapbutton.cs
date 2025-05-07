@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,17 +31,17 @@ public class Mapbutton : MonoBehaviour
         rect.localScale = isVisible ? Vector3.one : new Vector3(0f, 1f, 1f);
 
     }
-    
+
 
     void Update()
     {
         GameClearAutoButton();
     }
-    
+
     public void GameClearAutoButton()
     {
         //조건이 만족되면 A 버튼 클릭
-        if (GameManager.Instance.isClear &&  clearOn && !map.activeSelf)
+        if (GameManager.Instance.isClear && clearOn && !map.activeSelf)
         {
             aButton.onClick.Invoke(); //코드에서 클릭 실행
             clearOn = false;
