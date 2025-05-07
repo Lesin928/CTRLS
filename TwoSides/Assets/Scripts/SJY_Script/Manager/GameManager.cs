@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
             //플레이어 프리팹 생성
             go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
-            //playerObject = playerPrefab.GetComponentInChildren<PlayerObject>();
             playerObject = go.GetComponentInChildren<PlayerObject>();
             if (playerObject == null)
             {
@@ -134,12 +133,9 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.ChangeBGM("IngameBGM");
 
-        //LoadStage(currentStage);
-        //LoadingSceneController.Instance.LoadScene("Battle0");
         LoadingSceneController.Instance.LoadScene("Tutorial");
-
-
     }
+
     private void SetUpPlayerStats()
     {
         playerMaxHealth = 100;
