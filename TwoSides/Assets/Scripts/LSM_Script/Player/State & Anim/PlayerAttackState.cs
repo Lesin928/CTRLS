@@ -21,8 +21,9 @@ public class PlayerAttackState : PlayerState
         if (playerObject.IsGroundDetected())
         {
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); //미끄러짐 방지
+            //공중에서 바닥에 닿으면 멈추게 하는게 좋지 않을까? 리팩토링 예정
         }        
-        if (playerObject.MoveInput.x != 0) //공격 중 이동
+        if (playerObject.MoveInput.x != 0 && playerObject.IsGroundDetected()) //공격 중 이동
         {
             playerObject.transform.position += new Vector3(playerAnimation.Getfacing() * 1f, 0f, 0f);
         }

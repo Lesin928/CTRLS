@@ -6,9 +6,9 @@ using System.Collections;
 // NOTE : (기타 작성)
 
 /// <summary>
-/// 플레이어의 근접 공격 데미지를 관리하는 클래스
+/// 플레이어의 근접 스킬 데미지를 관리하는 클래스
 /// </summary>
-public class DaggerAttack : MonoBehaviour
+public class DaggerSkill : MonoBehaviour
 {    
     [SerializeField]
     private GameObject effect;
@@ -23,7 +23,7 @@ public class DaggerAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
-        { 
+        {
             if (collision.gameObject.GetComponent<EnemyObject>() != null)
             {
                 collision.gameObject.GetComponent<EnemyObject>().TakeDamage(IsCritical());
@@ -45,7 +45,7 @@ public class DaggerAttack : MonoBehaviour
     /// </summary>
     private float IsCritical()
     {
-        float finalDamage = playerObject.Attack; // 기본 데미지
+        float finalDamage = playerObject.Attack * 1.4f; // 기본 데미지 * 스킬 계수
         //치명타 판정
         if (Random.Range(0f, 1f) < playerObject.Critical)
         {
