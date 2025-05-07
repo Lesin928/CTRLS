@@ -1,5 +1,5 @@
-﻿using System.Threading;
-using UnityEditor.Experimental.GraphView;
+﻿//using System.Threading;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
@@ -15,7 +15,7 @@ public class EnemyBossBullet : MonoBehaviour
     [Header("Settings")]
     [SerializeField] float speed = 10f;       // 총알의 이동 속도
     [SerializeField] float lifeTime = 5f;     // 총알의 생명 시간
-    [SerializeField] GameObject vortexPrefab; 
+    [SerializeField] GameObject vortexPrefab;
 
     private EnemyObject attacker;
 
@@ -84,7 +84,7 @@ public class EnemyBossBullet : MonoBehaviour
 
     /// 충돌 처리 함수
     void OnTriggerEnter2D(Collider2D collision)
-    {   
+    {
         // 플레이어와 충돌한 경우
         if (collision.CompareTag("Player"))
         {

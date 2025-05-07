@@ -97,6 +97,8 @@ MonoBehaviour:
     monsterCount: 0
   - stageName: Mystery9
     monsterCount: 0
+  - stageName: Tutorial
+    monsterCount: 0
   - stageName: Store
     monsterCount: 0
   currentStageData:
@@ -105,6 +107,7 @@ MonoBehaviour:
   isClear: 0
   playerPrefab: {fileID: 4293148247142581802, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
   playerObject: {fileID: 0}
+  go: {fileID: 0}
   playerGold: 0
   playerHealth: 0
   playerMaxHealth: 0
@@ -114,3 +117,5 @@ MonoBehaviour:
   playerMoveSpeed: 0
   playerCritical: 0
   playerCriticalDamage: 0
+  playerjumpForce: 0
+  playerDashForce: 0
