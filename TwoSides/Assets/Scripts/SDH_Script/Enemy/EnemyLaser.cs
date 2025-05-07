@@ -1,5 +1,4 @@
-﻿using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// 적의 레이저 오브젝트를 처리하는 클래스입니다.

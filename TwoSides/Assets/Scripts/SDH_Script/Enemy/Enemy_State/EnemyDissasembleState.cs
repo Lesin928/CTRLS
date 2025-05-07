@@ -1,11 +1,12 @@
 using UnityEngine;
 
 /// <summary>
-/// 적의 죽음 상태 클래스
+/// 적의 대기 상태 클래스
 /// </summary>
-public class EnemyDeadState : EnemyState
+public class EnemyDissasembleState : EnemyState
 {
-    public EnemyDeadState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
+    // EnemyDissasembleState 생성자
+    public EnemyDissasembleState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName)
         : base(enemyBase, stateMachine, animBoolName)
     {
     }
@@ -28,10 +29,12 @@ public class EnemyDeadState : EnemyState
     {
         base.Update();
 
-        //GameManager.Instance.OnMonsterDead();
-
         if (triggerCalled)
-            GameObject.Destroy(enemyBase.gameObject);
+        {
+            // 플레이어가 탐지되면 추적 상태 진입
+            if (enemyBase.IsPlayerDetected())
+                enemyBase.EnterPlayerDetection();
+        }
     }
 
     /// <summary>

@@ -1,11 +1,12 @@
 using UnityEngine;
 
 /// <summary>
-/// 적의 죽음 상태 클래스
+/// 적의 대기 상태 클래스
 /// </summary>
-public class EnemyDeadState : EnemyState
+public class EnemyAssembleState : EnemyState
 {
-    public EnemyDeadState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
+    // EnemyAssembleState 생성자
+    public EnemyAssembleState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName)
         : base(enemyBase, stateMachine, animBoolName)
     {
     }
@@ -19,6 +20,9 @@ public class EnemyDeadState : EnemyState
 
         // 정지 상태로 전환
         enemyBase.SetZeroVelocity();
+
+        // 대기 시간 설정
+        stateTimer = 0.5f;
     }
 
     /// <summary>
@@ -28,10 +32,10 @@ public class EnemyDeadState : EnemyState
     {
         base.Update();
 
-        //GameManager.Instance.OnMonsterDead();
-
         if (triggerCalled)
-            GameObject.Destroy(enemyBase.gameObject);
+        {
+            enemyBase.CallChaseState();
+        }
     }
 
     /// <summary>

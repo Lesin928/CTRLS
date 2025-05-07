@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// 총알 객체를 처리하는 클래스입니다.
@@ -67,7 +65,7 @@ public class EnemyBullet : MonoBehaviour
 
     /// 충돌 처리 함수
     void OnTriggerEnter2D(Collider2D collision)
-    {   
+    {
         // 플레이어와 충돌한 경우
         if (collision.CompareTag("Player"))
         {

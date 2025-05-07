@@ -1,5 +1,3 @@
-using System.Collections;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 // TODO:
@@ -121,6 +119,10 @@ public class EnemyObject : CharacterObject
     /// 대기(Idle) 상태로 전환 요청을 합니다.
     /// </summary>
     public virtual void CallIdleState()
+    {
+    }
+
+    public virtual void CallChaseState()
     {
     }
 
