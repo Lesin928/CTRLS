@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class PuzzleManager1 : MonoBehaviour
 {
 
+
+    public GameObject puzzlePanel;
+
+
     /// 퍼즐 매니저 싱글톤 인스턴스
     public static PuzzleManager1 Instance;
 
@@ -30,6 +34,7 @@ public class PuzzleManager1 : MonoBehaviour
         Instance = this;
     }
 
+    private bool puzzleCleared = false; // 퍼즐 클리어 여부
 
 
 
@@ -43,6 +48,20 @@ public class PuzzleManager1 : MonoBehaviour
 
 
 
+    public bool IsPuzzleCleared()
+    {
+        return puzzleCleared;
+    }
+
+
+    void Update()
+    {
+        // 퍼즐이 클리어되지 않았고 퍼즐창이 열려 있을 때 F 키로 닫기
+        if (Input.GetKeyDown(KeyCode.F) && !puzzleCleared && puzzlePanel.activeSelf)
+        {
+            puzzlePanel.SetActive(false); // 퍼즐 창 닫기
+        }
+    }
 
 
     /// <summary>
@@ -134,13 +153,15 @@ public class PuzzleManager1 : MonoBehaviour
         if (isCorrect)
         {
             Debug.Log("퍼즐 완성!");
-            // 퍼즐이 완성되면 퍼즐 패널을 닫는다
+            puzzleCleared = true; // 클리어 상태로 기록
+
             InteractiveObject interactiveObject = Object.FindFirstObjectByType<InteractiveObject>();
             if (interactiveObject != null)
             {
                 interactiveObject.HidePuzzle(); // 퍼즐 패널 숨기기
             }
         }
+
     }
 
 
