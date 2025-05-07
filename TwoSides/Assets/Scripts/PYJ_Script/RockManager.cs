@@ -114,11 +114,20 @@ public class RockManager : MonoBehaviour
     /// </summary>
     public void StartSpawning()
     {
-        if (gameStarted) // 게임이 시작되었다면
+        if (gameStarted)
         {
-            ShowHearts(); // 하트 UI 켜기
-            InvokeRepeating(nameof(SpawnRock), 1f, spawnInterval); // 바위 생성 시작
+            ShowHearts();
+            InvokeRepeating(nameof(SpawnRock), 1f, spawnInterval);
+
+            // survivalTime 후에 StopSpawning 호출 예약
+            Invoke(nameof(StopSpawning), survivalTime);
         }
+    }
+    void StopSpawning()
+    {
+        CancelInvoke(nameof(SpawnRock));
+        gameClearPanel.SetActive(true); // 클리어 UI 표시
+        Debug.Log("게임 클리어 - 돌 스폰 중지");
     }
 
 
@@ -139,44 +148,35 @@ public class RockManager : MonoBehaviour
     /// <summary>
     /// 매 프레임마다 호출되는 Update 함수 
     /// </summary>
+    private bool clearPanelClosing = false;
+
     void Update()
     {
-        // 게임 오버나 게임 클리어 상태에서 엔터 입력 체크
-        if ((gameOverPanel.activeSelf || gameClearPanel.activeSelf))
+        if (gameOverPanel.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.Return)) // 엔터 키 입력 시
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                if (gameOverPanel.activeSelf)
-                    gameOverPanel.SetActive(false);
-                if (gameClearPanel.activeSelf)
-                    gameClearPanel.SetActive(false);
-
+                gameOverPanel.SetActive(false);
                 CancelInvoke(nameof(SpawnRock));
                 gameStarted = false;
             }
             return;
         }
 
-        if (!gameStarted)
+        if (gameClearPanel.activeSelf && !clearPanelClosing)
+        {
+            clearPanelClosing = true; // 중복 실행 방지
+            Invoke(nameof(CloseClearPanel), 2f); // 2초 후 자동 종료
             return;
-
-        // 타이머를 줄여가며 게임 시간 흐름
-        timer -= Time.deltaTime;
-
-        // === 게임 클리어 조건 추가 ===
-        if (timer <= 2f)
-        {
-
-            CancelInvoke(nameof(SpawnRock));  // 바위 생성 중지
-
         }
+    }
 
-        if (timer <= 0f)
-        {
-            timer = 0f;
-            gameClearPanel.SetActive(true);   // 게임 클리어 UI 표시
-            gameStarted = false;              // 게임 종료
-        }
+    void CloseClearPanel()
+    {
+        gameClearPanel.SetActive(false);
+        CancelInvoke(nameof(SpawnRock));
+        gameStarted = false;
+        clearPanelClosing = false; // 다시 초기화
     }
 
 
