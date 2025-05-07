@@ -2,9 +2,17 @@ using UnityEngine;
 
 public class TitleButton : MonoBehaviour
 {
+    public GameObject playerPrefab;
+
     public void StartTitle()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
+        LoadingSceneController.Instance.LoadScene("Title");
+
+        playerPrefab = GameObject.Find("PlayerSet(Clone)");
+        if (playerPrefab != null)
+        {
+            Destroy(playerPrefab);
+        }
 
         HUDManager.Instance.InitHUD();
         HUDManager.Instance.HideHUD();

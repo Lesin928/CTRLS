@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int deadMonsterCount = 0;
     public bool isClear = false;
 
+    public GameObject playerPrefab;
     public PlayerObject playerObject;
 
     #region PlayerStat
@@ -85,35 +86,26 @@ public class GameManager : MonoBehaviour
         else
             Debug.Log($"[GameManager] {sceneName} 스테이지 데이터 초기화 완료 - 몬스터 수: {currentStageData.monsterCount}");
 
-        if (currentStageData.stageName.Contains("Mystery")
-            || currentStageData.stageName.Contains("Puzzle")
-            || currentStageData.stageName.Contains("Store"))
-        {
-            OnStageClear();
-        }
-
         if (currentStageData.stageName == "Battle0")
         {
-            GameObject playerSet = GameObject.Find("PlayerSet");
-            if (playerSet == null)
-            {
-                Debug.LogError("PlayerSet not found in scene");
-                return;
-            }
+            //플레이어 프리팹 생성
+            Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
-            playerObject = playerSet.GetComponentInChildren<PlayerObject>();
+            playerObject = playerPrefab.GetComponentInChildren<PlayerObject>();
             if (playerObject == null)
             {
                 Debug.LogError("PlayerObject not found in PlayerSet hierarchy");
                 return;
             }
+
+            SetUpPlayerStats();
         }
     }
 
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
-        SetUpPlayerStats();
+
         currentStage = 1;
         isClear = false;
 
@@ -178,7 +170,7 @@ public class GameManager : MonoBehaviour
             isClear = true;
             currentStage++;
 
-            if (currentStage > maxStage)
+            if (currentStage > maxStage && Mapbutton.Instance.clearOn)
             {
                 GameClear();
             }
