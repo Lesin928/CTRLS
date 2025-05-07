@@ -150,21 +150,22 @@ public class PlayerObject : CharacterObject
         CriticalDamage = 2f; //ġ��Ÿ ���� ����
         jumpForce = 13f; // ���� ��
         dashForce = 15f; // �뽬 �� 
-    }   
+    }
 
     public override void TakeDamage(float damage)
     {
         if (isinvincibility) return; //���� ���̸� ������ ����
         IsInvincibility = true; //���� ���·� ����
         base.TakeDamage(damage);
-        GameManager.Instance.TakeDamage();
+
+        GameManager.Instance.TakeDamage(CurrentHp);
         GetComponentInChildren<HitAnim>().Flash();
     }
 
     protected override void Die() //���� Death ������Ʈ ����
     {
         IsDeath = true; //��� ���·� ����
-        playerAnimation.stateMachine.ChangeState(playerAnimation.deathState); 
+        playerAnimation.stateMachine.ChangeState(playerAnimation.deathState);
     }
 
     private IEnumerator DisableInvincibility(float delay)
