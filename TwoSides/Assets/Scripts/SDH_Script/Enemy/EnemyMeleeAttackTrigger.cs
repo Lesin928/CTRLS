@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+//using Unity.VisualScripting;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
@@ -19,7 +19,7 @@ public class EnemyMeleeAttackTrigger : EnemyAnimationTrigger
         foreach (var hit in colliders)
         {
             // 플레이어에게 데미지 전달
-            hit.GetComponent<PlayerObject>()?.TakeDamage(enemy.Attack); 
+            hit.GetComponent<PlayerObject>()?.TakeDamage(enemy.Attack);
         }
     }
 }

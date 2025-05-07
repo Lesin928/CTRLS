@@ -54,9 +54,6 @@ public class LoadingSceneController : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        if (HUDManager.Instance != null)
-            HUDManager.Instance.HideHUD();
-
         SceneManager.sceneLoaded += OnSceneLoaded;
         loadSceneName = sceneName;
         StartCoroutine(LoadSceneProcess());

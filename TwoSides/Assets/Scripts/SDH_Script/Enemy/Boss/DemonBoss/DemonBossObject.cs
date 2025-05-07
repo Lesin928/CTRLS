@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -97,7 +97,7 @@ public class DemonBossObject : EnemyObject
 
         if (closeRangeDetected())
             stateMachine.ChangeState(attack4State);
-        else if(midRangeDetected())
+        else if (midRangeDetected())
         {
             if (rand < 0.20f)
                 stateMachine.ChangeState(attack1State);
