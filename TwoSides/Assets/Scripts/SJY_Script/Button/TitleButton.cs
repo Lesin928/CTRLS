@@ -9,14 +9,22 @@ public class TitleButton : MonoBehaviour
         LoadingSceneController.Instance.LoadScene("Title");
 
         playerPrefab = GameObject.Find("PlayerSet(Clone)");
-        //playerPrefab = GameObject.Find("PlayerSet");
+
         if (playerPrefab != null)
         {
             Destroy(playerPrefab);
         }
 
-        HUDManager.Instance.InitHUD();
-        HUDManager.Instance.HideHUD();
+        if (HUDManager.Instance != null)
+        {
+            Debug.Log(HUDManager.Instance.gameObject.activeSelf + "1");
+        }
+
+        if (HUDManager.Instance != null)
+        {
+            Debug.Log(HUDManager.Instance.gameObject.activeSelf + "2");
+        }
+
         HideMapController.shouldShowHideMap = false;
         if (AudioManager.Instance != null)
         {
@@ -31,8 +39,6 @@ public class TitleButton : MonoBehaviour
                 go.SetActive(false);
                 Mapbtn.SetActive(false);
             }
-
-
         }
     }
 }

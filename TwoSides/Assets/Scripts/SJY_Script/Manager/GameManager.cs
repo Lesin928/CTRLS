@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     public float playerMoveSpeed;
     public float playerCritical;
     public float playerCriticalDamage;
+    public float playerjumpForce;
+    public float playerDashForce;
     #endregion
 
     private void Awake()
@@ -53,9 +55,6 @@ public class GameManager : MonoBehaviour
         playerHealth = playerMaxHealth;
         playerGold = 0;
         currentStage = 1;
-
-        if (SceneManager.GetActiveScene().name == "Title")
-            HUDManager.Instance.HideHUD();
     }
 
     public static void Init()
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour
         else
             Debug.Log($"[GameManager] {sceneName} 스테이지 데이터 초기화 완료 - 몬스터 수: {currentStageData.monsterCount}");
 
-        if (currentStageData.stageName == "Battle0")
+        if (currentStageData.stageName == "Tutorial")
         {
             //플레이어 프리팹 생성
             go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
@@ -136,7 +135,8 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.ChangeBGM("IngameBGM");
 
         //LoadStage(currentStage);
-        LoadingSceneController.Instance.LoadScene("Battle0");
+        //LoadingSceneController.Instance.LoadScene("Battle0");
+        LoadingSceneController.Instance.LoadScene("Tutorial");
 
 
     }
@@ -149,6 +149,9 @@ public class GameManager : MonoBehaviour
         playerAttackSpeed = 1f;
         playerCritical = 0.1f;
         playerCriticalDamage = 2f;
+        playerMoveSpeed = 7f;
+        playerjumpForce = 13f;
+        playerDashForce = 15f;
 
         playerObject.MaxHp = playerMaxHealth;
         playerObject.CurrentHp = playerHealth;
@@ -157,8 +160,9 @@ public class GameManager : MonoBehaviour
         playerObject.AttackSpeed = playerAttackSpeed;
         playerObject.Critical = playerCritical;
         playerObject.CriticalDamage = playerCriticalDamage;
-
-        //추후 MoveSpeed 세팅
+        playerObject.MoveSpeed = playerMoveSpeed;
+        playerObject.JumpForce = playerjumpForce;
+        playerObject.DashForce = playerDashForce;
 
         playerGold = 0;
     }
