@@ -28,13 +28,18 @@ public class StoreManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
         {
-            RerollItems();
-            Store.SetActive(true);
-            HUDManager.Instance.PauseGame();
-            Debug.Log("Store");
-
-            isStoreOpen = true;
+            OpenStore();
         }
+    }
+
+    public void OpenStore()
+    {
+        RerollItems();
+        Store.SetActive(true);
+        HUDManager.Instance.PauseGame();
+        Debug.Log("Store");
+
+        isStoreOpen = true;
     }
 
     void RerollItems()
