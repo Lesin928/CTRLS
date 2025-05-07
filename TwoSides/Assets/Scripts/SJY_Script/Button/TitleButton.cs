@@ -9,6 +9,7 @@ public class TitleButton : MonoBehaviour
         LoadingSceneController.Instance.LoadScene("Title");
 
         playerPrefab = GameObject.Find("PlayerSet(Clone)");
+        //playerPrefab = GameObject.Find("PlayerSet");
         if (playerPrefab != null)
         {
             Destroy(playerPrefab);
