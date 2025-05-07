@@ -70,14 +70,21 @@ public class InteractiveObject : MonoBehaviour
     /// <summary>
     /// 퍼즐 패널을 홯성화
     /// </summary>
-    void ShowPuzzle()
+    public void ShowPuzzle()
     {
-        if (puzzlePanel != null)
+        if (PuzzleManager1.Instance == null)
+            return;
+
+        if (PuzzleManager1.Instance.IsPuzzleCleared())
         {
-            puzzlePanel.SetActive(true);
-            Debug.Log("퍼즐이 시작되었습니다!");
+            Debug.Log("이미 퍼즐을 클리어했습니다!");
+            return;
         }
+
+        PuzzleManager1.Instance.puzzlePanel.SetActive(true);
     }
+
+
 
 
 

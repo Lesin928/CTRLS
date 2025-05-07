@@ -9,34 +9,34 @@ EditorBuildSettings:
     path: Assets/Scenes/SJY_Scene/Title.unity
     guid: 0b2a49d5d1f8cc9429dda97a591c1b13
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle0.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle0.unity
     guid: 4dfe0865967d887449af81f422245cfb
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle1.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle1.unity
     guid: c13f0265786edc142b7cd315d6632b99
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle2.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle2.unity
     guid: 056a0ba42d4de874e9c864afb2435a93
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle3.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle3.unity
     guid: d0bceaf775aa26142820af830d6b966b
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle4.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle4.unity
     guid: 113846b7e0123984e9aaac21fb9f417d
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle5.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle5.unity
     guid: 30c6b164234d8d649b9c6762558bcbd0
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle6.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle6.unity
     guid: 2e20ff5fd141d8f42b928315ecaf8360
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle7.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle7.unity
     guid: b32bf567c788e174c86221d9e2506646
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle8.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle8.unity
     guid: 52e1b14f9afdb654bba2df0dc52b0f8a
   - enabled: 1
-    path: Assets/Scenes/SJY_Scene/Battle/Battle9.unity
+    path: Assets/Scenes/SJY_Scene/Boss/Battle/Battle9.unity
     guid: 4f09d4c05efcc7b42a655c3967b78bdc
   - enabled: 0
     path: Assets/Scenes/SJY_Scene/Mystery/Mystery0.unity
