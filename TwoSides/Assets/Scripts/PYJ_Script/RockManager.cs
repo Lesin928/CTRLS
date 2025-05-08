@@ -139,6 +139,7 @@ public class RockManager : MonoBehaviour
 
         gameClearPanel.SetActive(true); // 클리어 UI 표시
         Debug.Log("게임 클리어 - 돌 스폰 중지");
+        GameManager.Instance.OnStageClear();
     }
 
 
@@ -180,6 +181,13 @@ public class RockManager : MonoBehaviour
             Invoke(nameof(CloseClearPanel), 2f); // 2초 후 자동 종료
             return;
         }
+
+        if (gameOverPanel.activeSelf)
+        {
+            clearPanelClosing = true; // 중복 실행 방지
+            Invoke(nameof(CloseOverPanel), 2f); // 2초 후 자동 종료
+            return;
+        }
     }
 
     void CloseClearPanel()
@@ -190,7 +198,13 @@ public class RockManager : MonoBehaviour
         clearPanelClosing = false; // 다시 초기화
     }
 
-
+    void CloseOverPanel()
+    {
+        gameOverPanel.SetActive(false);
+        CancelInvoke(nameof(SpawnRock));
+        gameStarted = false;
+        clearPanelClosing = false; // 다시 초기화
+    }
 
 
     /// <summary>
