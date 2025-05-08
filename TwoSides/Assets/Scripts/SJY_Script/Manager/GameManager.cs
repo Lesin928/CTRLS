@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
             isClear = true;
             currentStage++;
 
-            if (currentStage > maxStage && Mapbutton.Instance.clearOn)
+            if (currentStage > maxStage && Mapbutton.Instance.activeButton)
             {
                 GameClear();
             }

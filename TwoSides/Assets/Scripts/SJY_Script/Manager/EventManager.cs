@@ -12,7 +12,7 @@ public class EventManager : MonoBehaviour
     public Button EventButton1;
     public Button EventButton2;
 
-    //ÀÌº¥Æ® ¾Æ´Ñ ÀÏ¹İ´ëÈ­ Àü¿ë
+    //ì´ë²¤íŠ¸ ì•„ë‹Œ ì¼ë°˜ëŒ€í™” ì „ìš©
     public static int TUTORIAL = 101;
 
     public int fixedEventId = -1;
@@ -74,7 +74,7 @@ public class EventManager : MonoBehaviour
 
     public void ExitEvent()
     {
-        Debug.Log("ÀÌº¥Æ® Á¾·á");
+        Debug.Log("ì´ë²¤íŠ¸ ì¢…ë£Œ");
         EventPanel.SetActive(false);
         //HUDManager.Instance.ResumGame();
 
@@ -91,13 +91,10 @@ public class EventManager : MonoBehaviour
 
             if (EventScriptManager.Instance.GetEventScript(id, scriptIndex) == null)
             {
-                Debug.Log("Àú½ºÆ®ÀÌº¥Æ® Á¾·á");
+                Debug.Log("ì €ìŠ¤íŠ¸ì´ë²¤íŠ¸ ì¢…ë£Œ");
                 isEventFinished = true;
                 GameManager.Instance.OnStageClear();
-                // return;
             }
-
-            //StartEvent();
         }
 
     }

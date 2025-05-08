@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,6 +40,7 @@ public class Map : MonoBehaviour
     public static RectTransform latestBackgroundBox;
     public GameObject clearMarkPrefab;
     public bool previousInteractionState = true;
+    public bool doorConnected = false; // ✅ 추가
 
     public GameObject redDotPrefab; // ✅ 추가
     private GameObject redDotInstance; // ✅ 추가
@@ -64,11 +65,11 @@ public class Map : MonoBehaviour
 
     void Update()
     {
-        if (LEVEL != previousLevel || GameManager.Instance.isClear != previousInteractionState)
+        if (LEVEL != previousLevel || doorConnected != previousInteractionState)
         {
             RefreshButtonStates();
             previousLevel = LEVEL;
-            previousInteractionState = GameManager.Instance.isClear;
+            previousInteractionState = doorConnected;
         }
 
         IsClearCheck();
@@ -83,7 +84,7 @@ public class Map : MonoBehaviour
             redDotInstance = null;
         }
 
-        if (!GameManager.Instance.isClear && currentNode != null && redDotPrefab != null)
+        if (!doorConnected && currentNode != null && redDotPrefab != null)
         {
             redDotInstance = Instantiate(redDotPrefab, currentNode.transform);
             RectTransform rt = redDotInstance.GetComponent<RectTransform>();
@@ -93,7 +94,7 @@ public class Map : MonoBehaviour
 
     private void IsClearCheck()
     {
-        if (GameManager.Instance != null && GameManager.Instance.isClear && currentNode != null)
+        if (doorConnected && currentNode != null)
         {
             Button btn = currentNode.GetComponentInChildren<Button>();
             if (btn != null)
@@ -130,7 +131,7 @@ public class Map : MonoBehaviour
 
     void RefreshButtonStates()
     {
-        if (!GameManager.Instance.isClear)
+        if (!doorConnected)
         {
             foreach (MapNode node in grid)
             {
