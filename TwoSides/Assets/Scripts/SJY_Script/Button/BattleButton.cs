@@ -15,10 +15,17 @@ public class BattleButton : MonoBehaviour
     {
         string sceneName = "Battle";
 
-        int rand = Random.Range(0, 10);
+        //int rand = Random.Range(0, 10);
+        //while (isUsed[rand])
+        //{
+        //    rand = Random.Range(0, 10);
+        //}
+        //isUsed[rand] = true;
+
+        int rand = 0;
         while (isUsed[rand])
         {
-            rand = Random.Range(0, 10);
+            rand++;
         }
         isUsed[rand] = true;
 
