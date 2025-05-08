@@ -45,6 +45,8 @@ public class Map : MonoBehaviour
     public GameObject redDotPrefab; // ✅ 추가
     private GameObject redDotInstance; // ✅ 추가
 
+    public int battleNum = 0;
+
     void Start()
     {
         if (mapGenerated) return;
