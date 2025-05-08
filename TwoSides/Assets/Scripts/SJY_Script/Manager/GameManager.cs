@@ -89,7 +89,9 @@ public class GameManager : MonoBehaviour
         if (currentStageData.stageName == "Tutorial")
         {
             //플레이어 프리팹 생성
-            go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+            GameObject spawnPoint = GameObject.Find("Starting_Point");
+
+            go = Instantiate(playerPrefab, spawnPoint.transform.position, Quaternion.identity);
 
             playerObject = go.GetComponentInChildren<PlayerObject>();
             if (playerObject == null)
@@ -172,7 +174,7 @@ public class GameManager : MonoBehaviour
             isClear = true;
             currentStage++;
 
-            if (currentStage > maxStage && Mapbutton.Instance.activeButton)
+            if (currentStage > maxStage && Map.Instance.doorConnected)
             {
                 GameClear();
             }

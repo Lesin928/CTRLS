@@ -74,10 +74,9 @@ public class EventManager : MonoBehaviour
 
     public void ExitEvent()
     {
+        // 이벤트 !!
         Debug.Log("이벤트 종료");
         EventPanel.SetActive(false);
-        //HUDManager.Instance.ResumGame();
-
 
         if (isEventTalk)
         {
@@ -105,8 +104,6 @@ public class EventManager : MonoBehaviour
             Talk(id);
         else
             EventTalk(id);
-
-        //HUDManager.Instance.PauseGame();
     }
 
     private void Talk(int id)
