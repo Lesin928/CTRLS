@@ -1,36 +1,32 @@
-//using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// 적의 Meteor 공격 애니메이션 트리거를 처리하는 클래스입니다.
-/// 공격 범위 내에 플레이어가 있으면 공격 성공 메시지를 출력합니다.
+/// 보스의 메테오 공격 트리거 처리를 담당하는 클래스입니다.
+/// 이 클래스는 메테오 공격을 발동하고, 애니메이션이 끝났을 때 후속 작업을 처리합니다.
 /// </summary>
 public class EnemyBossMeteorAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject meteorPrefab; // Meteor 프리팹
-    [SerializeField] private Transform firePoint;     // 공격 발사 위치
+    [SerializeField] private GameObject meteorPrefab; // 메테오 프리팹
+    [SerializeField] private Transform firePoint;     // 메테오 발사 위치
 
-    /// <summary>
-    /// 실제 Meteor를 발사하는 트리거입니다.
-    /// 애니메이션 이벤트로 호출됩니다.
-    /// </summary>
+    // 메테오 공격 트리거
     private void MeteorAttackTrigger()
     {
-        // 부모 EnemyObject를 가져옴
+        // 부모 객체에서 EnemyObject를 찾습니다.
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Meteor 프리팹을 발사 지점에 생성
+        // 메테오 프리팹을 발사 위치에서 인스턴스화합니다.
         GameObject meteor = Instantiate(meteorPrefab, firePoint.position, Quaternion.identity);
 
-        // Meteor 객체의 스크립트를 가져와서 활성화
+        // 메테오 객체에 대한 스크립트를 가져와서 공격자와 방향을 설정합니다.
         EnemyBossMeteor meteorScript = meteor.GetComponent<EnemyBossMeteor>();
-        meteorScript.SetAttacker(enemy); // 발사자 전달
-        meteorScript.SetDirection(enemy.facingDir);
+        meteorScript.SetAttacker(enemy); // 공격자 설정
+        meteorScript.SetDirection(enemy.facingDir); // 방향 설정
     }
 
+    // 애니메이션이 완료되었을 때 호출되는 메서드 (애니메이션 이벤트에서 호출)
     private void MeteorAnimationTrigger()
     {
-        // 적의 애니메이션이 완료되었음을 알리는 메서드를 호출
         enemy.AnimationFinishTrigger();
     }
 }

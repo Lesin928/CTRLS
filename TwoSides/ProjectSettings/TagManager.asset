@@ -9,7 +9,7 @@ TagManager:
   - Interactive
   - StartingPoint
   - Confiner
-  - Puzzle
+  - Effect
   layers:
   - Default
   - TransparentFX

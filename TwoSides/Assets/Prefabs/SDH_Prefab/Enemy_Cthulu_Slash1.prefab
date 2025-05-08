@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2842995538601549682}
   m_Layer: 12
   m_Name: Enemy_Cthulu_Slash1
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

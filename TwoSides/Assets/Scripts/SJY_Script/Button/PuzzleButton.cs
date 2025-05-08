@@ -20,11 +20,15 @@ public class PuzzleButton : MonoBehaviour
         }
         isUsed[rand] = true;
 
+        rand = 0;
+
         sceneName += rand.ToString();
         map.SetActive(false);
+
         GameManager.Instance.isClear = false;
         Mapbutton.Instance.activeButton = false;
         Map.Instance.doorConnected = false;
+
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

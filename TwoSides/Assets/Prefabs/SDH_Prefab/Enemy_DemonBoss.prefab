@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4730321356836970}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -46,9 +46,9 @@ GameObject:
   - component: {fileID: 6304453728547788850}
   - component: {fileID: 2753733249500982132}
   - component: {fileID: 1039003353297207277}
-  - component: {fileID: 6246459777351027517}
   - component: {fileID: 2994131763496562126}
   - component: {fileID: 2027801676147690420}
+  - component: {fileID: 6246459777351027517}
   m_Layer: 0
   m_Name: Animator_DemonBoss
   m_TagString: Untagged
@@ -208,20 +208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smashPrefab: {fileID: 2811115583753261944, guid: 165d7ce3edbfb504cb9000901b55e11a, type: 3}
   firePoint: {fileID: 6381591796845706310}
---- !u!114 &6246459777351027517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106506966089593230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aec0f92d37f6fb94586b4beaaddc30d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashMaterial: {fileID: 2100000, guid: e9c26c977fd9fa249afa2bd8807994ac, type: 2}
-  duration: 0.05
 --- !u!114 &2994131763496562126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +236,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7475696652984398703, guid: 21276b3b56047c742a94752a93d0337c, type: 3}
   firePoint: {fileID: 7215332083280232538}
+--- !u!114 &6246459777351027517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106506966089593230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec0f92d37f6fb94586b4beaaddc30d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: e9c26c977fd9fa249afa2bd8807994ac, type: 2}
+  duration: 0.05
 --- !u!1 &681919610714339801
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,8 +370,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328175195732327875}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.112, y: 0.153, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.14100003, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -436,9 +436,9 @@ MonoBehaviour:
   closeAttackCheck: {fileID: 6585661258646407055}
   midAttackCheck: {fileID: 3231517490566501794}
   longAttackCheck: {fileID: 3212903648840652397}
-  closeAttackCheckSize: {x: 2.5, y: 3}
-  midAttackCheckSize: {x: 10, y: 3}
-  longAttackCheckSize: {x: 20, y: 3}
+  closeAttackCheckSize: {x: 2.5, y: 4}
+  midAttackCheckSize: {x: 10, y: 4}
+  longAttackCheckSize: {x: 20, y: 4}
 --- !u!50 &1468395984559332572
 Rigidbody2D:
   serializedVersion: 5
@@ -528,7 +528,7 @@ Transform:
   m_GameObject: {fileID: 1407361791509915293}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -652,7 +652,7 @@ Transform:
   m_GameObject: {fileID: 4200987088566404828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []

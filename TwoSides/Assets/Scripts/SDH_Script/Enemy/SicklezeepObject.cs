@@ -6,6 +6,10 @@ using UnityEngine;
 /// </summary>
 public class SicklezeepObject : EnemyObject
 {
+    [Header("Collider Info")]
+    [SerializeField] private Transform dashAttackCheck; // 대시 공격 감지 위치
+    [SerializeField] Vector2 dashAttackBoxSize; // 감지 박스 크기 조절
+
     private int currentAttackIndex = 0;
 
     #region State
@@ -14,7 +18,6 @@ public class SicklezeepObject : EnemyObject
     public EnemyChaseState chaseState { get; private set; }   // 추격 상태
     public EnemyAttackState attack1State { get; private set; } // 공격 상태
     public EnemyAttackState attack2State { get; private set; } // 공격 상태
-    public EnemyAttackState attack3State { get; private set; } // 공격 상태
     #endregion
 
     protected override void Awake()
@@ -27,7 +30,6 @@ public class SicklezeepObject : EnemyObject
         chaseState = new EnemyChaseState(this, stateMachine, "Move");
         attack1State = new EnemyAttackState(this, stateMachine, "Attack1");
         attack2State = new EnemyAttackState(this, stateMachine, "Attack2");
-        attack3State = new EnemyAttackState(this, stateMachine, "Attack3");
     }
 
     protected override void Start()
@@ -48,7 +50,13 @@ public class SicklezeepObject : EnemyObject
     /// </summary>
     public override void EnterPlayerDetection()
     {
-        stateMachine.ChangeState(chaseState);
+        if (IsDashAttackDetected() && Time.time >= lastTimeAttacked + attackCooldown)
+        {
+            lastTimeAttacked = Time.time;
+            CallAttackState();
+        }    
+        else
+            stateMachine.ChangeState(chaseState);
     }
 
     /// <summary>
@@ -60,12 +68,29 @@ public class SicklezeepObject : EnemyObject
     }
 
     /// <summary>
-    /// 호출 시 공격 상태로 전환합니다.
+    /// 호출 시 앞으로 빠르게 이동(대시)한 뒤 공격 상태로 전환합니다.
     /// </summary>
     public override void CallAttackState()
     {
-        stateMachine.ChangeState(attack1State);
+        // 대시처럼 이동: 플레이어 위치 방향으로 stopOffset만큼 떨어진 지점까지 이동
+        float stopOffset = 1f; // 플레이어와의 최소 거리
+        float rawDistance = PlayerManager.instance.player.transform.position.x - transform.position.x;
 
+        // 방향이 다르면 Flip
+        if (Mathf.Sign(rawDistance) != facingDir)
+        {
+            Flip();
+        }
+
+        // 이동해야 할 거리 = 전체 거리 - 최소 간격
+        float dashDistance = Mathf.Abs(rawDistance) - stopOffset;
+        dashDistance = Mathf.Max(0, dashDistance); // 음수 방지
+
+        // 방향을 고려한 벡터 (좌우 자동 계산)
+        Vector2 dashVector = new Vector2(facingDir * dashDistance, 0f);
+        transform.position += (Vector3)dashVector;
+
+        // 공격 상태로 전환
         switch (currentAttackIndex)
         {
             case 0:
@@ -74,13 +99,10 @@ public class SicklezeepObject : EnemyObject
             case 1:
                 stateMachine.ChangeState(attack2State);
                 break;
-            case 2:
-                stateMachine.ChangeState(attack3State);
-                break;
         }
 
-        // 다음 공격 인덱스로 순환 (0 → 1 → 2 → 0 ...)
-        currentAttackIndex = (currentAttackIndex + 1) % 3;
+        // 다음 공격 인덱스로 순환
+        currentAttackIndex = (currentAttackIndex + 1) % 2;
     }
 
     /// <summary>
@@ -89,5 +111,25 @@ public class SicklezeepObject : EnemyObject
     public override void CallIdleState()
     {
         stateMachine.ChangeState(idleState);
+    }
+
+    /// <summary>
+    /// 대시 방향으로 직선 공격 판정
+    /// </summary>
+    private bool IsDashAttackDetected()
+        => Physics2D.OverlapBox(dashAttackCheck.position, dashAttackBoxSize, 0f, whatIsPlayer) != null;
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.color = Color.red;
+
+        // 박스 중심 위치와 크기
+        Vector2 center = dashAttackCheck.position;
+        Vector2 size = dashAttackBoxSize;
+
+        // 사각형 기즈모 그리기
+        Gizmos.DrawWireCube(center, size);
     }
 }

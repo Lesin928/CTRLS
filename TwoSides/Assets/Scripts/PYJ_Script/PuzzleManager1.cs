@@ -10,36 +10,36 @@ public class PuzzleManager1 : MonoBehaviour
     public GameObject puzzlePanel;
 
 
-    /// ÆÛÁñ ¸Å´ÏÀú ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    /// í¼ì¦ ë§¤ë‹ˆì € ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     public static PuzzleManager1 Instance;
 
-    /// ÆÛÁñ Á¶°¢ ÇÁ¸®ÆÕ
+    /// í¼ì¦ ì¡°ê° í”„ë¦¬íŒ¹
     public GameObject piecePrefab;
 
-    /// ÆÛÁñ Á¶°¢ÀÌ ¹èÄ¡µÉ ºÎ¸ğ(±×¸®µå ÆĞ³Î)
+    /// í¼ì¦ ì¡°ê°ì´ ë°°ì¹˜ë  ë¶€ëª¨(ê·¸ë¦¬ë“œ íŒ¨ë„)
     public Transform puzzleParent;
 
-    /// ÆÛÁñ Á¶°¢¿ëÀ¸·Î Àß¶ó ³õÀº ½ºÇÁ¶óÀÌÆ® ¹è¿­
+    /// í¼ì¦ ì¡°ê°ìš©ìœ¼ë¡œ ì˜ë¼ ë†“ì€ ìŠ¤í”„ë¼ì´íŠ¸ ë°°ì—´
     public Sprite[] puzzleSprites;
 
-    /// ÇöÀç »ı¼ºµÈ ÆÛÁñ Á¶°¢ ¸®½ºÆ®
+    /// í˜„ì¬ ìƒì„±ëœ í¼ì¦ ì¡°ê° ë¦¬ìŠ¤íŠ¸
     private List<PuzzlePiece> pieces = new();
 
-    /// ÇöÀç ¼±ÅÃµÈ ÆÛÁñ Á¶°¢
+    /// í˜„ì¬ ì„ íƒëœ í¼ì¦ ì¡°ê°
     private PuzzlePiece selectedPiece;
 
-    /// ½Ì±ÛÅæ ÀÎ½ºÅÏ½º ÇÒ´ç
+    /// ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ í• ë‹¹
     private void Awake()
     {
         Instance = this;
     }
 
-    private bool puzzleCleared = false; // ÆÛÁñ Å¬¸®¾î ¿©ºÎ
+    private bool puzzleCleared = false; // í¼ì¦ í´ë¦¬ì–´ ì—¬ë¶€
 
 
 
     /// <summary>
-    /// °ÔÀÓ ½ÃÀÛ ½Ã ÆÛÁñ »ı¼º
+    /// ê²Œì„ ì‹œì‘ ì‹œ í¼ì¦ ìƒì„±
     /// /// </summary>
     void Start()
     {
@@ -54,6 +54,7 @@ public class PuzzleManager1 : MonoBehaviour
     }
 
 
+
     //void Update()
     //{
     //    if (puzzleCleared) return;
@@ -62,21 +63,22 @@ public class PuzzleManager1 : MonoBehaviour
     //    {
     //        if (puzzlePanel.activeSelf)
     //        {
-    //            puzzlePanel.SetActive(false); // ÆĞ³Î ´İ±â
-    //            Debug.Log("ÆÛÁñ Ã¢ ´İ±â");
+    //            puzzlePanel.SetActive(false); // ï¿½Ğ³ï¿½ ï¿½İ±ï¿½
+    //            Debug.Log("ï¿½ï¿½ï¿½ï¿½ Ã¢ ï¿½İ±ï¿½");
     //        }
     //        else
     //        {
-    //            puzzlePanel.SetActive(true); // ÆĞ³Î ¿­±â
-    //            Debug.Log("ÆÛÁñ Ã¢ ¿­±â");
+    //            puzzlePanel.SetActive(true); // ï¿½Ğ³ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //            Debug.Log("ï¿½ï¿½ï¿½ï¿½ Ã¢ ï¿½ï¿½ï¿½ï¿½");
     //        }
     //    }
     //}
 
 
 
+
     /// <summary>
-    /// ÆÛÁñ Á¶°¢À» »ı¼ºÇÏ°í ¹«ÀÛÀ§·Î ¹èÄ¡
+    /// í¼ì¦ ì¡°ê°ì„ ìƒì„±í•˜ê³  ë¬´ì‘ìœ„ë¡œ ë°°ì¹˜
     /// </summary>
     void CreatePuzzle()
     {
@@ -101,9 +103,9 @@ public class PuzzleManager1 : MonoBehaviour
 
 
     /// <summary>
-    /// ÆÛÁñ Á¶°¢ ¼±ÅÃ Ã³¸®
+    /// í¼ì¦ ì¡°ê° ì„ íƒ ì²˜ë¦¬
     /// </summary>
-    /// <param name="piece">¼±ÅÃµÈ ÆÛÁñ Á¶°¢</param>
+    /// <param name="piece">ì„ íƒëœ í¼ì¦ ì¡°ê°</param>
     /// 
 
     public void SelectPiece(PuzzlePiece piece)
@@ -125,10 +127,10 @@ public class PuzzleManager1 : MonoBehaviour
 
 
     /// <summary>
-    /// µÎ ÆÛÁñ Á¶°¢ÀÇ ÀÌ¹ÌÁö¿Í Á¤´ä ÀÎµ¦½º¸¦ ¹Ù²Ù±â
+    /// ë‘ í¼ì¦ ì¡°ê°ì˜ ì´ë¯¸ì§€ì™€ ì •ë‹µ ì¸ë±ìŠ¤ë¥¼ ë°”ê¾¸ê¸°
     /// 
-    /// µÎ Á¶°¢ÀÇ ±×¸²ÀÌ ¹Ù²î¾î¾ß ÇÏ°í,
-    ///°¢ Á¶°¢ÀÌ ¿ø·¡ ¾îµğ À§Ä¡¿¡ ÀÖ¾î¾ß Çß´ÂÁöµµ ¹Ù²î¾î¾ß ÆÛÁñ ¿Ï¼º ¿©ºÎ¸¦ Á¤È®È÷ ÆÇ´ÜÇÒ ¼ö ÀÖÀ½
+    /// ë‘ ì¡°ê°ì˜ ê·¸ë¦¼ì´ ë°”ë€Œì–´ì•¼ í•˜ê³ ,
+    ///ê° ì¡°ê°ì´ ì›ë˜ ì–´ë”” ìœ„ì¹˜ì— ìˆì–´ì•¼ í–ˆëŠ”ì§€ë„ ë°”ë€Œì–´ì•¼ í¼ì¦ ì™„ì„± ì—¬ë¶€ë¥¼ ì •í™•íˆ íŒë‹¨í•  ìˆ˜ ìˆìŒ
 
     void SwapPieces(PuzzlePiece a, PuzzlePiece b)
     {
@@ -147,7 +149,7 @@ public class PuzzleManager1 : MonoBehaviour
 
 
     /// <summary>
-    /// ÆÛÁñÀÌ ¿Ï¼ºµÇ¾ú´ÂÁö °Ë»ç
+    /// í¼ì¦ì´ ì™„ì„±ë˜ì—ˆëŠ”ì§€ ê²€ì‚¬
     /// </summary>
     void CheckClear()
     {
@@ -163,24 +165,25 @@ public class PuzzleManager1 : MonoBehaviour
 
         if (isCorrect)
         {
+
             GameManager.Instance.OnStageClear();
-            Debug.Log("ÆÛÁñ ¿Ï¼º!");
-            puzzleCleared = true; // Å¬¸®¾î »óÅÂ·Î ±â·Ï
+
+            Debug.Log("í¼ì¦ ì™„ì„±!");
+            puzzleCleared = true; // í´ë¦¬ì–´ ìƒíƒœë¡œ ê¸°ë¡
 
             InteractiveObject interactiveObject = Object.FindFirstObjectByType<InteractiveObject>();
             if (interactiveObject != null)
             {
-                interactiveObject.HidePuzzle(); // ÆÛÁñ ÆĞ³Î ¼û±â±â
+                interactiveObject.HidePuzzle(); // í¼ì¦ íŒ¨ë„ ìˆ¨ê¸°ê¸°
             }
         }
-
     }
 
 
 
 
     /// <summary>
-    /// ¸®½ºÆ® ¿ä¼Ò¸¦ ¹«ÀÛÀ§·Î ¼¯´Â ÇÔ¼ö
+    /// ë¦¬ìŠ¤íŠ¸ ìš”ì†Œë¥¼ ë¬´ì‘ìœ„ë¡œ ì„ëŠ” í•¨ìˆ˜
     /// </summary>
     void Shuffle<T>(List<T> list)
     {

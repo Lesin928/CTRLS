@@ -1,48 +1,48 @@
-//using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// 적의 Slash 공격 애니메이션 트리거를 처리하는 클래스입니다.
-/// 공격 범위 내에 플레이어가 있으면 공격 성공 메시지를 출력합니다.
+/// 보스의 슬래시 공격과 관련된 트리거를 처리하는 클래스입니다.
+/// 슬래시와 마법을 생성하고, 해당 공격의 트리거를 관리합니다.
 /// </summary>
 public class EnemyBossSlashAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject slashPrefab; // Slash 프리팹
-    [SerializeField] private GameObject magicPrefab; // Magic 프리팹
-    [SerializeField] private Transform firePoint;    // 공격 발사 위치
-    [SerializeField] private Transform handPoint;    // 손 위치 (Magic 활성화)
+    [SerializeField] private GameObject slashPrefab; // 슬래시 공격 프리팹
+    [SerializeField] private GameObject magicPrefab; // 마법 프리팹
+    [SerializeField] private Transform firePoint;    // 슬래시 공격이 발사될 위치
+    [SerializeField] private Transform handPoint;    // 마법이 생성될 위치
 
-    // SlashMagic 오브젝트(마법진)를 생성 (애니메이션 이벤트에서 호출)
+    // 슬래시 Magic 공격을 트리거하는 함수입니다.
     private void SlashMagicTrigger()
     {
-        // SlashMagic(마법진) 프리팹을 handPoint에 생성
+        // 마법을 발사할 위치에서 마법 프리팹을 생성
         GameObject magic = Instantiate(magicPrefab, handPoint.position, Quaternion.identity);
 
+        // 생성된 마법 객체에 대한 스크립트를 가져와 설정
         EnemyBossSlashMagic magicScript = magic.GetComponent<EnemyBossSlashMagic>();
-        magicScript.SetAttackTrigger(this);
+        magicScript.SetAttackTrigger(this); // 현재 트리거를 마법에 전달
     }
 
     /// <summary>
-    /// 실제 Slash를 발사하는 트리거입니다.
-    /// EnemyBossSlashMagic DestroyTrigger()에서 호출됩니다.
+    /// 슬래시 공격을 트리거하는 함수입니다.
+    /// EnemyBossSlashMagic의 DestroyTrigger()가 호출되면 해당 공격을 처리합니다.
     /// </summary>
     public void SlashAttackTrigger()
     {
-        // 부모 EnemyObject를 가져옴
+        // 부모 객체에서 EnemyObject를 가져옵니다.
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Slash 프리팹을 발사 지점에 생성
+        // 슬래시 공격을 발사할 위치에서 슬래시 공격 프리팹을 생성
         GameObject slash = Instantiate(slashPrefab, firePoint.position, Quaternion.identity);
 
-        // Slash 객체의 스크립트를 가져와서 활성화
+        // 생성된 슬래시 공격 객체에 대한 스크립트를 가져와 설정
         EnemyBossSlash slashScript = slash.GetComponent<EnemyBossSlash>();
-        slashScript.SetAttacker(enemy); // 발사자 전달
-        slashScript.SetDirection(enemy.facingDir);
+        slashScript.SetAttacker(enemy); // 슬래시 공격의 공격자를 설정
+        slashScript.SetDirection(enemy.facingDir); // 슬래시 공격의 방향 설정
     }
 
+    // 애니메이션이 완료되었을 때 호출되는 메서드 (애니메이션 이벤트에서 호출)
     private void SlashAnimationTrigger()
     {
-        // 적의 애니메이션이 완료되었음을 알리는 메서드를 호출
         enemy.AnimationFinishTrigger();
     }
 }

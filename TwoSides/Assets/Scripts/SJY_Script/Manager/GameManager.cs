@@ -167,17 +167,12 @@ public class GameManager : MonoBehaviour
 
     public void OnStageClear()
     {
-        if (isClear)
-            isClear = !isClear;
-        else
-        {
-            isClear = true;
-            currentStage++;
+        isClear = true;
+        currentStage++;
 
-            if (currentStage > maxStage && Map.Instance.doorConnected)
-            {
-                GameClear();
-            }
+        if (currentStage > maxStage && Map.Instance.doorConnected)
+        {
+            GameClear();
         }
     }
 
