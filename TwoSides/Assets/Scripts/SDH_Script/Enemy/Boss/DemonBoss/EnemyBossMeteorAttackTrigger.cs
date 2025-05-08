@@ -1,35 +1,32 @@
 using UnityEngine;
 
 /// <summary>
-/// ï¿½ï¿½ï¿½ï¿½ Meteor ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// º¸½ºÀÇ ¸ÞÅ×¿À °ø°Ý Æ®¸®°Å Ã³¸®¸¦ ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ÀÌ Å¬·¡½º´Â ¸ÞÅ×¿À °ø°ÝÀ» ¹ßµ¿ÇÏ°í, ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ³¡³µÀ» ¶§ ÈÄ¼Ó ÀÛ¾÷À» Ã³¸®ÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossMeteorAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject meteorPrefab; // Meteor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    [SerializeField] private Transform firePoint;     // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
+    [SerializeField] private GameObject meteorPrefab; // ¸ÞÅ×¿À ÇÁ¸®ÆÕ
+    [SerializeField] private Transform firePoint;     // ¸ÞÅ×¿À ¹ß»ç À§Ä¡
 
-    /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ Meteorï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-    /// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ È£ï¿½ï¿½Ë´Ï´ï¿½.
-    /// </summary>
+    // ¸ÞÅ×¿À °ø°Ý Æ®¸®°Å
     private void MeteorAttackTrigger()
     {
-        // ï¿½Î¸ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ºÎ¸ð °´Ã¼¿¡¼­ EnemyObject¸¦ Ã£½À´Ï´Ù.
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Meteor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ¸ÞÅ×¿À ÇÁ¸®ÆÕÀ» ¹ß»ç À§Ä¡¿¡¼­ ÀÎ½ºÅÏ½ºÈ­ÇÕ´Ï´Ù.
         GameObject meteor = Instantiate(meteorPrefab, firePoint.position, Quaternion.identity);
 
-        // Meteor ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ È°ï¿½ï¿½È­
+        // ¸ÞÅ×¿À °´Ã¼¿¡ ´ëÇÑ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í¼­ °ø°ÝÀÚ¿Í ¹æÇâÀ» ¼³Á¤ÇÕ´Ï´Ù.
         EnemyBossMeteor meteorScript = meteor.GetComponent<EnemyBossMeteor>();
-        meteorScript.SetAttacker(enemy); // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-        meteorScript.SetDirection(enemy.facingDir);
+        meteorScript.SetAttacker(enemy); // °ø°ÝÀÚ ¼³Á¤
+        meteorScript.SetDirection(enemy.facingDir); // ¹æÇâ ¼³Á¤
     }
 
+    // ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¿Ï·áµÇ¾úÀ» ¶§ È£ÃâµÇ´Â ¸Þ¼­µå (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
     private void MeteorAnimationTrigger()
     {
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½å¸¦ È£ï¿½ï¿½
         enemy.AnimationFinishTrigger();
     }
 }

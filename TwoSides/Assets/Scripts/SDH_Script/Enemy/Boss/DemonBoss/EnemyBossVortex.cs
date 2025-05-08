@@ -1,64 +1,66 @@
 using UnityEngine;
 
 /// <summary>
-/// Bossï¿½ï¿½ Vortex ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// º¸½ºÀÇ ¼Ò¿ëµ¹ÀÌ °ø°Ý°ú °ü·ÃµÈ Æ®¸®°Å¸¦ ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ¼Ò¿ëµ¹ÀÌ °ø°ÝÀÌ ¹ß»ýÇÏ¸é °ø°ÝÀÇ ¿¬Ãâ°ú ÈÄ¼Ó Ã³¸®¸¦ ¼öÇàÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossVortex : MonoBehaviour
 {
-    private EnemyObject attacker; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼
+    private EnemyObject attacker; // °ø°ÝÀÚ
 
     private void Start()
     {
+        // ¼Ò¿ëµ¹ÀÌ ½ÃÀÛ ½Ã, CapsuleCollider¸¦ ºñÈ°¼ºÈ­ÇÏ°í CircleCollider¸¦ È°¼ºÈ­
         GetComponent<CapsuleCollider2D>().enabled = false;
         GetComponent<CircleCollider2D>().enabled = true;
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
+    /// °ø°ÝÀÚ¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
     /// </summary>
+    /// <param name="enemy">Àû °´Ã¼</param>
     public void SetAttacker(EnemyObject enemy)
     {
         attacker = enemy;
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    /// ¼Ò¿ëµ¹ÀÌÀÇ ¹æÇâÀ» ¼³Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
     /// </summary>
-    /// <param name="facingDir">ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (1 ï¿½Ç´ï¿½ -1)</param>
+    /// <param name="facingDir">¼Ò¿ëµ¹ÀÌÀÇ ¹æÇâ (1ÀÌ¸é ¿À¸¥ÂÊ, -1ÀÌ¸é ¿ÞÂÊ)</param>
     public void SetDirection(int facingDir)
     {
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * facingDir;
+        scale.x = Mathf.Abs(scale.x) * facingDir; // xÃà Å©±â¸¦ ¹æÇâ¿¡ ¸Â°Ô ¼³Á¤
         transform.localScale = scale;
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
+    // °ø°Ý È°¼ºÈ­ (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÊ)
     private void EnableAttack()
     {
-        GetComponent<CapsuleCollider2D>().enabled = true;
-        GetComponent<CircleCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = true; // °ø°Ý ¹üÀ§ È°¼ºÈ­
+        GetComponent<CircleCollider2D>().enabled = false; // Vortex È¿°ú ºñÈ°¼ºÈ­
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
+    // °ø°Ý ºñÈ°¼ºÈ­ (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÊ)
     private void DisableAttack()
     {
-        GetComponent<CapsuleCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false; // °ø°Ý ¹üÀ§ ºñÈ°¼ºÈ­
     }
 
-    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ È£ï¿½ï¿½
-    void OnTriggerEnter2D(Collider2D collision)
+    // Ãæµ¹ Ã³¸® ÇÔ¼ö
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ÇÃ·¹ÀÌ¾î°¡ ¼Ò¿ëµ¹ÀÌ¿¡ ´êÀ¸¸é °ø°ÝÀÚÀÇ °ø°Ý·Â¸¸Å­ ÇÇÇØ¸¦ ÀÔÈû
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }
 
-    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ä±ï¿½
+    // ¼Ò¿ëµ¹ÀÌ °ø°Ý ÈÄ, °´Ã¼¸¦ Á¦°ÅÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
     private void DestroyTrigger()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); // ¼Ò¿ëµ¹ÀÌ °´Ã¼ Á¦°Å
     }
 }

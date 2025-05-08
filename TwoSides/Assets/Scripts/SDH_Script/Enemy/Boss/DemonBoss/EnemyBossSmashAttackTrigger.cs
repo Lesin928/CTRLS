@@ -1,55 +1,57 @@
 using UnityEngine;
 
 /// <summary>
-/// ï¿½ï¿½ï¿½ï¿½ Smash ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// º¸½ºÀÇ ½º¸Å½¬ °ø°Ý°ú °ü·ÃµÈ Æ®¸®°Å¸¦ ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ½º¸Å½¬ °ø°ÝÀÌ ¹ß»ýÇÒ ¶§, °ø°ÝÀÇ ¿¬Ãâ ¹× ÈÄ¼Ó Ã³¸®¸¦ ¼öÇàÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossSmashAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject smashPrefab; // Smash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    [SerializeField] private Transform firePoint;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
+    [SerializeField] private GameObject smashPrefab; // ½º¸Å½¬ °ø°Ý¿¡ »ç¿ëÇÒ ÇÁ¸®ÆÕ
+    [SerializeField] private Transform firePoint;    // ½º¸Å½¬ °ø°Ý ¹ß»ç ÁöÁ¡
 
-    private GameObject smash; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ smash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+    private GameObject smash; // ½º¸Å½¬ °ø°Ý »ý¼ºµÈ °´Ã¼
 
     /// <summary>
-    /// Smashï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ï´ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-    /// </summary>
+    /// ½º¸Å½¬ °ø°ÝÀ» È°¼ºÈ­½ÃÅ°´Â Æ®¸®°Å ÇÔ¼ö (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
     private void SmashAttackTrigger()
     {
-        // ï¿½Î¸ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // °ø°ÝÀ» ¼öÇàÇÏ´Â Àû °´Ã¼¸¦ °¡Á®¿È
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Smash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ½º¸Å½¬ °ø°ÝÀ» ¹ß»ç ÁöÁ¡¿¡¼­ »ý¼º
         smash = Instantiate(smashPrefab, firePoint.position, Quaternion.identity);
 
-        // Slash ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ È°ï¿½ï¿½È­
+        // ½º¸Å½¬ °ø°Ý °´Ã¼ÀÇ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í ¼³Á¤
         EnemyBossSmash smashScript = smash.GetComponent<EnemyBossSmash>();
-        smashScript.SetAttacker(enemy); // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-        smashScript.SetDirection(enemy.facingDir);
+        smashScript.SetAttacker(enemy); // °ø°ÝÀÚÀÇ Á¤º¸ ¼³Á¤
+        smashScript.SetDirection(enemy.facingDir); // °ø°Ý ¹æÇâ ¼³Á¤
     }
 
+    // ½º¸Å½¬ °ø°Ý °´Ã¼¸¦ ÆÄ±«ÇÏ´Â ÇÔ¼ö (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
     private void SmashDestroyTrigger()
     {
         if (smash != null)
         {
-            Destroy(smash); // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-            smash = null;
+            Destroy(smash); // ½º¸Å½¬ °´Ã¼ ÆÄ±«
+            smash = null; // ½º¸Å½¬ º¯¼ö ÃÊ±âÈ­
         }
     }
 
+    // º¸½ºÀÇ ÄÝ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­ÇÏ´Â ÇÔ¼ö (Á¡ÇÁ ¾Ö´Ï¸ÞÀÌ¼ÇÀÏ ¶§ ºñÈ°¼ºÈ­)
     private void Collider2DOff()
     {
-        GetComponentInParent<Collider2D>().enabled = false;
+        GetComponentInParent<Collider2D>().enabled = false; // ÄÝ¶óÀÌ´õ ºñÈ°¼ºÈ­
     }
 
+    // º¸½ºÀÇ ÄÝ¶óÀÌ´õ¸¦ È°¼ºÈ­ÇÏ´Â ÇÔ¼ö
     private void Collider2DOn()
     {
-        GetComponentInParent<Collider2D>().enabled = true;
+        GetComponentInParent<Collider2D>().enabled = true; // ÄÝ¶óÀÌ´õ È°¼ºÈ­
     }
 
+    // ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¿Ï·áµÇ¾úÀ» ¶§ È£ÃâµÇ´Â ¸Þ¼­µå (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
     private void SmashAnimationTrigger()
     {
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½å¸¦ È£ï¿½ï¿½
         enemy.AnimationFinishTrigger();
     }
 }

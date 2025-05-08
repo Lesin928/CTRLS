@@ -1,20 +1,21 @@
 using UnityEngine;
 
 /// <summary>
-/// ï¿½ï¿½ï¿½ï¿½ Slash ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// ÀûÀÇ ½½·¡½Ã °ø°ÝÀ» Ã³¸®ÇÏ´Â Å¬·¡½º.
+/// ½½·¡½Ã °ø°Ý ¹üÀ§ ³»¿¡ ÀÖ´Â ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ¸¦ ÀÔÈù´Ù.
 /// </summary>
 public class EnemySlash : MonoBehaviour
 {
-    private EnemyObject attacker; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼
+    private EnemyObject attacker; // ÀûÀÇ °ø°ÝÀÚ (EnemyObject)
 
     private void Start()
     {
+        // ½ÃÀÛ ½Ã °ø°Ý ÄÝ¶óÀÌ´õ ºñÈ°¼ºÈ­
         GetComponent<Collider2D>().enabled = false;
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
+    /// °ø°ÝÀÚÀÇ EnemyObject¸¦ ¼³Á¤ÇÑ´Ù.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
@@ -22,40 +23,41 @@ public class EnemySlash : MonoBehaviour
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    /// °ø°Ý ¹æÇâÀ» ¼³Á¤ÇÑ´Ù.
     /// </summary>
-    /// <param name="facingDir">ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (1 ï¿½Ç´ï¿½ -1)</param>
+    /// <param name="facingDir">°ø°Ý ¹æÇâ (1ÀÌ¸é ¿À¸¥ÂÊ, -1ÀÌ¸é ¿ÞÂÊ)</param>
     public void SetDirection(int facingDir)
     {
         Vector3 scale = transform.localScale;
+        // xÃà Å©±â Á¶Á¤À» ÅëÇØ °ø°Ý ¹æÇâÀ» ¼³Á¤ÇÑ´Ù.
         scale.x = Mathf.Abs(scale.x) * facingDir;
         transform.localScale = scale;
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
+    // ½½·¡½Ã °ø°Ý È°¼ºÈ­
     private void EnableAttack()
     {
         GetComponent<Collider2D>().enabled = true;
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
+    // ½½·¡½Ã °ø°Ý ºñÈ°¼ºÈ­
     private void DisableAttack()
     {
         GetComponent<Collider2D>().enabled = false;
     }
 
-    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ È£ï¿½ï¿½
-    void OnTriggerEnter2D(Collider2D collision)
+    // ½½·¡½Ã °ø°ÝÀÌ Ãæµ¹ÇÑ °´Ã¼¿¡ ´ëÇØ Ã³¸®
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Ãæµ¹ÇÑ °´Ã¼°¡ ÇÃ·¹ÀÌ¾îÀÏ °æ¿ì ÇÇÇØ¸¦ ÀÔÈù´Ù.
         if (collision.CompareTag("Player"))
         {
-
-            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ÇÃ·¹ÀÌ¾î °´Ã¼°¡ ÀÖÀ» °æ¿ì, ÇÇÇØ¸¦ ÀÔÈù´Ù.
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }
 
-    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ä±ï¿½
+    // ½½·¡½Ã °ø°Ý ÈÄ Æ®¸®°Å¸¦ Á¦°ÅÇÏ¿© °´Ã¼¸¦ ÆÄ±«ÇÑ´Ù.
     private void DestroyTrigger()
     {
         Destroy(gameObject);

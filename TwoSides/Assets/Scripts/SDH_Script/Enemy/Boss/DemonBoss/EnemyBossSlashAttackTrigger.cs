@@ -1,47 +1,48 @@
 using UnityEngine;
 
 /// <summary>
-/// ï¿½ï¿½ï¿½ï¿½ Slash ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// º¸½ºÀÇ ½½·¡½Ã °ø°Ý°ú °ü·ÃµÈ Æ®¸®°Å¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ½½·¡½Ã¿Í ¸¶¹ýÀ» »ý¼ºÇÏ°í, ÇØ´ç °ø°ÝÀÇ Æ®¸®°Å¸¦ °ü¸®ÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossSlashAttackTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject slashPrefab; // Slash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    [SerializeField] private GameObject magicPrefab; // Magic ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    [SerializeField] private Transform firePoint;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
-    [SerializeField] private Transform handPoint;    // ï¿½ï¿½ ï¿½ï¿½Ä¡ (Magic È°ï¿½ï¿½È­)
+    [SerializeField] private GameObject slashPrefab; // ½½·¡½Ã °ø°Ý ÇÁ¸®ÆÕ
+    [SerializeField] private GameObject magicPrefab; // ¸¶¹ý ÇÁ¸®ÆÕ
+    [SerializeField] private Transform firePoint;    // ½½·¡½Ã °ø°ÝÀÌ ¹ß»çµÉ À§Ä¡
+    [SerializeField] private Transform handPoint;    // ¸¶¹ýÀÌ »ý¼ºµÉ À§Ä¡
 
-    // SlashMagic ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
+    // ½½·¡½Ã Magic °ø°ÝÀ» Æ®¸®°ÅÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
     private void SlashMagicTrigger()
     {
-        // SlashMagic(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ handPointï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ¸¶¹ýÀ» ¹ß»çÇÒ À§Ä¡¿¡¼­ ¸¶¹ý ÇÁ¸®ÆÕÀ» »ý¼º
         GameObject magic = Instantiate(magicPrefab, handPoint.position, Quaternion.identity);
 
+        // »ý¼ºµÈ ¸¶¹ý °´Ã¼¿¡ ´ëÇÑ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í ¼³Á¤
         EnemyBossSlashMagic magicScript = magic.GetComponent<EnemyBossSlashMagic>();
-        magicScript.SetAttackTrigger(this);
+        magicScript.SetAttackTrigger(this); // ÇöÀç Æ®¸®°Å¸¦ ¸¶¹ý¿¡ Àü´Þ
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ Slashï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-    /// EnemyBossSlashMagic DestroyTrigger()ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ë´Ï´ï¿½.
+    /// ½½·¡½Ã °ø°ÝÀ» Æ®¸®°ÅÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
+    /// EnemyBossSlashMagicÀÇ DestroyTrigger()°¡ È£ÃâµÇ¸é ÇØ´ç °ø°ÝÀ» Ã³¸®ÇÕ´Ï´Ù.
     /// </summary>
     public void SlashAttackTrigger()
     {
-        // ï¿½Î¸ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ºÎ¸ð °´Ã¼¿¡¼­ EnemyObject¸¦ °¡Á®¿É´Ï´Ù.
         EnemyObject enemy = GetComponentInParent<EnemyObject>();
 
-        // Slash ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ½½·¡½Ã °ø°ÝÀ» ¹ß»çÇÒ À§Ä¡¿¡¼­ ½½·¡½Ã °ø°Ý ÇÁ¸®ÆÕÀ» »ý¼º
         GameObject slash = Instantiate(slashPrefab, firePoint.position, Quaternion.identity);
 
-        // Slash ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ È°ï¿½ï¿½È­
+        // »ý¼ºµÈ ½½·¡½Ã °ø°Ý °´Ã¼¿¡ ´ëÇÑ ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í ¼³Á¤
         EnemyBossSlash slashScript = slash.GetComponent<EnemyBossSlash>();
-        slashScript.SetAttacker(enemy); // ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-        slashScript.SetDirection(enemy.facingDir);
+        slashScript.SetAttacker(enemy); // ½½·¡½Ã °ø°ÝÀÇ °ø°ÝÀÚ¸¦ ¼³Á¤
+        slashScript.SetDirection(enemy.facingDir); // ½½·¡½Ã °ø°ÝÀÇ ¹æÇâ ¼³Á¤
     }
 
+    // ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ¿Ï·áµÇ¾úÀ» ¶§ È£ÃâµÇ´Â ¸Þ¼­µå (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£Ãâ)
     private void SlashAnimationTrigger()
     {
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½å¸¦ È£ï¿½ï¿½
         enemy.AnimationFinishTrigger();
     }
 }

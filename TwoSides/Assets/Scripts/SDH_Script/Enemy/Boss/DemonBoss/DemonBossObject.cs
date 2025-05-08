@@ -1,38 +1,38 @@
 using UnityEngine;
 
 /// <summary>
-/// DemonBoss ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Idle, Patrol, Chase, Attack ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// DemonBoss ¿ÀºêÁ§Æ®ÀÇ »óÅÂ ¹× Çàµ¿À» Á¤ÀÇÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// EnemyObject¸¦ »ó¼ÓÇÏ¸ç, ´Ù¾çÇÑ »óÅÂ (Idle, Patrol, Chase, Attack)¸¦ Ã³¸®ÇÕ´Ï´Ù.
 /// </summary>
 public class DemonBossObject : EnemyObject
 {
     [Header("Attack Check Transform")]
-    [SerializeField] private Transform closeAttackCheck;
-    [SerializeField] private Transform midAttackCheck;
-    [SerializeField] private Transform longAttackCheck;
+    [SerializeField] private Transform closeAttackCheck; // ±Ù°Å¸® °ø°Ý ¹üÀ§ ±âÁØ À§Ä¡
+    [SerializeField] private Transform midAttackCheck;   // Áß°Å¸® °ø°Ý ¹üÀ§ ±âÁØ À§Ä¡
+    [SerializeField] private Transform longAttackCheck;  // ¿ø°Å¸® °ø°Ý ¹üÀ§ ±âÁØ À§Ä¡
 
     [Header("Attack Check Radius")]
-    [SerializeField] Vector2 closeAttackCheckSize;
-    [SerializeField] Vector2 midAttackCheckSize;
-    [SerializeField] Vector2 longAttackCheckSize;
+    [SerializeField] Vector2 closeAttackCheckSize; // ±Ù°Å¸® °ø°Ý ¹üÀ§ Å©±â
+    [SerializeField] Vector2 midAttackCheckSize;   // Áß°Å¸® °ø°Ý ¹üÀ§ Å©±â
+    [SerializeField] Vector2 longAttackCheckSize;  // ¿ø°Å¸® °ø°Ý ¹üÀ§ Å©±â
 
     #region State
-    public EnemyIdleState idleState { get; private set; }     // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyPatrolState patrolState { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyChaseState chaseState { get; private set; }   // ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyAttackState attack1State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyAttackState attack2State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyAttackState attack3State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyAttackState attack4State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyAttackState attack5State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public EnemyAttackState attack6State { get; private set; } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public EnemyIdleState idleState { get; private set; }      // ´ë±â »óÅÂ
+    public EnemyPatrolState patrolState { get; private set; }  // ¼øÂû »óÅÂ
+    public EnemyChaseState chaseState { get; private set; }    // Ãß°Ý »óÅÂ
+    public EnemyAttackState attack1State { get; private set; } // °ø°Ý1 »óÅÂ
+    public EnemyAttackState attack2State { get; private set; } // °ø°Ý2 »óÅÂ
+    public EnemyAttackState attack3State { get; private set; } // °ø°Ý3 »óÅÂ
+    public EnemyAttackState attack4State { get; private set; } // °ø°Ý4 »óÅÂ
+    public EnemyAttackState attack5State { get; private set; } // °ø°Ý5 »óÅÂ
+    public EnemyAttackState attack6State { get; private set; } // °ø°Ý6 »óÅÂ
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
 
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½Ê±ï¿½È­
+        // »óÅÂ °´Ã¼ »ý¼º ¹× ÃÊ±âÈ­
         idleState = new EnemyIdleState(this, stateMachine, "Idle");
         patrolState = new EnemyPatrolState(this, stateMachine, "Move");
         chaseState = new EnemyChaseState(this, stateMachine, "Move");
@@ -48,7 +48,7 @@ public class DemonBossObject : EnemyObject
     {
         base.Start();
 
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Idle ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ê±ï¿½È­
+        // ½ÃÀÛ ½Ã Idle »óÅÂ·Î ÃÊ±âÈ­
         stateMachine.Initialize(idleState);
     }
 
@@ -58,19 +58,19 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// SlimeBoss -> DemonBoss ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
+    /// SlimeBoss -> DemonBoss ÀüÈ¯ ½Ã ¹æÇâÀ» ÃÊ±âÈ­ÇÕ´Ï´Ù.
     /// </summary>
-    /// <param name="direction">SlimeBossï¿½ï¿½ ï¿½ï¿½ï¿½â°ª</param>
+    /// <param name="direction">SlimeBossÀÇ ¹Ù¶óº¸´ø ¹æÇâ</param>
     public void InitFacingDir(int direction)
     {
         if (facingDir != direction)
         {
-            Flip(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            Flip(); // ¹æÇâ ¹ÝÀü
         }
     }
 
     /// <summary>
-    /// ï¿½Ã·ï¿½ï¿½Ì¾î°¡ Å½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
+    /// ÇÃ·¹ÀÌ¾î°¡ Å½ÁöµÇ¾úÀ» ¶§ Ãß°Ý »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
     /// </summary>
     public override void EnterPlayerDetection()
     {
@@ -78,7 +78,7 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Å½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
+    /// ÇÃ·¹ÀÌ¾î°¡ Å½Áö ¹üÀ§¿¡¼­ ¹þ¾î³µÀ» ¶§ ¼øÂû »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
     /// </summary>
     public override void ExitPlayerDetection()
     {
@@ -86,65 +86,89 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// È£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    /// È£Ãâ ½Ã ÀûÀýÇÑ °ø°Ý »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// °ø°Ý °Å¸®¿¡ µû¶ó ´Ù¾çÇÑ °ø°Ý ÆÐÅÏÀÌ ¼±ÅÃµË´Ï´Ù.
     /// </summary>
     public override void CallAttackState()
     {
         float distanceX = Mathf.Abs(transform.position.x - PlayerManager.instance.player.transform.position.x);
-        float rand = Random.value; // 0.0f ~ 1.0f ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ float
+        int rand;
 
         if (closeRangeDetected())
-            stateMachine.ChangeState(attack4State);
+        {
+            stateMachine.ChangeState(attack4State); // ±Ù°Å¸® °íÁ¤ °ø°Ý
+        }
         else if (midRangeDetected())
         {
-            if (rand < 0.20f)
-                stateMachine.ChangeState(attack1State);
-            else if (rand < 0.40f)
-                stateMachine.ChangeState(attack2State);
-            else if (rand < 0.60f)
-                stateMachine.ChangeState(attack3State);
-            else if (rand < 0.80f)
-                stateMachine.ChangeState(attack5State);
-            else
-                stateMachine.ChangeState(attack6State);
+            // Áß°Å¸®: ´Ù¾çÇÑ °ø°Ý Áß ¹«ÀÛÀ§ ¼±ÅÃ (0~4)
+            rand = Random.Range(0, 5); // 0, 1, 2, 3, 4
+            switch (rand)
+            {
+                case 0:
+                    stateMachine.ChangeState(attack1State);
+                    break;
+                case 1:
+                    stateMachine.ChangeState(attack2State);
+                    break;
+                case 2:
+                    stateMachine.ChangeState(attack3State);
+                    break;
+                case 3:
+                    stateMachine.ChangeState(attack5State);
+                    break;
+                case 4:
+                    stateMachine.ChangeState(attack6State);
+                    break;
+            }
         }
         else if (longRangeDetected())
         {
-            if (rand < 0.33f)
-                stateMachine.ChangeState(attack2State);
-            else if (rand < 0.66f)
-                stateMachine.ChangeState(attack5State);
-            else
-                stateMachine.ChangeState(attack6State);
+            // ¿ø°Å¸®: °ø°Ý 2, 5, 6 Áß ·£´ý ¼±ÅÃ (0~2)
+            rand = Random.Range(0, 3); // 0, 1, 2
+            switch (rand)
+            {
+                case 0:
+                    stateMachine.ChangeState(attack2State);
+                    break;
+                case 1:
+                    stateMachine.ChangeState(attack5State);
+                    break;
+                case 2:
+                    stateMachine.ChangeState(attack6State);
+                    break;
+            }
         }
     }
 
+
     /// <summary>
-    /// È£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
+    /// È£Ãâ ½Ã ´ë±â »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
     /// </summary>
     public override void CallIdleState()
     {
         stateMachine.ChangeState(idleState);
     }
 
+    // ±Ù°Å¸® °ø°Ý ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ´ÂÁö È®ÀÎ
+    public Collider2D closeRangeDetected()
+        => Physics2D.OverlapBox(closeAttackCheck.position, closeAttackCheckSize, 0f, whatIsPlayer);
+
+    // Áß°Å¸® °ø°Ý ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ´ÂÁö È®ÀÎ
+    public Collider2D midRangeDetected()
+        => Physics2D.OverlapBox(midAttackCheck.position, midAttackCheckSize, 0f, whatIsPlayer);
+
+    // ¿ø°Å¸® °ø°Ý ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ´ÂÁö È®ÀÎ
+    public Collider2D longRangeDetected()
+        => Physics2D.OverlapBox(longAttackCheck.position, longAttackCheckSize, 0f, whatIsPlayer);
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
 
+        // °ø°Ý ¹üÀ§¸¦ Scene ºä¿¡ ½Ã°¢ÀûÀ¸·Î Ç¥½Ã
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(closeAttackCheck.position, closeAttackCheckSize);
         Gizmos.DrawWireCube(midAttackCheck.position, midAttackCheckSize);
         Gizmos.DrawWireCube(longAttackCheck.position, longAttackCheckSize);
     }
-
-    public Collider2D closeRangeDetected()
-        => Physics2D.OverlapBox(closeAttackCheck.position, closeAttackCheckSize, 0f, whatIsPlayer);
-
-    public Collider2D midRangeDetected()
-        => Physics2D.OverlapBox(midAttackCheck.position, midAttackCheckSize, 0f, whatIsPlayer);
-
-    public Collider2D longRangeDetected()
-        => Physics2D.OverlapBox(longAttackCheck.position, longAttackCheckSize, 0f, whatIsPlayer);
-
 }

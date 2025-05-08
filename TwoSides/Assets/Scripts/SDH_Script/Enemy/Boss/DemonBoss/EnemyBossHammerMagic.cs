@@ -1,25 +1,25 @@
 using UnityEngine;
 
 /// <summary>
-/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Hammer ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// º¸½ºÀÇ ÇØ¸Ó ¸¶¹ýÀ» Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ÇØ¸Ó °ø°Ý Æ®¸®°Å¸¦ ÅëÇØ ÇØ¸Ó »ý¼º ¹× ¸¶¹ý Ã³¸®¸¦ ´ã´çÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossHammerMagic : MonoBehaviour
 {
-    private EnemyBossHammerAttackTrigger attackTrigger; // Hammer ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private EnemyBossHammerAttackTrigger attackTrigger; // ÇØ¸Ó °ø°Ý Æ®¸®°Å¸¦ Ã³¸®ÇÏ´Â Å¬·¡½º
 
     /// <summary>
-    /// Hammer ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    /// ÇØ¸Ó °ø°Ý Æ®¸®°Å¸¦ ¼³Á¤ÇÕ´Ï´Ù.
     /// </summary>
     public void SetAttackTrigger(EnemyBossHammerAttackTrigger trigger)
     {
         attackTrigger = trigger;
     }
 
-    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ÇØ¸Ó °ø°Ý Æ®¸®°Å È£Ãâ ÈÄ °´Ã¼ »èÁ¦ (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÊ)
     private void DestroyTrigger()
     {
-        attackTrigger.HammerAttackTrigger(); // Hammer ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
-        Destroy(gameObject);
+        attackTrigger.HammerAttackTrigger(); // ÇØ¸Ó °ø°Ý Æ®¸®°Å¸¦ È£Ãâ
+        Destroy(gameObject); // ¸¶¹ý °´Ã¼¸¦ ÆÄ±«
     }
 }

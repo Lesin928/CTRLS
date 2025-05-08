@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class EnemyHitState : EnemyState
 {
+    // EnemyHitState »ý¼ºÀÚ
     public EnemyHitState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
         : base(enemyBase, stateMachine, animBoolName)
     {

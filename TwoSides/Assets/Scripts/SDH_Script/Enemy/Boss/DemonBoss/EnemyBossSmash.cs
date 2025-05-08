@@ -1,38 +1,40 @@
 using UnityEngine;
 
 /// <summary>
-/// Bossï¿½ï¿½ Slash ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// º¸½ºÀÇ ½º¸Å½¬ °ø°Ý°ú °ü·ÃµÈ Ã³¸®¸¦ ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ½º¸Å½¬ °ø°ÝÀÌ ¹ß»ýÇÏ¸é, ÇØ´ç °ø°ÝÀÌ ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇÒ ¶§ ÇÇÇØ¸¦ ÁÖ°í ÈÄ¼Ó Ã³¸®¸¦ ¼öÇàÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossSmash : MonoBehaviour
 {
-    private EnemyObject attacker; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼
+    private EnemyObject attacker; // ½º¸Å½¬ °ø°ÝÀ» ½ÇÇàÇÑ Àû °´Ã¼
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
+    /// °ø°ÝÀ» ¼öÇàÇÑ Àû °´Ã¼¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
     /// </summary>
+    /// <param name="enemy">½º¸Å½¬ °ø°ÝÀ» ¼öÇàÇÑ Àû °´Ã¼</param>
     public void SetAttacker(EnemyObject enemy)
     {
-        attacker = enemy;
+        attacker = enemy; // ÁÖ¾îÁø Àû °´Ã¼¸¦ attacker º¯¼ö¿¡ ÇÒ´ç
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    /// ½º¸Å½¬ °ø°Ý ¹æÇâÀ» ¼³Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
+    /// °ø°Ý ¹æÇâ¿¡ ¸Â°Ô °ÔÀÓ ¿ÀºêÁ§Æ®ÀÇ ½ºÄÉÀÏÀ» º¯°æÇÕ´Ï´Ù.
     /// </summary>
-    /// <param name="facingDir">ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (1 ï¿½Ç´ï¿½ -1)</param>
+    /// <param name="facingDir">½º¸Å½¬ °ø°ÝÀÇ ¹æÇâ (1ÀÌ¸é ¿À¸¥ÂÊ, -1ÀÌ¸é ¿ÞÂÊ)</param>
     public void SetDirection(int facingDir)
     {
-        Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * facingDir;
-        transform.localScale = scale;
+        Vector3 scale = transform.localScale; // ÇöÀç ½ºÄÉÀÏÀ» °¡Á®¿È
+        scale.x = Mathf.Abs(scale.x) * facingDir; // °ø°Ý ¹æÇâ¿¡ ¸Â°Ô xÃà ½ºÄÉÀÏÀ» º¯°æ
+        transform.localScale = scale; // º¯°æµÈ ½ºÄÉÀÏÀ» Àû¿ë
     }
 
-    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ È£ï¿½ï¿½
-    void OnTriggerEnter2D(Collider2D collision)
+    // Ãæµ¹ Ã³¸® ÇÔ¼ö
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")) // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇÑ °æ¿ì
         {
-            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ¸¦ ÁÖ±â À§ÇØ TakeDamage ÇÔ¼ö È£Ãâ
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }

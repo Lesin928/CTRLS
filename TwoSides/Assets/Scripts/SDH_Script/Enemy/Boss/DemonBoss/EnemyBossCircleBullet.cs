@@ -1,59 +1,59 @@
 using UnityEngine;
 
 /// <summary>
-/// ì´ì•Œ ê°ì²´ë¥¼ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
-/// ì´ì•Œì´ ë°œì‚¬ë˜ê³ , ëª©í‘œë¥¼ í–¥í•´ ì´ë™í•˜ë©°, ì¶©ëŒ ì‹œ ì• ë‹ˆë©”ì´ì…˜ê³¼ í•¨ê»˜ ì²˜ë¦¬ë©ë‹ˆë‹¤.
+/// º¸½º ÃÑ¾Ë ¿ÀºêÁ§Æ®¸¦ Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// º¸½º·ÎºÎÅÍ ¹ß»çµÇ°í, ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ ÀÌµ¿ÇÏ¸ç, Ãæµ¹ ½Ã ÇÇ°İ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Àç»ıÇÏ°í Á¦°ÅµË´Ï´Ù.
 /// </summary>
 public class EnemyBossCircleBullet : MonoBehaviour
 {
-    // ì• ë‹ˆë©”ì´í„°ì™€ ë¦¬ì§€ë“œë°”ë””2D ì»´í¬ë„ŒíŠ¸
+    // ¾Ö´Ï¸ŞÀÌÅÍ ¹× Rigidbody2D ÄÄÆ÷³ÍÆ®
     protected Animator anim;
     protected Rigidbody2D rb;
 
     [Header("Settings")]
-    [SerializeField] float speed = 10f;   // ì´ì•Œì˜ ì´ë™ ì†ë„
-    [SerializeField] float lifeTime = 5f; // ì´ì•Œì˜ ìƒëª… ì‹œê°„
+    [SerializeField] private float speed = 10f;   // ÃÑ¾Ë ÀÌµ¿ ¼Óµµ
+    [SerializeField] private float lifeTime = 5f; // ÃÑ¾Ë ¼ö¸í
 
-    private EnemyObject attacker;
+    private EnemyObject attacker; // ¹ß»çÇÑ Àû °´Ã¼
 
-    void Awake()
+    private void Awake()
     {
-        // ì• ë‹ˆë©”ì´í„°ì™€ ë¦¬ì§€ë“œë°”ë””2D ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        // ¾Ö´Ï¸ŞÀÌÅÍ¿Í ¸®Áöµå¹Ùµğ ÄÄÆ÷³ÍÆ® ÃÊ±âÈ­
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    private void Start()
     {
-        // ì¼ì • ì‹œê°„ í›„ ì´ì•Œ ì‚­ì œ
+        // ÀÏÁ¤ ½Ã°£ÀÌ Áö³ª¸é ÃÑ¾Ë »èÁ¦
         Destroy(gameObject, lifeTime);
     }
 
     /// <summary>
-    /// ê³µê²©ì„ ë°œì‚¬í•œ EnemyObjectë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
+    /// ÀÌ ÃÑ¾ËÀ» ¹ß»çÇÑ ÀûÀ» ¼³Á¤ÇÕ´Ï´Ù.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
         attacker = enemy;
     }
 
-    // ì´ì•Œì„ ë°œì‚¬í•˜ëŠ” í•¨ìˆ˜ (ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œ)
+    // ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ ÃÑ¾ËÀ» ¹ß»çÇÏ´Â ¸Ş¼­µå (¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®·Î È£Ãâ)
     private void Shoot()
     {
         Vector2 targetPosition = PlayerManager.instance.player.transform.position;
 
-        // í˜„ì¬ ìœ„ì¹˜ì—ì„œ ëª©í‘œ ìœ„ì¹˜ê¹Œì§€ì˜ ë°©í–¥ ê³„ì‚°
+        // ÇöÀç À§Ä¡¿¡¼­ ÇÃ·¹ÀÌ¾î À§Ä¡±îÁö ¹æÇâ °è»ê
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
 
-        // ì´ì•Œ ì†ë„ ì ìš©
+        // ¹æÇâ°ú ¼Óµµ¸¦ °öÇÏ¿© ÀÌµ¿ ½ÃÀÛ
         rb.linearVelocity = direction * speed;
 
-        // íšŒì „ë„ ë°œì‚¬ ë°©í–¥ìœ¼ë¡œ ì„¤ì •
+        // ÃÑ¾Ë È¸Àü ¹æÇâ ¼³Á¤
         RotateToVelocity(rb.linearVelocity);
     }
 
-    // ì´ì•Œì˜ ì´ë™ ë°©í–¥ì— ë§ê²Œ íšŒì „í•˜ëŠ” í•¨ìˆ˜
-    void RotateToVelocity(Vector2 velocity)
+    // ÃÑ¾ËÀÌ ³¯¾Æ°¡´Â ¹æÇâÀ¸·Î È¸Àü½ÃÅ°´Â ¸Ş¼­µå
+    private void RotateToVelocity(Vector2 velocity)
     {
         if (velocity.sqrMagnitude > 0.01f)
         {
@@ -62,40 +62,29 @@ public class EnemyBossCircleBullet : MonoBehaviour
         }
     }
 
-    /// ì¶©ëŒ ì²˜ë¦¬ í•¨ìˆ˜
-    void OnTriggerEnter2D(Collider2D collision)
+    // Ãæµ¹ Ã³¸® ÇÔ¼ö
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•œ ê²½ìš°
+        // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇßÀ» ¶§
         if (collision.CompareTag("Player"))
         {
-            // íˆíŠ¸ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
-            anim.SetBool("Hit", true);
+            anim.SetBool("Hit", true); // ÇÇ°İ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+            rb.linearVelocity = Vector2.zero; // ÀÌµ¿ ÁßÁö
+            GetComponent<Collider2D>().enabled = false; // Ãæµ¹ ºñÈ°¼ºÈ­
 
-            // ì¶©ëŒ í›„ ì´ì•Œ ì •ì§€
-            rb.linearVelocity = Vector2.zero;
-
-            // ì½œë¼ì´ë” ë¹„í™œì„±í™”
-            GetComponent<Collider2D>().enabled = false;
-
-            // í”Œë ˆì´ì–´ì—ê²Œ ë°ë¯¸ì§€ ì „ë‹¬
+            // ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ ÀÔÈû
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
-
-        // ë²½ê³¼ ì¶©ëŒí•œ ê²½ìš°
+        // ¹Ù´Ú°ú Ãæµ¹ÇßÀ» ¶§
         else if (collision.CompareTag("Ground"))
         {
-            // íˆíŠ¸ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
-            anim.SetBool("Hit", true);
-
-            // ì¶©ëŒ í›„ ì´ì•Œ ì •ì§€
-            rb.linearVelocity = Vector2.zero;
-
-            // ì½œë¼ì´ë” ë¹„í™œì„±í™”
-            GetComponent<Collider2D>().enabled = false;
+            anim.SetBool("Hit", true); // ÇÇ°İ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+            rb.linearVelocity = Vector2.zero; // ÀÌµ¿ ÁßÁö
+            GetComponent<Collider2D>().enabled = false; // Ãæµ¹ ºñÈ°¼ºÈ­
         }
     }
 
-    // ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œë˜ì–´ ì´í™íŠ¸ ì˜¤ë¸Œì íŠ¸ë¥¼ íŒŒê´´
+    // ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÇ¾î ÃÑ¾ËÀ» Á¦°ÅÇÏ´Â ¸Ş¼­µå
     private void DestroyTrigger()
     {
         Destroy(gameObject);

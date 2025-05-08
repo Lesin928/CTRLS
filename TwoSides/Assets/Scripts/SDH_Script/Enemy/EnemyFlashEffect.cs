@@ -10,7 +10,7 @@ public class EnemyFlashEffect : MonoBehaviour
     private Material originalMaterial; // 원래 사용 중인 머티리얼 저장
     private Coroutine flashRoutine; // 현재 실행 중인 코루틴
 
-    void Start()
+    private void Start()
     {
         // 현재 오브젝트의 SpriteRenderer 컴포넌트를 가져옴
         spriteRenderer = GetComponent<SpriteRenderer>();

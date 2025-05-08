@@ -23,7 +23,7 @@ public class EnemyPixelLightningLine : MonoBehaviour
 
     private LineRenderer lr; // 라인을 그리기 위한 LineRenderer 컴포넌트
 
-    void Awake()
+    private void Awake()
     {
         lr = GetComponent<LineRenderer>();
         lr.textureMode = LineTextureMode.Tile;
@@ -37,7 +37,7 @@ public class EnemyPixelLightningLine : MonoBehaviour
         lr.sortingOrder = sortingOrder;
     }
 
-    void Update()
+    private void Update()
     {
         if (startPoint == null || endPoint == null) 
             Destroy(gameObject);

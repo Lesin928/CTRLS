@@ -147,7 +147,7 @@ public class EnemyObject : CharacterObject
     /// </summary>
     /// <returns>벽이 감지되면 true, 아니면 false를 반환합니다.</returns>
     public virtual bool IsWallDetected()
-        => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround).collider != null;
+        => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsWall).collider != null;
 
     /// <summary>
     /// 플레이어가 감지되었는지 검사합니다.

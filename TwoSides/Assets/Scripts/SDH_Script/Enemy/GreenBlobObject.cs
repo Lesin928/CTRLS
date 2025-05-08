@@ -75,6 +75,9 @@ public class GreenBlobObject : EnemyObject
         stateMachine.ChangeState(dissasembleState);
     }
 
+    /// <summary>
+    /// 호출 시 추격 상태로 전환합니다.
+    /// </summary>
     public override void CallChaseState()
     {
         stateMachine.ChangeState(chaseState);

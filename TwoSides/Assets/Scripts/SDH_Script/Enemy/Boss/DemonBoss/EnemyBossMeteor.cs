@@ -1,62 +1,64 @@
 using UnityEngine;
 
 /// <summary>
-/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Meteor ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
-/// ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¸ï¿½, ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+/// º¸½ºÀÇ ¸ÞÅ×¿À °ø°Ý Ã³¸®¸¦ ´ã´çÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ÀÌ Å¬·¡½º´Â ¸ÞÅ×¿À °ø°ÝÀ» È°¼ºÈ­/ºñÈ°¼ºÈ­ÇÏ°í, ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã µ¥¹ÌÁö¸¦ ÁÖ´Â µîÀÇ ¿ªÇÒÀ» ÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossMeteor : MonoBehaviour
 {
-    private EnemyObject attacker; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼
+    private EnemyObject attacker; // °ø°ÝÀÚ
 
     private void Start()
     {
+        // °ÔÀÓ ½ÃÀÛ ½Ã ÄÝ¶óÀÌ´õ ºñÈ°¼ºÈ­
         GetComponent<Collider2D>().enabled = false;
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ EnemyObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
+    /// °ø°ÝÀÚ¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
     /// </summary>
+    /// <param name="enemy">Àû °´Ã¼(EnemyObject)</param>
     public void SetAttacker(EnemyObject enemy)
     {
         attacker = enemy;
     }
 
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    /// MeteorÀÇ ¹æÇâÀ» ¼³Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
     /// </summary>
-    /// <param name="facingDir">ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (1 ï¿½Ç´ï¿½ -1)</param>
+    /// <param name="facingDir">¹æÇâ ¼³Á¤ (1Àº ¿À¸¥ÂÊ, -1Àº ¿ÞÂÊ)</param>
     public void SetDirection(int facingDir)
     {
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * facingDir;
+        scale.x = Mathf.Abs(scale.x) * facingDir; // ¹æÇâ¿¡ ¸Â°Ô ½ºÄÉÀÏÀ» Á¶Á¤
         transform.localScale = scale;
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
+    // °ø°Ý È°¼ºÈ­ (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÊ)
     private void EnableAttack()
     {
         GetComponent<Collider2D>().enabled = true;
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ (ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½)
+    // °ø°Ý È°¼ºÈ­ (¾Ö´Ï¸ÞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÊ)
     private void DisableAttack()
     {
         GetComponent<Collider2D>().enabled = false;
     }
 
-    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ È£ï¿½ï¿½
-    void OnTriggerEnter2D(Collider2D collision)
+    // Ãæµ¹ Ã³¸® ÇÔ¼ö
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // ÇÃ·¹ÀÌ¾î°¡ Ãæµ¹ ½Ã µ¥¹ÌÁö Ã³¸®
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }
 
-    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ä±ï¿½
+    // Meteor °ø°Ý ÈÄ ¿ÀºêÁ§Æ®¸¦ Á¦°ÅÇÏ´Â ÇÔ¼ö
     private void DestroyTrigger()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); // Meteor ¿ÀºêÁ§Æ® ÆÄ±«
     }
 }
