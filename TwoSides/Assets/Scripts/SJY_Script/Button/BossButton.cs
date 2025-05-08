@@ -13,8 +13,8 @@ public class BossButton : MonoBehaviour
         string sceneName = "Boss";
         map.SetActive(false);
         GameManager.Instance.isClear = false;
-        Mapbutton.Instance.clearOn = false;
-        //Map.Instance.doorConnected = false;
+        Mapbutton.Instance.activeButton = false;
+        Map.Instance.doorConnected = false;
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

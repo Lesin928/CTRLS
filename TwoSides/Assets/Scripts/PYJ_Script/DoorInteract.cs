@@ -45,8 +45,8 @@ public class DoorInteract : Interactive
         if (GameManager.Instance.isClear)
         {
             Debug.Log("문 개방! 다음 맵으로 이동합니다.");//지도 열리게 
-            Mapbutton.Instance.clearOn = true;
-            //Map.Instance.doorConnected = true;
+            Mapbutton.Instance.activeButton = true;
+            Map.Instance.doorConnected = true;
             Mapbutton.Instance.GameClearAutoButton();
         }
         else
