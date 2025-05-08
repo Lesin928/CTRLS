@@ -109,7 +109,7 @@ public class EnemySupportState : EnemyState
     }
 
     // 특정 적에게 버프 지원 수행
-    void Support(Transform targetEnemy)
+    private void Support(Transform targetEnemy)
     {
         Debug.Log($"{targetEnemy.name} 을(를) 지원합니다.");
 
@@ -207,7 +207,7 @@ public class EnemySupportState : EnemyState
     }
 
     // 특정 적에게 준 지원을 해제
-    void RemoveSupport(Transform targetEnemy)
+    private void RemoveSupport(Transform targetEnemy)
     {
         Debug.Log($"{targetEnemy.name} 지원 해제");
 

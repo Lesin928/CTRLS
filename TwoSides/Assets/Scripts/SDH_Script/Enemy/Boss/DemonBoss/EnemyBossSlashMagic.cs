@@ -1,26 +1,26 @@
-//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// 보스의 Slash 공격 이펙트를 처리하는 클래스입니다.
-/// 애니메이션 이벤트를 통해 활성화되며, 플레이어와 충돌 시 처리 로직을 수행합니다.
+/// 보스의 슬래시 마법과 관련된 처리를 담당하는 클래스입니다.
+/// 슬래시 공격 트리거를 통해 슬래시 생성 및 마법 처리를 담당합니다.
 /// </summary>
 public class EnemyBossSlashMagic : MonoBehaviour
 {
-    private EnemyBossSlashAttackTrigger attackTrigger; // Slash 공격을 트리거하는 참조 변수
+    private EnemyBossSlashAttackTrigger attackTrigger; // 슬래시 공격 트리거와 연동되는 변수
 
     /// <summary>
-    /// Slash 공격 트리거를 설정합니다.
+    /// 슬래시 공격 트리거를 설정하는 함수입니다.
     /// </summary>
     public void SetAttackTrigger(EnemyBossSlashAttackTrigger trigger)
     {
-        attackTrigger = trigger;
+        attackTrigger = trigger; // 주어진 트리거를 attackTrigger 변수에 할당
     }
 
-    // 애니메이션 이벤트에서 호출되어 공격을 실행하고 오브젝트를 삭제함
+    // 슬래시 공격의 후속 처리를 실행하는 함수입니다. 
+    // 공격이 끝나면 슬래시 공격 트리거를 호출하고, 해당 객체를 삭제합니다.
     private void DestroyTrigger()
     {
-        attackTrigger.SlashAttackTrigger(); // Slash 공격 실행
-        Destroy(gameObject);
+        attackTrigger.SlashAttackTrigger(); // 슬래시 공격을 트리거
+        Destroy(gameObject); // 현재 게임 오브젝트를 삭제
     }
 }

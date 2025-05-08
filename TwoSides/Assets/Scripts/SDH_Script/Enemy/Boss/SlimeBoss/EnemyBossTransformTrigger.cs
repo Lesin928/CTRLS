@@ -1,9 +1,13 @@
 using UnityEngine;
 
+/// <summary>
+/// Slime Boss -> Demon Boss 로 전환하는 트리거입니다.
+/// Slime Boss의 Dead 애니메이션에서 이벤트로 호출하여 Demon Boss를 생성합니다.
+/// </summary>
 public class EnemyBossTransformTrigger : EnemyAnimationTrigger
 {
-    [SerializeField] private GameObject demonBossPrefab;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject demonBossPrefab; // DemonBoss 프리팹
+    [SerializeField] private Transform spawnPoint;       // 스폰 위치
 
     // 메인 보스 생성
     // Dead 애니메이션에서 이벤트로 호출

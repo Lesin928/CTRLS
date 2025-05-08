@@ -1,5 +1,3 @@
-using System.Collections;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 // TODO:
@@ -124,6 +122,10 @@ public class EnemyObject : CharacterObject
     {
     }
 
+    public virtual void CallChaseState()
+    {
+    }
+
     #region [Animation Event]
     /// <summary>
     /// 애니메이션 이벤트가 종료되었음을 상태 머신에 알립니다.
@@ -138,14 +140,14 @@ public class EnemyObject : CharacterObject
     /// </summary>
     /// <returns>지면이 감지되면 true, 아니면 false를 반환합니다.</returns>
     public virtual bool IsGroundDetected()
-        => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround).collider != null;
 
     /// <summary>
     /// 벽이 감지되었는지 판단합니다.
     /// </summary>
     /// <returns>벽이 감지되면 true, 아니면 false를 반환합니다.</returns>
     public virtual bool IsWallDetected()
-        => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+        => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsWall).collider != null;
 
     /// <summary>
     /// 플레이어가 감지되었는지 검사합니다.
@@ -153,6 +155,13 @@ public class EnemyObject : CharacterObject
     /// <returns>플레이어와 충돌한 Collider2D 객체를 반환하거나, 감지되지 않은 경우 null을 반환합니다.</returns>
     public virtual Collider2D IsPlayerDetected()
         => Physics2D.OverlapCircle(playerCheck.position, playerCheckRadius, whatIsPlayer);
+
+    /// <summary>
+    /// 공격 할 수 있는지 검사합니다.
+    /// </summary>
+    /// <returns>플레이어와 충돌한 Collider2D 객체를 반환하거나, 감지되지 않은 경우 null을 반환합니다.</returns>
+    public virtual Collider2D IsAttackDetectable()
+        => Physics2D.OverlapCircle(attackCheck.position, attackCheckRadius, whatIsPlayer);
 
     /// <summary>
     /// 플레이어와 오브젝트 사이에 벽이 있는지 여부를 판단합니다.

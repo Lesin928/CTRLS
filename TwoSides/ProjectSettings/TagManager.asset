@@ -9,6 +9,7 @@ TagManager:
   - Interactive
   - StartingPoint
   - Confiner
+  - Effect
   layers:
   - Default
   - TransparentFX

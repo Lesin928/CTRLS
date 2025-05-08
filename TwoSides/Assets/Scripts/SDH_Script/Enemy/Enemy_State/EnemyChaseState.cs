@@ -72,7 +72,7 @@ public class EnemyChaseState : EnemyState
         }
         else if (enemyBase.IsPlayerDetected() != null)
         {
-            if (distance < enemyBase.attackCheckRadius)
+            if (enemyBase.IsAttackDetectable() != null)
             {
                 // 공격 조건 만족 시 공격 상태로 전환
                 if (CanAttack() && !enemyBase.IsWallBetweenPlayer())
