@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 117489277}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73741,7 +73741,7 @@ GameObject:
   - component: {fileID: 1096833767}
   m_Layer: 9
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76064,6 +76064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1643111680}
+  - component: {fileID: 1643111687}
   - component: {fileID: 1643111686}
   - component: {fileID: 1643111685}
   - component: {fileID: 1643111684}
@@ -76072,7 +76073,7 @@ GameObject:
   - component: {fileID: 1643111681}
   m_Layer: 10
   m_Name: Moving_Thin_Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76599,6 +76600,20 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1643111687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643111679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804c75416f5abe242b76bc568a15fa29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  moveAmount: 0.5
 --- !u!1 &1715565183
 GameObject:
   m_ObjectHideFlags: 0
@@ -77319,7 +77334,7 @@ GameObject:
   - component: {fileID: 1790965360}
   m_Layer: 11
   m_Name: Thin Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78256,7 +78271,7 @@ GameObject:
   - component: {fileID: 1792389878}
   m_Layer: 10
   m_Name: Thin Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

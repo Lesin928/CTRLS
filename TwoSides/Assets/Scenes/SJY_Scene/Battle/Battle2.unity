@@ -69498,7 +69498,7 @@ GameObject:
   - component: {fileID: 533495435}
   m_Layer: 9
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71767,7 +71767,7 @@ GameObject:
   - component: {fileID: 575884074}
   m_Layer: 10
   m_Name: Moving_Thin_Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72437,7 +72437,7 @@ GameObject:
   - component: {fileID: 691180231}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77241,7 +77241,7 @@ GameObject:
   - component: {fileID: 1655852210}
   m_Layer: 10
   m_Name: Thin Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78102,7 +78102,7 @@ GameObject:
   - component: {fileID: 1900313783}
   m_Layer: 10
   m_Name: Thin Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -69011,7 +69011,7 @@ GameObject:
   - component: {fileID: 239662529}
   m_Layer: 10
   m_Name: Thin Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70346,26 +70346,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 61, y: 15, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 8
-      m_TileSpriteIndex: 8
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 62, y: 15, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 7
-      m_TileSpriteIndex: 7
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: 53, y: 19, z: 0}
     second:
       serializedVersion: 2
@@ -70452,9 +70432,9 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 6f6cf810440356c48902885df0ee3ebd, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 4af7cb62a094e0b479258f54168690fc, type: 2}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 75fe2b00cdb516b418d2f75b2b75c259, type: 2}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 5828e4486448c544bab1040edde50874, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: fee88609b3cc89d4e991629ac4c39e35, type: 2}
@@ -70481,9 +70461,9 @@ Tilemap:
     m_Data: {fileID: -1268996694, guid: d647089c1bd50da4e8e9ad8c155836e5, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1049326443, guid: d647089c1bd50da4e8e9ad8c155836e5, type: 3}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: -830042738, guid: d647089c1bd50da4e8e9ad8c155836e5, type: 3}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 890588135, guid: d647089c1bd50da4e8e9ad8c155836e5, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 1779571708, guid: d647089c1bd50da4e8e9ad8c155836e5, type: 3}
@@ -70496,7 +70476,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -1459155598, guid: d647089c1bd50da4e8e9ad8c155836e5, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 18
+  - m_RefCount: 16
     m_Data:
       e00: 1
       e01: 0
@@ -70515,7 +70495,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 18
+  - m_RefCount: 16
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -70891,7 +70871,7 @@ GameObject:
   - component: {fileID: 880310287}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75235,7 +75215,7 @@ GameObject:
   - component: {fileID: 1353082564}
   m_Layer: 9
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77291,7 +77271,7 @@ GameObject:
   - component: {fileID: 1631392750}
   m_Layer: 11
   m_Name: Thin Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78153,7 +78133,7 @@ GameObject:
   - component: {fileID: 1782907138}
   m_Layer: 10
   m_Name: Moving_Thin_Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78216,7 +78196,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
