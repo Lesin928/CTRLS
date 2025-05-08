@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 526077026}
   - component: {fileID: 526077025}
   - component: {fileID: 526077024}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Thin Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}

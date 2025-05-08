@@ -35815,6 +35815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1318243097}
+  - component: {fileID: 1318243098}
   - component: {fileID: 1318243096}
   m_Layer: 0
   m_Name: Global Volume
@@ -35855,6 +35856,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1318243098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318243095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e92749e79791eb4f8f84f4c1fac750b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 1318243096}
 --- !u!1 &1353272084
 GameObject:
   m_ObjectHideFlags: 0

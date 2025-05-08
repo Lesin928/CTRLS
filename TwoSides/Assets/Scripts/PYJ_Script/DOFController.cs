@@ -11,20 +11,26 @@ public class VignetteControllerURP : MonoBehaviour
     {
         if (volume.profile.TryGet(out vignette))
         {
-            vignette.active = true; // 비네트 효과 켜기
+            vignette.active = true;
             vignette.intensity.value = 0.3f; // 기본 강도
         }
     }
 
-    void Update()
+    // 외부에서 호출할 때 강도를 0.6으로 고정
+    public void TriggerVignette()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (vignette != null)
         {
-            if (vignette != null)
-            {
-                vignette.intensity.value = 0.6f; // Enter 키로 강도 증가
-            }
+            vignette.intensity.value = 0.6f;
+        }
+    }
+
+    // 외부에서 호출할 때 강도를 0.3으로 고정
+    public void ResetVignette()
+    {
+        if (vignette != null)
+        {
+            vignette.intensity.value = 0.3f;
         }
     }
 }
-
