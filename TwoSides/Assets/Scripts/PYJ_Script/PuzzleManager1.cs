@@ -54,24 +54,24 @@ public class PuzzleManager1 : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        if (puzzleCleared) return;
+    //void Update()
+    //{
+    //    if (puzzleCleared) return;
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (puzzlePanel.activeSelf)
-            {
-                puzzlePanel.SetActive(false); // 패널 닫기
-                Debug.Log("퍼즐 창 닫기");
-            }
-            else
-            {
-                puzzlePanel.SetActive(true); // 패널 열기
-                Debug.Log("퍼즐 창 열기");
-            }
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        if (puzzlePanel.activeSelf)
+    //        {
+    //            puzzlePanel.SetActive(false); // 패널 닫기
+    //            Debug.Log("퍼즐 창 닫기");
+    //        }
+    //        else
+    //        {
+    //            puzzlePanel.SetActive(true); // 패널 열기
+    //            Debug.Log("퍼즐 창 열기");
+    //        }
+    //    }
+    //}
 
 
 
@@ -163,6 +163,7 @@ public class PuzzleManager1 : MonoBehaviour
 
         if (isCorrect)
         {
+            GameManager.Instance.OnStageClear();
             Debug.Log("퍼즐 완성!");
             puzzleCleared = true; // 클리어 상태로 기록
 
