@@ -8,9 +8,7 @@ public class BattleButton : MonoBehaviour
     private void Awake()
     {
         if (map == null)
-            map = GameObject.Find("MapScrollArea"); // ÀÌ¸§ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ
-
-        isUsed[0] = true;
+            map = GameObject.Find("MapScrollArea"); // ì´ë¦„ ì •í™•íˆ ì¼ì¹˜í•´ì•¼ í•¨
     }
 
     public void Onclick()
@@ -26,7 +24,8 @@ public class BattleButton : MonoBehaviour
 
         sceneName += rand.ToString();
         GameManager.Instance.isClear = false;
-        Mapbutton.Instance.clearOn = false;
+        Mapbutton.Instance.activeButton = false;
+        Map.Instance.doorConnected = false;
         map.SetActive(false);
         LoadingSceneController.Instance.LoadScene(sceneName);
     }

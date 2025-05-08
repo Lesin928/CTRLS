@@ -6,14 +6,15 @@ public class BossButton : MonoBehaviour
     private void Awake()
     {
         if (map == null)
-            map = GameObject.Find("MapScrollArea"); // ÀÌ¸§ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ
+            map = GameObject.Find("MapScrollArea"); // ì´ë¦„ ì •í™•íˆ ì¼ì¹˜í•´ì•¼ í•¨
     }
     public void Onclick()
     {
         string sceneName = "Boss";
         map.SetActive(false);
         GameManager.Instance.isClear = false;
-        Mapbutton.Instance.clearOn = false;
+        Mapbutton.Instance.activeButton = false;
+        Map.Instance.doorConnected = false;
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

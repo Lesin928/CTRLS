@@ -12,7 +12,7 @@ public class EventManager : MonoBehaviour
     public Button EventButton1;
     public Button EventButton2;
 
-    //¿Ã∫•∆Æ æ∆¥— ¿œπ›¥Î»≠ ¿¸øÎ
+    //Ïù¥Î≤§Ìä∏ ÏïÑÎãå ÏùºÎ∞òÎåÄÌôî Ï†ÑÏö©
     public static int TUTORIAL = 101;
 
     public int fixedEventId = -1;
@@ -34,16 +34,16 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        if (fixedEventId > 0)
-            id = fixedEventId;
-        else if (GameManager.Instance.currentStage == 1)
+        if (GameManager.Instance.currentStage == 1)
         {
             id = TUTORIAL;
-            isEventTalk = true;
+            isEventFinished = false;
         }
         else
+        {
             id = EventScriptManager.Instance.GetScriptId();
-        isEventFinished = false;
+            isEventTalk = true;
+        }
     }
 
     private void Update()
@@ -68,19 +68,17 @@ public class EventManager : MonoBehaviour
 
     public void StartEvent()
     {
-        Event(id);
         EventPanel.SetActive(true);
+        Event(id);
     }
 
     public void ExitEvent()
     {
-        Debug.Log("¿Ã∫•∆Æ ¡æ∑·");
         EventPanel.SetActive(false);
-        //HUDManager.Instance.ResumGame();
-
 
         if (isEventTalk)
         {
+            Debug.Log("Ïù¥Î≤§Ìä∏ Ï¢ÖÎ£å");
             GameManager.Instance.OnStageClear();
         }
         else
@@ -91,13 +89,10 @@ public class EventManager : MonoBehaviour
 
             if (EventScriptManager.Instance.GetEventScript(id, scriptIndex) == null)
             {
-                Debug.Log("¿˙Ω∫∆Æ¿Ã∫•∆Æ ¡æ∑·");
+                Debug.Log("Ï†ÄÏä§Ìä∏Ïù¥Î≤§Ìä∏ Ï¢ÖÎ£å");
                 isEventFinished = true;
                 GameManager.Instance.OnStageClear();
-                // return;
             }
-
-            //StartEvent();
         }
 
     }
@@ -108,8 +103,6 @@ public class EventManager : MonoBehaviour
             Talk(id);
         else
             EventTalk(id);
-
-        //HUDManager.Instance.PauseGame();
     }
 
     private void Talk(int id)
