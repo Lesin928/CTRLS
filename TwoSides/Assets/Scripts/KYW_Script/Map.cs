@@ -289,7 +289,7 @@ public class Map : MonoBehaviour
                 if (node == null) continue;
 
                 if (floor == 1) node.type = NodeType.Battle;
-                else if (floor == 8) node.type = NodeType.Puzzle;
+                //else if (floor == 8) node.type = NodeType.Puzzle;
                 else if (floor == 14) node.type = NodeType.Store;
                 else
                 {

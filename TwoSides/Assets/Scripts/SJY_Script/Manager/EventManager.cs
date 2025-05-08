@@ -34,16 +34,16 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        if (fixedEventId > 0)
-            id = fixedEventId;
-        else if (GameManager.Instance.currentStage == 1)
+        if (GameManager.Instance.currentStage == 1)
         {
             id = TUTORIAL;
-            isEventTalk = true;
+            isEventFinished = false;
         }
         else
+        {
             id = EventScriptManager.Instance.GetScriptId();
-        isEventFinished = false;
+            isEventTalk = true;
+        }
     }
 
     private void Update()
@@ -68,19 +68,17 @@ public class EventManager : MonoBehaviour
 
     public void StartEvent()
     {
-        Event(id);
         EventPanel.SetActive(true);
+        Event(id);
     }
 
     public void ExitEvent()
     {
-        Debug.Log("이벤트 종료");
         EventPanel.SetActive(false);
-        //HUDManager.Instance.ResumGame();
-
 
         if (isEventTalk)
         {
+            Debug.Log("이벤트 종료");
             GameManager.Instance.OnStageClear();
         }
         else
@@ -105,8 +103,6 @@ public class EventManager : MonoBehaviour
             Talk(id);
         else
             EventTalk(id);
-
-        //HUDManager.Instance.PauseGame();
     }
 
     private void Talk(int id)
