@@ -95,6 +95,11 @@ public class LoadingSceneController : MonoBehaviour
                 GameManager.Instance.isClear = false;
             }
 
+            if (loadSceneName == "Puzzle0")
+            {
+                GameManager.Instance.isClear = true;
+            }
+
             if (HUDManager.Instance != null)
                 HUDManager.Instance.ShowHUD();
         }
