@@ -1,38 +1,42 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
-/// DemonBoss ¿ÀºêÁ§Æ®ÀÇ »óÅÂ ¹× Çàµ¿À» Á¤ÀÇÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// EnemyObject¸¦ »ó¼ÓÇÏ¸ç, ´Ù¾çÇÑ »óÅÂ (Idle, Patrol, Chase, Attack)¸¦ Ã³¸®ÇÕ´Ï´Ù.
+/// DemonBoss ì˜¤ë¸Œì íŠ¸ì˜ ìƒíƒœ ë° í–‰ë™ì„ ì •ì˜í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// EnemyObjectë¥¼ ìƒì†í•˜ë©°, ë‹¤ì–‘í•œ ìƒíƒœ (Idle, Patrol, Chase, Attack)ë¥¼ ì²˜ë¦¬í•©ë‹ˆë‹¤.
 /// </summary>
 public class DemonBossObject : EnemyObject
 {
     [Header("Attack Check Transform")]
-    [SerializeField] private Transform closeAttackCheck; // ±Ù°Å¸® °ø°İ ¹üÀ§ ±âÁØ À§Ä¡
-    [SerializeField] private Transform midAttackCheck;   // Áß°Å¸® °ø°İ ¹üÀ§ ±âÁØ À§Ä¡
-    [SerializeField] private Transform longAttackCheck;  // ¿ø°Å¸® °ø°İ ¹üÀ§ ±âÁØ À§Ä¡
+    [SerializeField] private Transform closeAttackCheck; // ê·¼ê±°ë¦¬ ê³µê²© ë²”ìœ„ ê¸°ì¤€ ìœ„ì¹˜
+    [SerializeField] private Transform midAttackCheck;   // ì¤‘ê±°ë¦¬ ê³µê²© ë²”ìœ„ ê¸°ì¤€ ìœ„ì¹˜
+    [SerializeField] private Transform longAttackCheck;  // ì›ê±°ë¦¬ ê³µê²© ë²”ìœ„ ê¸°ì¤€ ìœ„ì¹˜
 
     [Header("Attack Check Radius")]
-    [SerializeField] Vector2 closeAttackCheckSize; // ±Ù°Å¸® °ø°İ ¹üÀ§ Å©±â
-    [SerializeField] Vector2 midAttackCheckSize;   // Áß°Å¸® °ø°İ ¹üÀ§ Å©±â
-    [SerializeField] Vector2 longAttackCheckSize;  // ¿ø°Å¸® °ø°İ ¹üÀ§ Å©±â
+    [SerializeField] Vector2 closeAttackCheckSize; // ê·¼ê±°ë¦¬ ê³µê²© ë²”ìœ„ í¬ê¸°
+    [SerializeField] Vector2 midAttackCheckSize;   // ì¤‘ê±°ë¦¬ ê³µê²© ë²”ìœ„ í¬ê¸°
+    [SerializeField] Vector2 longAttackCheckSize;  // ì›ê±°ë¦¬ ê³µê²© ë²”ìœ„ í¬ê¸°
+
+    [SerializeField] private GameObject healthBar;
+    private Slider slider;
 
     #region State
-    public EnemyIdleState idleState { get; private set; }      // ´ë±â »óÅÂ
-    public EnemyPatrolState patrolState { get; private set; }  // ¼øÂû »óÅÂ
-    public EnemyChaseState chaseState { get; private set; }    // Ãß°İ »óÅÂ
-    public EnemyAttackState attack1State { get; private set; } // °ø°İ1 »óÅÂ
-    public EnemyAttackState attack2State { get; private set; } // °ø°İ2 »óÅÂ
-    public EnemyAttackState attack3State { get; private set; } // °ø°İ3 »óÅÂ
-    public EnemyAttackState attack4State { get; private set; } // °ø°İ4 »óÅÂ
-    public EnemyAttackState attack5State { get; private set; } // °ø°İ5 »óÅÂ
-    public EnemyAttackState attack6State { get; private set; } // °ø°İ6 »óÅÂ
+    public EnemyIdleState idleState { get; private set; }      // ëŒ€ê¸° ìƒíƒœ
+    public EnemyPatrolState patrolState { get; private set; }  // ìˆœì°° ìƒíƒœ
+    public EnemyChaseState chaseState { get; private set; }    // ì¶”ê²© ìƒíƒœ
+    public EnemyAttackState attack1State { get; private set; } // ê³µê²©1 ìƒíƒœ
+    public EnemyAttackState attack2State { get; private set; } // ê³µê²©2 ìƒíƒœ
+    public EnemyAttackState attack3State { get; private set; } // ê³µê²©3 ìƒíƒœ
+    public EnemyAttackState attack4State { get; private set; } // ê³µê²©4 ìƒíƒœ
+    public EnemyAttackState attack5State { get; private set; } // ê³µê²©5 ìƒíƒœ
+    public EnemyAttackState attack6State { get; private set; } // ê³µê²©6 ìƒíƒœ
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
 
-        // »óÅÂ °´Ã¼ »ı¼º ¹× ÃÊ±âÈ­
+        // ìƒíƒœ ê°ì²´ ìƒì„± ë° ì´ˆê¸°í™”
         idleState = new EnemyIdleState(this, stateMachine, "Idle");
         patrolState = new EnemyPatrolState(this, stateMachine, "Move");
         chaseState = new EnemyChaseState(this, stateMachine, "Move");
@@ -47,30 +51,36 @@ public class DemonBossObject : EnemyObject
     protected override void Start()
     {
         base.Start();
+        GameObject healthBar = Instantiate(this.healthBar);
+        slider = healthBar.GetComponentInChildren<Slider>();
 
-        // ½ÃÀÛ ½Ã Idle »óÅÂ·Î ÃÊ±âÈ­
+        slider.maxValue = MaxHp;
+        slider.value = CurrentHp;
+
+        // ì‹œì‘ ì‹œ Idle ìƒíƒœë¡œ ì´ˆê¸°í™”
         stateMachine.Initialize(idleState);
     }
 
     protected override void Update()
     {
         base.Update();
+        slider.value = CurrentHp;
     }
 
     /// <summary>
-    /// SlimeBoss -> DemonBoss ÀüÈ¯ ½Ã ¹æÇâÀ» ÃÊ±âÈ­ÇÕ´Ï´Ù.
+    /// SlimeBoss -> DemonBoss ì „í™˜ ì‹œ ë°©í–¥ì„ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="direction">SlimeBossÀÇ ¹Ù¶óº¸´ø ¹æÇâ</param>
+    /// <param name="direction">SlimeBossì˜ ë°”ë¼ë³´ë˜ ë°©í–¥</param>
     public void InitFacingDir(int direction)
     {
         if (facingDir != direction)
         {
-            Flip(); // ¹æÇâ ¹İÀü
+            Flip(); // ë°©í–¥ ë°˜ì „
         }
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ Å½ÁöµÇ¾úÀ» ¶§ Ãß°İ »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// í”Œë ˆì´ì–´ê°€ íƒì§€ë˜ì—ˆì„ ë•Œ ì¶”ê²© ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public override void EnterPlayerDetection()
     {
@@ -78,7 +88,7 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ Å½Áö ¹üÀ§¿¡¼­ ¹ş¾î³µÀ» ¶§ ¼øÂû »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// í”Œë ˆì´ì–´ê°€ íƒì§€ ë²”ìœ„ì—ì„œ ë²—ì–´ë‚¬ì„ ë•Œ ìˆœì°° ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public override void ExitPlayerDetection()
     {
@@ -86,8 +96,8 @@ public class DemonBossObject : EnemyObject
     }
 
     /// <summary>
-    /// È£Ãâ ½Ã ÀûÀıÇÑ °ø°İ »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
-    /// °ø°İ °Å¸®¿¡ µû¶ó ´Ù¾çÇÑ °ø°İ ÆĞÅÏÀÌ ¼±ÅÃµË´Ï´Ù.
+    /// í˜¸ì¶œ ì‹œ ì ì ˆí•œ ê³µê²© ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
+    /// ê³µê²© ê±°ë¦¬ì— ë”°ë¼ ë‹¤ì–‘í•œ ê³µê²© íŒ¨í„´ì´ ì„ íƒë©ë‹ˆë‹¤.
     /// </summary>
     public override void CallAttackState()
     {
@@ -96,11 +106,11 @@ public class DemonBossObject : EnemyObject
 
         if (closeRangeDetected())
         {
-            stateMachine.ChangeState(attack4State); // ±Ù°Å¸® °íÁ¤ °ø°İ
+            stateMachine.ChangeState(attack4State); // ê·¼ê±°ë¦¬ ê³ ì • ê³µê²©
         }
         else if (midRangeDetected())
         {
-            // Áß°Å¸®: ´Ù¾çÇÑ °ø°İ Áß ¹«ÀÛÀ§ ¼±ÅÃ (0~4)
+            // ì¤‘ê±°ë¦¬: ë‹¤ì–‘í•œ ê³µê²© ì¤‘ ë¬´ì‘ìœ„ ì„ íƒ (0~4)
             rand = Random.Range(0, 5); // 0, 1, 2, 3, 4
             switch (rand)
             {
@@ -123,7 +133,7 @@ public class DemonBossObject : EnemyObject
         }
         else if (longRangeDetected())
         {
-            // ¿ø°Å¸®: °ø°İ 2, 5, 6 Áß ·£´ı ¼±ÅÃ (0~2)
+            // ì›ê±°ë¦¬: ê³µê²© 2, 5, 6 ì¤‘ ëœë¤ ì„ íƒ (0~2)
             rand = Random.Range(0, 3); // 0, 1, 2
             switch (rand)
             {
@@ -142,22 +152,22 @@ public class DemonBossObject : EnemyObject
 
 
     /// <summary>
-    /// È£Ãâ ½Ã ´ë±â »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// í˜¸ì¶œ ì‹œ ëŒ€ê¸° ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public override void CallIdleState()
     {
         stateMachine.ChangeState(idleState);
     }
 
-    // ±Ù°Å¸® °ø°İ ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ´ÂÁö È®ÀÎ
+    // ê·¼ê±°ë¦¬ ê³µê²© ë²”ìœ„ ë‚´ì— í”Œë ˆì´ì–´ê°€ ìˆëŠ”ì§€ í™•ì¸
     public Collider2D closeRangeDetected()
         => Physics2D.OverlapBox(closeAttackCheck.position, closeAttackCheckSize, 0f, whatIsPlayer);
 
-    // Áß°Å¸® °ø°İ ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ´ÂÁö È®ÀÎ
+    // ì¤‘ê±°ë¦¬ ê³µê²© ë²”ìœ„ ë‚´ì— í”Œë ˆì´ì–´ê°€ ìˆëŠ”ì§€ í™•ì¸
     public Collider2D midRangeDetected()
         => Physics2D.OverlapBox(midAttackCheck.position, midAttackCheckSize, 0f, whatIsPlayer);
 
-    // ¿ø°Å¸® °ø°İ ¹üÀ§ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÖ´ÂÁö È®ÀÎ
+    // ì›ê±°ë¦¬ ê³µê²© ë²”ìœ„ ë‚´ì— í”Œë ˆì´ì–´ê°€ ìˆëŠ”ì§€ í™•ì¸
     public Collider2D longRangeDetected()
         => Physics2D.OverlapBox(longAttackCheck.position, longAttackCheckSize, 0f, whatIsPlayer);
 
@@ -165,7 +175,7 @@ public class DemonBossObject : EnemyObject
     {
         base.OnDrawGizmos();
 
-        // °ø°İ ¹üÀ§¸¦ Scene ºä¿¡ ½Ã°¢ÀûÀ¸·Î Ç¥½Ã
+        // ê³µê²© ë²”ìœ„ë¥¼ Scene ë·°ì— ì‹œê°ì ìœ¼ë¡œ í‘œì‹œ
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(closeAttackCheck.position, closeAttackCheckSize);
         Gizmos.DrawWireCube(midAttackCheck.position, midAttackCheckSize);

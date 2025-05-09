@@ -5,118 +5,122 @@ using UnityEngine;
 // NOTE:
 
 /// <summary>
-/// Àû ¿ÀºêÁ§Æ®ÀÇ ±âº» µ¿ÀÛÀ» Á¤ÀÇÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ÀÌµ¿, °¨Áö, °ø°İ, »óÅÂ ÀüÀÌ µîÀÇ ±â´ÉÀ» Æ÷ÇÔÇÕ´Ï´Ù.
+/// ì  ì˜¤ë¸Œì íŠ¸ì˜ ê¸°ë³¸ ë™ì‘ì„ ì •ì˜í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì´ë™, ê°ì§€, ê³µê²©, ìƒíƒœ ì „ì´ ë“±ì˜ ê¸°ëŠ¥ì„ í¬í•¨í•©ë‹ˆë‹¤.
 /// </summary>
 public class EnemyObject : CharacterObject
 {
     #region [Move Info]
     [Header("Move Info")]
-    public float defaultMoveSpeed; // ±âº» ÀÌµ¿ ¼Óµµ
-    public float chaseSpeed;       // Ãß°İ ½Ã ¼Óµµ
+    public float defaultMoveSpeed; // ê¸°ë³¸ ì´ë™ ì†ë„
+    public float chaseSpeed;       // ì¶”ê²© ì‹œ ì†ë„
     #endregion
 
     #region [Attack Info]
     [Header("Attack Info")]
-    public float attackCooldown;                     // °ø°İ ÄğÅ¸ÀÓ °£°İ
-    [HideInInspector] public float lastTimeAttacked; // ¸¶Áö¸· °ø°İ ½Ã°£
+    public float attackCooldown;                     // ê³µê²© ì¿¨íƒ€ì„ ê°„ê²©
+    [HideInInspector] public float lastTimeAttacked; // ë§ˆì§€ë§‰ ê³µê²© ì‹œê°„
     #endregion
 
     #region [Collider Info]
     [Header("Collider Info")]
-    [SerializeField] protected Transform groundCheck;     // Áö¸é °¨Áö À§Ä¡
-    [SerializeField] protected float groundCheckDistance; // Áö¸é °¨Áö °Å¸®
+    [SerializeField] protected Transform groundCheck;     // ì§€ë©´ ê°ì§€ ìœ„ì¹˜
+    [SerializeField] protected float groundCheckDistance; // ì§€ë©´ ê°ì§€ ê±°ë¦¬
     [Space]
-    [SerializeField] protected Transform wallCheck;       // º® °¨Áö À§Ä¡
-    [SerializeField] protected float wallCheckDistance;   // º® °¨Áö °Å¸®
+    [SerializeField] protected Transform wallCheck;       // ë²½ ê°ì§€ ìœ„ì¹˜
+    [SerializeField] protected float wallCheckDistance;   // ë²½ ê°ì§€ ê±°ë¦¬
     [Space]
-    [SerializeField] protected Transform playerCheck;     // ÇÃ·¹ÀÌ¾î °¨Áö À§Ä¡
-    [SerializeField] protected float playerCheckRadius;   // ÇÃ·¹ÀÌ¾î °¨Áö ¹İ°æ
+    [SerializeField] protected Transform playerCheck;     // í”Œë ˆì´ì–´ ê°ì§€ ìœ„ì¹˜
+    [SerializeField] protected float playerCheckRadius;   // í”Œë ˆì´ì–´ ê°ì§€ ë°˜ê²½
     [Space]
-    public Transform attackCheck;                         // °ø°İ ÆÇÁ¤ À§Ä¡
-    public float attackCheckRadius;                       // °ø°İ ÆÇÁ¤ ¹İ°æ
+    public Transform attackCheck;                         // ê³µê²© íŒì • ìœ„ì¹˜
+    public float attackCheckRadius;                       // ê³µê²© íŒì • ë°˜ê²½
     [Space]
-    [SerializeField] protected LayerMask whatIsGround;    // Áö¸é ·¹ÀÌ¾î
-    [SerializeField] protected LayerMask whatIsWall;      // º® ·¹ÀÌ¾î
-    [SerializeField] protected LayerMask whatIsPlayer;    // ÇÃ·¹ÀÌ¾î ·¹ÀÌ¾î
+    [SerializeField] protected LayerMask whatIsGround;    // ì§€ë©´ ë ˆì´ì–´
+    [SerializeField] protected LayerMask whatIsWall;      // ë²½ ë ˆì´ì–´
+    [SerializeField] protected LayerMask whatIsPlayer;    // í”Œë ˆì´ì–´ ë ˆì´ì–´
+    public float colliderWidth { get; private set; }
     #endregion
 
     #region [Flash Effect]
     [Header("Flash Effect")]
-    [SerializeField] private EnemyFlashEffect flashEffect; // ÇÃ·¡½Ã ÀÌÆåÆ®
+    [SerializeField] private EnemyFlashEffect flashEffect; // í”Œë˜ì‹œ ì´í™íŠ¸
     #endregion
 
     #region [Components]
-    public Animator anim { get; private set; }  // ¾Ö´Ï¸ŞÀÌÅÍ ÄÄÆ÷³ÍÆ®
-    public Rigidbody2D rb { get; private set; } // Rigidbody2D ÄÄÆ÷³ÍÆ®
-    public Collider2D col { get; private set; } // Collider2D ÄÄÆ÷³ÍÆ®
+    public Animator anim { get; private set; }  // ì• ë‹ˆë©”ì´í„° ì»´í¬ë„ŒíŠ¸
+    public Rigidbody2D rb { get; private set; } // Rigidbody2D ì»´í¬ë„ŒíŠ¸
+    public Collider2D col { get; private set; } // Collider2D ì»´í¬ë„ŒíŠ¸
     #endregion
 
     #region [StateMachine]
-    public EnemyStateMachine stateMachine { get; private set; } // ½ºÅ×ÀÌÆ® ¸Ó½Å
+    public EnemyStateMachine stateMachine { get; private set; } // ìŠ¤í…Œì´íŠ¸ ë¨¸ì‹ 
     #endregion
 
     #region [State]
-    public EnemyHitState hitState { get; private set; }   // ÇÇ°İ »óÅÂ
-    public EnemyDeadState deadState { get; private set; } // Á×À½ »óÅÂ
+    public EnemyHitState hitState { get; private set; }   // í”¼ê²© ìƒíƒœ
+    public EnemyDeadState deadState { get; private set; } // ì£½ìŒ ìƒíƒœ
     #endregion
 
     #region [Facing]
-    public int facingDir { get; private set; } = 1; // ÇöÀç ¹Ù¶óº¸´Â ¹æÇâ (1: ¿À¸¥ÂÊ, -1: ¿ŞÂÊ)
-    protected bool facingRight = true;              // ¿À¸¥ÂÊ ¹Ù¶óº¸°í ÀÖ´ÂÁö ¿©ºÎ
+    public int facingDir { get; private set; } = 1; // í˜„ì¬ ë°”ë¼ë³´ëŠ” ë°©í–¥ (1: ì˜¤ë¥¸ìª½, -1: ì™¼ìª½)
+    protected bool facingRight = true;              // ì˜¤ë¥¸ìª½ ë°”ë¼ë³´ê³  ìˆëŠ”ì§€ ì—¬ë¶€
     #endregion
 
-    public float colliderWidth { get; private set; }
+    #region [Audio]
+    private EnemySoundTrigger soundTrigger;
+    #endregion
 
-    // ½ºÅ×ÀÌÆ® ¸Ó½Å ÃÊ±âÈ­
+    // ìŠ¤í…Œì´íŠ¸ ë¨¸ì‹  ì´ˆê¸°í™”
     protected virtual void Awake()
     {
         stateMachine = new EnemyStateMachine();
 
-        // »óÅÂ ÀÎ½ºÅÏ½º¸¦ ÃÊ±âÈ­
+        // ìƒíƒœ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì´ˆê¸°í™”
         hitState = new EnemyHitState(this, stateMachine, "Hit");
         deadState = new EnemyDeadState(this, stateMachine, "Dead");
     }
 
-    // ÄÄÆ÷³ÍÆ® ÃÊ±âÈ­
+    // ì»´í¬ë„ŒíŠ¸ ì´ˆê¸°í™”
     protected virtual void Start()
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         flashEffect = GetComponentInChildren<EnemyFlashEffect>();
         col = GetComponent<Collider2D>();
+        soundTrigger = GetComponentInChildren<EnemySoundTrigger>();
         colliderWidth = col.bounds.size.x;
     }
 
-    // ÇöÀç »óÅÂ °»½Å
+    // í˜„ì¬ ìƒíƒœ ê°±ì‹ 
     protected virtual void Update()
     {
         stateMachine.currentState?.Update();
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î °¨Áö »óÅÂ ÁøÀÔ ½Ã È£ÃâµË´Ï´Ù.
+    /// í”Œë ˆì´ì–´ ê°ì§€ ìƒíƒœ ì§„ì… ì‹œ í˜¸ì¶œë©ë‹ˆë‹¤.
     /// </summary>
     public virtual void EnterPlayerDetection()
     {
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î °¨Áö »óÅÂ Á¾·á ½Ã È£ÃâµË´Ï´Ù.
+    /// í”Œë ˆì´ì–´ ê°ì§€ ìƒíƒœ ì¢…ë£Œ ì‹œ í˜¸ì¶œë©ë‹ˆë‹¤.
     /// </summary>
     public virtual void ExitPlayerDetection()
     {
     }
 
     /// <summary>
-    /// °ø°İ(Attack) »óÅÂ·Î ÀüÈ¯À» ¿äÃ»ÇÕ´Ï´Ù.
+    /// ê³µê²©(Attack) ìƒíƒœë¡œ ì „í™˜ì„ ìš”ì²­í•©ë‹ˆë‹¤.
     /// </summary>
     public virtual void CallAttackState()
     {
     }
 
     /// <summary>
-    /// ´ë±â(Idle) »óÅÂ·Î ÀüÈ¯ ¿äÃ»À» ÇÕ´Ï´Ù.
+    /// ëŒ€ê¸°(Idle) ìƒíƒœë¡œ ì „í™˜ ìš”ì²­ì„ í•©ë‹ˆë‹¤.
     /// </summary>
     public virtual void CallIdleState()
     {
@@ -128,7 +132,7 @@ public class EnemyObject : CharacterObject
 
     #region [Animation Event]
     /// <summary>
-    /// ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®°¡ Á¾·áµÇ¾úÀ½À» »óÅÂ ¸Ó½Å¿¡ ¾Ë¸³´Ï´Ù.
+    /// ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ê°€ ì¢…ë£Œë˜ì—ˆìŒì„ ìƒíƒœ ë¨¸ì‹ ì— ì•Œë¦½ë‹ˆë‹¤.
     /// </summary>
     public virtual void AnimationFinishTrigger()
         => stateMachine.currentState?.AnimationFinishTrigger();
@@ -136,37 +140,37 @@ public class EnemyObject : CharacterObject
 
     #region [Detection]
     /// <summary>
-    /// Áö¸éÀÌ °¨ÁöµÇ¾ú´ÂÁö ÆÇ´ÜÇÕ´Ï´Ù.
+    /// ì§€ë©´ì´ ê°ì§€ë˜ì—ˆëŠ”ì§€ íŒë‹¨í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <returns>Áö¸éÀÌ °¨ÁöµÇ¸é true, ¾Æ´Ï¸é false¸¦ ¹İÈ¯ÇÕ´Ï´Ù.</returns>
+    /// <returns>ì§€ë©´ì´ ê°ì§€ë˜ë©´ true, ì•„ë‹ˆë©´ falseë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.</returns>
     public virtual bool IsGroundDetected()
         => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround).collider != null;
 
     /// <summary>
-    /// º®ÀÌ °¨ÁöµÇ¾ú´ÂÁö ÆÇ´ÜÇÕ´Ï´Ù.
+    /// ë²½ì´ ê°ì§€ë˜ì—ˆëŠ”ì§€ íŒë‹¨í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <returns>º®ÀÌ °¨ÁöµÇ¸é true, ¾Æ´Ï¸é false¸¦ ¹İÈ¯ÇÕ´Ï´Ù.</returns>
+    /// <returns>ë²½ì´ ê°ì§€ë˜ë©´ true, ì•„ë‹ˆë©´ falseë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.</returns>
     public virtual bool IsWallDetected()
         => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsWall).collider != null;
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ °¨ÁöµÇ¾ú´ÂÁö °Ë»çÇÕ´Ï´Ù.
+    /// í”Œë ˆì´ì–´ê°€ ê°ì§€ë˜ì—ˆëŠ”ì§€ ê²€ì‚¬í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <returns>ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇÑ Collider2D °´Ã¼¸¦ ¹İÈ¯ÇÏ°Å³ª, °¨ÁöµÇÁö ¾ÊÀº °æ¿ì nullÀ» ¹İÈ¯ÇÕ´Ï´Ù.</returns>
+    /// <returns>í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•œ Collider2D ê°ì²´ë¥¼ ë°˜í™˜í•˜ê±°ë‚˜, ê°ì§€ë˜ì§€ ì•Šì€ ê²½ìš° nullì„ ë°˜í™˜í•©ë‹ˆë‹¤.</returns>
     public virtual Collider2D IsPlayerDetected()
         => Physics2D.OverlapCircle(playerCheck.position, playerCheckRadius, whatIsPlayer);
 
     /// <summary>
-    /// °ø°İ ÇÒ ¼ö ÀÖ´ÂÁö °Ë»çÇÕ´Ï´Ù.
+    /// ê³µê²© í•  ìˆ˜ ìˆëŠ”ì§€ ê²€ì‚¬í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <returns>ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇÑ Collider2D °´Ã¼¸¦ ¹İÈ¯ÇÏ°Å³ª, °¨ÁöµÇÁö ¾ÊÀº °æ¿ì nullÀ» ¹İÈ¯ÇÕ´Ï´Ù.</returns>
+    /// <returns>í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•œ Collider2D ê°ì²´ë¥¼ ë°˜í™˜í•˜ê±°ë‚˜, ê°ì§€ë˜ì§€ ì•Šì€ ê²½ìš° nullì„ ë°˜í™˜í•©ë‹ˆë‹¤.</returns>
     public virtual Collider2D IsAttackDetectable()
         => Physics2D.OverlapCircle(attackCheck.position, attackCheckRadius, whatIsPlayer);
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î¿Í ¿ÀºêÁ§Æ® »çÀÌ¿¡ º®ÀÌ ÀÖ´ÂÁö ¿©ºÎ¸¦ ÆÇ´ÜÇÕ´Ï´Ù.
+    /// í”Œë ˆì´ì–´ì™€ ì˜¤ë¸Œì íŠ¸ ì‚¬ì´ì— ë²½ì´ ìˆëŠ”ì§€ ì—¬ë¶€ë¥¼ íŒë‹¨í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <returns>º®ÀÌ °¨ÁöµÇ¸é true, ¾Æ´Ï¸é false¸¦ ¹İÈ¯ÇÕ´Ï´Ù.</returns>
+    /// <returns>ë²½ì´ ê°ì§€ë˜ë©´ true, ì•„ë‹ˆë©´ falseë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.</returns>
     public bool IsWallBetweenPlayer()
     {
         Vector2 start = transform.position;
@@ -180,8 +184,8 @@ public class EnemyObject : CharacterObject
 
     #region [Flip]
     /// <summary>
-    /// ¿ÀºêÁ§Æ®ÀÇ ¹æÇâÀ» ÀüÈ¯ÇÕ´Ï´Ù.
-    /// (ÁÂ¿ì ¹İÀü ¼öÇà)
+    /// ì˜¤ë¸Œì íŠ¸ì˜ ë°©í–¥ì„ ì „í™˜í•©ë‹ˆë‹¤.
+    /// (ì¢Œìš° ë°˜ì „ ìˆ˜í–‰)
     /// </summary>
     public void Flip()
     {
@@ -191,9 +195,9 @@ public class EnemyObject : CharacterObject
     }
 
     /// <summary>
-    /// ÀÔ·ÂµÈ x°ª¿¡ µû¶ó ¿ÀºêÁ§Æ®ÀÇ ¹æÇâÀ» ÀüÈ¯ÇÕ´Ï´Ù.
+    /// ì…ë ¥ëœ xê°’ì— ë”°ë¼ ì˜¤ë¸Œì íŠ¸ì˜ ë°©í–¥ì„ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="xInput">ÀÌµ¿ ÀÔ·Â °ª (¾ç¼ö -> ¿À¸¥ÂÊ, À½¼ö -> ¿ŞÂÊ)</param>
+    /// <param name="xInput">ì´ë™ ì…ë ¥ ê°’ (ì–‘ìˆ˜ -> ì˜¤ë¥¸ìª½, ìŒìˆ˜ -> ì™¼ìª½)</param>
     private void FlipController(float xInput)
     {
         if (xInput > 0 && !facingRight) Flip();
@@ -203,7 +207,7 @@ public class EnemyObject : CharacterObject
 
     #region [Velocity Control]
     /// <summary>
-    /// RigidbodyÀÇ ¼Óµµ¸¦ 0À¸·Î ¼³Á¤ÇÕ´Ï´Ù.
+    /// Rigidbodyì˜ ì†ë„ë¥¼ 0ìœ¼ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
     /// </summary>
     public void SetZeroVelocity()
     {
@@ -211,10 +215,10 @@ public class EnemyObject : CharacterObject
     }
 
     /// <summary>
-    /// RigidbodyÀÇ ¼Óµµ¸¦ ¼³Á¤ÇÏ°í, ÀÔ·Â °ª¿¡ µû¶ó ¹æÇâÀ» Á¶Á¤ÇÕ´Ï´Ù.
+    /// Rigidbodyì˜ ì†ë„ë¥¼ ì„¤ì •í•˜ê³ , ì…ë ¥ ê°’ì— ë”°ë¼ ë°©í–¥ì„ ì¡°ì •í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="xVelocity">X Ãà ¼Óµµ °ª</param>
-    /// <param name="yVelocity">Y Ãà ¼Óµµ °ª</param>
+    /// <param name="xVelocity">X ì¶• ì†ë„ ê°’</param>
+    /// <param name="yVelocity">Y ì¶• ì†ë„ ê°’</param>
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
@@ -223,7 +227,7 @@ public class EnemyObject : CharacterObject
     #endregion
 
     #region [Gizmos]
-    // °¨Áö ¹× °ø°İ ¿µ¿ª ½Ã°¢È­
+    // ê°ì§€ ë° ê³µê²© ì˜ì—­ ì‹œê°í™”
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -245,29 +249,32 @@ public class EnemyObject : CharacterObject
     #endregion
 
     /// <summary>
-    /// µ¥¹ÌÁö¸¦ ¹Ş¾Æ ÇöÀç Ã¼·ÂÀ» °è»êÇÏ°í »óÅÂ¸¦ ÀüÈ¯ÇÕ´Ï´Ù.
+    /// ë°ë¯¸ì§€ë¥¼ ë°›ì•„ í˜„ì¬ ì²´ë ¥ì„ ê³„ì‚°í•˜ê³  ìƒíƒœë¥¼ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="_damage">ÇÃ·¹ÀÌ¾îÀÇ µ¥¹ÌÁö °ª</param>
+    /// <param name="_damage">í”Œë ˆì´ì–´ì˜ ë°ë¯¸ì§€ ê°’</param>
     public override void TakeDamage(float _damage)
     {
-        // ¹æ¾î·Â°ú µ¥¹ÌÁö¸¦ °í·ÁÇÑ Ã¼·Â °¨¼Ò °è»ê
+        // ë°©ì–´ë ¥ê³¼ ë°ë¯¸ì§€ë¥¼ ê³ ë ¤í•œ ì²´ë ¥ ê°ì†Œ ê³„ì‚°
         CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
 
-        flashEffect.Flash(); // ÇÇ°İ ½Ã ÇÃ·¡½Ã È¿°ú ½ÇÇà
+        if (soundTrigger != null)
+            soundTrigger.PlayHitSound(); // íˆíŠ¸ ì‚¬ìš´ë“œ ì¬ìƒ
 
-        if (CurrentHp <= 0)  // Ã¼·ÂÀÌ 0 ÀÌÇÏÀÌ¸é Á×Àº »óÅÂ·Î ÀüÈ¯
+        flashEffect.Flash(); // í”¼ê²© ì‹œ í”Œë˜ì‹œ íš¨ê³¼ ì‹¤í–‰
+
+        if (CurrentHp <= 0)  // ì²´ë ¥ì´ 0 ì´í•˜ì´ë©´ ì£½ì€ ìƒíƒœë¡œ ì „í™˜
         {
             CurrentHp = 0;
             stateMachine.ChangeState(deadState);
         }
-        else // Ã¼·ÂÀÌ ³²¾Æ ÀÖ°í °ø°İ ÁßÀÌ ¾Æ´Ï¶ó¸é ÇÇ°İ »óÅÂ·Î ÀüÈ¯
+        else // ì²´ë ¥ì´ ë‚¨ì•„ ìˆê³  ê³µê²© ì¤‘ì´ ì•„ë‹ˆë¼ë©´ í”¼ê²© ìƒíƒœë¡œ ì „í™˜
         {
             if (!stateMachine.isAttacking)
                 stateMachine.ChangeState(hitState);
         }
     }
 
-    // »ç¸Á ½Ã Ã³¸® ·ÎÁ÷ (EnemyObject¿¡¼­´Â »ç¿ë X)
+    // ì‚¬ë§ ì‹œ ì²˜ë¦¬ ë¡œì§ (EnemyObjectì—ì„œëŠ” ì‚¬ìš© X)
     protected override void Die()
     {
     }
