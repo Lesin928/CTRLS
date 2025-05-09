@@ -1,30 +1,30 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 버프 종류 정의
+/// 지원 버프의 종류를 정의하는 열거형
 /// </summary>
 public enum BuffType
 {
-    ATTACK,
-    DEFENSE,
-    HEAL
+    ATTACK,   // 공격력 증가
+    SPEED,    // 스피드 증가
+    HEAL      // 체력 회복
 }
 
 /// <summary>
-/// 주변 아군에게 버프를 부여하는 적의 상태 클래스
+/// 적 유닛이 주변의 다른 적에게 버프를 주는 상태
 /// </summary>
 public class EnemySupportState : EnemyState
 {
-    private float supportRange;    // 지원 범위
-    private LayerMask enemyLayer;  // 적 레이어 마스크
-    private GameObject buffPrefab; // 마법진 프리팹
-    private BuffType buffType;     // 부여할 버프 타입
+    private float supportRange;    // 버프를 줄 수 있는 범위
+    private LayerMask enemyLayer;  // 적 레이어
+    private GameObject buffPrefab; // 버프 이펙트 프리팹
+    private BuffType buffType;     // 버프 종류
 
-    // 이미 지원한 적들을 저장 (적 Transform -> 생성된 마법진 오브젝트)
+    // 지원한 적과 해당 버프 이펙트를 기록하는 딕셔너리
     private Dictionary<Transform, GameObject> supportedEnemies = new();
 
-    // EnemySupportState 생성자
+    // 생성자
     public EnemySupportState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName,
         float supportRange, GameObject buffPrefab, BuffType buffType)
         : base(enemyBase, stateMachine, animBoolName)
@@ -36,33 +36,32 @@ public class EnemySupportState : EnemyState
     }
 
     /// <summary>
-    /// 상태 시작 시 호출
+    /// 상태 진입 시 초기화
     /// </summary>
     public override void Enter()
     {
         base.Enter();
-        supportedEnemies.Clear(); // 이전에 지원한 적 목록 초기화
+        supportedEnemies.Clear(); // 이전에 지원했던 적들을 초기화
     }
 
     /// <summary>
-    /// 매 프레임 호출 (주변 적 감지 및 지원)
+    /// 상태 갱신: 범위 내 적 탐지 및 지원 적용/제거 처리
     /// </summary>
     public override void Update()
     {
         base.Update();
 
-        // 지원 범위 내의 적들을 감지
+        // 지원 범위 내에 있는 적을 탐색
         Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(enemyBase.transform.position, supportRange, enemyLayer);
 
         HashSet<Transform> currentEnemies = new();
         foreach (var enemy in enemiesInRange)
         {
-            // 자기 자신 제외
-            if (enemy.gameObject != enemyBase.gameObject)
+            if (enemy.gameObject != enemyBase.gameObject) // 자신은 제외
             {
                 currentEnemies.Add(enemy.transform);
 
-                // 아직 지원하지 않았다면 지원 수행
+                // 아직 지원하지 않은 적이라면 버프 적용
                 if (!supportedEnemies.ContainsKey(enemy.transform))
                 {
                     Support(enemy.transform);
@@ -70,7 +69,7 @@ public class EnemySupportState : EnemyState
             }
         }
 
-        // 범위를 벗어난 적들을 제거
+        // 범위 밖으로 나간 적의 지원 제거
         List<Transform> enemiesToRemove = new();
         foreach (var supported in supportedEnemies)
         {
@@ -81,45 +80,44 @@ public class EnemySupportState : EnemyState
             }
         }
 
-        // 딕셔너리에서 제거
+        // 딕셔너리에서도 제거
         foreach (var enemy in enemiesToRemove)
         {
             supportedEnemies.Remove(enemy);
         }
-
-
     }
 
     /// <summary>
-    /// 상태 종료 시 호출
+    /// 상태 종료 시 모든 지원 제거
     /// </summary>
     public override void Exit()
     {
         base.Exit();
 
-        // 모든 마법진과 라인 정리
+        // 지원 중이던 적들의 버프 이펙트 제거
         foreach (var supported in supportedEnemies)
         {
             if (supported.Value != null)
             {
-                Object.Destroy(supported.Value);
+                RemoveSupport(supported.Key);
             }
         }
+
         supportedEnemies.Clear();
     }
 
-    // 특정 적에게 버프 지원 수행
+    // 버프를 적용하는 함수
     private void Support(Transform targetEnemy)
     {
-        Debug.Log($"{targetEnemy.name} 을(를) 지원합니다.");
+        Debug.Log($"{targetEnemy.name} 에게 버프 적용됨.");
 
         if (buffPrefab != null)
         {
-            // 마법진 생성 및 대상에 붙이기
+            // 버프 이펙트를 생성하고 적 자식으로 붙임
             GameObject buff = Object.Instantiate(buffPrefab, targetEnemy.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
             buff.transform.SetParent(targetEnemy);
 
-            // 대상의 콜라이더에 맞춰 마법진 크기 조절
+            // 적 크기에 맞게 버프 이펙트 크기 조절
             Collider2D collider = targetEnemy.GetComponent<Collider2D>();
             if (collider != null)
             {
@@ -129,57 +127,57 @@ public class EnemySupportState : EnemyState
 
             supportedEnemies.Add(targetEnemy, buff);
 
-            // 전기 효과 선 생성
+            // 전기 라인 이펙트 생성
             CreateElectricLine(targetEnemy);
         }
     }
 
-    // 전기 선 시각 효과 생성
+    // 전기 라인 이펙트를 생성하는 함수
     private void CreateElectricLine(Transform targetEnemy)
     {
-        // 새로운 GameObject 생성
+        // 라인 오브젝트 생성 및 부모 설정
         GameObject lineObj = new GameObject($"ElectricLine_{targetEnemy.name}");
         lineObj.transform.SetParent(enemyBase.transform);
 
-        // 라인 렌더러 및 커스텀 라인 컴포넌트 추가
+        // 컴포넌트 추가
         LineRenderer lr = lineObj.AddComponent<LineRenderer>();
         EnemyPixelLightningLine pixelLine = lineObj.AddComponent<EnemyPixelLightningLine>();
 
-        // 시작/끝 지점 설정
+        // 시작점과 끝점 설정
         pixelLine.startPoint = enemyBase.transform;
         pixelLine.endPoint = targetEnemy;
 
-        // 파형 구성 설정
+        // 라인 속성 설정
         pixelLine.segmentCount = 30;
         pixelLine.waveAmplitude = 0.2f;
         pixelLine.waveFrequency = 8f;
         pixelLine.pixelSize = 0.05f;
 
-        // 라인렌더러 속성 설정
+        // 라인렌더러 설정
         lr.textureMode = LineTextureMode.Tile;
         lr.alignment = LineAlignment.TransformZ;
         lr.startWidth = pixelLine.pixelSize * 0.3f;
         lr.endWidth = pixelLine.pixelSize * 0.3f;
         lr.material = new Material(Shader.Find("Sprites/Default"));
 
-        // 버프 타입에 따른 색상 지정
+        // 버프 종류에 따라 색상 지정
         if (buffType == BuffType.ATTACK)
         {
-            lr.startColor = new Color(1f, 0.8f, 0f); // 노란색 → 빨간색
+            lr.startColor = new Color(1f, 0.8f, 0f);
             lr.endColor = new Color(1f, 0f, 0f);
         }
-        else if (buffType == BuffType.DEFENSE)
+        else if (buffType == BuffType.SPEED)
         {
-            lr.startColor = new Color(0f, 1f, 1f); // 시안 → 파란색
+            lr.startColor = new Color(0f, 1f, 1f);
             lr.endColor = new Color(0f, 0f, 1f);
         }
         else if (buffType == BuffType.HEAL)
         {
-            lr.startColor = new Color(1f, 1f, 1f); // 흰색 → 초록색
+            lr.startColor = new Color(1f, 1f, 1f);
             lr.endColor = new Color(0f, 1f, 0f);
         }
 
-        // 선 위치 계산 (Perlin Noise + 랜덤)
+        // 선 위치 계산 (Perlin Noise + 랜덤 + 계단화)
         Vector3[] linePositions = new Vector3[pixelLine.segmentCount];
         for (int i = 0; i < pixelLine.segmentCount; i++)
         {
@@ -191,11 +189,9 @@ public class EnemySupportState : EnemyState
             float randomNoise = Random.Range(-0.1f, 0.1f);
             float intensity = Mathf.Lerp(0.5f, 1.5f, t);
 
-            // 흔들림 적용
             pos.y += (noise1 + noise2 + randomNoise) * intensity;
             pos.x += (noise1 - noise2 + randomNoise * 0.5f) * intensity * 0.5f;
 
-            // 픽셀 스냅 적용
             pos.x = Mathf.Round(pos.x / pixelLine.pixelSize) * pixelLine.pixelSize;
             pos.y = Mathf.Round(pos.y / pixelLine.pixelSize) * pixelLine.pixelSize;
 
@@ -206,10 +202,10 @@ public class EnemySupportState : EnemyState
         lr.SetPositions(linePositions);
     }
 
-    // 특정 적에게 준 지원을 해제
+    // 지원 제거 함수
     private void RemoveSupport(Transform targetEnemy)
     {
-        Debug.Log($"{targetEnemy.name} 지원 해제");
+        Debug.Log($"{targetEnemy.name} 버프 해제");
 
         if (supportedEnemies.TryGetValue(targetEnemy, out GameObject buff))
         {
@@ -219,7 +215,7 @@ public class EnemySupportState : EnemyState
             }
         }
 
-        // 전기선 오브젝트도 제거
+        // 전기 라인 오브젝트 제거
         Transform electricLine = enemyBase.transform.Find($"ElectricLine_{targetEnemy.name}");
         if (electricLine != null)
             Object.Destroy(electricLine.gameObject);
