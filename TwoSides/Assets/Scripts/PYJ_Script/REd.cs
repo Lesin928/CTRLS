@@ -4,22 +4,28 @@ public class ToggleImageOnEnter : MonoBehaviour
 {
     public GameObject image2; // Inspector에서 Image2 오브젝트를 연결하세요.
 
-    void Start()
+    // void Start()
+    // {
+    //     if (image2 != null)
+    //     {
+    //         image2.SetActive(false); // 이 줄을 제거 또는 주석 처리
+    //     }
+    // }
+
+    // 외부에서 호출할 함수
+    public void ShowImage()
     {
         if (image2 != null)
         {
-            image2.SetActive(false); // 처음에 꺼진 상태로 시작
+            image2.SetActive(true); // 이미지 켜기
         }
     }
 
-    void Update()
+    public void HideImage()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) // Enter 키
+        if (image2 != null)
         {
-            if (image2 != null)
-            {
-                image2.SetActive(true); // Enter 키를 누르면 켜짐
-            }
+            image2.SetActive(false); // 이미지 끄기
         }
     }
 }
