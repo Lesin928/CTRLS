@@ -12,13 +12,14 @@ public class EventManager : MonoBehaviour
     public Button EventButton1;
     public Button EventButton2;
 
-    //�̺�Ʈ �ƴ� �Ϲݴ�ȭ ����
+    //이벤트 아닌 일반대화 전용
     public static int TUTORIAL = 101;
 
     public int fixedEventId = -1;
     private int id;
     public bool isEventFinished;
     private int scriptIndex;
+    public bool isEventTalk = false;
 
     private void Awake()
     {
@@ -33,26 +34,29 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
-        if (fixedEventId > 0)
-            id = fixedEventId;
-        else if (GameManager.Instance.currentStage == 1)
+        if (GameManager.Instance.currentStage == 1)
+        {
             id = TUTORIAL;
+            isEventFinished = false;
+        }
         else
+        {
             id = EventScriptManager.Instance.GetScriptId();
-        isEventFinished = false;
+            isEventTalk = true;
+        }
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
-    //    {
-    //        StartEvent();
-    //    }
-    //    else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
-    //    {
-    //        ExitEvent();
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && !isEventFinished)
+        {
+            StartEvent();
+        }
+        else if (Input.GetKeyDown(KeyCode.Return) && isEventFinished)
+        {
+            ExitEvent();
+        }
+    }
 
     private void OnDestroy()
     {
@@ -64,15 +68,33 @@ public class EventManager : MonoBehaviour
 
     public void StartEvent()
     {
-        Event(id);
         EventPanel.SetActive(true);
+        Event(id);
     }
 
     public void ExitEvent()
     {
-        Debug.Log("�̺�Ʈ ����");
         EventPanel.SetActive(false);
-        HUDManager.Instance.ResumGame();
+
+        if (isEventTalk)
+        {
+            Debug.Log("이벤트 종료");
+            GameManager.Instance.OnStageClear();
+        }
+        else
+        {
+            id++;
+            scriptIndex = 0;
+            isEventFinished = false;
+
+            if (EventScriptManager.Instance.GetEventScript(id, scriptIndex) == null)
+            {
+                Debug.Log("저스트이벤트 종료");
+                isEventFinished = true;
+                GameManager.Instance.OnStageClear();
+            }
+        }
+
     }
 
     private void Event(int id)
@@ -81,8 +103,6 @@ public class EventManager : MonoBehaviour
             Talk(id);
         else
             EventTalk(id);
-
-        HUDManager.Instance.PauseGame();
     }
 
     private void Talk(int id)

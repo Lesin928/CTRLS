@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8494519959803764042}
   - component: {fileID: 8798051820795727852}
   - component: {fileID: 6561507538272397620}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy_DemonBoss_Smash
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

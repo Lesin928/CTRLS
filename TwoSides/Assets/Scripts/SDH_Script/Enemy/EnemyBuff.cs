@@ -17,13 +17,13 @@ public class EnemyBuff : MonoBehaviour
     bool isBuffApplied = false; // 중복 적용 방지 플래그
 
     // 원래의 능력치 저장용 변수
-    float originalAttack;
-    float originalMoveSpeed;
-    float originalDefaultMoveSpeed;
-    float originalChaseSpeed;
+    private float originalAttack;
+    private float originalMoveSpeed;
+    private float originalDefaultMoveSpeed;
+    private float originalChaseSpeed;
 
     // 시작 시 EnemyObject 참조 및 원래 능력치 저장
-    void Start()
+    private void Start()
     {
         enemy = GetComponentInParent<EnemyObject>();
 
@@ -76,7 +76,7 @@ public class EnemyBuff : MonoBehaviour
         isBuffApplied = true; // 버프 적용 완료 표시
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (!isBuffApplied || enemy == null) return;
 

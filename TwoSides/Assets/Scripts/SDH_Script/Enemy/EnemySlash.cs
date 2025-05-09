@@ -1,21 +1,21 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// 적의 Slash 공격 이펙트를 처리하는 클래스입니다.
-/// 애니메이션 이벤트를 통해 활성화되며, 플레이어와 충돌 시 처리 로직을 수행합니다.
+/// 적의 슬래시 공격을 처리하는 클래스.
+/// 슬래시 공격 범위 내에 있는 플레이어에게 피해를 입힌다.
 /// </summary>
 public class EnemySlash : MonoBehaviour
 {
-    private EnemyObject attacker; // 공격을 발사한 적 객체
+    private EnemyObject attacker; // 적의 공격자 (EnemyObject)
 
     private void Start()
     {
+        // 시작 시 공격 콜라이더 비활성화
         GetComponent<Collider2D>().enabled = false;
     }
 
     /// <summary>
-    /// 공격을 발사한 EnemyObject를 가져오는 함수입니다.
+    /// 공격자의 EnemyObject를 설정한다.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
@@ -23,40 +23,41 @@ public class EnemySlash : MonoBehaviour
     }
 
     /// <summary>
-    /// 적의 바라보는 방향에 맞춰 이펙트 방향을 설정합니다.
+    /// 공격 방향을 설정한다.
     /// </summary>
-    /// <param name="facingDir">적이 바라보는 방향 (1 또는 -1)</param>
+    /// <param name="facingDir">공격 방향 (1이면 오른쪽, -1이면 왼쪽)</param>
     public void SetDirection(int facingDir)
     {
         Vector3 scale = transform.localScale;
+        // x축 크기 조정을 통해 공격 방향을 설정한다.
         scale.x = Mathf.Abs(scale.x) * facingDir;
         transform.localScale = scale;
     }
 
-    // 공격 활성화 (애니메이션 이벤트에서 호출)
+    // 슬래시 공격 활성화
     private void EnableAttack()
     {
         GetComponent<Collider2D>().enabled = true;
     }
 
-    // 공격 비활성화 (애니메이션 이벤트에서 호출)
+    // 슬래시 공격 비활성화
     private void DisableAttack()
     {
         GetComponent<Collider2D>().enabled = false;
     }
 
-    // 플레이어와 충돌 시 호출
-    void OnTriggerEnter2D(Collider2D collision)
+    // 슬래시 공격이 충돌한 객체에 대해 처리
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        // 충돌한 객체가 플레이어일 경우 피해를 입힌다.
         if (collision.CompareTag("Player"))
         {
-            
-            // 플레이어에게 데미지 전달
+            // 플레이어 객체가 있을 경우, 피해를 입힌다.
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }
 
-    // 애니메이션 이벤트에서 호출되어 이펙트 오브젝트를 파괴
+    // 슬래시 공격 후 트리거를 제거하여 객체를 파괴한다.
     private void DestroyTrigger()
     {
         Destroy(gameObject);

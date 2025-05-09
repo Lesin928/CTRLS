@@ -1,26 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºÐ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºÐ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ìž‘ì„±)
 
 /// <summary>
-/// ÀÌ Å¬·¡½º¸¦ °¡Áø ¿ÀºêÁ§Æ®´Â ¾ÀÀÌ ¹Ù²î¾îµµ ÆÄ±«µÇÁö ¾ÊÀ½
-/// ÇÃ·¹ÀÌ¾î¿¡°Ô¸¸ »ç¿ëÇÏ´Â Å¬·¡½º
+/// ì´ í´ëž˜ìŠ¤ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ëŠ” ì”¬ì´ ë°”ë€Œì–´ë„ íŒŒê´´ë˜ì§€ ì•ŠìŒ
+/// í”Œë ˆì´ì–´ì—ê²Œë§Œ ì‚¬ìš©í•˜ëŠ” í´ëž˜ìŠ¤
 /// </summary>
 public class PlayerDontDestroyOnLoad : MonoBehaviour
 {
     private PlayerDontDestroyOnLoad p;
-    //ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®
+    //í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸
     private GameObject player;
 
     private void Awake()
     {
         p = FindAnyObjectByType<PlayerDontDestroyOnLoad>();
-        //ÀÚ½Ä ¿ÀºêÁ§Æ®Áß ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®ÀÇ Transform ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿È
+        //ìžì‹ ì˜¤ë¸Œì íŠ¸ì¤‘ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ì˜ Transform ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜´
         player = GameObject.Find("Player");
 
-        // ¾À ÀÌµ¿ ½Ã Áßº¹ ¹æÁö
+        // ì”¬ ì´ë™ ì‹œ ì¤‘ë³µ ë°©ì§€
         if (p != null && p != this)
         {
             Destroy(gameObject);

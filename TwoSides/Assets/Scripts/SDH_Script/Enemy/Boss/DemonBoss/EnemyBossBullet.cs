@@ -1,55 +1,58 @@
-ï»¿using System.Threading;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// ì´ì•Œ ê°ì²´ë¥¼ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
-/// ì´ì•Œì´ ë°œì‚¬ë˜ê³ , ëª©í‘œë¥¼ í–¥í•´ ì´ë™í•˜ë©°, ì¶©ëŒ ì‹œ ì• ë‹ˆë©”ì´ì…˜ê³¼ í•¨ê»˜ ì²˜ë¦¬ë©ë‹ˆë‹¤.
+/// º¸½ºÀÇ ÃÑ¾ËÀ» Ã³¸®ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+/// ÀÏÁ¤ °Å¸® ¾È¿¡ ÇÃ·¹ÀÌ¾î°¡ Á¢±ÙÇÏ¸é ¼Ò¿ëµ¹ÀÌ(Vortex)¸¦ »ı¼ºÇÕ´Ï´Ù.
 /// </summary>
 public class EnemyBossBullet : MonoBehaviour
 {
-    // ì• ë‹ˆë©”ì´í„°ì™€ ë¦¬ì§€ë“œë°”ë””2D ì»´í¬ë„ŒíŠ¸
+    // ¾Ö´Ï¸ŞÀÌ¼Ç ÄÁÆ®·Ñ·¯
     protected Animator anim;
+
+    // Rigidbody2D ÄÄÆ÷³ÍÆ®
     protected Rigidbody2D rb;
 
     [Header("Settings")]
-    [SerializeField] float speed = 10f;       // ì´ì•Œì˜ ì´ë™ ì†ë„
-    [SerializeField] float lifeTime = 5f;     // ì´ì•Œì˜ ìƒëª… ì‹œê°„
-    [SerializeField] GameObject vortexPrefab; 
+    [SerializeField] private float speed = 10f;       // ÃÑ¾Ë ¼Óµµ
+    [SerializeField] private float lifeTime = 5f;     // ÃÑ¾ËÀÇ ¼ö¸í
+    [SerializeField] private GameObject vortexPrefab; // »ı¼ºÇÒ ¼Ò¿ëµ¹ÀÌ ÇÁ¸®ÆÕ
 
-    private EnemyObject attacker;
+    private EnemyObject attacker; // ÀÌ ÃÑ¾ËÀ» ¹ß»çÇÑ Àû ¿ÀºêÁ§Æ®
 
-    void Awake()
+    private void Awake()
     {
-        // ì• ë‹ˆë©”ì´í„°ì™€ ë¦¬ì§€ë“œë°”ë””2D ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        // ¾Ö´Ï¸ŞÀÌÅÍ¿Í ¸®Áöµå¹Ùµğ ÄÄÆ÷³ÍÆ® ÃÊ±âÈ­
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    private void Start()
     {
-        // ì¼ì • ì‹œê°„ í›„ ì´ì•Œ ì‚­ì œ
+        // ÀÏÁ¤ ½Ã°£ ÈÄ ÃÑ¾Ë Á¦°Å
         Destroy(gameObject, lifeTime);
     }
 
-    void Update()
+    private void Update()
     {
+        // ÇÃ·¹ÀÌ¾î¿ÍÀÇ xÃà °Å¸® °è»ê
         float distanceX = Mathf.Abs(transform.position.x - PlayerManager.instance.player.transform.position.x);
+
         if (distanceX < 0.5f)
         {
-            // ì´ì•Œ ìœ„ì¹˜ì—ì„œ í”„ë¦¬íŒ¹ ìƒì„±
+            // ÇÃ·¹ÀÌ¾î ±ÙÃ³¿¡ ¼Ò¿ëµ¹ÀÌ »ı¼º
             GameObject vortex = Instantiate(vortexPrefab, transform.position, Quaternion.identity);
 
-            // Vortex ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì ¸ì˜´
+            // ¼Ò¿ëµ¹ÀÌ ½ºÅ©¸³Æ®¿¡ °ø°İÀÚ Á¤º¸ Àü´Ş
             EnemyBossVortex vortexScript = vortex.GetComponent<EnemyBossVortex>();
-            vortexScript.SetAttacker(attacker); // ë°œì‚¬ì ì „ë‹¬
+            vortexScript.SetAttacker(attacker);
 
+            // ÃÑ¾Ë Á¦°Å
             DestroyTrigger();
         }
     }
 
     /// <summary>
-    /// ê³µê²©ì„ ë°œì‚¬í•œ EnemyObjectë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
+    /// ÀÌ ÃÑ¾ËÀ» ¹ß»çÇÑ ÀûÀ» ¼³Á¤ÇÕ´Ï´Ù.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
@@ -57,23 +60,23 @@ public class EnemyBossBullet : MonoBehaviour
     }
 
     /// <summary>
-    /// ì´ì•Œì„ ë°œì‚¬í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
+    /// ÁöÁ¤ÇÑ À§Ä¡·Î ÃÑ¾ËÀ» ¹ß»çÇÕ´Ï´Ù.
     /// </summary>
-    /// <param name="targetPosition">ëª©í‘œ ì§€ì ì˜ ìœ„ì¹˜</param>
+    /// <param name="targetPosition">¹ß»çÇÒ ¸ñÇ¥ À§Ä¡</param>
     public void Shoot(Vector2 targetPosition)
     {
-        // í˜„ì¬ ìœ„ì¹˜ì—ì„œ ëª©í‘œ ìœ„ì¹˜ê¹Œì§€ì˜ ë°©í–¥ ê³„ì‚°
+        // ÇöÀç À§Ä¡¿¡¼­ ¸ñÇ¥ À§Ä¡±îÁöÀÇ ¹æÇâ °è»ê
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
 
-        // ì´ì•Œ ì†ë„ ì ìš©
+        // ¼Óµµ Àû¿ë
         rb.linearVelocity = direction * speed;
 
-        // íšŒì „ë„ ë°œì‚¬ ë°©í–¥ìœ¼ë¡œ ì„¤ì •
+        // ÃÑ¾Ë È¸Àü ¹æÇâ ¼³Á¤
         RotateToVelocity(rb.linearVelocity);
     }
 
-    // ì´ì•Œì˜ ì´ë™ ë°©í–¥ì— ë§ê²Œ íšŒì „í•˜ëŠ” í•¨ìˆ˜
-    void RotateToVelocity(Vector2 velocity)
+    // ¼Óµµ º¤ÅÍ ¹æÇâ¿¡ µû¶ó ÃÑ¾ËÀ» È¸Àü½ÃÅ°´Â ÇÔ¼ö
+    private void RotateToVelocity(Vector2 velocity)
     {
         if (velocity.sqrMagnitude > 0.01f)
         {
@@ -82,40 +85,37 @@ public class EnemyBossBullet : MonoBehaviour
         }
     }
 
-    /// ì¶©ëŒ ì²˜ë¦¬ í•¨ìˆ˜
-    void OnTriggerEnter2D(Collider2D collision)
-    {   
-        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•œ ê²½ìš°
+    // Ãæµ¹ Ã³¸® ÇÔ¼ö
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.CompareTag("Player"))
         {
-            // íˆíŠ¸ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+            // Ãæµ¹ ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
             anim.SetBool("Hit", true);
 
-            // ì¶©ëŒ í›„ ì´ì•Œ ì •ì§€
+            // ÀÌµ¿ Á¤Áö
             rb.linearVelocity = Vector2.zero;
 
-            // ì½œë¼ì´ë” ë¹„í™œì„±í™”
+            // Ãæµ¹ ºñÈ°¼ºÈ­
             GetComponent<Collider2D>().enabled = false;
 
-            // í”Œë ˆì´ì–´ì—ê²Œ ë°ë¯¸ì§€ ì „ë‹¬
+            // ÇÇÇØ Ã³¸®
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
-
-        // ë²½ê³¼ ì¶©ëŒí•œ ê²½ìš°
         else if (collision.CompareTag("Ground"))
         {
-            // íˆíŠ¸ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+            // Ãæµ¹ ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
             anim.SetBool("Hit", true);
 
-            // ì¶©ëŒ í›„ ì´ì•Œ ì •ì§€
+            // ÀÌµ¿ Á¤Áö
             rb.linearVelocity = Vector2.zero;
 
-            // ì½œë¼ì´ë” ë¹„í™œì„±í™”
+            // Ãæµ¹ ºñÈ°¼ºÈ­
             GetComponent<Collider2D>().enabled = false;
         }
     }
 
-    // ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œë˜ì–´ ì´í™íŠ¸ ì˜¤ë¸Œì íŠ¸ë¥¼ íŒŒê´´
+    // ÃÑ¾ËÀ» Á¦°ÅÇÏ´Â ÇÔ¼ö
     private void DestroyTrigger()
     {
         Destroy(gameObject);

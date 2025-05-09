@@ -2,12 +2,29 @@ using UnityEngine;
 
 public class TitleButton : MonoBehaviour
 {
+    public GameObject playerPrefab;
+
     public void StartTitle()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
+        LoadingSceneController.Instance.LoadScene("Title");
 
-        HUDManager.Instance.InitHUD();
-        HUDManager.Instance.HideHUD();
+        playerPrefab = GameObject.Find("PlayerSet(Clone)");
+
+        if (playerPrefab != null)
+        {
+            Destroy(playerPrefab);
+        }
+
+        if (HUDManager.Instance != null)
+        {
+            Debug.Log(HUDManager.Instance.gameObject.activeSelf + "1");
+        }
+
+        if (HUDManager.Instance != null)
+        {
+            Debug.Log(HUDManager.Instance.gameObject.activeSelf + "2");
+        }
+
         HideMapController.shouldShowHideMap = false;
         if (AudioManager.Instance != null)
         {
@@ -22,8 +39,6 @@ public class TitleButton : MonoBehaviour
                 go.SetActive(false);
                 Mapbtn.SetActive(false);
             }
-
-
         }
     }
 }

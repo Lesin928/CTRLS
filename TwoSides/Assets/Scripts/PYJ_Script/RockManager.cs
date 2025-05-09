@@ -101,11 +101,14 @@ public class RockManager : MonoBehaviour
 
     public void StartGame()
     {
-        gameStarted = true; // 게임 시작 상태로 변경
-        gameOverPanel.SetActive(false); // 게임 오버 패널 숨기기
-        gameClearPanel.SetActive(false); // 게임 클리어 패널 숨기기
-        Time.timeScale = 1;  // 게임이 멈추지 않도록 설정
+        gameStarted = true;
+        gameOverPanel.SetActive(false);
+        gameClearPanel.SetActive(false);
+        Time.timeScale = 1;
+
+        StartSpawning(); // 이 줄 추가!
     }
+
 
 
 
@@ -114,11 +117,29 @@ public class RockManager : MonoBehaviour
     /// </summary>
     public void StartSpawning()
     {
-        if (gameStarted) // 게임이 시작되었다면
+        if (gameStarted)
         {
-            ShowHearts(); // 하트 UI 켜기
-            InvokeRepeating(nameof(SpawnRock), 1f, spawnInterval); // 바위 생성 시작
+            ShowHearts();
+            InvokeRepeating(nameof(SpawnRock), 1f, spawnInterval);
+
+            // survivalTime 후에 StopSpawning 호출 예약
+            Invoke(nameof(StopSpawning), survivalTime);
         }
+    }
+    void StopSpawning()
+    {
+        CancelInvoke(nameof(SpawnRock));
+
+        // 게임 오버 상태면 클리어 처리하지 않음
+        if (hp <= 0)
+        {
+            Debug.Log("게임 오버 상태이므로 클리어 처리 안 함");
+            return;
+        }
+
+        gameClearPanel.SetActive(true); // 클리어 UI 표시
+        Debug.Log("게임 클리어 - 돌 스폰 중지");
+        GameManager.Instance.OnStageClear();
     }
 
 
@@ -139,47 +160,51 @@ public class RockManager : MonoBehaviour
     /// <summary>
     /// 매 프레임마다 호출되는 Update 함수 
     /// </summary>
+    private bool clearPanelClosing = false;
+
     void Update()
     {
-        // 게임 오버나 게임 클리어 상태에서 엔터 입력 체크
-        if ((gameOverPanel.activeSelf || gameClearPanel.activeSelf))
+        if (gameOverPanel.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.Return)) // 엔터 키 입력 시
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                if (gameOverPanel.activeSelf)
-                    gameOverPanel.SetActive(false);
-                if (gameClearPanel.activeSelf)
-                    gameClearPanel.SetActive(false);
-
+                gameOverPanel.SetActive(false);
                 CancelInvoke(nameof(SpawnRock));
                 gameStarted = false;
             }
             return;
         }
 
-        if (!gameStarted)
-            return;
-
-        // 타이머를 줄여가며 게임 시간 흐름
-        timer -= Time.deltaTime;
-
-        // === 게임 클리어 조건 추가 ===
-        if (timer <= 2f)
+        if (gameClearPanel.activeSelf && !clearPanelClosing)
         {
-
-            CancelInvoke(nameof(SpawnRock));  // 바위 생성 중지
-
+            clearPanelClosing = true; // 중복 실행 방지
+            Invoke(nameof(CloseClearPanel), 2f); // 2초 후 자동 종료
+            return;
         }
 
-        if (timer <= 0f)
+        if (gameOverPanel.activeSelf)
         {
-            timer = 0f;
-            gameClearPanel.SetActive(true);   // 게임 클리어 UI 표시
-            gameStarted = false;              // 게임 종료
+            clearPanelClosing = true; // 중복 실행 방지
+            Invoke(nameof(CloseOverPanel), 2f); // 2초 후 자동 종료
+            return;
         }
     }
 
+    void CloseClearPanel()
+    {
+        gameClearPanel.SetActive(false);
+        CancelInvoke(nameof(SpawnRock));
+        gameStarted = false;
+        clearPanelClosing = false; // 다시 초기화
+    }
 
+    void CloseOverPanel()
+    {
+        gameOverPanel.SetActive(false);
+        CancelInvoke(nameof(SpawnRock));
+        gameStarted = false;
+        clearPanelClosing = false; // 다시 초기화
+    }
 
 
     /// <summary>
@@ -212,18 +237,25 @@ public class RockManager : MonoBehaviour
     /// <summary>
     /// 플레이어가 피해를 입을 때 호출되는 함수
     /// </summary>
-    public void TakeDamage()
+    public void TakeDamage2()
     {
-        Debug.Log("바위 충돌!"); // 디버그 메시지
-        hp--; // 체력 감소
-        UpdateHPText(); // 체력 텍스트 업데이트
-        UpdateHearts(); // 하트 UI 업데이트
+        Debug.Log("바위 충돌!");
+        hp--;
+        UpdateHPText();
+        UpdateHearts();
 
         if (hp <= 0)
         {
-            gameOverPanel.SetActive(true); // 게임 오버 패널 표시
+            gameOverPanel.SetActive(true);
+
+            // 클리어 방지를 위해 예약된 StopSpawning 취소
+            CancelInvoke(nameof(StopSpawning));
+
+            // 바위 생성도 멈춤
+            CancelInvoke(nameof(SpawnRock));
         }
     }
+
 
 
 

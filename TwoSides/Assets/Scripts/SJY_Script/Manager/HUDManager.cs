@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
@@ -33,10 +34,15 @@ public class HUDManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         canvasGroup = GetComponent<CanvasGroup>();
+
+        HideHUD();
     }
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().name == "Title")
+            HideHUD();
+
         if (isTrackingTime)
         {
             playTime += Time.unscaledDeltaTime;
@@ -97,9 +103,9 @@ public class HUDManager : MonoBehaviour
         Debug.Log($"Health: {health}/{maxHealth}");
     }
 
-    public void SetGold(int amount)
+    public void SetGold(int value)
     {
-        gold += amount;
+        gold = value;
         UpdateHUD();
     }
 

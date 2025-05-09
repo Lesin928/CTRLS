@@ -3,19 +3,31 @@ using UnityEngine;
 public class MysteryButton : MonoBehaviour
 {
     public GameObject map;
+    private bool[] isUsed = new bool[10];
+
     private void Awake()
     {
         if (map == null)
-            map = GameObject.Find("MapScrollArea"); // ÀÌ¸§ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ
+            map = GameObject.Find("MapScrollArea"); // ì´ë¦„ ì •í™•íˆ ì¼ì¹˜í•´ì•¼ í•¨
+
+        isUsed[0] = true;
     }
     public void Onclick()
     {
         string sceneName = "Mystery";
-        int rand = Random.Range(0, 10);  // range ¹Ù²Ù±â
+
+        int rand = Random.Range(0, 10);
+        while (isUsed[rand])
+        {
+            rand = Random.Range(0, 10);
+        }
+        isUsed[rand] = true;
+
         sceneName += rand.ToString();
         map.SetActive(false);
         GameManager.Instance.isClear = false;
-        Mapbutton.Instance.clearOn = false;
+        Mapbutton.Instance.activeButton = false;
+        Map.Instance.doorConnected = false;
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

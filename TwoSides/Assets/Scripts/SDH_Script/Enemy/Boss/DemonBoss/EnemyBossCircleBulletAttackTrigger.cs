@@ -20,10 +20,9 @@ public class EnemyBossCircleBulletAttackTrigger : EnemyAnimationTrigger
         bulletScript.SetAttacker(enemy); // 발사자 전달
     }
 
-    // 애니메이션이 완료되었을 때 호출되는 메서드
+    // 애니메이션이 완료되었을 때 호출되는 메서드 (애니메이션 이벤트에서 호출)
     private void CircleBulletAnimationTrigger()
     {
-        // 적의 애니메이션이 완료되었음을 알리는 메서드를 호출
         enemy.AnimationFinishTrigger();
     }
 }

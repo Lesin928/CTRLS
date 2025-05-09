@@ -1,38 +1,37 @@
-ï»¿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// í™”ì‚´ ë°œì‚¬ë¥¼ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
-/// ëª©í‘œ ìœ„ì¹˜ë¡œ í–¥í•˜ëŠ” í¬ë¬¼ì„  ê¶¤ì ì„ ë”°ë¼ ë‚ ì•„ê°€ë©°, í”Œë ˆì´ì–´ì™€ ì¶©ëŒ ì‹œ í™”ì‚´ì´ í”Œë ˆì´ì–´ì—ê²Œ ë¶™ìŠµë‹ˆë‹¤.
+/// ÀûÀÇ È­»ìÀ» ¹ß»çÇÏ´Â ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
+/// È­»ìÀº ¸ñÇ¥ ÁöÁ¡À¸·Î ÀÏÁ¤ÇÑ ºñÀ²·Î °î¼± ºñÇàÇÏ¸ç, ¸ñÇ¥¿¡ Ãæµ¹ÇÏ¸é ÇÇÇØ¸¦ ÀÔÈ÷°í, ÀÏÁ¤ ½Ã°£ÀÌ Áö³ª¸é ÀÚµ¿À¸·Î »èÁ¦µË´Ï´Ù.
 /// </summary>
 public class EnemyArrow : MonoBehaviour
 {
-    private Rigidbody2D rb; // Rigidbody2D ì»´í¬ë„ŒíŠ¸
-    private Collider2D cd;  // Collider2D ì»´í¬ë„ŒíŠ¸
+    private Rigidbody2D rb; // Rigidbody2D ±¸¼º ¿ä¼Ò
+    private Collider2D cd;  // Collider2D ±¸¼º ¿ä¼Ò
 
     [Header("Settings")]
-    [SerializeField] private float gravityScale = 1f;     // ì¤‘ë ¥ ë¹„ìœ¨
-    [SerializeField] private float arcHeightRatio = 0.2f; // ê¶¤ì  ë†’ì´ ë¹„ìœ¨ (ì „ì²´ ê±°ë¦¬ì˜ 20%)
-    [SerializeField] private float flightTime = 1f;       // ë¹„í–‰ ì‹œê°„
-    [SerializeField] private float lifeTime = 5f;         // í™”ì‚´ì˜ ìƒëª… ì‹œê°„
+    [SerializeField] private float gravityScale = 1f;     // Áß·ÂÀÇ °­µµ
+    [SerializeField] private float arcHeightRatio = 0.2f; // °î¼± ³ôÀÌ ºñÀ² (±âº» 20%)
+    [SerializeField] private float flightTime = 1f;       // ºñÇà ½Ã°£
+    [SerializeField] private float lifeTime = 5f;         // È­»ìÀÇ »ı¸í ½Ã°£
 
     private EnemyObject attacker;
 
-    void Awake()
+    private void Awake()
     {
-        // ì• ë‹ˆë©”ì´í„°, ë¦¬ì§€ë“œë°”ë””2D, ì½œë¼ì´ë” ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        // ÃÊ±âÈ­: Rigidbody2D¿Í Collider2D ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<CapsuleCollider2D>();
     }
 
-    void Update()
+    private void Update()
     {
-        // í™”ì‚´ì˜ ì†ë„ì— ë§ì¶° íšŒì „
+        // ºñÇà Áß È­»ìÀÇ ¼Óµµ¿¡ ¸ÂÃç È¸Àü
         RotateToVelocity(rb.linearVelocity);
     }
 
     /// <summary>
-    /// ê³µê²©ì„ ë°œì‚¬í•œ EnemyObjectë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
+    /// Àû °´Ã¼¸¦ ¼³Á¤ÇÕ´Ï´Ù.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
@@ -40,42 +39,42 @@ public class EnemyArrow : MonoBehaviour
     }
 
     /// <summary>
-    /// í™”ì‚´ì„ ë°œì‚¬í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
-    /// ëª©í‘œ ìœ„ì¹˜ë¥¼ í–¥í•´ í¬ë¬¼ì„  ê¶¤ì ì„ ê·¸ë¦¬ë©° ë‚ ì•„ê°‘ë‹ˆë‹¤.
+    /// ¸ñÇ¥ À§Ä¡¸¦ ±âÁØÀ¸·Î È­»ìÀ» ¹ß»çÇÕ´Ï´Ù.
+    /// ÁÖ¾îÁø ½Ã°£ ³»¿¡ °î¼± ºñÇàÀ» ÇÏµµ·Ï ¼³Á¤ÇÕ´Ï´Ù.
     /// </summary>
-    /// <param name="targetPosition">ëª©í‘œ ì§€ì ì˜ ìœ„ì¹˜</param>
+    /// <param name="targetPosition">¸ñÇ¥ À§Ä¡</param>
     public void Shoot(Vector2 targetPosition)
     {
         Vector2 startPosition = transform.position;
-        float gravity = Mathf.Abs(Physics2D.gravity.y * gravityScale);
+        float gravity = Mathf.Abs(Physics2D.gravity.y * gravityScale); // Áß·Â °è»ê
         float distanceX = targetPosition.x - startPosition.x;
         float distanceY = targetPosition.y - startPosition.y;
 
-        // ìˆ˜í‰ ì†ë„ëŠ” ê±°ë¦¬ / ì‹œê°„
+        // ¼öÆò ¼Óµµ °è»ê
         float initialVx = distanceX / flightTime;
 
-        // arcHeightë¥¼ ì„¤ì •í•˜ì—¬ ëª©í‘œê¹Œì§€ ê°€ëŠ” ê²½ë¡œì˜ ë†’ì´ë¥¼ ê²°ì •
+        // °î¼± ³ôÀÌ ºñÀ²¿¡ µû¸¥ ¼öÁ÷ ¼Óµµ °è»ê
         float arcHeight = Mathf.Abs(distanceX) * arcHeightRatio;
 
-        // arcHeightë¥¼ ê³ ë ¤í•œ ìˆ˜ì§ ì†ë„ ê³„ì‚°
+        // ¼öÁ÷ ¼Óµµ °è»ê
         float initialVy = Mathf.Sqrt(2 * gravity * arcHeight);
 
-        // ì‹œê°„ì— ë§ì¶°ì„œ Vy ë³´ì •
+        // ºñÇà ½Ã°£À» °í·ÁÇÑ ÃÖÁ¾ ¼öÁ÷ ¼Óµµ ¼öÁ¤
         float totalTime = (2 * initialVy) / gravity;
-        initialVy = (gravity * flightTime) / 2f;  // ìˆ˜ì •ëœ ìˆ˜ì§ ì†ë„
+        initialVy = (gravity * flightTime) / 2f;  // ¼öÁ÷ ¼Óµµ ¼öÁ¤
 
-        // ìˆ˜ì§ê³¼ ìˆ˜í‰ ì†ë„ë¥¼ ê°ê° ì„¤ì •í•˜ì—¬ ë°œì‚¬
+        // ÃÊ±â ¼Óµµ º¤ÅÍ ¼³Á¤
         Vector2 velocity = new Vector2(initialVx, initialVy);
 
         rb.gravityScale = gravityScale;
         rb.linearVelocity = velocity;
 
-        // ë°œì‚¬ ë°©í–¥ì— ë§ê²Œ í™”ì‚´ íšŒì „
+        // È­»ì È¸Àü
         RotateToVelocity(velocity);
     }
 
-    // í™”ì‚´ì˜ ì´ë™ ì†ë„ì— ë§ì¶° í™”ì‚´ì˜ íšŒì „ ë°©í–¥ì„ ì„¤ì •í•˜ëŠ” í•¨ìˆ˜
-    void RotateToVelocity(Vector2 velocity)
+    // È­»ìÀÌ ÀÌµ¿ÇÏ´Â ¹æÇâ¿¡ ¸ÂÃç È¸Àü
+    private void RotateToVelocity(Vector2 velocity)
     {
         if (velocity.sqrMagnitude > 0.01f)
         {
@@ -84,27 +83,27 @@ public class EnemyArrow : MonoBehaviour
         }
     }
 
-    // í™”ì‚´ì´ ë‹¤ë¥¸ ê°ì²´ì™€ ì¶©ëŒí•  ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
-    // í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•˜ë©´ í™”ì‚´ì´ í”Œë ˆì´ì–´ì—ê²Œ ë¶™ê³ , ì¶©ëŒ í›„ ì‚­ì œ
-    void OnTriggerEnter2D(Collider2D collision)
+    // Ãæµ¹ÀÌ ¹ß»ıÇÏ¸é Àû¿¡°Ô ÇÇÇØ¸¦ ÀÔÈ÷°í È­»ìÀ» »èÁ¦ÇÏ´Â ÇÔ¼ö
+    // È­»ìÀÌ ÀÏÁ¤ ½Ã°£ ÈÄ ÆÄ±«µÇµµ·Ï ¼³Á¤
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•œ ê²½ìš°
+        // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã
         if (collision.CompareTag("Player"))
         {
             cd.enabled = false;
 
-            // ë¦¬ì§€ë“œë°”ë””ë¥¼ Kinematicìœ¼ë¡œ ì„¤ì •í•˜ì—¬ ë¬¼ë¦¬ ë°˜ì‘ì„ ì¤‘ì§€
+            // È­»ìÀ» KinematicÀ¸·Î ¼³Á¤ÇÏ¿© ¹°¸® ¹ıÄ¢¿¡ ÀÇÇØ ÀÌµ¿ÇÏÁö ¾Êµµ·Ï ¼³Á¤
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
-            // í™”ì‚´ì„ í”Œë ˆì´ì–´ì˜ ìì‹ ê°ì²´ë¡œ ì„¤ì •
+            // È­»ìÀÌ ÇÃ·¹ÀÌ¾îÀÇ ÀÚ½Ä °´Ã¼°¡ µÇµµ·Ï ¼³Á¤
             transform.parent = collision.transform;
 
-            // í”Œë ˆì´ì–´ì—ê²Œ ë°ë¯¸ì§€ ì „ë‹¬
+            // ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ¸¦ ÀÔÈû
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
 
-        // ì¼ì • ì‹œê°„ì´ ì§€ë‚˜ë©´ í™”ì‚´ì„ ì‚­ì œ
+        // »ı¸í ½Ã°£ÀÌ ³¡³ª¸é È­»ì ÆÄ±«
         Destroy(gameObject, lifeTime);
     }
 }

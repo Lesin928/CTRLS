@@ -31480,7 +31480,7 @@ MonoBehaviour:
   hpText: {fileID: 471661662}
   gameOverPanel: {fileID: 637447805}
   gameClearPanel: {fileID: 1896507921}
-  survivalTime: 15
+  survivalTime: 25
   hearts:
   - {fileID: 1187381979}
   - {fileID: 1655039621}
@@ -33808,7 +33808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912cb03fb0d74a3449d08fdbd24b9084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPanel: {fileID: 859974825}
 --- !u!1001 &1134140216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33867,11 +33866,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6642513903006819401, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.396651
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6642513903006819401, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19961977
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -2,95 +2,90 @@ using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour
 {
-
-    // 퍼즐 패널 UI
-    public GameObject puzzlePanel;
-
-    // 플레이어가 상호작용 범위 내에 있는지 체크
+    // 플레이어가 퍼즐 오브젝트 범위에 들어왔는지 여부
     private bool isPlayerInRange = false;
 
-
-
-
-    /// <summary>
-    /// 퍼즐 패널을 비활성화 (초기 상태)
-    /// </summary>
     private void Start()
     {
-        
-        if (puzzlePanel != null)
+        // 게임 시작 시 퍼즐 패널을 비활성화
+        if (PuzzleManager1.Instance != null && PuzzleManager1.Instance.puzzlePanel != null)
         {
-            puzzlePanel.SetActive(false);
+            PuzzleManager1.Instance.puzzlePanel.SetActive(false);
         }
     }
 
-
-
-
-    /// <summary>
-    /// 플레이어가 범위 내에 있고 F 키를 누르면 퍼즐 패널을 활성화
-    /// </summary>
     private void Update()
     {
+        // 플레이어가 범위 내에 있고 F 키를 누른 경우에만 퍼즐을 토글
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
         {
-            ShowPuzzle();
+            TogglePuzzle();
         }
     }
 
-
-
-    /// <summary>
-    /// 플레이어가 퍼즐 오브젝트와 충돌하였을 때 시작 메시지 출력
-    /// </summary>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        // 플레이어가 "Puzzle" 태그를 가진 오브젝트와 부딪힌 경우
+        if (other.CompareTag("Player") && this.CompareTag("Puzzle"))
         {
-            isPlayerInRange = true; // 플레이어가 범위 내에 들어왔을 때
+            isPlayerInRange = true;
             Debug.Log("퍼즐을 시작하려면 F키를 누르세요.");
         }
     }
 
-
-
-
-    /// <summary>
-    /// 플레이어가 범위 내에 있고 엔터 키를 누르면 퍼즐 패널을 활성화
-    /// </summary>
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        // 플레이어가 "Puzzle" 태그를 가진 오브젝트 범위를 벗어난 경우
+        if (other.CompareTag("Player") && this.CompareTag("Puzzle"))
         {
-            isPlayerInRange = false; // 플레이어가 범위에서 나갔을 때
+            isPlayerInRange = false;
         }
     }
 
 
     /// <summary>
-    /// 퍼즐 패널을 홯성화
+    /// 퍼즐 패널을 열거나 닫음 (토글 기능)
     /// </summary>
-    void ShowPuzzle()
+    private void TogglePuzzle()
     {
-        if (puzzlePanel != null)
+        // 퍼즐 매니저나 퍼즐 패널이 존재하지 않으면 리턴
+        if (PuzzleManager1.Instance == null || PuzzleManager1.Instance.puzzlePanel == null)
+            return;
+
+        // 퍼즐을 이미 클리어한 경우 메시지만 출력하고 리턴
+        if (PuzzleManager1.Instance.IsPuzzleCleared())
         {
-            puzzlePanel.SetActive(true);
-            Debug.Log("퍼즐이 시작되었습니다!");
+            Debug.Log("이미 퍼즐을 클리어했습니다!");
+            return;
+        }
+
+        // 퍼즐 패널 상태에 따라 열거나 닫기
+        bool isActive = PuzzleManager1.Instance.puzzlePanel.activeSelf;
+
+        if (isActive)
+        {
+            HidePuzzle();  // 퍼즐 패널이 켜져 있으면 닫기
+        }
+        else
+        {
+            ShowPuzzle();  // 퍼즐 패널이 꺼져 있으면 열기
         }
     }
 
-
-
+    /// <summary>
+    /// 퍼즐 패널 보이기
+    /// </summary>
+    public void ShowPuzzle()
+    {
+        PuzzleManager1.Instance.puzzlePanel.SetActive(true);
+    }
 
     /// <summary>
-    /// 퍼즐이 완료되면 퍼즐 창을 닫는 메시지 출력
+    /// 퍼즐 패널 숨기기
     /// </summary>
     public void HidePuzzle()
     {
-        if (puzzlePanel != null)
-        {
-            puzzlePanel.SetActive(false);
-            Debug.Log("퍼즐이 완료되어 창이 닫혔습니다.");
-        }
+        PuzzleManager1.Instance.puzzlePanel.SetActive(false);
+        Debug.Log("퍼즐 창이 닫혔습니다.");
     }
 }

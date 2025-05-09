@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
+    public AudioMixer audioMixer;
     private AudioSource BGM;
 
     void Awake()
@@ -21,12 +22,17 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        audioMixer.SetFloat("BGM", -20f);
+    }
+
     public void RestartBGM()
     {
         if (BGM != null)
         {
             BGM.Stop();
-            BGM.Play(); // ´Ù½Ã Ã³À½ºÎÅÍ Àç»ı
+            BGM.Play(); // ë‹¤ì‹œ ì²˜ìŒë¶€í„° ì¬ìƒ
         }
     }
 

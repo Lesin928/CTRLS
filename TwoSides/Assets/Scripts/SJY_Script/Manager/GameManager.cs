@@ -18,7 +18,11 @@ public class GameManager : MonoBehaviour
     private int deadMonsterCount = 0;
     public bool isClear = false;
 
-    //public GameObject mapButton;
+    public GameObject playerPrefab;
+    public PlayerObject playerObject;
+    public GameObject go;
+
+    public GameObject fadeCanvasPrefab;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -31,6 +35,9 @@ public class GameManager : MonoBehaviour
     public float playerMoveSpeed;
     public float playerCritical;
     public float playerCriticalDamage;
+    public float playerjumpForce;
+    public float playerDashForce;
+
     #endregion
 
     private void Awake()
@@ -47,34 +54,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerMaxHealth = 100;
-        playerHealth = playerMaxHealth;
-        playerGold = 0;
         currentStage = 1;
-
-        if (SceneManager.GetActiveScene().name == "Title")
-            HUDManager.Instance.HideHUD();
-        //{
-        //    if (mapButton != null)
-        //    {
-        //        Debug.Log("MapButton is inactive in GameManager.");
-        //        mapButton.SetActive(false);
-        //    }
-
-        //    else
-        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
-        //}
-        //else
-        //{
-        //    if (mapButton != null)
-        //    {
-        //        Debug.Log("MapButton is active in GameManager.");
-        //        mapButton.SetActive(true);
-        //    }
-
-        //    else
-        //        Debug.LogWarning("MapButton is not assigned in GameManager.");
-        //}
     }
 
     public static void Init()
@@ -102,25 +82,35 @@ public class GameManager : MonoBehaviour
         currentStageData = stageDataList.Find(data => data.stageName == sceneName);
 
         if (currentStageData == null)
-            Debug.LogWarning($"[GameManager] {sceneName}¿¡ ÇØ´çÇÏ´Â StageData°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning($"[GameManager] {sceneName}ì— í•´ë‹¹í•˜ëŠ” StageDataê°€ ì—†ìŠµë‹ˆë‹¤.");
         else
-            Debug.Log($"[GameManager] {sceneName} ½ºÅ×ÀÌÁö µ¥ÀÌÅÍ ÃÊ±âÈ­ ¿Ï·á - ¸ó½ºÅÍ ¼ö: {currentStageData.monsterCount}");
+            Debug.Log($"[GameManager] {sceneName} ìŠ¤í…Œì´ì§€ ë°ì´í„° ì´ˆê¸°í™” ì™„ë£Œ - ëª¬ìŠ¤í„° ìˆ˜: {currentStageData.monsterCount}");
 
-        if (currentStageData.stageName.Contains("Mystery")
-            || currentStageData.stageName.Contains("Puzzle")
-            || currentStageData.stageName.Contains("Store"))
+        if (currentStageData.stageName == "Tutorial")
         {
-            OnStageClear();
+            //í”Œë ˆì´ì–´ í”„ë¦¬íŒ¹ ìƒì„±
+            GameObject spawnPoint = GameObject.Find("Starting_Point");
+
+            go = Instantiate(playerPrefab, spawnPoint.transform.position, Quaternion.identity);
+
+            playerObject = go.GetComponentInChildren<PlayerObject>();
+            if (playerObject == null)
+            {
+                Debug.LogError("PlayerObject not found in PlayerSet hierarchy");
+                return;
+            }
+
+            SetUpPlayerStats();
         }
+        var playerObj = go.GetComponent<PlayerDontDestroyOnLoad>();
+        if (playerObj != null)
+            playerObj.ResetSpawnPosition();
     }
 
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
 
-        playerMaxHealth = 100;
-        playerHealth = playerMaxHealth;
-        playerGold = 0;
         currentStage = 1;
         isClear = false;
 
@@ -148,26 +138,48 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.ChangeBGM("IngameBGM");
 
-        //LoadStage(currentStage);
-        LoadingSceneController.Instance.LoadScene("Battle0");
+        LoadingSceneController.Instance.LoadScene("Tutorial");
+    }
 
+    private void SetUpPlayerStats()
+    {
+        playerMaxHealth = 100;
+        playerHealth = playerMaxHealth;
+        playerAttack = 5f;
+        playerArmor = 3f;
+        playerAttackSpeed = 1f;
+        playerCritical = 0.1f;
+        playerCriticalDamage = 2f;
+        playerMoveSpeed = 7f;
+        playerjumpForce = 13f;
+        playerDashForce = 15f;
 
+        playerObject.MaxHp = playerMaxHealth;
+        playerObject.CurrentHp = playerHealth;
+        playerObject.Armor = playerArmor;
+        playerObject.Attack = playerAttack;
+        playerObject.AttackSpeed = playerAttackSpeed;
+        playerObject.Critical = playerCritical;
+        playerObject.CriticalDamage = playerCriticalDamage;
+        playerObject.MoveSpeed = playerMoveSpeed;
+        playerObject.JumpForce = playerjumpForce;
+        playerObject.DashForce = playerDashForce;
+
+        playerGold = 0;
+
+        HUDManager.Instance.SetMaxHealth(playerMaxHealth);
+        HUDManager.Instance.SetHealth(playerHealth);
+        HUDManager.Instance.SetGold(playerGold);
     }
 
     public void OnStageClear()
     {
-        if (isClear)
-            isClear = !isClear;
-        else
-        {
-            isClear = true;
-            currentStage++;
+        isClear = true;
+        currentStage++;
 
-            if (currentStage > maxStage)
-            {
-                // ÀÌ°É º¸½º½ºÅ×ÀÌÁö¿¡¼­ Ã¼Å©ÇÏ´Â ¹æ¹ıÀ¸·Î ¹Ù²ã¾ß¤ÁÇÔ
-                GameClear();
-            }
+        if (currentStage > maxStage && Map.Instance.doorConnected)
+        {
+            GameClear();
         }
     }
 
@@ -179,7 +191,7 @@ public class GameManager : MonoBehaviour
         if (deadMonsterCount >= currentStageData.monsterCount)
         {
             OnStageClear();
-            Debug.Log("½ºÅ×ÀÌÁö Å¬¸®¾î");
+            Debug.Log("ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´");
         }
     }
 
@@ -187,11 +199,19 @@ public class GameManager : MonoBehaviour
     {
         HUDManager.Instance.HideHUD();
         HideMapController.shouldShowHideMap = false;
+
+        //Instantiate(fadeCanvasPrefab);
+
         StartCoroutine(GameOverRoutine());
     }
 
     IEnumerator GameOverRoutine()
     {
+        GameObject fadeObj = Instantiate(fadeCanvasPrefab);
+        FadeController fade = fadeObj.GetComponent<FadeController>();
+
+        yield return StartCoroutine(fade.FadeOut());
+
         AsyncOperation op = SceneManager.LoadSceneAsync("GameOver");
         yield return new WaitUntil(() => op.isDone);
     }
@@ -216,12 +236,13 @@ public class GameManager : MonoBehaviour
 
         if (playerGold <= 0)
             playerGold = 0;
-        HUDManager.Instance.SetGold(value);
+        HUDManager.Instance.SetGold(playerGold);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float hp)
     {
-        playerHealth -= damage;
+        playerHealth = hp;
+
         HUDManager.Instance.SetHealth(playerHealth);
 
         if (playerHealth <= 0)
@@ -233,28 +254,32 @@ public class GameManager : MonoBehaviour
     public void SetHealth(float value)
     {
         playerHealth += value;
+        playerObject.CurrentHp = playerHealth;
 
         if (playerHealth >= playerMaxHealth)
         {
             playerHealth = playerMaxHealth;
+            playerObject.CurrentHp = playerHealth;
         }
+
+        HUDManager.Instance.SetHealth(playerHealth);
 
         if (playerHealth <= 0)
         {
             GameOver();
         }
-
-        HUDManager.Instance.SetHealth(playerHealth);
     }
 
     public void SetMaxHealth(float value)
     {
         playerMaxHealth += value;
+        playerObject.MaxHp = playerMaxHealth;
         HUDManager.Instance.SetMaxHealth(playerMaxHealth);
 
         if (playerHealth >= playerMaxHealth)
         {
             playerHealth = playerMaxHealth;
+            playerObject.CurrentHp = playerHealth;
             HUDManager.Instance.SetHealth(playerHealth);
         }
 
@@ -267,31 +292,37 @@ public class GameManager : MonoBehaviour
     public void SetPlayerArmor(float value)
     {
         playerArmor += value;
+        playerObject.Armor = playerArmor;
     }
 
     public void SetPlayerAttack(float value)
     {
         playerAttack += value;
+        playerObject.Attack = playerAttack;
     }
 
     public void SetPlayerAttackSpeed(float value)
     {
         playerAttackSpeed += value;
+        playerObject.AttackSpeed = playerAttackSpeed;
     }
 
     public void SetPlayerMoveSpeed(float value)
     {
         playerMoveSpeed += value;
+        playerObject.MoveSpeed = playerMoveSpeed;
     }
 
     public void SetPlayerCritical(float value)
     {
         playerCritical += value;
+        playerObject.Critical = playerCritical;
     }
 
     public void SetPlayerCriticalDamage(float value)
     {
         playerCriticalDamage += value;
+        playerObject.CriticalDamage = playerCriticalDamage;
     }
     #endregion
 
@@ -299,25 +330,35 @@ public class GameManager : MonoBehaviour
     {
         if (InputBlocker.blockKeyboardInput) return;
 
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    SetPlayerAttack(10);
+        //}
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SetGold(10);
+            SetMaxHealth(10);
         }
-
         if (Input.GetKeyDown(KeyCode.W))
+        {
+            SetMaxHealth(-10);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
         {
             SetHealth(10);
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(10);
-        }
-
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartNewGame();
+            SetHealth(-10);
         }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            SetGold(1000);
+        }
+
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    StartNewGame();
+        //}
 
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -325,19 +366,5 @@ public class GameManager : MonoBehaviour
             OnStageClear();
             Debug.Log(isClear);
         }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SetMaxHealth(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            SetMaxHealth(-10);
-        }
-        /*if (Input.GetKeyDown(KeyCode.A))
-        {
-            GameClear();
-        }*/
     }
 }

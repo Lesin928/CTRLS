@@ -5,25 +5,25 @@ using UnityEngine;
 // NOTE:
 
 /// <summary>
-/// Ä³¸¯ÅÍ ´É·ÂÄ¡ Ãß»ó Å¬·¡½º,
-/// ¸ğµç Ä³¸¯ÅÍ´Â ÀÌ Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Æ¾ß ÇÔ 
+/// ìºë¦­í„° ëŠ¥ë ¥ì¹˜ ì¶”ìƒ í´ë˜ìŠ¤,
+/// ëª¨ë“  ìºë¦­í„°ëŠ” ì´ í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ì•¼ í•¨ 
 /// </summary>
 public abstract class CharacterObject : MonoBehaviour
 {
     #region Character Info    
-    [SerializeField] private float maxHp; //ÃÖ´ëÃ¼·Â
-    [SerializeField] private float currentHp; //ÇöÀç Ã¼·Â
-    [SerializeField] private float armor; //¹æ¾î·Â
-    [SerializeField] private float attack; //°ø°İ·Â
-    [SerializeField] private float attackSpeed; //°ø°İ¼Óµµ 
-    [SerializeField] private float moveSpeed; //ÀÌµ¿¼Óµµ
-    [SerializeField] private float critical; //Ä¡¸íÅ¸ È®·ü 
-    [SerializeField] private float criticalDamage; //Ä¡¸íÅ¸ ÇÇÇØ
+    [SerializeField] private float maxHp; //ìµœëŒ€ì²´ë ¥
+    [SerializeField] private float currentHp; //í˜„ì¬ ì²´ë ¥
+    [SerializeField] private float armor; //ë°©ì–´ë ¥
+    [SerializeField] private float attack; //ê³µê²©ë ¥
+    [SerializeField] private float attackSpeed; //ê³µê²©ì†ë„ 
+    [SerializeField] private float moveSpeed; //ì´ë™ì†ë„
+    [SerializeField] private float critical; //ì¹˜ëª…íƒ€ í™•ë¥  
+    [SerializeField] private float criticalDamage; //ì¹˜ëª…íƒ€ í”¼í•´
     #endregion
 
     #region Setters and Getters
     ///<summary>
-    ///ÃÖ´ëÃ¼·Â ¼³Á¤ ¹× ¹İÈ¯ ÇÔ¼ö
+    ///ìµœëŒ€ì²´ë ¥ ì„¤ì • ë° ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float MaxHp
     {
@@ -37,7 +37,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     ///<summary>
-    ///ÇöÀçÃ¼·Â ¹İÈ¯ ÇÔ¼ö
+    ///í˜„ì¬ì²´ë ¥ ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float CurrentHp
     {
@@ -46,7 +46,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     ///<summary>
-    ///¹æ¾î·Â ¼³Á¤ ¹× ¹İÈ¯ ÇÔ¼ö
+    ///ë°©ì–´ë ¥ ì„¤ì • ë° ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float Armor
     {
@@ -55,7 +55,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     ///<summary>
-    ///°ø°İ·Â ¼³Á¤ ¹× ¹İÈ¯ ÇÔ¼ö
+    ///ê³µê²©ë ¥ ì„¤ì • ë° ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float Attack
     {
@@ -64,7 +64,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     ///<summary>
-    ///°ø°İ¼Óµµ ¼³Á¤ ¹× ¹İÈ¯ ÇÔ¼ö
+    ///ê³µê²©ì†ë„ ì„¤ì • ë° ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float AttackSpeed
     {
@@ -73,7 +73,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     ///<summary>
-    ///ÀÌµ¿¼Óµµ ¼³Á¤ ¹× ¹İÈ¯ ÇÔ¼ö
+    ///ì´ë™ì†ë„ ì„¤ì • ë° ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float MoveSpeed
     {
@@ -82,7 +82,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     ///<summary>
-    ///Ä¡¸íÅ¸ È®·ü ¼³Á¤ ¹× ¹İÈ¯ ÇÔ¼ö
+    ///ì¹˜ëª…íƒ€ í™•ë¥  ì„¤ì • ë° ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float Critical
     {
@@ -91,7 +91,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     ///<summary>
-    ///Ä¡¸íÅ¸ ÇÇÇØ ¼³Á¤ ¹× ¹İÈ¯ ÇÔ¼ö
+    ///ì¹˜ëª…íƒ€ í”¼í•´ ì„¤ì • ë° ë°˜í™˜ í•¨ìˆ˜
     ///</summary>
     public virtual float CriticalDamage
     {
@@ -101,20 +101,20 @@ public abstract class CharacterObject : MonoBehaviour
     #endregion 
 
     /// <summary>    
-    /// ÇÇ°İ ÇÔ¼ö
+    /// í”¼ê²© í•¨ìˆ˜
     /// </summary>
-    /// <param name="_damage"> °ø°İ ÁÖÃ¼°¡ ÁÖ´Â ÃÖÁ¾ µ¥¹ÌÁö </param> 
+    /// <param name="_damage"> ê³µê²© ì£¼ì²´ê°€ ì£¼ëŠ” ìµœì¢… ë°ë¯¸ì§€ </param> 
     public virtual void TakeDamage(float _damage)
     {
-        //legacy code (ÇöÀç´Â »ç¿ëÇÏÁö ¾ÊÀ½) Å©¸®Æ¼ÄÃ È®·üÀ» °è»êÇÏ¿© µ¥¹ÌÁö¿¡ ¹İ¿µ
+        //legacy code (í˜„ì¬ëŠ” ì‚¬ìš©í•˜ì§€ ì•ŠìŒ) í¬ë¦¬í‹°ì»¬ í™•ë¥ ì„ ê³„ì‚°í•˜ì—¬ ë°ë¯¸ì§€ì— ë°˜ì˜
         //if (UnityEngine.Random.Range(0f, 1f) < _critical)
         //{
         //_damage *= criticalDamage;
         //}
-        //µ¥¹ÌÁö * ¹æ¾î·Â ¹İ°¨ °è¼ö ( µ¥¹ÌÁö / µ¥¹ÌÁö + ¾Æ¸Ó) 
+        //ë°ë¯¸ì§€ * ë°©ì–´ë ¥ ë°˜ê° ê³„ìˆ˜ ( ë°ë¯¸ì§€ / ë°ë¯¸ì§€ + ì•„ë¨¸) 
         CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
 
-        //Ã¼·ÂÀÌ 0 ÀÌÇÏ¸é Die() È£Ãâ
+        //ì²´ë ¥ì´ 0 ì´í•˜ë©´ Die() í˜¸ì¶œ
         if (CurrentHp <= 0)
         {
             CurrentHp = 0;
@@ -123,7 +123,7 @@ public abstract class CharacterObject : MonoBehaviour
     }
 
     /// <summary>    
-    /// ÇØ´ç Ä³¸¯ÅÍ°¡ Á×¾úÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    /// í•´ë‹¹ ìºë¦­í„°ê°€ ì£½ì—ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     /// </summary>
     protected abstract void Die();
 }

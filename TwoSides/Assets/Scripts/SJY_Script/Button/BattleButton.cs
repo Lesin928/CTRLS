@@ -3,19 +3,40 @@ using UnityEngine;
 public class BattleButton : MonoBehaviour
 {
     public static GameManager Instance;
-    public GameObject map; // ¿¬°á ¾È ÇØµµ µÊ
+    public GameObject map;
+    private bool[] isUsed = new bool[10];
     private void Awake()
     {
         if (map == null)
-            map = GameObject.Find("MapScrollArea"); // ÀÌ¸§ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ
+            map = GameObject.Find("MapScrollArea"); // ì´ë¦„ ì •í™•íˆ ì¼ì¹˜í•´ì•¼ í•¨
     }
+
     public void Onclick()
     {
         string sceneName = "Battle";
-        int rand = Random.Range(0, 10);
-        sceneName += rand.ToString();
+
+        //int rand = Random.Range(0, 10);
+        //while (isUsed[rand])
+        //{
+        //    rand = Random.Range(0, 10);
+        //}
+        //isUsed[rand] = true;
+
+        //int rand = 0;
+        //while (isUsed[rand])
+        //{
+        //    rand++;
+        //}
+        //isUsed[rand] = true;
+
+
+        sceneName += Map.Instance.battleNum.ToString();
+        if (Map.Instance.battleNum < 9)
+            Map.Instance.battleNum++;
+
         GameManager.Instance.isClear = false;
-        Mapbutton.Instance.clearOn = false;
+        Mapbutton.Instance.activeButton = false;
+        Map.Instance.doorConnected = false;
         map.SetActive(false);
         LoadingSceneController.Instance.LoadScene(sceneName);
     }

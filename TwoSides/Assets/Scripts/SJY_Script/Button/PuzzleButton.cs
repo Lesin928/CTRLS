@@ -3,19 +3,32 @@ using UnityEngine;
 public class PuzzleButton : MonoBehaviour
 {
     public GameObject map;
+    private bool[] isUsed = new bool[3];
     private void Awake()
     {
         if (map == null)
-            map = GameObject.Find("MapScrollArea"); // ÀÌ¸§ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ
+            map = GameObject.Find("MapScrollArea"); // ì´ë¦„ ì •í™•íˆ ì¼ì¹˜í•´ì•¼ í•¨
     }
     public void Onclick()
     {
         string sceneName = "Puzzle";
-        int rand = Random.Range(0, 3);  // range ¹Ù²Ù±â
+
+        int rand = Random.Range(0, 3);
+        while (isUsed[rand])
+        {
+            rand = Random.Range(0, 3);
+        }
+        isUsed[rand] = true;
+
+        rand = 0;
+
         sceneName += rand.ToString();
         map.SetActive(false);
+
         GameManager.Instance.isClear = false;
-        Mapbutton.Instance.clearOn = false;
+        Mapbutton.Instance.activeButton = false;
+        Map.Instance.doorConnected = false;
+
         LoadingSceneController.Instance.LoadScene(sceneName);
     }
 }

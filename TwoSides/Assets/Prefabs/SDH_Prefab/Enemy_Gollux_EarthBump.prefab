@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5833878042772297004}
   m_Layer: 12
   m_Name: Enemy_Gollux_EarthBump
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -21,19 +21,25 @@ public class StoreManager : MonoBehaviour
         rerollButton.onClick.AddListener(RerollItems);
         exitButton.onClick.AddListener(ExitStore);
 
+        GameManager.Instance.OnStageClear();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
         {
-            RerollItems();
-            Store.SetActive(true);
-            HUDManager.Instance.PauseGame();
-            Debug.Log("Store");
-
-            isStoreOpen = true;
+            OpenStore();
         }
+    }
+
+    public void OpenStore()
+    {
+        RerollItems();
+        Store.SetActive(true);
+        HUDManager.Instance.PauseGame();
+        Debug.Log("Store");
+
+        isStoreOpen = true;
     }
 
     void RerollItems()
@@ -76,7 +82,7 @@ public class StoreManager : MonoBehaviour
             text.text = $"{item.statType.ToString()}";
             icon.sprite = item.icon;
 
-            int index = i; // Å¬·ÎÀú ¹®Á¦ ¹æÁö
+            int index = i; // í´ë¡œì € ë¬¸ì œ ë°©ì§€
             itemButton[i].onClick.RemoveAllListeners();
             itemButton[i].onClick.AddListener(() => OnItemSelected(currentSelection[index]));
 
@@ -86,10 +92,10 @@ public class StoreManager : MonoBehaviour
 
     void OnItemSelected(ItemData item)
     {
-        if (GameManager.Instance.playerGold - 50 < 0)   //ÀÓ½Ã·Î 50    °æ°íÀ½ Ãß°¡ÇÏ±â
+        if (GameManager.Instance.playerGold - 50 < 0)   //ìž„ì‹œë¡œ 50    ê²½ê³ ìŒ ì¶”ê°€í•˜ê¸°
             return;
 
-        Debug.Log($"±¸¸ÅÇÑ ¾ÆÀÌÅÛ: {item.statType.ToString()}");
+        Debug.Log($"êµ¬ë§¤í•œ ì•„ì´í…œ: {item.statType.ToString()}");
 
         GameManager.Instance.SetGold(-50);
         ApplyItemEffect(item);

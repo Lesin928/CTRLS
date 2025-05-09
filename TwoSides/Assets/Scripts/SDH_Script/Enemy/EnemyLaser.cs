@@ -1,21 +1,21 @@
-ï»¿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// ì ì˜ ë ˆì´ì € ì˜¤ë¸Œì íŠ¸ë¥¼ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
-/// ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œë˜ì–´ ë°©í–¥ ì„¤ì • ë° ì¶©ëŒ ì²˜ë¦¬ë¥¼ ìˆ˜í–‰í•©ë‹ˆë‹¤.
+/// ÀûÀÇ ·¹ÀÌÀú °ø°İÀ» Ã³¸®ÇÏ´Â Å¬·¡½º.
+/// ·¹ÀÌÀú´Â ¹ß»ç ÈÄ ÀÏÁ¤ ½Ã°£ÀÌ Áö³­ ÈÄ ÀÚµ¿À¸·Î »èÁ¦µÇ¸ç, ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ½Ã ÇÇÇØ¸¦ ÀÔÈù´Ù.
 /// </summary>
 public class EnemyLaser : MonoBehaviour
 {
-    private EnemyObject attacker; // ê³µê²©ì„ ë°œì‚¬í•œ ì  ê°ì²´
+    private EnemyObject attacker; // °ø°İÇÑ Àû °´Ã¼
 
     private void Start()
     {
+        // ÃÊ±âÈ­ ½Ã Collider2D ºñÈ°¼ºÈ­
         GetComponent<Collider2D>().enabled = false;
     }
 
     /// <summary>
-    /// ê³µê²©ì„ ë°œì‚¬í•œ EnemyObjectë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
+    /// °ø°İÇÑ Àû °´Ã¼¸¦ ¼³Á¤ÇÑ´Ù.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
@@ -23,44 +23,46 @@ public class EnemyLaser : MonoBehaviour
     }
 
     /// <summary>
-    /// ë ˆì´ì €ì˜ ë°©í–¥ê³¼ íšŒì „ì„ ì„¤ì •í•©ë‹ˆë‹¤.
+    /// ·¹ÀÌÀúÀÇ ¹æÇâÀ» ¼³Á¤ÇÑ´Ù.
     /// </summary>
-    /// <param name="facingDir">ì ì´ ë°”ë¼ë³´ëŠ” ë°©í–¥ (1 ë˜ëŠ” -1)</param>
+    /// <param name="facingDir">·¹ÀÌÀúÀÇ ¹æÇâ (1Àº ¿À¸¥ÂÊ, -1Àº ¿ŞÂÊ)</param>
     public void SetDirection(int facingDir)
     {
-        // ë°”ë¼ë³´ëŠ” ë°©í–¥ì— ë”°ë¼ Y ì¶• ìŠ¤ì¼€ì¼ ì¡°ì •
+        // ·¹ÀÌÀúÀÇ YÃà ¹İÀüÀ» ¼³Á¤ÇÏ¿© ¹æÇâÀ» ¹Ù²Û´Ù.
         Vector3 scale = transform.localScale;
         scale.y = Mathf.Abs(scale.y) * -facingDir;
         transform.localScale = scale;
 
-        // Z ì¶• íšŒì „ê°’ì„ 90ë„ë¡œ ì„¤ì •
+        // Z Ãà È¸ÀüÀ» 90µµ·Î ¼³Á¤ÇÏ¿© ·¹ÀÌÀúÀÇ ¹æÇâÀ» Á¶Á¤ÇÑ´Ù.
         transform.rotation = Quaternion.Euler(0f, 0f, 90f);
     }
 
-    // ê³µê²© í™œì„±í™” (ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œ)
+    // °ø°İÀ» È°¼ºÈ­ (Collider2D È°¼ºÈ­)
     private void EnableAttack()
     {
         GetComponent<Collider2D>().enabled = true;
     }
 
-    // ê³µê²© ë¹„í™œì„±í™” (ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œ)
+    // °ø°İÀ» ºñÈ°¼ºÈ­ (Collider2D ºñÈ°¼ºÈ­)
     private void DisableAttack()
     {
         GetComponent<Collider2D>().enabled = false;
     }
 
-    // í”Œë ˆì´ì–´ì™€ ì¶©ëŒ ì‹œ í˜¸ì¶œ
-    void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// ·¹ÀÌÀú°¡ Ãæµ¹ÇÑ °´Ã¼¿ÍÀÇ »óÈ£ÀÛ¿ëÀ» Ã³¸®ÇÑ´Ù.
+    /// </summary>
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒí–ˆì„ ê²½ìš°
+        // Ãæµ¹ÇÑ °´Ã¼°¡ ÇÃ·¹ÀÌ¾îÀÏ °æ¿ì
         if (collision.CompareTag("Player"))
         {
-            // í”Œë ˆì´ì–´ì—ê²Œ ë°ë¯¸ì§€ ì „ë‹¬
+            // ÇÃ·¹ÀÌ¾î °´Ã¼°¡ Á¸ÀçÇÏ¸é ÇÇÇØ¸¦ ÀÔÈù´Ù.
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
     }
 
-    // ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œë˜ì–´ ì˜¤ë¸Œì íŠ¸ë¥¼ ì‚­ì œí•¨
+    // ·¹ÀÌÀú°¡ ´õ ÀÌ»ó ÇÊ¿ä ¾øÀ» °æ¿ì ¿ÀºêÁ§Æ®¸¦ »èÁ¦ÇÑ´Ù.
     private void DestroyTrigger()
     {
         Destroy(gameObject);

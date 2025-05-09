@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// TutorialGoblin 적 오브젝트의 상태 및 행동을 정의한 클래스입니다.
-/// EnemyObject를 상속하며, 상태 머신을 통해 Idle, Patrol, Chase, Attack 상태를 관리합니다.
+/// EnemyObject를 상속하며, 상태 머신을 통해 Idle, Attack 상태를 관리합니다.
 /// </summary>
 public class TutorialGoblinObject : EnemyObject
 {

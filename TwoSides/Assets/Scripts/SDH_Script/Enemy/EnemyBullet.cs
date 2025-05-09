@@ -1,38 +1,36 @@
-ï»¿using System.Threading;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// ì´ì•Œ ê°ì²´ë¥¼ ì²˜ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
-/// ì´ì•Œì´ ë°œì‚¬ë˜ê³ , ëª©í‘œë¥¼ í–¥í•´ ì´ë™í•˜ë©°, ì¶©ëŒ ì‹œ ì• ë‹ˆë©”ì´ì…˜ê³¼ í•¨ê»˜ ì²˜ë¦¬ë©ë‹ˆë‹¤.
+/// ÀûÀÇ ÃÑ¾ËÀ» °ü¸®ÇÏ´Â Å¬·¡½ºÀÌ´Ù.
+/// ÃÑ¾ËÀº ¹ß»ç ÈÄ ¸ñÇ¥ À§Ä¡¸¦ ÇâÇØ ºñÇàÇÏ¸ç, Ãæµ¹ ½Ã ÀûÀÌ³ª ¶¥¿¡ ÇÇÇØ¸¦ ÀÔÈù´Ù.
 /// </summary>
 public class EnemyBullet : MonoBehaviour
 {
-    // ì• ë‹ˆë©”ì´í„°ì™€ ë¦¬ì§€ë“œë°”ë””2D ì»´í¬ë„ŒíŠ¸
-    protected Animator anim;
-    protected Rigidbody2D rb;
+    // ¾Ö´Ï¸ŞÀÌÅÍ¿Í ¸®Áöµå¹Ùµğ2D ÄÄÆ÷³ÍÆ®
+    protected Animator anim;  // ¾Ö´Ï¸ŞÀÌÅÍ
+    protected Rigidbody2D rb; // ¸®Áöµå¹Ùµğ2D
 
     [Header("Settings")]
-    [SerializeField] float speed = 10f;   // ì´ì•Œì˜ ì´ë™ ì†ë„
-    [SerializeField] float lifeTime = 5f; // ì´ì•Œì˜ ìƒëª… ì‹œê°„
+    [SerializeField] private float speed = 10f;   // ÃÑ¾ËÀÇ ºñÇà ¼Óµµ
+    [SerializeField] private float lifeTime = 5f; // ÃÑ¾ËÀÇ »ı¸í ½Ã°£
 
-    private EnemyObject attacker;
+    private EnemyObject attacker; // ÃÑ¾ËÀ» ¹ß»çÇÑ Àû
 
-    void Awake()
+    private void Awake()
     {
-        // ì• ë‹ˆë©”ì´í„°ì™€ ë¦¬ì§€ë“œë°”ë””2D ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        // ¾Ö´Ï¸ŞÀÌÅÍ¿Í ¸®Áöµå¹Ùµğ2D ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿Â´Ù.
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    private void Start()
     {
-        // ì¼ì • ì‹œê°„ í›„ ì´ì•Œ ì‚­ì œ
+        // »ı¸í ½Ã°£ÀÌ ³¡³­ ÈÄ ÃÑ¾ËÀ» ÆÄ±«ÇÑ´Ù.
         Destroy(gameObject, lifeTime);
     }
 
     /// <summary>
-    /// ê³µê²©ì„ ë°œì‚¬í•œ EnemyObjectë¥¼ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
+    /// Àû ¿ÀºêÁ§Æ®¸¦ ¼³Á¤ÇÑ´Ù.
     /// </summary>
     public void SetAttacker(EnemyObject enemy)
     {
@@ -40,23 +38,23 @@ public class EnemyBullet : MonoBehaviour
     }
 
     /// <summary>
-    /// ì´ì•Œì„ ë°œì‚¬í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
+    /// ÃÑ¾ËÀ» ¹ß»çÇÑ´Ù.
     /// </summary>
-    /// <param name="targetPosition">ëª©í‘œ ì§€ì ì˜ ìœ„ì¹˜</param>
+    /// <param name="targetPosition">¸ñÇ¥ À§Ä¡</param>
     public void Shoot(Vector2 targetPosition)
     {
-        // í˜„ì¬ ìœ„ì¹˜ì—ì„œ ëª©í‘œ ìœ„ì¹˜ê¹Œì§€ì˜ ë°©í–¥ ê³„ì‚°
+        // ¸ñÇ¥ À§Ä¡·Î ÇâÇÏ´Â ¹æÇâÀ» ±¸ÇÑ´Ù.
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
 
-        // ì´ì•Œ ì†ë„ ì ìš©
+        // ¹æÇâ¿¡ ¼Óµµ¸¦ °öÇØ ÃÑ¾ËÀÇ ¼Óµµ¸¦ ¼³Á¤ÇÑ´Ù.
         rb.linearVelocity = direction * speed;
 
-        // íšŒì „ë„ ë°œì‚¬ ë°©í–¥ìœ¼ë¡œ ì„¤ì •
+        // ÃÑ¾ËÀÌ ÀÌµ¿ÇÏ´Â ¹æÇâÀ» ¸ÂÃá´Ù.
         RotateToVelocity(rb.linearVelocity);
     }
 
-    // ì´ì•Œì˜ ì´ë™ ë°©í–¥ì— ë§ê²Œ íšŒì „í•˜ëŠ” í•¨ìˆ˜
-    void RotateToVelocity(Vector2 velocity)
+    // ÃÑ¾ËÀÇ ¹æÇâ¿¡ ¸Â°Ô È¸ÀüÇÏ´Â ÇÔ¼ö
+    private void RotateToVelocity(Vector2 velocity)
     {
         if (velocity.sqrMagnitude > 0.01f)
         {
@@ -65,40 +63,42 @@ public class EnemyBullet : MonoBehaviour
         }
     }
 
-    /// ì¶©ëŒ ì²˜ë¦¬ í•¨ìˆ˜
-    void OnTriggerEnter2D(Collider2D collision)
-    {   
-        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒí•œ ê²½ìš°
+    /// <summary>
+    /// Ãæµ¹ ¹ß»ı ½Ã È£ÃâµÇ´Â ÇÔ¼ö
+    /// </summary>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇÑ °æ¿ì
         if (collision.CompareTag("Player"))
         {
-            // íˆíŠ¸ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+            // Ãæµ¹ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ½ÇÇàÇÑ´Ù.
             anim.SetBool("Hit", true);
 
-            // ì¶©ëŒ í›„ ì´ì•Œ ì •ì§€
+            // ÃÑ¾ËÀÇ ¼Óµµ¸¦ 0À¸·Î ¼³Á¤ÇÏ¿© ¸ØÃá´Ù.
             rb.linearVelocity = Vector2.zero;
 
-            // ì½œë¼ì´ë” ë¹„í™œì„±í™”
+            // Collider2D¸¦ ºñÈ°¼ºÈ­ÇÏ¿© Ãæµ¹ Ã³¸®¸¦ ¸·´Â´Ù.
             GetComponent<Collider2D>().enabled = false;
 
-            // í”Œë ˆì´ì–´ì—ê²Œ ë°ë¯¸ì§€ ì „ë‹¬
+            // ÇÃ·¹ÀÌ¾î¿¡°Ô ÇÇÇØ¸¦ ÀÔÈù´Ù.
             collision.GetComponent<PlayerObject>()?.TakeDamage(attacker.Attack);
         }
 
-        // ë²½ê³¼ ì¶©ëŒí•œ ê²½ìš°
+        // ¶¥°ú Ãæµ¹ÇÑ °æ¿ì
         else if (collision.CompareTag("Ground"))
         {
-            // íˆíŠ¸ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+            // Ãæµ¹ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ½ÇÇàÇÑ´Ù.
             anim.SetBool("Hit", true);
 
-            // ì¶©ëŒ í›„ ì´ì•Œ ì •ì§€
+            // ÃÑ¾ËÀÇ ¼Óµµ¸¦ 0À¸·Î ¼³Á¤ÇÏ¿© ¸ØÃá´Ù.
             rb.linearVelocity = Vector2.zero;
 
-            // ì½œë¼ì´ë” ë¹„í™œì„±í™”
+            // Collider2D¸¦ ºñÈ°¼ºÈ­ÇÏ¿© Ãæµ¹ Ã³¸®¸¦ ¸·´Â´Ù.
             GetComponent<Collider2D>().enabled = false;
         }
     }
 
-    // ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œë˜ì–´ ì´í™íŠ¸ ì˜¤ë¸Œì íŠ¸ë¥¼ íŒŒê´´
+    // ÃÑ¾ËÀÌ Ãæµ¹ ÈÄ ÀÏÁ¤ ½Ã°£ Áö³ª¸é ÆÄ±«µÇ´Â ÇÔ¼ö
     private void DestroyTrigger()
     {
         Destroy(gameObject);
