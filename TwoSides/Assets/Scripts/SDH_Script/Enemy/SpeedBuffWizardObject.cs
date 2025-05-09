@@ -1,31 +1,31 @@
 using UnityEngine;
 
 /// <summary>
-/// ¹æ¾î·Â ¹öÇÁ¸¦ ºÎ¿©ÇÏ´Â ¸¶¹ı»ç Àû ¿ÀºêÁ§Æ® Å¬·¡½ºÀÔ´Ï´Ù.
-/// EnemyObject¸¦ »ó¼ÓÇÏ¸ç, Áö¿ø ¹üÀ§ ³» ¾Æ±º¿¡°Ô ¹æ¾î·Â ¹öÇÁ¸¦ ºÎ¿©ÇÏ´Â Support »óÅÂ¸¦ °¡Áı´Ï´Ù.
+/// ë°©ì–´ë ¥ ë²„í”„ë¥¼ ë¶€ì—¬í•˜ëŠ” ë§ˆë²•ì‚¬ ì  ì˜¤ë¸Œì íŠ¸ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// EnemyObjectë¥¼ ìƒì†í•˜ë©°, ì§€ì› ë²”ìœ„ ë‚´ ì•„êµ°ì—ê²Œ ë°©ì–´ë ¥ ë²„í”„ë¥¼ ë¶€ì—¬í•˜ëŠ” Support ìƒíƒœë¥¼ ê°€ì§‘ë‹ˆë‹¤.
 /// </summary>
 public class SpeedBuffWizardObject : EnemyObject
 {
-    [SerializeField] private float supportRange;    // Áö¿ø ¹üÀ§
-    [SerializeField] private GameObject buffPrefab; // ¹öÇÁ ÇÁ¸®ÆÕ
+    [SerializeField] private float supportRange;    // ì§€ì› ë²”ìœ„
+    [SerializeField] private GameObject buffPrefab; // ë²„í”„ í”„ë¦¬íŒ¹
 
     #region State
-    public EnemySupportState supportState { get; private set; } // Áö¿ø »óÅÂ
+    public EnemySupportState supportState { get; private set; } // ì§€ì› ìƒíƒœ
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
 
-        // Áö¿ø »óÅÂ ÀÎ½ºÅÏ½º ÃÊ±âÈ­ (¹æ¾î·Â ¹öÇÁ Å¸ÀÔ)
-        supportState = new EnemySupportState(this, stateMachine, "Idle", supportRange, buffPrefab, BuffType.DEFENSE);
+        // ì§€ì› ìƒíƒœ ì¸ìŠ¤í„´ìŠ¤ ì´ˆê¸°í™” (ë°©ì–´ë ¥ ë²„í”„ íƒ€ì…)
+        supportState = new EnemySupportState(this, stateMachine, "Idle", supportRange, buffPrefab, BuffType.SPEED);
     }
 
     protected override void Start()
     {
         base.Start();
 
-        // ½ÃÀÛ ½Ã Áö¿ø »óÅÂ·Î ÃÊ±âÈ­
+        // ì‹œì‘ ì‹œ ì§€ì› ìƒíƒœë¡œ ì´ˆê¸°í™”
         stateMachine.Initialize(supportState);
     }
 
@@ -42,7 +42,7 @@ public class SpeedBuffWizardObject : EnemyObject
         stateMachine.ChangeState(supportState);
     }
 
-    // Áö¿ø ¹üÀ§ ½Ã°¢È­
+    // ì§€ì› ë²”ìœ„ ì‹œê°í™”
     protected override void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

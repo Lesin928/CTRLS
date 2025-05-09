@@ -49,6 +49,9 @@ GameObject:
   - component: {fileID: 2994131763496562126}
   - component: {fileID: 2027801676147690420}
   - component: {fileID: 6246459777351027517}
+  - component: {fileID: 9089749398404269929}
+  - component: {fileID: 5850664469140416091}
+  - component: {fileID: 8312288448961077504}
   m_Layer: 0
   m_Name: Animator_DemonBoss
   m_TagString: Untagged
@@ -250,6 +253,157 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: e9c26c977fd9fa249afa2bd8807994ac, type: 2}
   duration: 0.05
+--- !u!114 &9089749398404269929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106506966089593230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338712f9534065546aa61925e19ecd40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSoundClips:
+  - {fileID: 8300000, guid: 5e54b0f394e662440938432a05c580f8, type: 3}
+  - {fileID: 8300000, guid: 4258f993d5f8dc14999779d56bc161ec, type: 3}
+  - {fileID: 8300000, guid: 6cb9d7e8e55d7dd4090a41f0dbdf2d05, type: 3}
+  - {fileID: 8300000, guid: 8e95b854c1004fa49b1edea0b5f3cf52, type: 3}
+  - {fileID: 8300000, guid: 7b20727d55ea95e40947b3410a7a2f8a, type: 3}
+  - {fileID: 8300000, guid: a14d387b7ce03f2479246f66f81bcb87, type: 3}
+  hitSoundVolume: 0.3
+  attackSoundClip: {fileID: 8300000, guid: 4145319a7ae27964db0837f9b44dfe35, type: 3}
+  attackSoundVolume: 0
+--- !u!114 &5850664469140416091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106506966089593230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e16de804c3e6241bd3fac382f8da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicSoundClip: {fileID: 8300000, guid: d5d28e0cf62c30640b9927bef243bac5, type: 3}
+  magicSoundVolume: 0.3
+  attack1SoundClip: {fileID: 8300000, guid: 3fda263b79619034987cd379434022b3, type: 3}
+  attack1SoundVolume: 0.3
+  attack2SoundClip: {fileID: 8300000, guid: ead79e6f8a49d6c46a369d5fb5fffc88, type: 3}
+  attack2SoundVolume: 0.6
+  attack3SoundClip: {fileID: 8300000, guid: 2d671a3a5f0de1a48b945abb28e07520, type: 3}
+  attack3SoundVolume: 0.6
+  attack4SoundClip: {fileID: 8300000, guid: b90711ae86aff744db256f4191993d9d, type: 3}
+  attack4SoundVolume: 0.3
+  attack5SoundClip: {fileID: 8300000, guid: 84841602760dd5e4585686e699af29ae, type: 3}
+  attack5SoundVolume: 0.3
+  attack6SoundClip: {fileID: 8300000, guid: f5df1271b4b1dbb4e85b2fd5ea9574c7, type: 3}
+  attack6SoundVolume: 0.3
+  screamSoundClip:
+  - {fileID: 8300000, guid: 0a94156f7074bc1439e5cdcf4677eaa7, type: 3}
+  - {fileID: 8300000, guid: 64211c8ca42eb8148b3601ff99f58f09, type: 3}
+  - {fileID: 8300000, guid: e2d71c2984bf89447a1624fc05d02d99, type: 3}
+  - {fileID: 8300000, guid: 035104000f6f2f440aa198c976f1660d, type: 3}
+  screamSoundVolume: 0.3
+--- !u!82 &8312288448961077504
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106506966089593230}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &681919610714339801
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +524,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328175195732327875}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.14100003, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
@@ -403,8 +557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1df5ca11d989941821b6191e52fd55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 500
-  currentHp: 500
+  maxHp: 2000
+  currentHp: 2000
   armor: 0
   attack: 10
   attackSpeed: 0
@@ -439,6 +593,7 @@ MonoBehaviour:
   closeAttackCheckSize: {x: 2.5, y: 4}
   midAttackCheckSize: {x: 10, y: 4}
   longAttackCheckSize: {x: 20, y: 4}
+  healthBar: {fileID: 4288437340468795717, guid: 814f6f2f199495a45bbe309ab460a1fd, type: 3}
 --- !u!50 &1468395984559332572
 Rigidbody2D:
   serializedVersion: 5
