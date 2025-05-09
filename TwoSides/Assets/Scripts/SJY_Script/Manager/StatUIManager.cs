@@ -52,7 +52,7 @@ public class StatUIManager : MonoBehaviour
     {
         if (InputBlocker.blockKeyboardInput) return;
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             ToggleStatWindow();
         }
