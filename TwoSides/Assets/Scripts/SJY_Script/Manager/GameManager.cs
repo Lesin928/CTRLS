@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public PlayerObject playerObject;
     public GameObject go;
 
+    public GameObject fadeCanvasPrefab;
+
     #region PlayerStat
     [Header("PlayerStat")]
     public int playerGold;
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     public float playerCriticalDamage;
     public float playerjumpForce;
     public float playerDashForce;
+
     #endregion
 
     private void Awake()
@@ -193,11 +196,19 @@ public class GameManager : MonoBehaviour
     {
         HUDManager.Instance.HideHUD();
         HideMapController.shouldShowHideMap = false;
+
+        //Instantiate(fadeCanvasPrefab);
+
         StartCoroutine(GameOverRoutine());
     }
 
     IEnumerator GameOverRoutine()
     {
+        GameObject fadeObj = Instantiate(fadeCanvasPrefab);
+        FadeController fade = fadeObj.GetComponent<FadeController>();
+
+        yield return StartCoroutine(fade.FadeOut());
+
         AsyncOperation op = SceneManager.LoadSceneAsync("GameOver");
         yield return new WaitUntil(() => op.isDone);
     }
