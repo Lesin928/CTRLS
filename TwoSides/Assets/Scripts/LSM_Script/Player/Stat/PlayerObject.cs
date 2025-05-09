@@ -175,7 +175,8 @@ public class PlayerObject : CharacterObject
     }   
 
     public override void TakeDamage(float damage)     
-    { 
+    {
+        if(CurrentHp <= 0) return; //���� ���·� ����   
         if (IsInvincibility) return; //���� ���̸� ������ ����
         if (Isgod) return; //���� ���̸� ������ ����
         IsInvincibility = true; //���� ���·� ����
