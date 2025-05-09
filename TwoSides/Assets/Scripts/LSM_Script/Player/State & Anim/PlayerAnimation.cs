@@ -13,6 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; } 
     public SpriteRenderer sr { get; private set; }
+     
     #endregion
 
     #region Playerfacing //플레이어의 방향을 나타내는 변수
@@ -34,6 +35,7 @@ public class PlayerAnimation : MonoBehaviour
     public PlayerComboState comboState { get; private set; }
     public PlayerSkillState skillState { get; private set; }
     public PlayerDeathState deathState { get; private set; }
+    public PlayerParryState parryState { get; private set; }
 
     #endregion
 
@@ -57,6 +59,7 @@ public class PlayerAnimation : MonoBehaviour
         comboState = new PlayerComboState(this, stateMachine, playerObject, "Attack2");
         skillState = new PlayerSkillState(this, stateMachine, playerObject, "Skill");
         deathState = new PlayerDeathState(this, stateMachine, playerObject, "Death");
+        parryState = new PlayerParryState(this, stateMachine, playerObject, "Parry");
     }
      
     protected void Start()

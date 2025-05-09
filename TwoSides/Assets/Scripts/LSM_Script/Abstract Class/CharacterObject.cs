@@ -30,8 +30,9 @@ public abstract class CharacterObject : MonoBehaviour
         get => maxHp;
         set
         {
-            maxHp = value;
-            currentHp = value; // 최대체력 설정 시 현재체력도 초기화
+            maxHp = value; 
+            if (currentHp > maxHp)
+                currentHp = value;
         }
     }
 

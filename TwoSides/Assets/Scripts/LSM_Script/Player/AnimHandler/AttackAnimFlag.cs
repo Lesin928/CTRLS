@@ -36,8 +36,7 @@ public class AttackAnimFlag : MonoBehaviour
     {
         if (playerObject.attackCollider2.activeSelf)
         { 
-            playerObject.attackCollider2.SetActive(false); 
-        }
-          
+            playerObject.attackCollider2.SetActive(false);
+        } 
     }
 }

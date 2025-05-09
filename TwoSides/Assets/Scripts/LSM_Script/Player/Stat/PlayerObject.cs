@@ -19,12 +19,13 @@ public class PlayerObject : CharacterObject
     public GameObject attackCollider1;
     public GameObject attackCollider2;
     public GameObject skillCollider;
+    public GameObject parryCollider;
     #endregion
 
     #region Player Info   
     [Header("플레이어 정보")]
-    [SerializeField] private float jumpForce; //추후 세팅
-    [SerializeField] private float dashForce; //추후 세팅
+    [SerializeField] private float jumpForce; // 점프 힘
+    [SerializeField] private float dashForce; // 대쉬 힘 
     [SerializeField] private float invincibilityDuration = 0.5f; //추후 세팅
     [SerializeField] private bool isCombo = false; //콤보 중
     [SerializeField] private bool isAttack = false; //공격 중
@@ -32,6 +33,8 @@ public class PlayerObject : CharacterObject
     [SerializeField] private bool isSkill = false; // 스킬 사용 중
     [SerializeField] private bool isinvincibility = false; //무적 중
     [SerializeField] private bool isDeath = false; //사망중
+    [SerializeField] private bool isEvasion = false; //회피상태
+    [SerializeField] private bool isCanParry = false; //패링가능
     [SerializeField] private bool endAttack = false; //공격 종료 
     #endregion
 
@@ -58,6 +61,16 @@ public class PlayerObject : CharacterObject
         get => isCombo;
         set => isCombo = value;
     }
+    public virtual bool IsCanParry
+    {
+        get => isCanParry;
+        set => isCanParry = value;
+    }
+    public virtual bool IsEvasion
+    {
+        get => isEvasion;
+        set => isEvasion = value;
+    }   
     public virtual bool IsDeath
     {
         get => isDeath;
@@ -139,24 +152,25 @@ public class PlayerObject : CharacterObject
 
     private void Start()
     {
-        //플레이어 초기 세팅
-        MaxHp = 100f; //체력  
+        //테스트용 플레이어 초기 세팅
+        /*
+        MaxHp = 100f; //체력
         CurrentHp = 100f; //체력
         Attack = 5f; //공격력
         Armor = 3f; //방어력
         AttackSpeed = 1f; //공격속도
-        MoveSpeed = 7f;
         Critical = 0.1f; //치명타 확률
         CriticalDamage = 2f; //치명타 피해 배율
-        jumpForce = 13f; // 점프 힘
-        dashForce = 15f; // 대쉬 힘 
+        MoveSpeed = 7f; // 이동 속도 */
     }   
 
     public override void TakeDamage(float damage)     
-    {
+    { 
         if (isinvincibility) return; //무적 중이면 데미지 무시
         IsInvincibility = true; //무적 상태로 변경
-        base.TakeDamage(damage);        
+        base.TakeDamage(damage);
+
+        GameManager.Instance.TakeDamage(CurrentHp);
         GetComponentInChildren<HitAnim>().Flash();
     }
 

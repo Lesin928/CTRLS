@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Interactive
   - StartingPoint
+  - Effect
+  - Confiner
   layers:
   - Default
   - TransparentFX

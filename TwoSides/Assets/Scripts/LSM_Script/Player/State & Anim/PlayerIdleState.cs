@@ -16,7 +16,7 @@ public class PlayerIdleState : PlayerGroundState
         base.Enter(); 
     }
     public override void Update()
-    {
+    { 
         if (!playerObject.IsGroundDetected())
         {
             stateMachine.ChangeState(playerAnimation.airState);
