@@ -107,6 +107,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   go: {fileID: 0}
   fadeCanvasPrefab: {fileID: 652154436532790244, guid: 55aa1a501532e2544897aff3c44ceb65, type: 3}
+  hitEffectUI: {fileID: 5190647351312058720, guid: c3ae6b0cee982874cbad99ba6fed100e, type: 3}
   playerGold: 0
   playerHealth: 0
   playerMaxHealth: 0

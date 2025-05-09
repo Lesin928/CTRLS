@@ -5,6 +5,8 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using JetBrains.Annotations;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class GameManager : MonoBehaviour
     public GameObject go;
 
     public GameObject fadeCanvasPrefab;
+
+    private GameObject hitEffectUI;
+    private Image hitEffectImage;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -102,6 +107,11 @@ public class GameManager : MonoBehaviour
 
             SetUpPlayerStats();
         }
+
+        hitEffectUI = GameObject.Find("HitEffect");
+        if (hitEffectUI != null)
+            hitEffectImage = hitEffectUI.GetComponentInChildren<Image>();
+
         var playerObj = go.GetComponent<PlayerDontDestroyOnLoad>();
         if (playerObj != null)
             playerObj.ResetSpawnPosition();
@@ -207,6 +217,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverRoutine()
     {
+        yield return new WaitForSeconds(1f);
+
         GameObject fadeObj = Instantiate(fadeCanvasPrefab);
         FadeController fade = fadeObj.GetComponent<FadeController>();
 
@@ -225,6 +237,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameClearRoutine()
     {
+        yield return new WaitForSeconds(1f);
+
         AsyncOperation op = SceneManager.LoadSceneAsync("GameClear");
         yield return new WaitUntil(() => op.isDone);
     }
@@ -241,14 +255,31 @@ public class GameManager : MonoBehaviour
 
     public void TakeDamage(float hp)
     {
+        Debug.Log(hp);
         playerHealth = hp;
 
         HUDManager.Instance.SetHealth(playerHealth);
+
+        hitEffectUI = GameObject.Find("HitEffect");
+        if (hitEffectUI != null)
+            hitEffectImage = hitEffectUI.GetComponentInChildren<Image>();
+
+        StartCoroutine(HitEffectCoroutine());
 
         if (playerHealth <= 0)
         {
             GameOver();
         }
+    }
+
+    IEnumerator HitEffectCoroutine()
+    {
+        Debug.Log("HitEffectCoroutine Start");
+        hitEffectUI.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        hitEffectUI.SetActive(false);
     }
 
     public void SetHealth(float value)
@@ -334,26 +365,26 @@ public class GameManager : MonoBehaviour
         //{
         //    SetPlayerAttack(10);
         //}
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SetMaxHealth(10);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            SetMaxHealth(-10);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SetHealth(10);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SetHealth(-10);
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            SetGold(1000);
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    SetMaxHealth(10);
+        //}
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    SetMaxHealth(-10);
+        //}
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    SetHealth(10);
+        //}
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    SetHealth(-10);
+        //}
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    SetGold(1000);
+        //}
 
         //if (Input.GetKeyDown(KeyCode.R))
         //{
