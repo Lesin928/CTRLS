@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
 
     private float skillCooldownTimer = 0f; // 스킬 쿨타임 시간    
     private float skillCooldownDuration = 3f; // 스킬 쿨타임 시간    
+
+    private float parryCooldownTimer = 0f; // 패링 쿨타임 시간    
+    private float parryCooldownDuration = 3f; // 패링 쿨타임 시간   
     #endregion 
 
     private void Awake()
@@ -67,6 +70,10 @@ public class PlayerController : MonoBehaviour
         if (skillCooldownTimer > 0)
             skillCooldownTimer -= Time.deltaTime;
 
+        // 패링 쿨타임이 끝나지 않았으면 쿨타임 감소
+        if (parryCooldownTimer > 0)
+            parryCooldownTimer -= Time.deltaTime;
+
         bool shouldCheckGround = groundIgnoreTimer <= 0;
     }
 
@@ -85,7 +92,7 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (playerObject.IsDeath) return; //사망 상태
-        if (playerObject.IsGroundDetected() && !playerObject.IsSkill)
+        if (playerObject.IsGroundDetected() && !playerObject.IsSkill && !playerObject.IsDashing)
         {
             groundIgnoreTimer = groundIgnoreDuration;
             Debug.Log("점프");
@@ -99,29 +106,37 @@ public class PlayerController : MonoBehaviour
     public void OnDash(InputAction.CallbackContext context)
     {
         if (playerObject.IsDeath) return; //사망 상태
+        if (dashCooldownTimer > 0) return; // 대쉬 쿨타임이 남아있으면 대쉬를 하지 않음
+        
         if (!playerObject.IsDashing && !playerObject.IsAttack)
         {
+            dashCooldownTimer = dashCooldownDuration;
             playerAnimation.stateMachine.ChangeState(playerAnimation.dashState);
             StartCoroutine(Dash());
         }
     }
 
     /// <summary>
-    /// 키보드 C 입력을 처리하는 메서드
+    /// 키보드 X 입력을 처리하는 메서드
     /// </summary>
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (playerObject.IsDeath) return; //사망 상태
-        if (context.phase != InputActionPhase.Performed) return;
-        if (playerObject.IsDashing) return;
-        if (playerObject.IsSkill) return;
-        // 만약 공격중이 아닐경우 공격 상태
-        if (!playerObject.IsAttack)
+        if (playerObject.IsSkill) return; //스킬 사용중
+        if (context.phase != InputActionPhase.Performed) return;                
+        if (playerObject.IsDashing && playerObject.IsEvasion && playerObject.IsCanParry)
+        {
+            if (parryCooldownTimer > 0) return; // 패링 쿨타임이 남아있으면 패링을 하지 않음 
+            playerAnimation.stateMachine.ChangeState(playerAnimation.parryState);
+            parryCooldownTimer = parryCooldownDuration;
+            return;
+        }        
+        if (!playerObject.IsAttack && !playerObject.IsDashing)
         {
             playerAnimation.stateMachine.ChangeState(playerAnimation.attackState);
             StartCoroutine(Attack());
         }
-        else if (playerObject.IsAttack)
+        else if (playerObject.IsAttack && !playerObject.IsDashing)
         {
             StartCoroutine(Combo());
         }
@@ -133,7 +148,15 @@ public class PlayerController : MonoBehaviour
     public void OnShift(InputAction.CallbackContext context)
     {
         if (playerObject.IsDeath) return; //사망 상태 
-        Debug.Log("Shift! (Shift 버튼)");  
+        Debug.Log("무적 모드 (Shift 버튼)");  
+        if(!playerObject.IsInvincibility)
+        {
+           playerObject.IsInvincibility = true; // 무적모드
+        }
+        else if(playerObject.IsInvincibility)
+        {
+            playerObject.IsInvincibility = false; // 무적모드 해제
+        }   
     } 
     /// <summary>
     /// 키보드 F 입력을 처리하는 메서드
@@ -169,14 +192,10 @@ public class PlayerController : MonoBehaviour
     } 
     private IEnumerator Dash()
     {
-        if (dashCooldownTimer > 0)
-            yield break; // 대쉬 쿨타임이 남아있으면 대쉬를 하지 않음
-        dashCooldownTimer = dashCooldownDuration;
-        playerObject.IsDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
         rb.linearVelocity = new Vector2(playerAnimation.Getfacing() * playerObject.DashForce, 0f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         rb.gravityScale = originalGravity;
         playerObject.IsDashing = false;
     }

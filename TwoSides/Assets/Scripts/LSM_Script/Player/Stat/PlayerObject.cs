@@ -19,12 +19,13 @@ public class PlayerObject : CharacterObject
     public GameObject attackCollider1;
     public GameObject attackCollider2;
     public GameObject skillCollider;
+    public GameObject parryCollider;
     #endregion
 
     #region Player Info   
     [Header("�÷��̾� ����")]
-    [SerializeField] private float jumpForce; //���� ����
-    [SerializeField] private float dashForce; //���� ����
+    [SerializeField] private float jumpForce; // ���� ��
+    [SerializeField] private float dashForce; // �뽬 �� 
     [SerializeField] private float invincibilityDuration = 0.5f; //���� ����
     [SerializeField] private bool isCombo = false; //�޺� ��
     [SerializeField] private bool isAttack = false; //���� ��
@@ -32,6 +33,8 @@ public class PlayerObject : CharacterObject
     [SerializeField] private bool isSkill = false; // ��ų ��� ��
     [SerializeField] private bool isinvincibility = false; //���� ��
     [SerializeField] private bool isDeath = false; //�����
+    [SerializeField] private bool isEvasion = false; //ȸ�ǻ���
+    [SerializeField] private bool isCanParry = false; //�и�����
     [SerializeField] private bool endAttack = false; //���� ���� 
     #endregion
 
@@ -58,6 +61,16 @@ public class PlayerObject : CharacterObject
         get => isCombo;
         set => isCombo = value;
     }
+    public virtual bool IsCanParry
+    {
+        get => isCanParry;
+        set => isCanParry = value;
+    }
+    public virtual bool IsEvasion
+    {
+        get => isEvasion;
+        set => isEvasion = value;
+    }   
     public virtual bool IsDeath
     {
         get => isDeath;
@@ -139,21 +152,20 @@ public class PlayerObject : CharacterObject
 
     private void Start()
     {
-        //�÷��̾� �ʱ� ����
-        MaxHp = 100f; //ü��  
+        //�׽�Ʈ�� �÷��̾� �ʱ� ����
+        /*
+        MaxHp = 100f; //ü��
         CurrentHp = 100f; //ü��
         Attack = 5f; //���ݷ�
         Armor = 3f; //����
         AttackSpeed = 1f; //���ݼӵ�
-        MoveSpeed = 7f;
         Critical = 0.1f; //ġ��Ÿ Ȯ��
         CriticalDamage = 2f; //ġ��Ÿ ���� ����
-        jumpForce = 13f; // ���� ��
-        dashForce = 15f; // �뽬 �� 
-    }
+        MoveSpeed = 7f; // �̵� �ӵ� */
+    }   
 
-    public override void TakeDamage(float damage)
-    {
+    public override void TakeDamage(float damage)     
+    { 
         if (isinvincibility) return; //���� ���̸� ������ ����
         IsInvincibility = true; //���� ���·� ����
         base.TakeDamage(damage);

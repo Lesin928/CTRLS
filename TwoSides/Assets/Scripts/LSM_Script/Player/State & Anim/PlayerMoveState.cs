@@ -17,7 +17,7 @@ public class PlayerMoveState : PlayerGroundState
     } 
      
     public override void Update()
-    {
+    { 
         base.Update();
         if (!playerObject.IsGroundDetected())
         {

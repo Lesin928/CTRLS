@@ -25,7 +25,7 @@ public class PlayerJumpState : PlayerState
         base.Exit();
     } 
     public override void Update()
-    {
+    { 
         base.Update();
         if (rb.linearVelocityY < 0)
         {

@@ -17,7 +17,7 @@ public class PlayerAirState : PlayerState
     }
      
     public override void Update()
-    {
+    { 
         base.Update();
         //Air에서의 상태 전이
         if (playerObject.IsGroundDetected())
