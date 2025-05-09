@@ -86,8 +86,8 @@ public class StatUIManager : MonoBehaviour
 
         healthText.text = $"HP : {gm.playerHealth} / {gm.playerMaxHealth}";
         attackText.text = $"Attack : {gm.playerAttack}";
-        attackSpeedText.text = $"AttackSpeed : {gm.playerAttackSpeed}%";
-        criticalText.text = $"Critical : {gm.playerCritical}%";
+        attackSpeedText.text = $"AttackSpeed : {gm.playerAttackSpeed * 100}%";
+        criticalText.text = $"Critical : {gm.playerCritical * 100}%";
         criticalDamageText.text = $"CriticalDamage : {gm.playerCriticalDamage}%";
         armorText.text = $"Armor : {gm.playerArmor}";
         moveSpeedText.text = $"MoveSpeed : {gm.playerMoveSpeed}%";

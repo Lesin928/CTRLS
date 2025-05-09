@@ -27,25 +27,22 @@ public class PlayerDontDestroyOnLoad : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (this == null)
-        {
-            Debug.LogError("PlayerDontDestroyOnLoad 인스턴스가 null입니다!");
-            return;
-        }
 
+    public void ResetSpawnPosition()
+    {
         player.transform.localPosition = Vector3.zero;
 
         GameObject spawnPoint = GameObject.Find("Starting_Point");
-        if (spawnPoint == null)
-            Debug.LogError("Starting_Point 오브젝트를 찾을 수 없습니다.");
-        if (spawnPoint != null && spawnPoint.CompareTag("StartingPoint"))
+        if (spawnPoint != null)
         {
-            Debug.Log("Starting_Point 오브젝트를 찾았습니다.");
             transform.position = spawnPoint.transform.position;
+            Debug.Log("Starting Point Position: " + spawnPoint.transform.position);
+            Debug.Log("Player position set to Starting_Point.");
+        }
+        else
+        {
+            Debug.LogError("Starting_Point not found.");
         }
     }
 }
