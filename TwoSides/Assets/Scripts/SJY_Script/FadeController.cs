@@ -15,13 +15,27 @@ public class FadeController : MonoBehaviour
         float time = 0f;
         Color color = fadeImage.color;
 
-        while (time < fadeDuration)
+        if (color.a == 1f)
         {
-            time += Time.deltaTime;
-            color.a = Mathf.Lerp(0f, 1f, time / fadeDuration);
-            fadeImage.color = color;
-            yield return null;
+            while (time < fadeDuration)
+            {
+                time += Time.deltaTime;
+                color.a = Mathf.Lerp(1f, 0f, time / fadeDuration);
+                fadeImage.color = color;
+                yield return null;
+            }
         }
+        else
+        {
+            while (time < fadeDuration)
+            {
+                time += Time.deltaTime;
+                color.a = Mathf.Lerp(0f, 1f, time / fadeDuration);
+                fadeImage.color = color;
+                yield return null;
+            }
+        }
+
 
         Debug.Log("FadeOut Complete");
     }
