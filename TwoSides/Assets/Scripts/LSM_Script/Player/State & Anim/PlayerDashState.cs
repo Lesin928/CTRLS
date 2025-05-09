@@ -1,4 +1,4 @@
-using UnityEngine;
+using UnityEngine; 
 
 // TODO: (추가할일 적는부분)
 // FIXME: (고칠거 적는부분)
@@ -10,15 +10,26 @@ using UnityEngine;
 public class PlayerDashState : PlayerState
 {
     public PlayerDashState (PlayerAnimation _playerAnim, PlayerStateMachine _stateMachine, PlayerObject _playerObject, string _animBoolName)
-        : base(_playerAnim, _stateMachine, _playerObject, _animBoolName) { }
+        : base(_playerAnim, _stateMachine, _playerObject, _animBoolName) { } 
+
     public override void Enter()
     {
         base.Enter(); 
-    }
+        playerObject.IsInvincibility = true; //대쉬 중 무적
+        playerObject.IsDashing = true;
+        //회피 가능이면 극한회피
+        if (playerObject.IsEvasion)
+        {
+            playerAnimation.GetComponent<VignetteControllerURP>().TriggerVignette(); 
+            playerAnimation.GetComponent<ParryAfterImage>().StartDodgeEffect(); //잔상
+            //회피 연출
+            playerObject.IsCanParry = true; //패링 가능 
+        }
+    } 
     public override void Update()
-    {
-        base.Update(); 
-        //대쉬에서의 상태 전이
+    { 
+        base.Update();
+        //대쉬에서의 상태 전이 
         if (!playerObject.IsDashing)
         {
             if (playerObject.IsGroundDetected()) 
@@ -41,8 +52,17 @@ public class PlayerDashState : PlayerState
 
 
     public override void Exit()
-    { 
-        base.Exit(); 
-    }
+    {        
+        playerObject.IsInvincibility = false; //대쉬 중 무적 해제
+        playerObject.IsEvasion = false; 
+        base.Exit();
+    } 
+
+
+
+
+
+
+
 
 }

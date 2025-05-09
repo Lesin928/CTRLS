@@ -16,6 +16,7 @@ public class PlayerComboState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        playerObject.EndAttack = false;
         playerObject.attackCollider1.SetActive(false); //이전 공격 판정 비활성화
         playerObject.attackCollider2.SetActive(true); //콤보 데미지 판정
         if (playerObject.MoveInput.x != 0 && playerObject.IsGroundDetected()) //공격시 이동
@@ -24,7 +25,7 @@ public class PlayerComboState : PlayerState
         }
     } 
     public override void Update()
-    {
+    { 
         base.Update();
         // 공격중이 아니고 콤보중이 아닐 때 상태 전이
         if (!playerObject.IsAttack && !playerObject.IsCombo)

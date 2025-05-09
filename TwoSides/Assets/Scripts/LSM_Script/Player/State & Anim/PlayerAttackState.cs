@@ -29,7 +29,7 @@ public class PlayerAttackState : PlayerState
         }
     }  
   public override void Update()
-    {
+    { 
         base.Update(); 
         // 콤보 상태 전이
         if(playerObject.IsCombo && playerObject.EndAttack)

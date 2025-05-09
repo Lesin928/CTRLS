@@ -16,7 +16,7 @@ public class PlayerDeathState : PlayerState
         base.Enter(); 
     }
     public override void Update()
-    {
+    { 
         base.Update(); 
     } 
     public override void Exit()
