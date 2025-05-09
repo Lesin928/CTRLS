@@ -1,27 +1,25 @@
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class ToggleImageOnEnter : MonoBehaviour
 {
-    [Header("스폰할 프리팹")]
-    public GameObject prefabToSpawn;
+    public GameObject image2; // Inspector에서 Image2 오브젝트를 연결하세요.
 
-    [Header("스폰 위치 (인스펙터에서 조정)")]
-    public Vector3 spawnPosition = Vector3.zero;
-
-    [Header("스폰 회전 (선택 사항)")]
-    public Vector3 spawnRotationEuler = Vector3.zero;
-
-    // 인스펙터에서 호출할 수 있게 만듭니다 (Editor에서 버튼 사용 가능)
-    public void SpawnAtDefinedPosition()
+    void Start()
     {
-        if (prefabToSpawn != null)
+        if (image2 != null)
         {
-            Quaternion spawnRotation = Quaternion.Euler(spawnRotationEuler);
-            Instantiate(prefabToSpawn, spawnPosition, spawnRotation);
+            image2.SetActive(false); // 처음에 꺼진 상태로 시작
         }
-        else
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return)) // Enter 키
         {
-            Debug.LogWarning("프리팹이 할당되지 않았습니다!");
+            if (image2 != null)
+            {
+                image2.SetActive(true); // Enter 키를 누르면 켜짐
+            }
         }
     }
 }
