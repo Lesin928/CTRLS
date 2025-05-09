@@ -11,23 +11,22 @@ public class UI_HealthBar : MonoBehaviour
     private void Start()
     {
         myTransform = GetComponent<RectTransform>();
-
         slider = GetComponentInChildren<Slider>();
-
         entity = GetComponentInParent<EnemyObject>();
     }
 
-    // Flip()ÀÌ º¸Åë Update¿¡¼­ ½ÇÇàµÇ¹Ç·Î LateUpdate()¿¡¼­ Ã³¸®ÇØ¾ß UIÀÇ ¹æÇâÀÌ ¸¶Áö¸·¿¡ °íÁ¤µÇ¾î ±ò²ûÇÏ°Ô µ¿ÀÛ
+    // Flip()ì´ ë³´í†µ Updateì—ì„œ ì‹¤í–‰ë˜ë¯€ë¡œ LateUpdate()ì—ì„œ ì²˜ë¦¬í•´ì•¼ UIì˜ ë°©í–¥ì´ ë§ˆì§€ë§‰ì— ê³ ì •ë˜ì–´ ê¹”ë”í•˜ê²Œ ë™ì‘
     private void LateUpdate()
     {
         LockUIFacing();
         UpdateHealthUI();
     }
+
     private void LockUIFacing()
     {
         if (entity != null)
         {
-            // ºÎ¸ğ°¡ ¿À¸¥ÂÊ º¸°í ÀÖÀ¸¸é ±×´ë·Î, ¿ŞÂÊ º¸°í ÀÖÀ¸¸é YÃà¸¸ µÚÁıÀ½
+            // ë¶€ëª¨ê°€ ì˜¤ë¥¸ìª½ ë³´ê³  ìˆìœ¼ë©´ ê·¸ëŒ€ë¡œ, ì™¼ìª½ ë³´ê³  ìˆìœ¼ë©´ Yì¶•ë§Œ ë’¤ì§‘ìŒ
             myTransform.localRotation = entity.facingDir == 1
                 ? Quaternion.identity
                 : Quaternion.Euler(0, 180, 0);
@@ -38,5 +37,8 @@ public class UI_HealthBar : MonoBehaviour
     {
         slider.maxValue = entity.MaxHp;
         slider.value = entity.CurrentHp;
+
+        if (entity.CurrentHp <= 0)
+            gameObject.SetActive(false);
     }
 }
