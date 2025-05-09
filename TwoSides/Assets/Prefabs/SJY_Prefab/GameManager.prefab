@@ -108,6 +108,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 4293148247142581802, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
   playerObject: {fileID: 0}
   go: {fileID: 0}
+  fadeCanvasPrefab: {fileID: 652154436532790244, guid: 55aa1a501532e2544897aff3c44ceb65, type: 3}
   playerGold: 0
   playerHealth: 0
   playerMaxHealth: 0

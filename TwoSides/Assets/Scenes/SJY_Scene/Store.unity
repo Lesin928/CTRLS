@@ -3152,6 +3152,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapShadowCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8335538203837540484, guid: bc4d18a4dcc295b43b8c5cec1642d8f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -103,9 +103,9 @@ public class HUDManager : MonoBehaviour
         Debug.Log($"Health: {health}/{maxHealth}");
     }
 
-    public void SetGold(int amount)
+    public void SetGold(int value)
     {
-        gold += amount;
+        gold = value;
         UpdateHUD();
     }
 

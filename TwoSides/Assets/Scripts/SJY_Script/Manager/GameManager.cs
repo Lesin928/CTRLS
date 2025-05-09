@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public PlayerObject playerObject;
     public GameObject go;
 
+    public GameObject fadeCanvasPrefab;
+
     #region PlayerStat
     [Header("PlayerStat")]
     public int playerGold;
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     public float playerCriticalDamage;
     public float playerjumpForce;
     public float playerDashForce;
+
     #endregion
 
     private void Awake()
@@ -51,9 +54,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerMaxHealth = 100;
-        playerHealth = playerMaxHealth;
-        playerGold = 0;
         currentStage = 1;
     }
 
@@ -102,6 +102,9 @@ public class GameManager : MonoBehaviour
 
             SetUpPlayerStats();
         }
+        var playerObj = go.GetComponent<PlayerDontDestroyOnLoad>();
+        if (playerObj != null)
+            playerObj.ResetSpawnPosition();
     }
 
     public void StartNewGame()
@@ -163,6 +166,10 @@ public class GameManager : MonoBehaviour
         playerObject.DashForce = playerDashForce;
 
         playerGold = 0;
+
+        HUDManager.Instance.SetMaxHealth(playerMaxHealth);
+        HUDManager.Instance.SetHealth(playerHealth);
+        HUDManager.Instance.SetGold(playerGold);
     }
 
     public void OnStageClear()
@@ -192,11 +199,19 @@ public class GameManager : MonoBehaviour
     {
         HUDManager.Instance.HideHUD();
         HideMapController.shouldShowHideMap = false;
+
+        //Instantiate(fadeCanvasPrefab);
+
         StartCoroutine(GameOverRoutine());
     }
 
     IEnumerator GameOverRoutine()
     {
+        GameObject fadeObj = Instantiate(fadeCanvasPrefab);
+        FadeController fade = fadeObj.GetComponent<FadeController>();
+
+        yield return StartCoroutine(fade.FadeOut());
+
         AsyncOperation op = SceneManager.LoadSceneAsync("GameOver");
         yield return new WaitUntil(() => op.isDone);
     }
@@ -221,12 +236,14 @@ public class GameManager : MonoBehaviour
 
         if (playerGold <= 0)
             playerGold = 0;
-        HUDManager.Instance.SetGold(value);
+        HUDManager.Instance.SetGold(playerGold);
     }
 
     public void TakeDamage(float hp)
     {
         playerHealth = hp;
+
+        HUDManager.Instance.SetHealth(playerHealth);
 
         if (playerHealth <= 0)
         {
@@ -245,12 +262,12 @@ public class GameManager : MonoBehaviour
             playerObject.CurrentHp = playerHealth;
         }
 
+        HUDManager.Instance.SetHealth(playerHealth);
+
         if (playerHealth <= 0)
         {
             GameOver();
         }
-
-        HUDManager.Instance.SetHealth(playerHealth);
     }
 
     public void SetMaxHealth(float value)
@@ -349,9 +366,5 @@ public class GameManager : MonoBehaviour
             OnStageClear();
             Debug.Log(isClear);
         }
-
-
-
-
     }
 }
