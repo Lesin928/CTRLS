@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1294700874702475616}
   - component: {fileID: 1901306472781376298}
   - component: {fileID: -5178676344189941456}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Parry hit Effect
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

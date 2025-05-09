@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class VignetteControllerURP : MonoBehaviour
+public class DOFController : MonoBehaviour
 {
     public Volume volume;
     private Vignette vignette;
