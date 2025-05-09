@@ -102,6 +102,9 @@ public class GameManager : MonoBehaviour
 
             SetUpPlayerStats();
         }
+        var playerObj = go.GetComponent<PlayerDontDestroyOnLoad>();
+        if (playerObj != null)
+            playerObj.ResetSpawnPosition();
     }
 
     public void StartNewGame()
