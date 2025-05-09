@@ -851,6 +851,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 0}
   playerObject: {fileID: 0}
   go: {fileID: 0}
+  fadeCanvasPrefab: {fileID: 0}
   playerGold: 0
   playerHealth: 0
   playerMaxHealth: 0
