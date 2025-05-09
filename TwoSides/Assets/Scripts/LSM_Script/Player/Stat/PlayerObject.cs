@@ -20,6 +20,7 @@ public class PlayerObject : CharacterObject
     public GameObject attackCollider2;
     public GameObject skillCollider;
     public GameObject parryCollider;
+    public GameObject GOD;
     #endregion
 
     #region Player Info   
@@ -32,6 +33,7 @@ public class PlayerObject : CharacterObject
     [SerializeField] private bool isDashing = false; //�뽬 ��
     [SerializeField] private bool isSkill = false; // ��ų ��� ��
     [SerializeField] private bool isinvincibility = false; //���� ��
+    [SerializeField] private bool isgod = false; //���� ��
     [SerializeField] private bool isDeath = false; //�����
     [SerializeField] private bool isEvasion = false; //ȸ�ǻ���
     [SerializeField] private bool isCanParry = false; //�и�����
@@ -56,6 +58,11 @@ public class PlayerObject : CharacterObject
             }
         }
     }
+    public virtual bool Isgod
+    {
+        get => isgod;
+        set => isgod = value;
+    }  
     public virtual bool IsCombo
     {
         get => isCombo;
@@ -132,7 +139,7 @@ public class PlayerObject : CharacterObject
     [SerializeField] private Vector2 moveInput;
     #endregion
 
-    #region �浹 �Լ�
+    #region groundCheck
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
     protected virtual void OnDrawGizmos()
@@ -148,6 +155,9 @@ public class PlayerObject : CharacterObject
         playerObject = GetComponent<PlayerObject>();
         attackCollider1.SetActive(false);
         attackCollider2.SetActive(false);
+        skillCollider.SetActive(false);
+        parryCollider.SetActive(false);
+        GOD.SetActive(false);
     }
 
     private void Start()
@@ -166,7 +176,8 @@ public class PlayerObject : CharacterObject
 
     public override void TakeDamage(float damage)     
     { 
-        if (isinvincibility) return; //���� ���̸� ������ ����
+        if (IsInvincibility) return; //���� ���̸� ������ ����
+        if (Isgod) return; //���� ���̸� ������ ����
         IsInvincibility = true; //���� ���·� ����
         base.TakeDamage(damage);
 
