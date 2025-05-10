@@ -155,11 +155,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSoundClips:
-  - {fileID: 8300000, guid: b4b60c963f8a9fc469deed99532aca08, type: 3}
-  - {fileID: 8300000, guid: 3655c89f940fb9a428e0f27efe01fb4e, type: 3}
-  - {fileID: 8300000, guid: fa3c790daa55fbd499186f3da6deb351, type: 3}
+  - {fileID: 8300000, guid: 94733c5a963c41b44a7af9b566a427c6, type: 3}
+  - {fileID: 8300000, guid: ed7cac4f9a139fb4897c8a5655b7d128, type: 3}
+  - {fileID: 8300000, guid: 031ada0db6b09094faf73834a2f71d14, type: 3}
+  - {fileID: 8300000, guid: 80a2ff3028f790540b1cdac3b76b5dba, type: 3}
+  - {fileID: 8300000, guid: 3c0f355f3c0782747ac8c78c101f095e, type: 3}
+  - {fileID: 8300000, guid: baabaac8593aab845a45ec425973ad7d, type: 3}
   hitSoundVolume: 0.3
-  attackSoundClip: {fileID: 8300000, guid: aa3727a62bf62c54c8311dd80ce7f781, type: 3}
+  attackSoundClip: {fileID: 8300000, guid: 8fe2e822011fc5d4c804ccb850867d33, type: 3}
   attackSoundVolume: 0.3
 --- !u!82 &8325026117464828518
 AudioSource:

@@ -813,11 +813,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSoundClips:
-  - {fileID: 8300000, guid: 1bf7a49e26179d648b6001903e484eb3, type: 3}
-  - {fileID: 8300000, guid: 1bf95f16fe5db1240a8940af22886d0f, type: 3}
-  - {fileID: 8300000, guid: 5128b41fc7a34f243bf098d6762d4006, type: 3}
+  - {fileID: 8300000, guid: 9bf546e3a8e252c48a4c5297e477049b, type: 3}
+  - {fileID: 8300000, guid: 8bda4517f7150bc42b24fbc24721728e, type: 3}
+  - {fileID: 8300000, guid: 20e42e860aa72ca40bf25f7234f3e3ed, type: 3}
   hitSoundVolume: 0.3
-  attackSoundClip: {fileID: 8300000, guid: 26f4b7fc240b25a4f84cacf0a749c6c3, type: 3}
+  attackSoundClip: {fileID: 8300000, guid: 085e6ca8e1a357f4389a379b7a7b9ce8, type: 3}
   attackSoundVolume: 0.3
 --- !u!82 &3218321331750962623
 AudioSource:

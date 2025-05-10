@@ -1,41 +1,44 @@
 using UnityEngine;
 
 /// <summary>
-/// 적이 죽었을 때의 상태를 처리하는 클래스
+/// ?곸씠 二쎌뿀???뚯쓽 ?곹깭瑜?泥섎━?섎뒗 ?대옒??
 /// </summary>
 public class EnemyDeadState : EnemyState
 {
-    // 생성자: 상태머신, 애니메이션 bool 이름을 기반으로 Dead 상태를 초기화
+    // ?앹꽦?? ?곹깭癒몄떊, ?좊땲硫붿씠??bool ?대쫫??湲곕컲?쇰줈 Dead ?곹깭瑜?珥덇린??
     public EnemyDeadState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName)
         : base(enemyBase, stateMachine, animBoolName)
     {
     }
 
     /// <summary>
-    /// 적이 Dead 상태에 진입할 때 호출
+    /// ?곸씠 Dead ?곹깭??吏꾩엯?????몄텧
     /// </summary>
     public override void Enter()
     {
         base.Enter();
 
-        // 죽었으므로 적의 속도를 0으로 설정
+        // 二쎌뿀?쇰?濡??곸쓽 ?띾룄瑜?0?쇰줈 ?ㅼ젙
         enemyBase.SetZeroVelocity();
+
+        //GameManager.Instance.OnMonsterDead();
+        //GameManager.Instance.SetGold();
     }
 
     /// <summary>
-    /// 매 프레임마다 상태를 갱신함. 트리거가 호출되면 오브젝트를 제거함.
+    /// 留??꾨젅?꾨쭏???곹깭瑜?媛깆떊?? ?몃━嫄곌? ?몄텧?섎㈃ ?ㅻ툕?앺듃瑜??쒓굅??
     /// </summary>
     public override void Update()
     {
         base.Update();
 
-        // 적 오브젝트 제거 조건 확인
+        // ???ㅻ툕?앺듃 ?쒓굅 議곌굔 ?뺤씤
         if (triggerCalled)
             GameObject.Destroy(enemyBase.gameObject);
     }
 
     /// <summary>
-    /// 적이 Dead 상태에서 나갈 때 호출
+    /// ?곸씠 Dead ?곹깭?먯꽌 ?섍컝 ???몄텧
     /// </summary>
     public override void Exit()
     {

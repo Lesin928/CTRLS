@@ -1,23 +1,23 @@
 using UnityEngine;
 
 /// <summary>
-/// 방어력 버프를 부여하는 마법사 적 오브젝트 클래스입니다.
-/// EnemyObject를 상속하며, 지원 범위 내 아군에게 방어력 버프를 부여하는 Support 상태를 가집니다.
+/// 諛⑹뼱??踰꾪봽瑜?遺?ы븯??留덈쾿?????ㅻ툕?앺듃 ?대옒?ㅼ엯?덈떎.
+/// EnemyObject瑜??곸냽?섎ŉ, 吏??踰붿쐞 ???꾧뎔?먭쾶 諛⑹뼱??踰꾪봽瑜?遺?ы븯??Support ?곹깭瑜?媛吏묐땲??
 /// </summary>
 public class SpeedBuffWizardObject : EnemyObject
 {
-    [SerializeField] private float supportRange;    // 지원 범위
-    [SerializeField] private GameObject buffPrefab; // 버프 프리팹
+    [SerializeField] private float supportRange;    // 吏??踰붿쐞
+    [SerializeField] private GameObject buffPrefab; // 踰꾪봽 ?꾨━??
 
     #region State
-    public EnemySupportState supportState { get; private set; } // 지원 상태
+    public EnemySupportState supportState { get; private set; } // 吏???곹깭
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
 
-        // 지원 상태 인스턴스 초기화 (방어력 버프 타입)
+        // 吏???곹깭 ?몄뒪?댁뒪 珥덇린??(諛⑹뼱??踰꾪봽 ???
         supportState = new EnemySupportState(this, stateMachine, "Idle", supportRange, buffPrefab, BuffType.SPEED);
     }
 
@@ -25,7 +25,7 @@ public class SpeedBuffWizardObject : EnemyObject
     {
         base.Start();
 
-        // 시작 시 지원 상태로 초기화
+        // ?쒖옉 ??吏???곹깭濡?珥덇린??
         stateMachine.Initialize(supportState);
     }
 
@@ -42,7 +42,7 @@ public class SpeedBuffWizardObject : EnemyObject
         stateMachine.ChangeState(supportState);
     }
 
-    // 지원 범위 시각화
+    // 吏??踰붿쐞 ?쒓컖??
     protected override void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

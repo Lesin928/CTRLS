@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0dfbaae5ba8ee4fb933d8a09861e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ativateSoundClips: {fileID: 8300000, guid: 16bd8277a8d7bce409047f4f032b151e, type: 3}
+  ativateSoundClips: {fileID: 8300000, guid: 404fe9e99da706d44a4b3a66b1f23bcc, type: 3}
   ativateSoundVolume: 0.3
 --- !u!82 &2121639416571317122
 AudioSource:

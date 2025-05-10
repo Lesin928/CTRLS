@@ -217,9 +217,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSoundClips:
-  - {fileID: 8300000, guid: 4145319a7ae27964db0837f9b44dfe35, type: 3}
+  - {fileID: 8300000, guid: dc95b4d6af58f3949945c3cf0d06ff90, type: 3}
   hitSoundVolume: 0.3
-  attackSoundClip: {fileID: 8300000, guid: f4e33c277050427498383533eb92d74f, type: 3}
+  attackSoundClip: {fileID: 8300000, guid: c946953c16c3a084fbe78f091ce63862, type: 3}
   attackSoundVolume: 0.3
 --- !u!82 &4642398479538701083
 AudioSource:
