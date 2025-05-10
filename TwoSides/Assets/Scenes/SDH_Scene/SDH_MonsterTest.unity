@@ -36660,13 +36660,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6430326238322964213, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
-      propertyPath: whatIsWall.m_Bits
-      value: 3840
-      objectReference: {fileID: 0}
-    - target: {fileID: 6430326238322964213, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
-      propertyPath: whatIsGround.m_Bits
-      value: 3840
+    - target: {fileID: 3564881296303950274, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7951202712812836870, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
       propertyPath: m_AnchorMax.x
@@ -37314,13 +37310,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7912810248245000136, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
-      propertyPath: whatIsWall.m_Bits
-      value: 3840
-      objectReference: {fileID: 0}
-    - target: {fileID: 7912810248245000136, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
-      propertyPath: whatIsGround.m_Bits
-      value: 3840
+    - target: {fileID: 2407603373366774029, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8636950096466825703, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
       propertyPath: m_Name
@@ -37544,14 +37536,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 77745494118676932, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
-      propertyPath: whatIsWall.m_Bits
-      value: 3840
-      objectReference: {fileID: 0}
-    - target: {fileID: 77745494118676932, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
-      propertyPath: whatIsGround.m_Bits
-      value: 3840
-      objectReference: {fileID: 0}
     - target: {fileID: 2148754198803713794, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.52
@@ -37599,6 +37583,10 @@ PrefabInstance:
     - target: {fileID: 3826276085330295853, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6414322412413722042, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8009925599877200457, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
       propertyPath: m_Name
