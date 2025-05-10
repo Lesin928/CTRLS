@@ -21,8 +21,8 @@ public class EnemyDeadState : EnemyState
         // 二쎌뿀?쇰?濡??곸쓽 ?띾룄瑜?0?쇰줈 ?ㅼ젙
         enemyBase.SetZeroVelocity();
 
-        //GameManager.Instance.OnMonsterDead();
-        //GameManager.Instance.SetGold();
+        GameManager.Instance.OnMonsterDead();
+        GameManager.Instance.SetGold(100);
     }
 
     /// <summary>
