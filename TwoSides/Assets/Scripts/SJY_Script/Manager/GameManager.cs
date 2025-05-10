@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
 
         GameObject hitEffect = Instantiate(hitEffectUIPrefab);
         hitEffectImage = hitEffect.GetComponentInChildren<Image>();
-        hitEffectImage.enabled = false;
     }
 
     public static void Init()
@@ -199,6 +198,7 @@ public class GameManager : MonoBehaviour
         if (currentStageData == null) return;
 
         deadMonsterCount++;
+        Debug.Log($"Dead Monster Count: {deadMonsterCount}");
         if (deadMonsterCount >= currentStageData.monsterCount)
         {
             OnStageClear();
@@ -270,11 +270,20 @@ public class GameManager : MonoBehaviour
     IEnumerator HitEffectCoroutine()
     {
         Debug.Log("HitEffectCoroutine Start");
-        hitEffectImage.enabled = true;
 
-        yield return new WaitForSeconds(0.2f);
+        Color color = hitEffectImage.color;
+        color.a = 0.5f;
 
-        hitEffectImage.enabled = false;
+        float duration = 0.3f;
+        float timer = 0.0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(0.5f, 0f, timer / duration);
+            hitEffectImage.color = color;
+            yield return null;
+        }
     }
 
     public void SetHealth(float value)
