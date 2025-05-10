@@ -18,18 +18,24 @@ public class PuzzleButton : MonoBehaviour
     }
     public void Onclick()
     {
-        sceneName = "Puzzle";
+        if (Map.Instance.puzzleNum >= 3)
+            Map.Instance.puzzleNum = 0;
 
-        int rand = Random.Range(0, 3);
-        while (isUsed[rand])
-        {
-            rand = Random.Range(0, 3);
-        }
-        isUsed[rand] = true;
+        sceneName = "Puzzle" + Map.Instance.puzzleNum;
 
-        rand = 0;
+        if (Map.Instance.puzzleNum < 3)
+            Map.Instance.puzzleNum++;
 
-        sceneName += rand.ToString();
+        //int rand = Random.Range(0, 3);
+        //while (isUsed[rand])
+        //{
+        //    rand = Random.Range(0, 3);
+        //}
+        //isUsed[rand] = true;
+
+        //rand = 0;
+
+        //sceneName += rand.ToString();
 
         GameManager.Instance.isClear = false;
         Mapbutton.Instance.activeButton = false;

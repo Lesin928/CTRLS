@@ -23,6 +23,7 @@ public class StartGameButton : MonoBehaviour
         {
             Map.Instance.ResetMap();
             Map.Instance.battleNum = 0;
+            Map.Instance.puzzleNum = 0;
         }
     }
 }
