@@ -1,42 +1,42 @@
 using UnityEngine;
 
 /// <summary>
-/// ì ì˜ ì£½ìŒ ìƒíƒœ í´ë˜ìŠ¤
+/// ÀûÀÇ Á×À½ »óÅÂ Å¬·¡½º
 /// </summary>
 public class EnemyDeadState : EnemyState
 {
-    // EnemyDeadState ìƒì„±ì
-    public EnemyDeadState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName)
+    // EnemyDeadState »ı¼ºÀÚ
+    public EnemyDeadState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
         : base(enemyBase, stateMachine, animBoolName)
     {
     }
 
     /// <summary>
-    /// ìƒíƒœ ì§„ì… ì‹œ ì‹¤í–‰
+    /// »óÅÂ ÁøÀÔ ½Ã ½ÇÇà
     /// </summary>
     public override void Enter()
     {
         base.Enter();
 
-        // ì •ì§€ ìƒíƒœë¡œ ì „í™˜
+        // Á¤Áö »óÅÂ·Î ÀüÈ¯
         enemyBase.SetZeroVelocity();
     }
 
     /// <summary>
-    /// ë§¤ í”„ë ˆì„ ëŒ€ê¸° ìƒíƒœ ë¡œì§ ì‹¤í–‰
+    /// ¸Å ÇÁ·¹ÀÓ ´ë±â »óÅÂ ·ÎÁ÷ ½ÇÇà
     /// </summary>
     public override void Update()
     {
         base.Update();
 
-        GameManager.Instance.OnMonsterDead();
+        //GameManager.Instance.OnMonsterDead();
 
         if (triggerCalled)
             GameObject.Destroy(enemyBase.gameObject);
     }
 
     /// <summary>
-    /// ìƒíƒœ ì¢…ë£Œ ì‹œ ì‹¤í–‰
+    /// »óÅÂ Á¾·á ½Ã ½ÇÇà
     /// </summary>
     public override void Exit()
     {
