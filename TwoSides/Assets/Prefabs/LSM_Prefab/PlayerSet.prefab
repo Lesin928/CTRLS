@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7530009681345463230}
   - component: {fileID: 3788754449605474309}
   - component: {fileID: 3656161930879445693}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DaggerAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 4392765770099878004}
   - component: {fileID: 8962718293741008209}
   - component: {fileID: 3873474871363209691}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Evasion Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2732940133844570629}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: GroundChcker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 1289852854071828245}
   - component: {fileID: 1164848017808768079}
   - component: {fileID: 2042898148861370531}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: ParryCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1320,7 +1320,7 @@ Transform:
   m_GameObject: {fileID: 6748240366553006592}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000007818301, y: -0.000000029017299, z: -2.2686597e-16, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.34861982, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
