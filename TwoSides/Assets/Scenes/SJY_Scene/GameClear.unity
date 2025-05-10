@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiImage: {fileID: 2086563450}
-  targetPosition: {x: 0, y: 2200}
+  targetPosition: {x: 0, y: 2500}
   speed: 200
   fadeCanvasPrefab: {fileID: 1193452178}
 --- !u!114 &2086563452
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 2094167048}
   - component: {fileID: 2094167047}
   - component: {fileID: 2094167046}
-  - component: {fileID: 2094167045}
+  - component: {fileID: 2094167049}
   m_Layer: 5
   m_Name: Button_Home
   m_TagString: Untagged
@@ -1105,20 +1105,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -117}
   m_SizeDelta: {x: 600, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2094167045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094167043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5357e292959a7464ba4dcc77609df818, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  playerPrefab: {fileID: 0}
 --- !u!114 &2094167046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,8 +1149,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094167045}
-        m_TargetAssemblyTypeName: TitleButton, Assembly-CSharp
+      - m_Target: {fileID: 2094167049}
+        m_TargetAssemblyTypeName: EndingToTile, Assembly-CSharp
         m_MethodName: StartTitle
         m_Mode: 1
         m_Arguments:
@@ -1213,6 +1199,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094167043}
   m_CullTransparentMesh: 1
+--- !u!114 &2094167049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094167043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8d512bcdd8e7649b7abd0d70e9fd94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 4293148247142581802, guid: 425d94ae80206b04bb433ac70f99f7be, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

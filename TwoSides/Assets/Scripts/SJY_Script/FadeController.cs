@@ -36,7 +36,8 @@ public class FadeController : MonoBehaviour
             }
         }
 
-
         Debug.Log("FadeOut Complete");
+
+        gameObject.SetActive(false);
     }
 }
