@@ -1,6 +1,8 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
@@ -41,7 +43,14 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            id = EventScriptManager.Instance.GetScriptId();
+            //id = EventScriptManager.Instance.GetScriptId();
+            string sceneName = SceneManager.GetActiveScene().name;
+            sceneName.Substring(8);
+
+            string number = new string(sceneName.Where(char.IsDigit).ToArray());
+            Debug.Log("씬번호 : " + number);
+            id = int.Parse(number);
+            Debug.Log("이벤트 아이디 : " + id);
             isEventTalk = true;
         }
     }
