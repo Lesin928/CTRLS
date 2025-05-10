@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreditText : MonoBehaviour
 {
@@ -31,5 +32,7 @@ public class CreditText : MonoBehaviour
         FadeController fade = fadeCanvasPrefab.GetComponent<FadeController>();
 
         yield return StartCoroutine(fade.FadeOut());
+
+        yield return new WaitForSeconds(1.5f);
     }
 }

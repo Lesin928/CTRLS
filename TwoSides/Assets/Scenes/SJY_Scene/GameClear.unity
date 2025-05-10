@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiImage: {fileID: 2086563450}
-  targetPosition: {x: 0, y: 2200}
+  targetPosition: {x: 0, y: 2500}
   speed: 200
   fadeCanvasPrefab: {fileID: 1193452178}
 --- !u!114 &2086563452
