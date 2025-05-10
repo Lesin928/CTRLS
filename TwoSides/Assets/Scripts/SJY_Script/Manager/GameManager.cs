@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using JetBrains.Annotations;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject fadeCanvasPrefab;
 
-    private GameObject hitEffectUI;
+    public GameObject hitEffectUIPrefab;
     private Image hitEffectImage;
 
     #region PlayerStat
@@ -60,6 +61,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentStage = 1;
+
+        GameObject hitEffect = Instantiate(hitEffectUIPrefab);
+        hitEffectImage = hitEffect.GetComponentInChildren<Image>();
     }
 
     public static void Init()
@@ -107,10 +111,6 @@ public class GameManager : MonoBehaviour
 
             SetUpPlayerStats();
         }
-
-        hitEffectUI = GameObject.Find("HitEffect");
-        if (hitEffectUI != null)
-            hitEffectImage = hitEffectUI.GetComponentInChildren<Image>();
 
         var playerObj = go.GetComponent<PlayerDontDestroyOnLoad>();
         if (playerObj != null)
@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour
         if (currentStageData == null) return;
 
         deadMonsterCount++;
+        Debug.Log($"Dead Monster Count: {deadMonsterCount}");
         if (deadMonsterCount >= currentStageData.monsterCount)
         {
             OnStageClear();
@@ -210,8 +211,6 @@ public class GameManager : MonoBehaviour
         HUDManager.Instance.HideHUD();
         HideMapController.shouldShowHideMap = false;
 
-        //Instantiate(fadeCanvasPrefab);
-
         StartCoroutine(GameOverRoutine());
     }
 
@@ -222,6 +221,7 @@ public class GameManager : MonoBehaviour
         GameObject fadeObj = Instantiate(fadeCanvasPrefab);
         FadeController fade = fadeObj.GetComponent<FadeController>();
 
+        AudioManager.Instance.ChangeBGM("OverBGM");
         yield return StartCoroutine(fade.FadeOut());
 
         AsyncOperation op = SceneManager.LoadSceneAsync("GameOver");
@@ -238,6 +238,8 @@ public class GameManager : MonoBehaviour
     IEnumerator GameClearRoutine()
     {
         yield return new WaitForSeconds(1f);
+
+        AudioManager.Instance.ChangeBGM("ClearBGM");
 
         AsyncOperation op = SceneManager.LoadSceneAsync("GameClear");
         yield return new WaitUntil(() => op.isDone);
@@ -260,10 +262,6 @@ public class GameManager : MonoBehaviour
 
         HUDManager.Instance.SetHealth(playerHealth);
 
-        hitEffectUI = GameObject.Find("HitEffect");
-        if (hitEffectUI != null)
-            hitEffectImage = hitEffectUI.GetComponentInChildren<Image>();
-
         StartCoroutine(HitEffectCoroutine());
 
         if (playerHealth <= 0)
@@ -275,11 +273,20 @@ public class GameManager : MonoBehaviour
     IEnumerator HitEffectCoroutine()
     {
         Debug.Log("HitEffectCoroutine Start");
-        hitEffectUI.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
+        Color color = hitEffectImage.color;
+        color.a = 0.5f;
 
-        hitEffectUI.SetActive(false);
+        float duration = 0.3f;
+        float timer = 0.0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(0.5f, 0f, timer / duration);
+            hitEffectImage.color = color;
+            yield return null;
+        }
     }
 
     public void SetHealth(float value)
