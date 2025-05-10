@@ -1,123 +1,123 @@
 using UnityEngine;
 
 /// <summary>
-/// ???대옒?ㅻ뒗 ??罹먮┃?곗쓽 ?대룞, 怨듦꺽, 異⑸룎 泥섎━, ?곹깭 愿由??깆쓣 泥섎━?⑸땲??
-/// ?곸쓽 ?곹깭???곹깭 癒몄떊?쇰줈 愿由щ릺硫? 湲곕낯?곸씤 ?대룞, 異붿쟻, 怨듦꺽 ?깆쓽 ?숈옉???ы븿?⑸땲??
+/// ???????삳뮉 ??筌?Ŧ??怨쀬벥 ??猷? ?⑤벀爰? ?겸뫖猷?筌ｌ꼶?? ?怨밴묶 ?온???源놁뱽 筌ｌ꼶???몃빍??
+/// ?怨몄벥 ?怨밴묶???怨밴묶 ?믩챷???곗쨮 ?온?귐됰┷筌? 疫꿸퀡??怨몄뵥 ??猷? ?곕뗄?? ?⑤벀爰??源놁벥 ??덉삂????釉??몃빍??
 /// </summary>
 public class EnemyObject : CharacterObject
 {
     #region [Move Info]
     [Header("Move Info")]
-    public float defaultMoveSpeed; // 湲곕낯 ?대룞 ?띾룄
-    public float chaseSpeed;       // 異붿쟻 ?대룞 ?띾룄
+    public float defaultMoveSpeed; // 疫꿸퀡????猷???얜즲
+    public float chaseSpeed;       // ?곕뗄????猷???얜즲
     #endregion
 
     #region [Attack Info]
     [Header("Attack Info")]
-    public float attackCooldown;                     // 怨듦꺽 荑⑦???
-    [HideInInspector] public float lastTimeAttacked; // 留덉?留됱쑝濡?怨듦꺽???쒓컙
+    public float attackCooldown;                     // ?⑤벀爰??묅뫂???
+    [HideInInspector] public float lastTimeAttacked; // 筌띾뜆?筌띾맩?앮에??⑤벀爰????볦퍢
     #endregion
 
     #region [Collider Info]
     [Header("Collider Info")]
-    [SerializeField] protected Transform groundCheck;     // ?낆쓣 泥댄겕?섎뒗 ?꾩튂
-    [SerializeField] protected float groundCheckDistance; // ??泥댄겕 嫄곕━
+    [SerializeField] protected Transform groundCheck;     // ??놁뱽 筌ｋ똾寃??롫뮉 ?袁⑺뒄
+    [SerializeField] protected float groundCheckDistance; // ??筌ｋ똾寃?椰꾧퀡??
     [Space]
-    [SerializeField] protected Transform wallCheck;       // 踰쎌쓣 泥댄겕?섎뒗 ?꾩튂
-    [SerializeField] protected float wallCheckDistance;   // 踰?泥댄겕 嫄곕━
+    [SerializeField] protected Transform wallCheck;       // 甕곗럩??筌ｋ똾寃??롫뮉 ?袁⑺뒄
+    [SerializeField] protected float wallCheckDistance;   // 甕?筌ｋ똾寃?椰꾧퀡??
     [Space]
-    [SerializeField] protected Transform playerCheck;     // ?뚮젅?댁뼱瑜?泥댄겕?섎뒗 ?꾩튂
-    [SerializeField] protected float playerCheckRadius;   // ?뚮젅?댁뼱 泥댄겕 諛섏?由?
+    [SerializeField] protected Transform playerCheck;     // ???쟿??곷선??筌ｋ똾寃??롫뮉 ?袁⑺뒄
+    [SerializeField] protected float playerCheckRadius;   // ???쟿??곷선 筌ｋ똾寃?獄쏆꼷???
     [Space]
-    public Transform attackCheck;                         // 怨듦꺽 踰붿쐞 泥댄겕 ?꾩튂
-    public float attackCheckRadius;                       // 怨듦꺽 踰붿쐞 泥댄겕 諛섏?由?
+    public Transform attackCheck;                         // ?⑤벀爰?甕곕뗄??筌ｋ똾寃??袁⑺뒄
+    public float attackCheckRadius;                       // ?⑤벀爰?甕곕뗄??筌ｋ똾寃?獄쏆꼷???
     [Space]
-    [SerializeField] protected LayerMask whatIsGround;    // ???덉씠??留덉뒪??
-    [SerializeField] protected LayerMask whatIsWall;      // 踰??덉씠??留덉뒪??
-    [SerializeField] protected LayerMask whatIsPlayer;    // ?뚮젅?댁뼱 ?덉씠??留덉뒪??
-    public float colliderWidth { get; private set; }      // 肄쒕씪?대뜑???덈퉬
+    [SerializeField] protected LayerMask whatIsGround;    // ????됱뵠??筌띾뜆???
+    [SerializeField] protected LayerMask whatIsWall;      // 甕???됱뵠??筌띾뜆???
+    [SerializeField] protected LayerMask whatIsPlayer;    // ???쟿??곷선 ??됱뵠??筌띾뜆???
+    public float colliderWidth { get; private set; }      // ?꾩뮆????????덊돩
     #endregion
 
     #region [Flash Effect]
     [Header("Flash Effect")]
-    [SerializeField] private EnemyFlashEffect flashEffect; // ?곸쓽 ?뚮옒???댄럺??
+    [SerializeField] private EnemyFlashEffect flashEffect; // ?怨몄벥 ???삋????꾨읃??
     #endregion
 
     #region [Components]
-    public Animator anim { get; private set; }  // ??罹먮┃?곗쓽 ?좊땲硫붿씠??
-    public Rigidbody2D rb { get; private set; } // ??罹먮┃?곗쓽 Rigidbody2D
-    public Collider2D col { get; private set; } // ??罹먮┃?곗쓽 Collider2D
+    public Animator anim { get; private set; }  // ??筌?Ŧ??怨쀬벥 ?醫딅빍筌롫뗄???
+    public Rigidbody2D rb { get; private set; } // ??筌?Ŧ??怨쀬벥 Rigidbody2D
+    public Collider2D col { get; private set; } // ??筌?Ŧ??怨쀬벥 Collider2D
     #endregion
 
     #region [StateMachine]
-    public EnemyStateMachine stateMachine { get; private set; } // ?곸쓽 ?곹깭 癒몄떊
+    public EnemyStateMachine stateMachine { get; private set; } // ?怨몄벥 ?怨밴묶 ?믩챷??
     #endregion
 
     #region [State]
-    public EnemyHitState hitState { get; private set; }   // ?곸씠 留욎? ?곹깭
-    public EnemyDeadState deadState { get; private set; } // ?곸씠 二쎌? ?곹깭
+    public EnemyHitState hitState { get; private set; }   // ?怨몄뵠 筌띿쉸? ?怨밴묶
+    public EnemyDeadState deadState { get; private set; } // ?怨몄뵠 雅뚯럩? ?怨밴묶
     #endregion
 
     #region [Facing]
-    public int facingDir { get; private set; } = 1; // ?곸쓽 諛⑺뼢 (1: ?ㅻⅨ履? -1: ?쇱そ)
-    protected bool facingRight = true;              // ?곸씠 ?ㅻⅨ履쎌쓣 蹂닿퀬 ?덈뒗吏 ?щ?
+    public int facingDir { get; private set; } = 1; // ?怨몄벥 獄쎻뫚堉?(1: ??삘뀲筌? -1: ??긱걹)
+    protected bool facingRight = true;              // ?怨몄뵠 ??삘뀲筌잛럩??癰귣떯????덈뮉筌왖 ???
     #endregion
 
     #region [Audio]
-    private EnemySoundTrigger soundTrigger; // ?곸쓽 ?뚮━ ?몃━嫄?
+    private EnemySoundTrigger soundTrigger; // ?怨몄벥 ???봺 ?紐꺿봺椰?
     #endregion
 
 
-    // ?곹깭 癒몄떊 珥덇린??諛??곹깭 ?ㅼ젙
+    // ?怨밴묶 ?믩챷???λ뜃由??獄??怨밴묶 ??쇱젟
     protected virtual void Awake()
     {
         stateMachine = new EnemyStateMachine();
 
-        // ?곸쓽 Hit ?곹깭? Dead ?곹깭瑜?珥덇린??
+        // ?怨몄벥 Hit ?怨밴묶?? Dead ?怨밴묶???λ뜃由??
         hitState = new EnemyHitState(this, stateMachine, "Hit");
         deadState = new EnemyDeadState(this, stateMachine, "Dead");
     }
 
-    // ?꾩슂??而댄룷?뚰듃??珥덇린??
+    // ?袁⑹뒄???뚮똾猷??곕뱜???λ뜃由??
     protected virtual void Start()
     {
-        anim = GetComponentInChildren<Animator>(); // ?좊땲硫붿씠??而댄룷?뚰듃 珥덇린??
-        rb = GetComponent<Rigidbody2D>(); // 由ъ??쒕컮??而댄룷?뚰듃 珥덇린??
-        flashEffect = GetComponentInChildren<EnemyFlashEffect>(); // ?뚮옒???④낵 而댄룷?뚰듃 珥덇린??
-        col = GetComponent<Collider2D>(); // 肄쒕씪?대뜑 而댄룷?뚰듃 珥덇린??
-        soundTrigger = GetComponentInChildren<EnemySoundTrigger>(); // ?뚮━ ?몃━嫄?而댄룷?뚰듃 珥덇린??
-        colliderWidth = col.bounds.size.x; // 肄쒕씪?대뜑??媛濡?湲몄씠 ???
+        anim = GetComponentInChildren<Animator>(); // ?醫딅빍筌롫뗄????뚮똾猷??곕뱜 ?λ뜃由??
+        rb = GetComponent<Rigidbody2D>(); // ?귐???뺤뺍???뚮똾猷??곕뱜 ?λ뜃由??
+        flashEffect = GetComponentInChildren<EnemyFlashEffect>(); // ???삋????ｋ궢 ?뚮똾猷??곕뱜 ?λ뜃由??
+        col = GetComponent<Collider2D>(); // ?꾩뮆??????뚮똾猷??곕뱜 ?λ뜃由??
+        soundTrigger = GetComponentInChildren<EnemySoundTrigger>(); // ???봺 ?紐꺿봺椰??뚮똾猷??곕뱜 ?λ뜃由??
+        colliderWidth = col.bounds.size.x; // ?꾩뮆??????揶쎛嚥?疫뀀챷??????
     }
 
-    // ?곹깭 癒몄떊 ?낅뜲?댄듃
+    // ?怨밴묶 ?믩챷????낅쑓??꾨뱜
     protected virtual void Update()
     {
-        stateMachine.currentState?.Update(); // ?꾩옱 ?곹깭???낅뜲?댄듃 ?몄텧
+        stateMachine.currentState?.Update(); // ?袁⑹삺 ?怨밴묶????낅쑓??꾨뱜 ?紐꾪뀱
     }
 
     /// <summary>
-    /// ?뚮젅?댁뼱 ?먯? ?곹깭濡?吏꾩엯?????몄텧?섎뒗 ?⑥닔
+    /// ???쟿??곷선 ?癒? ?怨밴묶嚥?筌욊쑴??????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
     public virtual void EnterPlayerDetection()
     {
     }
 
     /// <summary>
-    /// ?뚮젅?댁뼱 ?먯? ?곹깭?먯꽌 踰쀬뼱?????몄텧?섎뒗 ?⑥닔
+    /// ???쟿??곷선 ?癒? ?怨밴묶?癒?퐣 甕곗щ선?????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
     public virtual void ExitPlayerDetection()
     {
     }
 
     /// <summary>
-    /// 怨듦꺽 ?곹깭濡??꾪솚?섎뒗 ?⑥닔
+    /// ?⑤벀爰??怨밴묶嚥??袁れ넎??롫뮉 ??λ땾
     /// </summary>
     public virtual void CallAttackState()
     {
     }
 
     /// <summary>
-    /// ?湲??곹깭濡??꾪솚?섎뒗 ?⑥닔
+    /// ??疫??怨밴묶嚥??袁れ넎??롫뮉 ??λ땾
     /// </summary>
     public virtual void CallIdleState()
     {
@@ -129,7 +129,7 @@ public class EnemyObject : CharacterObject
 
     #region [Animation Event]
     /// <summary>
-    /// ?좊땲硫붿씠?섏씠 ?앸궗?????몄텧?섎뒗 ?⑥닔
+    /// ?醫딅빍筌롫뗄???륁뵠 ??멸텢?????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
     public virtual void AnimationFinishTrigger()
         => stateMachine.currentState?.AnimationFinishTrigger();
@@ -137,37 +137,37 @@ public class EnemyObject : CharacterObject
 
     #region [Detection]
     /// <summary>
-    /// 諛붾떏??媛먯??섎뒗 ?⑥닔
+    /// 獄쏅뗀???揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>諛붾떏??媛먯??섎㈃ true, ?꾨땲硫?false</returns>
+    /// <returns>獄쏅뗀???揶쏅Ŋ???롢늺 true, ?袁⑤빍筌?false</returns>
     public virtual bool IsGroundDetected()
         => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround).collider != null;
 
     /// <summary>
-    /// 踰쎌쓣 媛먯??섎뒗 ?⑥닔
+    /// 甕곗럩??揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>踰쎌씠 媛먯??섎㈃ true, ?꾨땲硫?false</returns>
+    /// <returns>甕곗럩??揶쏅Ŋ???롢늺 true, ?袁⑤빍筌?false</returns>
     public virtual bool IsWallDetected()
         => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsWall).collider != null;
 
     /// <summary>
-    /// ?뚮젅?댁뼱瑜?媛먯??섎뒗 ?⑥닔
+    /// ???쟿??곷선??揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>?뚮젅?댁뼱媛 媛먯??섎㈃ ?대떦 Collider2D瑜?諛섑솚, ?꾨땲硫?null</returns>
+    /// <returns>???쟿??곷선揶쎛 揶쏅Ŋ???롢늺 ????Collider2D??獄쏆꼹?? ?袁⑤빍筌?null</returns>
     public virtual Collider2D IsPlayerDetected()
         => Physics2D.OverlapCircle(playerCheck.position, playerCheckRadius, whatIsPlayer);
 
     /// <summary>
-    /// 怨듦꺽??媛?ν븳 踰붿쐞???뚮젅?댁뼱媛 ?덈뒗吏 媛먯??섎뒗 ?⑥닔
+    /// ?⑤벀爰??揶쎛?館釉?甕곕뗄??????쟿??곷선揶쎛 ??덈뮉筌왖 揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>?뚮젅?댁뼱媛 媛먯??섎㈃ ?대떦 Collider2D瑜?諛섑솚, ?꾨땲硫?null</returns>
+    /// <returns>???쟿??곷선揶쎛 揶쏅Ŋ???롢늺 ????Collider2D??獄쏆꼹?? ?袁⑤빍筌?null</returns>
     public virtual Collider2D IsAttackDetectable()
         => Physics2D.OverlapCircle(attackCheck.position, attackCheckRadius, whatIsPlayer);
 
     /// <summary>
-    /// 踰쎄낵 ?뚮젅?댁뼱 ?ъ씠???μ븷臾쇱씠 ?덈뒗吏 ?뺤씤?섎뒗 ?⑥닔
+    /// 甕곗럡?????쟿??곷선 ??????關釉룩눧?깆뵠 ??덈뮉筌왖 ?類ㅼ뵥??롫뮉 ??λ땾
     /// </summary>
-    /// <returns>踰??ъ씠???뚮젅?댁뼱媛 ?덉쑝硫?true, ?꾨땲硫?false</returns>
+    /// <returns>甕?????????쟿??곷선揶쎛 ??됱몵筌?true, ?袁⑤빍筌?false</returns>
     public bool IsWallBetweenPlayer()
     {
         Vector2 start = transform.position;
@@ -181,16 +181,16 @@ public class EnemyObject : CharacterObject
 
     #region [Flip]
     /// <summary>
-    /// ?곸쓽 諛⑺뼢??諛섏쟾?쒗궎???⑥닔
+    /// ?怨몄벥 獄쎻뫚堉??獄쏆꼷???쀪텕????λ땾
     /// </summary>
     public void Flip()
     {
         facingDir *= -1;
         facingRight = !facingRight;
-        transform.Rotate(0, 180, 0); // 媛앹껜瑜?Y異뺤쓣 湲곗??쇰줈 180???뚯쟾
+        transform.Rotate(0, 180, 0); // 揶쏆빘猿쒐몴?Y?곕벡??疫꿸퀣???곗쨮 180?????읈
     }
 
-    // ?낅젰 媛믪뿉 ?곕씪 ?곸쓽 諛⑺뼢???꾪솚?섎뒗 ?⑥닔
+    // ??낆젾 揶쏅?肉??怨뺤뵬 ?怨몄벥 獄쎻뫚堉???袁れ넎??롫뮉 ??λ땾
     private void FlipController(float xInput)
     {
         if (xInput > 0 && !facingRight) Flip();
@@ -200,7 +200,7 @@ public class EnemyObject : CharacterObject
 
     #region [Velocity Control]
     /// <summary>
-    /// Rigidbody???띾룄瑜?0?쇰줈 ?ㅼ젙?섎뒗 ?⑥닔
+    /// Rigidbody????얜즲??0??곗쨮 ??쇱젟??롫뮉 ??λ땾
     /// </summary>
     public void SetZeroVelocity()
     {
@@ -208,19 +208,19 @@ public class EnemyObject : CharacterObject
     }
 
     /// <summary>
-    /// Rigidbody???띾룄瑜??ㅼ젙?섎뒗 ?⑥닔
+    /// Rigidbody????얜즲????쇱젟??롫뮉 ??λ땾
     /// </summary>
-    /// <param name="xVelocity">X異??띾룄</param>
-    /// <param name="yVelocity">Y異??띾룄</param>
+    /// <param name="xVelocity">X????얜즲</param>
+    /// <param name="yVelocity">Y????얜즲</param>
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
-        FlipController(xVelocity); // X異??낅젰 媛믪뿉 ?곕씪 ?곸쓽 諛⑺뼢???꾪솚
+        FlipController(xVelocity); // X????낆젾 揶쏅?肉??怨뺤뵬 ?怨몄벥 獄쎻뫚堉???袁れ넎
     }
     #endregion
 
     #region [Gizmos]
-    // Gizmos濡?媛곸쥌 媛먯? 踰붿쐞? 寃쎈줈瑜??쒓컖?곸쑝濡??쒖떆
+    // Gizmos嚥?揶쏄낯伊?揶쏅Ŋ? 甕곕뗄??? 野껋럥以덄몴???볦퍟?怨몄몵嚥???뽯뻻
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -242,32 +242,34 @@ public class EnemyObject : CharacterObject
     #endregion
 
     /// <summary>
-    /// ?곸씠 ?쇳빐瑜?諛쏆쓣 ???몄텧?섎뒗 ?⑥닔
+    /// ?怨몄뵠 ??노퉸??獄쏆룇?????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
-    /// <param name="_damage">?낅젰???쇳빐 媛?/param>
+    /// <param name="_damage">??낆젾????노퉸 揶?/param>
     public override void TakeDamage(float _damage)
     {
-        // ?쇳빐 媛믪뿉 ?곕씪 ?꾩옱 泥대젰 媛먯냼
+        if (CurrentHp <= 0) return;
+
+        // ??노퉸 揶쏅?肉??怨뺤뵬 ?袁⑹삺 筌ｋ???揶쏅Ŋ??
         CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
 
         if (soundTrigger != null)
-            soundTrigger.PlayHitSound(); // 留욎쓣 ???뚮━ ?ъ깮
+            soundTrigger.PlayHitSound(); // 筌띿쉸???????봺 ??源?
 
-        flashEffect.Flash(); // ?뚮옒???④낵 ?ㅽ뻾
+        flashEffect.Flash(); // ???삋????ｋ궢 ??쎈뻬
 
-        if (CurrentHp <= 0)  // 泥대젰??0 ?댄븯濡??⑥뼱吏硫?二쎌쓬 ?곹깭濡??꾪솚
+        if (CurrentHp <= 0)  // 筌ｋ????0 ??꾨릭嚥???λ선筌왖筌?雅뚯럩???怨밴묶嚥??袁れ넎
         {
             CurrentHp = 0;
             stateMachine.ChangeState(deadState);
         }
-        else // 泥대젰???⑥븘 ?덉쑝硫??덊듃 ?곹깭濡??꾪솚
+        else // 筌ｋ??????λ툡 ??됱몵筌???딅뱜 ?怨밴묶嚥??袁れ넎
         {
             if (!stateMachine.isAttacking)
                 stateMachine.ChangeState(hitState);
         }
     }
 
-    // ?곸씠 二쎌뿀?????몄텧?섎뒗 ?⑥닔 (EnemyObject?먯꽌???ъ슜 X)
+    // ?怨몄뵠 雅뚯럩肉?????紐꾪뀱??롫뮉 ??λ땾 (EnemyObject?癒?퐣??????X)
     protected override void Die()
     {
     }
