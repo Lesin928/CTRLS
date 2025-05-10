@@ -266,14 +266,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSoundClips:
-  - {fileID: 8300000, guid: 5e54b0f394e662440938432a05c580f8, type: 3}
-  - {fileID: 8300000, guid: 4258f993d5f8dc14999779d56bc161ec, type: 3}
-  - {fileID: 8300000, guid: 6cb9d7e8e55d7dd4090a41f0dbdf2d05, type: 3}
-  - {fileID: 8300000, guid: 8e95b854c1004fa49b1edea0b5f3cf52, type: 3}
-  - {fileID: 8300000, guid: 7b20727d55ea95e40947b3410a7a2f8a, type: 3}
-  - {fileID: 8300000, guid: a14d387b7ce03f2479246f66f81bcb87, type: 3}
+  - {fileID: 8300000, guid: 94733c5a963c41b44a7af9b566a427c6, type: 3}
+  - {fileID: 8300000, guid: ed7cac4f9a139fb4897c8a5655b7d128, type: 3}
+  - {fileID: 8300000, guid: 031ada0db6b09094faf73834a2f71d14, type: 3}
+  - {fileID: 8300000, guid: 80a2ff3028f790540b1cdac3b76b5dba, type: 3}
+  - {fileID: 8300000, guid: 67fcc9b7a15698a47ad5b8567e00ab49, type: 3}
+  - {fileID: 8300000, guid: 9bf546e3a8e252c48a4c5297e477049b, type: 3}
   hitSoundVolume: 0.3
-  attackSoundClip: {fileID: 8300000, guid: 4145319a7ae27964db0837f9b44dfe35, type: 3}
+  attackSoundClip: {fileID: 8300000, guid: dc95b4d6af58f3949945c3cf0d06ff90, type: 3}
   attackSoundVolume: 0
 --- !u!114 &5850664469140416091
 MonoBehaviour:
@@ -287,25 +287,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e16de804c3e6241bd3fac382f8da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicSoundClip: {fileID: 8300000, guid: d5d28e0cf62c30640b9927bef243bac5, type: 3}
+  magicSoundClip: {fileID: 8300000, guid: e1587627b15e844448758d0254d84242, type: 3}
   magicSoundVolume: 0.3
-  attack1SoundClip: {fileID: 8300000, guid: 3fda263b79619034987cd379434022b3, type: 3}
+  attack1SoundClip: {fileID: 8300000, guid: 884eeec7f9cc67643a51059bbdfd7c8e, type: 3}
   attack1SoundVolume: 0.3
-  attack2SoundClip: {fileID: 8300000, guid: ead79e6f8a49d6c46a369d5fb5fffc88, type: 3}
+  attack2SoundClip: {fileID: 8300000, guid: 406b520b30fbbd645a0bae3fe536700f, type: 3}
   attack2SoundVolume: 0.6
-  attack3SoundClip: {fileID: 8300000, guid: 2d671a3a5f0de1a48b945abb28e07520, type: 3}
+  attack3SoundClip: {fileID: 8300000, guid: 6a0cd6cf97af14743a1f03949e03e275, type: 3}
   attack3SoundVolume: 0.6
-  attack4SoundClip: {fileID: 8300000, guid: b90711ae86aff744db256f4191993d9d, type: 3}
+  attack4SoundClip: {fileID: 8300000, guid: 5a812d003a749034f8f25f8115d3b6b3, type: 3}
   attack4SoundVolume: 0.3
-  attack5SoundClip: {fileID: 8300000, guid: 84841602760dd5e4585686e699af29ae, type: 3}
+  attack5SoundClip: {fileID: 8300000, guid: 3bfb3f59a060a834bb17b9a048b58c75, type: 3}
   attack5SoundVolume: 0.3
-  attack6SoundClip: {fileID: 8300000, guid: f5df1271b4b1dbb4e85b2fd5ea9574c7, type: 3}
+  attack6SoundClip: {fileID: 8300000, guid: 7ed13fae55c9f724db87f34bc127706d, type: 3}
   attack6SoundVolume: 0.3
   screamSoundClip:
-  - {fileID: 8300000, guid: 0a94156f7074bc1439e5cdcf4677eaa7, type: 3}
-  - {fileID: 8300000, guid: 64211c8ca42eb8148b3601ff99f58f09, type: 3}
-  - {fileID: 8300000, guid: e2d71c2984bf89447a1624fc05d02d99, type: 3}
-  - {fileID: 8300000, guid: 035104000f6f2f440aa198c976f1660d, type: 3}
+  - {fileID: 8300000, guid: db53a24e9a112234bad75989d3deb908, type: 3}
+  - {fileID: 8300000, guid: 96609ed1c9cb35446a0345da510406c1, type: 3}
+  - {fileID: 8300000, guid: 9f225ae2b95b78c4c90f74b4ab5da86c, type: 3}
+  - {fileID: 8300000, guid: 4d3b44101c961004c9323f20bc2a1868, type: 3}
   screamSoundVolume: 0.3
 --- !u!82 &8312288448961077504
 AudioSource:
@@ -590,7 +590,7 @@ MonoBehaviour:
   closeAttackCheck: {fileID: 6585661258646407055}
   midAttackCheck: {fileID: 3231517490566501794}
   longAttackCheck: {fileID: 3212903648840652397}
-  closeAttackCheckSize: {x: 2.5, y: 4}
+  closeAttackCheckSize: {x: 1.5, y: 4}
   midAttackCheckSize: {x: 10, y: 4}
   longAttackCheckSize: {x: 20, y: 4}
   healthBar: {fileID: 4288437340468795717, guid: 814f6f2f199495a45bbe309ab460a1fd, type: 3}
