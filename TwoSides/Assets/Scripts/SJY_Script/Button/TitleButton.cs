@@ -1,11 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TitleButton : MonoBehaviour
 {
+    public GameObject map;
     public GameObject playerPrefab;
 
     public void StartTitle()
     {
+        map = GameObject.Find("MapScrollArea");
+
+        if (map.activeSelf)
+        {
+            map.SetActive(false);
+        }
+
         LoadingSceneController.Instance.LoadScene("Title");
 
         playerPrefab = GameObject.Find("PlayerSet(Clone)");

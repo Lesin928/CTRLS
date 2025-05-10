@@ -48,6 +48,34 @@ AnimationClip:
       value: {fileID: 1186287750956511266, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
     - time: 1.0833334
       value: {fileID: 8394397810536957031, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.1666666
+      value: {fileID: 1534581964391506232, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.25
+      value: {fileID: 7773042686186629122, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.3333334
+      value: {fileID: -7225321971583474172, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.4166666
+      value: {fileID: -7589924557722080713, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.5
+      value: {fileID: 6322461292032787513, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.5833334
+      value: {fileID: 503674938544581070, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.6666666
+      value: {fileID: 6213134324484357932, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.75
+      value: {fileID: -6875810628633774005, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.8333334
+      value: {fileID: -6778757664142915548, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 1.9166666
+      value: {fileID: -3253903753416833825, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 2
+      value: {fileID: 1276343109446604367, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 2.0833333
+      value: {fileID: -2558924109257815315, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 2.1666667
+      value: {fileID: 1186287750956511266, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - time: 2.25
+      value: {fileID: 8394397810536957031, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -84,17 +112,31 @@ AnimationClip:
     - {fileID: -2558924109257815315, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
     - {fileID: 1186287750956511266, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
     - {fileID: 8394397810536957031, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 1534581964391506232, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 7773042686186629122, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: -7225321971583474172, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: -7589924557722080713, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 6322461292032787513, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 503674938544581070, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 6213134324484357932, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: -6875810628633774005, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: -6778757664142915548, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: -3253903753416833825, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 1276343109446604367, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: -2558924109257815315, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 1186287750956511266, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
+    - {fileID: 8394397810536957031, guid: ff447158968726b489be394ba4f3d3c8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1666667
+    m_StopTime: 2.3333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -108,4 +150,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 2.25
+    functionName: PlayAttackSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

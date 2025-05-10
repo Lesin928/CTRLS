@@ -2,29 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 지원 버프의 종류를 정의하는 열거형
+/// 吏??踰꾪봽??醫낅쪟瑜??뺤쓽?섎뒗 ?닿굅??
 /// </summary>
 public enum BuffType
 {
-    ATTACK,   // 공격력 증가
-    SPEED,    // 스피드 증가
-    HEAL      // 체력 회복
+    ATTACK,   // 怨듦꺽??利앷?
+    SPEED,    // ?ㅽ뵾??利앷?
+    HEAL      // 泥대젰 ?뚮났
 }
 
 /// <summary>
-/// 적 유닛이 주변의 다른 적에게 버프를 주는 상태
+/// ???좊떅??二쇰????ㅻⅨ ?곸뿉寃?踰꾪봽瑜?二쇰뒗 ?곹깭
 /// </summary>
 public class EnemySupportState : EnemyState
 {
-    private float supportRange;    // 버프를 줄 수 있는 범위
-    private LayerMask enemyLayer;  // 적 레이어
-    private GameObject buffPrefab; // 버프 이펙트 프리팹
-    private BuffType buffType;     // 버프 종류
+    private float supportRange;    // 踰꾪봽瑜?以????덈뒗 踰붿쐞
+    private LayerMask enemyLayer;  // ???덉씠??
+    private GameObject buffPrefab; // 踰꾪봽 ?댄럺???꾨━??
+    private BuffType buffType;     // 踰꾪봽 醫낅쪟
 
-    // 지원한 적과 해당 버프 이펙트를 기록하는 딕셔너리
+    // 吏?먰븳 ?곴낵 ?대떦 踰꾪봽 ?댄럺?몃? 湲곕줉?섎뒗 ?뺤뀛?덈━
     private Dictionary<Transform, GameObject> supportedEnemies = new();
 
-    // 생성자
+    // ?앹꽦??
     public EnemySupportState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName,
         float supportRange, GameObject buffPrefab, BuffType buffType)
         : base(enemyBase, stateMachine, animBoolName)
@@ -36,32 +36,32 @@ public class EnemySupportState : EnemyState
     }
 
     /// <summary>
-    /// 상태 진입 시 초기화
+    /// ?곹깭 吏꾩엯 ??珥덇린??
     /// </summary>
     public override void Enter()
     {
         base.Enter();
-        supportedEnemies.Clear(); // 이전에 지원했던 적들을 초기화
+        supportedEnemies.Clear(); // ?댁쟾??吏?먰뻽???곷뱾??珥덇린??
     }
 
     /// <summary>
-    /// 상태 갱신: 범위 내 적 탐지 및 지원 적용/제거 처리
+    /// ?곹깭 媛깆떊: 踰붿쐞 ?????먯? 諛?吏???곸슜/?쒓굅 泥섎━
     /// </summary>
     public override void Update()
     {
         base.Update();
 
-        // 지원 범위 내에 있는 적을 탐색
+        // 吏??踰붿쐞 ?댁뿉 ?덈뒗 ?곸쓣 ?먯깋
         Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(enemyBase.transform.position, supportRange, enemyLayer);
 
         HashSet<Transform> currentEnemies = new();
         foreach (var enemy in enemiesInRange)
         {
-            if (enemy.gameObject != enemyBase.gameObject) // 자신은 제외
+            if (enemy.gameObject != enemyBase.gameObject) // ?먯떊? ?쒖쇅
             {
                 currentEnemies.Add(enemy.transform);
 
-                // 아직 지원하지 않은 적이라면 버프 적용
+                // ?꾩쭅 吏?먰븯吏 ?딆? ?곸씠?쇰㈃ 踰꾪봽 ?곸슜
                 if (!supportedEnemies.ContainsKey(enemy.transform))
                 {
                     Support(enemy.transform);
@@ -69,7 +69,7 @@ public class EnemySupportState : EnemyState
             }
         }
 
-        // 범위 밖으로 나간 적의 지원 제거
+        // 踰붿쐞 諛뽰쑝濡??섍컙 ?곸쓽 吏???쒓굅
         List<Transform> enemiesToRemove = new();
         foreach (var supported in supportedEnemies)
         {
@@ -80,7 +80,7 @@ public class EnemySupportState : EnemyState
             }
         }
 
-        // 딕셔너리에서도 제거
+        // ?뺤뀛?덈━?먯꽌???쒓굅
         foreach (var enemy in enemiesToRemove)
         {
             supportedEnemies.Remove(enemy);
@@ -88,13 +88,13 @@ public class EnemySupportState : EnemyState
     }
 
     /// <summary>
-    /// 상태 종료 시 모든 지원 제거
+    /// ?곹깭 醫낅즺 ??紐⑤뱺 吏???쒓굅
     /// </summary>
     public override void Exit()
     {
         base.Exit();
 
-        // 지원 중이던 적들의 버프 이펙트 제거
+        // 吏??以묒씠???곷뱾??踰꾪봽 ?댄럺???쒓굅
         foreach (var supported in supportedEnemies)
         {
             if (supported.Value != null)
@@ -106,18 +106,18 @@ public class EnemySupportState : EnemyState
         supportedEnemies.Clear();
     }
 
-    // 버프를 적용하는 함수
+    // 踰꾪봽瑜??곸슜?섎뒗 ?⑥닔
     private void Support(Transform targetEnemy)
     {
-        Debug.Log($"{targetEnemy.name} 에게 버프 적용됨.");
+        Debug.Log($"{targetEnemy.name} ?먭쾶 踰꾪봽 ?곸슜??");
 
         if (buffPrefab != null)
         {
-            // 버프 이펙트를 생성하고 적 자식으로 붙임
+            // 踰꾪봽 ?댄럺?몃? ?앹꽦?섍퀬 ???먯떇?쇰줈 遺숈엫
             GameObject buff = Object.Instantiate(buffPrefab, targetEnemy.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
             buff.transform.SetParent(targetEnemy);
 
-            // 적 크기에 맞게 버프 이펙트 크기 조절
+            // ???ш린??留욊쾶 踰꾪봽 ?댄럺???ш린 議곗젅
             Collider2D collider = targetEnemy.GetComponent<Collider2D>();
             if (collider != null)
             {
@@ -127,40 +127,40 @@ public class EnemySupportState : EnemyState
 
             supportedEnemies.Add(targetEnemy, buff);
 
-            // 전기 라인 이펙트 생성
+            // ?꾧린 ?쇱씤 ?댄럺???앹꽦
             CreateElectricLine(targetEnemy);
         }
     }
 
-    // 전기 라인 이펙트를 생성하는 함수
+    // ?꾧린 ?쇱씤 ?댄럺?몃? ?앹꽦?섎뒗 ?⑥닔
     private void CreateElectricLine(Transform targetEnemy)
     {
-        // 라인 오브젝트 생성 및 부모 설정
+        // ?쇱씤 ?ㅻ툕?앺듃 ?앹꽦 諛?遺紐??ㅼ젙
         GameObject lineObj = new GameObject($"ElectricLine_{targetEnemy.name}");
         lineObj.transform.SetParent(enemyBase.transform);
 
-        // 컴포넌트 추가
+        // 而댄룷?뚰듃 異붽?
         LineRenderer lr = lineObj.AddComponent<LineRenderer>();
         EnemyPixelLightningLine pixelLine = lineObj.AddComponent<EnemyPixelLightningLine>();
 
-        // 시작점과 끝점 설정
+        // ?쒖옉?먭낵 ?앹젏 ?ㅼ젙
         pixelLine.startPoint = enemyBase.transform;
         pixelLine.endPoint = targetEnemy;
 
-        // 라인 속성 설정
+        // ?쇱씤 ?띿꽦 ?ㅼ젙
         pixelLine.segmentCount = 30;
         pixelLine.waveAmplitude = 0.2f;
         pixelLine.waveFrequency = 8f;
         pixelLine.pixelSize = 0.05f;
 
-        // 라인렌더러 설정
+        // ?쇱씤?뚮뜑???ㅼ젙
         lr.textureMode = LineTextureMode.Tile;
         lr.alignment = LineAlignment.TransformZ;
         lr.startWidth = pixelLine.pixelSize * 0.3f;
         lr.endWidth = pixelLine.pixelSize * 0.3f;
         lr.material = new Material(Shader.Find("Sprites/Default"));
 
-        // 버프 종류에 따라 색상 지정
+        // 踰꾪봽 醫낅쪟???곕씪 ?됱긽 吏??
         if (buffType == BuffType.ATTACK)
         {
             lr.startColor = new Color(1f, 0.8f, 0f);
@@ -177,7 +177,7 @@ public class EnemySupportState : EnemyState
             lr.endColor = new Color(0f, 1f, 0f);
         }
 
-        // 선 위치 계산 (Perlin Noise + 랜덤 + 계단화)
+        // ???꾩튂 怨꾩궛 (Perlin Noise + ?쒕뜡 + 怨꾨떒??
         Vector3[] linePositions = new Vector3[pixelLine.segmentCount];
         for (int i = 0; i < pixelLine.segmentCount; i++)
         {
@@ -202,10 +202,10 @@ public class EnemySupportState : EnemyState
         lr.SetPositions(linePositions);
     }
 
-    // 지원 제거 함수
+    // 吏???쒓굅 ?⑥닔
     private void RemoveSupport(Transform targetEnemy)
     {
-        Debug.Log($"{targetEnemy.name} 버프 해제");
+        Debug.Log($"{targetEnemy.name} 踰꾪봽 ?댁젣");
 
         if (supportedEnemies.TryGetValue(targetEnemy, out GameObject buff))
         {
@@ -215,7 +215,7 @@ public class EnemySupportState : EnemyState
             }
         }
 
-        // 전기 라인 오브젝트 제거
+        // ?꾧린 ?쇱씤 ?ㅻ툕?앺듃 ?쒓굅
         Transform electricLine = enemyBase.transform.Find($"ElectricLine_{targetEnemy.name}");
         if (electricLine != null)
             Object.Destroy(electricLine.gameObject);
