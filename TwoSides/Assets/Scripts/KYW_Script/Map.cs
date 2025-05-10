@@ -46,6 +46,7 @@ public class Map : MonoBehaviour
     private GameObject redDotInstance; // ✅ 추가
 
     public int battleNum = 0;
+    public int puzzleNum = 0;
 
     void Start()
     {

@@ -199,10 +199,10 @@ MonoBehaviour:
   attackCheckRadius: 1.3
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 3840
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 3840
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128

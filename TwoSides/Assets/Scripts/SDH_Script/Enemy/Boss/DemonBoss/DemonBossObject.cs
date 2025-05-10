@@ -27,7 +27,7 @@ public class DemonBossObject : EnemyObject
     public EnemyAttackState attack1State { get; private set; } // 공격 1
     public EnemyAttackState attack2State { get; private set; } // 공격 2
     public EnemyAttackState attack3State { get; private set; } // 공격 3
-    public EnemyAttackState attack4State { get; private set; } // 공격 4 (근거리)
+    public EnemyAttackState attack4State { get; private set; } // 공격 4
     public EnemyAttackState attack5State { get; private set; } // 공격 5
     public EnemyAttackState attack6State { get; private set; } // 공격 6
     #endregion
@@ -100,17 +100,24 @@ public class DemonBossObject : EnemyObject
     /// </summary>
     public override void CallAttackState()
     {
-        float distanceX = Mathf.Abs(transform.position.x - PlayerManager.instance.player.transform.position.x);
         int rand;
 
         if (closeRangeDetected())
         {
-            stateMachine.ChangeState(attack4State); // 근거리 전용 공격
+            rand = Random.Range(0, 2);
+            switch (rand)
+            {
+                case 0:
+                    stateMachine.ChangeState(attack4State);
+                    break;
+                case 1:
+                    stateMachine.ChangeState(attack6State);
+                    break;
+            }
         }
         else if (midRangeDetected())
         {
-            // 중거리 공격: 랜덤하게 1~3, 5~6 중 선택
-            rand = Random.Range(0, 5);
+            rand = Random.Range(0, 3);
             switch (rand)
             {
                 case 0:
@@ -122,17 +129,10 @@ public class DemonBossObject : EnemyObject
                 case 2:
                     stateMachine.ChangeState(attack3State);
                     break;
-                case 3:
-                    stateMachine.ChangeState(attack5State);
-                    break;
-                case 4:
-                    stateMachine.ChangeState(attack6State);
-                    break;
             }
         }
         else if (longRangeDetected())
         {
-            // 원거리 공격: 2, 5, 6 중 하나 선택
             rand = Random.Range(0, 3);
             switch (rand)
             {
@@ -173,7 +173,6 @@ public class DemonBossObject : EnemyObject
     {
         base.OnDrawGizmos();
 
-        // 디버깅을 위해 Scene에서 공격 범위 확인
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(closeAttackCheck.position, closeAttackCheckSize);
         Gizmos.DrawWireCube(midAttackCheck.position, midAttackCheckSize);

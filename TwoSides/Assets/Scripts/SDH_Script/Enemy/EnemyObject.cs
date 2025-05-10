@@ -1,123 +1,123 @@
 using UnityEngine;
 
 /// <summary>
-/// 이 클래스는 적 캐릭터의 이동, 공격, 충돌 처리, 상태 관리 등을 처리합니다.
-/// 적의 상태는 상태 머신으로 관리되며, 기본적인 이동, 추적, 공격 등의 동작을 포함합니다.
+/// ???????삳뮉 ??筌?Ŧ??怨쀬벥 ??猷? ?⑤벀爰? ?겸뫖猷?筌ｌ꼶?? ?怨밴묶 ?온???源놁뱽 筌ｌ꼶???몃빍??
+/// ?怨몄벥 ?怨밴묶???怨밴묶 ?믩챷???곗쨮 ?온?귐됰┷筌? 疫꿸퀡??怨몄뵥 ??猷? ?곕뗄?? ?⑤벀爰??源놁벥 ??덉삂????釉??몃빍??
 /// </summary>
 public class EnemyObject : CharacterObject
 {
     #region [Move Info]
     [Header("Move Info")]
-    public float defaultMoveSpeed; // 기본 이동 속도
-    public float chaseSpeed;       // 추적 이동 속도
+    public float defaultMoveSpeed; // 疫꿸퀡????猷???얜즲
+    public float chaseSpeed;       // ?곕뗄????猷???얜즲
     #endregion
 
     #region [Attack Info]
     [Header("Attack Info")]
-    public float attackCooldown;                     // 공격 쿨타임
-    [HideInInspector] public float lastTimeAttacked; // 마지막으로 공격한 시간
+    public float attackCooldown;                     // ?⑤벀爰??묅뫂???
+    [HideInInspector] public float lastTimeAttacked; // 筌띾뜆?筌띾맩?앮에??⑤벀爰????볦퍢
     #endregion
 
     #region [Collider Info]
     [Header("Collider Info")]
-    [SerializeField] protected Transform groundCheck;     // 땅을 체크하는 위치
-    [SerializeField] protected float groundCheckDistance; // 땅 체크 거리
+    [SerializeField] protected Transform groundCheck;     // ??놁뱽 筌ｋ똾寃??롫뮉 ?袁⑺뒄
+    [SerializeField] protected float groundCheckDistance; // ??筌ｋ똾寃?椰꾧퀡??
     [Space]
-    [SerializeField] protected Transform wallCheck;       // 벽을 체크하는 위치
-    [SerializeField] protected float wallCheckDistance;   // 벽 체크 거리
+    [SerializeField] protected Transform wallCheck;       // 甕곗럩??筌ｋ똾寃??롫뮉 ?袁⑺뒄
+    [SerializeField] protected float wallCheckDistance;   // 甕?筌ｋ똾寃?椰꾧퀡??
     [Space]
-    [SerializeField] protected Transform playerCheck;     // 플레이어를 체크하는 위치
-    [SerializeField] protected float playerCheckRadius;   // 플레이어 체크 반지름
+    [SerializeField] protected Transform playerCheck;     // ???쟿??곷선??筌ｋ똾寃??롫뮉 ?袁⑺뒄
+    [SerializeField] protected float playerCheckRadius;   // ???쟿??곷선 筌ｋ똾寃?獄쏆꼷???
     [Space]
-    public Transform attackCheck;                         // 공격 범위 체크 위치
-    public float attackCheckRadius;                       // 공격 범위 체크 반지름
+    public Transform attackCheck;                         // ?⑤벀爰?甕곕뗄??筌ｋ똾寃??袁⑺뒄
+    public float attackCheckRadius;                       // ?⑤벀爰?甕곕뗄??筌ｋ똾寃?獄쏆꼷???
     [Space]
-    [SerializeField] protected LayerMask whatIsGround;    // 땅 레이어 마스크
-    [SerializeField] protected LayerMask whatIsWall;      // 벽 레이어 마스크
-    [SerializeField] protected LayerMask whatIsPlayer;    // 플레이어 레이어 마스크
-    public float colliderWidth { get; private set; }      // 콜라이더의 너비
+    [SerializeField] protected LayerMask whatIsGround;    // ????됱뵠??筌띾뜆???
+    [SerializeField] protected LayerMask whatIsWall;      // 甕???됱뵠??筌띾뜆???
+    [SerializeField] protected LayerMask whatIsPlayer;    // ???쟿??곷선 ??됱뵠??筌띾뜆???
+    public float colliderWidth { get; private set; }      // ?꾩뮆????????덊돩
     #endregion
 
     #region [Flash Effect]
     [Header("Flash Effect")]
-    [SerializeField] private EnemyFlashEffect flashEffect; // 적의 플래시 이펙트
+    [SerializeField] private EnemyFlashEffect flashEffect; // ?怨몄벥 ???삋????꾨읃??
     #endregion
 
     #region [Components]
-    public Animator anim { get; private set; }  // 적 캐릭터의 애니메이터
-    public Rigidbody2D rb { get; private set; } // 적 캐릭터의 Rigidbody2D
-    public Collider2D col { get; private set; } // 적 캐릭터의 Collider2D
+    public Animator anim { get; private set; }  // ??筌?Ŧ??怨쀬벥 ?醫딅빍筌롫뗄???
+    public Rigidbody2D rb { get; private set; } // ??筌?Ŧ??怨쀬벥 Rigidbody2D
+    public Collider2D col { get; private set; } // ??筌?Ŧ??怨쀬벥 Collider2D
     #endregion
 
     #region [StateMachine]
-    public EnemyStateMachine stateMachine { get; private set; } // 적의 상태 머신
+    public EnemyStateMachine stateMachine { get; private set; } // ?怨몄벥 ?怨밴묶 ?믩챷??
     #endregion
 
     #region [State]
-    public EnemyHitState hitState { get; private set; }   // 적이 맞은 상태
-    public EnemyDeadState deadState { get; private set; } // 적이 죽은 상태
+    public EnemyHitState hitState { get; private set; }   // ?怨몄뵠 筌띿쉸? ?怨밴묶
+    public EnemyDeadState deadState { get; private set; } // ?怨몄뵠 雅뚯럩? ?怨밴묶
     #endregion
 
     #region [Facing]
-    public int facingDir { get; private set; } = 1; // 적의 방향 (1: 오른쪽, -1: 왼쪽)
-    protected bool facingRight = true;              // 적이 오른쪽을 보고 있는지 여부
+    public int facingDir { get; private set; } = 1; // ?怨몄벥 獄쎻뫚堉?(1: ??삘뀲筌? -1: ??긱걹)
+    protected bool facingRight = true;              // ?怨몄뵠 ??삘뀲筌잛럩??癰귣떯????덈뮉筌왖 ???
     #endregion
 
     #region [Audio]
-    private EnemySoundTrigger soundTrigger; // 적의 소리 트리거
+    private EnemySoundTrigger soundTrigger; // ?怨몄벥 ???봺 ?紐꺿봺椰?
     #endregion
 
 
-    // 상태 머신 초기화 및 상태 설정
+    // ?怨밴묶 ?믩챷???λ뜃由??獄??怨밴묶 ??쇱젟
     protected virtual void Awake()
     {
         stateMachine = new EnemyStateMachine();
 
-        // 적의 Hit 상태와 Dead 상태를 초기화
+        // ?怨몄벥 Hit ?怨밴묶?? Dead ?怨밴묶???λ뜃由??
         hitState = new EnemyHitState(this, stateMachine, "Hit");
         deadState = new EnemyDeadState(this, stateMachine, "Dead");
     }
 
-    // 필요한 컴포넌트들 초기화
+    // ?袁⑹뒄???뚮똾猷??곕뱜???λ뜃由??
     protected virtual void Start()
     {
-        anim = GetComponentInChildren<Animator>(); // 애니메이션 컴포넌트 초기화
-        rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 초기화
-        flashEffect = GetComponentInChildren<EnemyFlashEffect>(); // 플래시 효과 컴포넌트 초기화
-        col = GetComponent<Collider2D>(); // 콜라이더 컴포넌트 초기화
-        soundTrigger = GetComponentInChildren<EnemySoundTrigger>(); // 소리 트리거 컴포넌트 초기화
-        colliderWidth = col.bounds.size.x; // 콜라이더의 가로 길이 저장
+        anim = GetComponentInChildren<Animator>(); // ?醫딅빍筌롫뗄????뚮똾猷??곕뱜 ?λ뜃由??
+        rb = GetComponent<Rigidbody2D>(); // ?귐???뺤뺍???뚮똾猷??곕뱜 ?λ뜃由??
+        flashEffect = GetComponentInChildren<EnemyFlashEffect>(); // ???삋????ｋ궢 ?뚮똾猷??곕뱜 ?λ뜃由??
+        col = GetComponent<Collider2D>(); // ?꾩뮆??????뚮똾猷??곕뱜 ?λ뜃由??
+        soundTrigger = GetComponentInChildren<EnemySoundTrigger>(); // ???봺 ?紐꺿봺椰??뚮똾猷??곕뱜 ?λ뜃由??
+        colliderWidth = col.bounds.size.x; // ?꾩뮆??????揶쎛嚥?疫뀀챷??????
     }
 
-    // 상태 머신 업데이트
+    // ?怨밴묶 ?믩챷????낅쑓??꾨뱜
     protected virtual void Update()
     {
-        stateMachine.currentState?.Update(); // 현재 상태의 업데이트 호출
+        stateMachine.currentState?.Update(); // ?袁⑹삺 ?怨밴묶????낅쑓??꾨뱜 ?紐꾪뀱
     }
 
     /// <summary>
-    /// 플레이어 탐지 상태로 진입할 때 호출되는 함수
+    /// ???쟿??곷선 ?癒? ?怨밴묶嚥?筌욊쑴??????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
     public virtual void EnterPlayerDetection()
     {
     }
 
     /// <summary>
-    /// 플레이어 탐지 상태에서 벗어날 때 호출되는 함수
+    /// ???쟿??곷선 ?癒? ?怨밴묶?癒?퐣 甕곗щ선?????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
     public virtual void ExitPlayerDetection()
     {
     }
 
     /// <summary>
-    /// 공격 상태로 전환하는 함수
+    /// ?⑤벀爰??怨밴묶嚥??袁れ넎??롫뮉 ??λ땾
     /// </summary>
     public virtual void CallAttackState()
     {
     }
 
     /// <summary>
-    /// 대기 상태로 전환하는 함수
+    /// ??疫??怨밴묶嚥??袁れ넎??롫뮉 ??λ땾
     /// </summary>
     public virtual void CallIdleState()
     {
@@ -129,7 +129,7 @@ public class EnemyObject : CharacterObject
 
     #region [Animation Event]
     /// <summary>
-    /// 애니메이션이 끝났을 때 호출되는 함수
+    /// ?醫딅빍筌롫뗄???륁뵠 ??멸텢?????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
     public virtual void AnimationFinishTrigger()
         => stateMachine.currentState?.AnimationFinishTrigger();
@@ -137,37 +137,37 @@ public class EnemyObject : CharacterObject
 
     #region [Detection]
     /// <summary>
-    /// 바닥을 감지하는 함수
+    /// 獄쏅뗀???揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>바닥이 감지되면 true, 아니면 false</returns>
+    /// <returns>獄쏅뗀???揶쏅Ŋ???롢늺 true, ?袁⑤빍筌?false</returns>
     public virtual bool IsGroundDetected()
         => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround).collider != null;
 
     /// <summary>
-    /// 벽을 감지하는 함수
+    /// 甕곗럩??揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>벽이 감지되면 true, 아니면 false</returns>
+    /// <returns>甕곗럩??揶쏅Ŋ???롢늺 true, ?袁⑤빍筌?false</returns>
     public virtual bool IsWallDetected()
         => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsWall).collider != null;
 
     /// <summary>
-    /// 플레이어를 감지하는 함수
+    /// ???쟿??곷선??揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>플레이어가 감지되면 해당 Collider2D를 반환, 아니면 null</returns>
+    /// <returns>???쟿??곷선揶쎛 揶쏅Ŋ???롢늺 ????Collider2D??獄쏆꼹?? ?袁⑤빍筌?null</returns>
     public virtual Collider2D IsPlayerDetected()
         => Physics2D.OverlapCircle(playerCheck.position, playerCheckRadius, whatIsPlayer);
 
     /// <summary>
-    /// 공격이 가능한 범위에 플레이어가 있는지 감지하는 함수
+    /// ?⑤벀爰??揶쎛?館釉?甕곕뗄??????쟿??곷선揶쎛 ??덈뮉筌왖 揶쏅Ŋ???롫뮉 ??λ땾
     /// </summary>
-    /// <returns>플레이어가 감지되면 해당 Collider2D를 반환, 아니면 null</returns>
+    /// <returns>???쟿??곷선揶쎛 揶쏅Ŋ???롢늺 ????Collider2D??獄쏆꼹?? ?袁⑤빍筌?null</returns>
     public virtual Collider2D IsAttackDetectable()
         => Physics2D.OverlapCircle(attackCheck.position, attackCheckRadius, whatIsPlayer);
 
     /// <summary>
-    /// 벽과 플레이어 사이에 장애물이 있는지 확인하는 함수
+    /// 甕곗럡?????쟿??곷선 ??????關釉룩눧?깆뵠 ??덈뮉筌왖 ?類ㅼ뵥??롫뮉 ??λ땾
     /// </summary>
-    /// <returns>벽 사이에 플레이어가 있으면 true, 아니면 false</returns>
+    /// <returns>甕?????????쟿??곷선揶쎛 ??됱몵筌?true, ?袁⑤빍筌?false</returns>
     public bool IsWallBetweenPlayer()
     {
         Vector2 start = transform.position;
@@ -181,16 +181,16 @@ public class EnemyObject : CharacterObject
 
     #region [Flip]
     /// <summary>
-    /// 적의 방향을 반전시키는 함수
+    /// ?怨몄벥 獄쎻뫚堉??獄쏆꼷???쀪텕????λ땾
     /// </summary>
     public void Flip()
     {
         facingDir *= -1;
         facingRight = !facingRight;
-        transform.Rotate(0, 180, 0); // 객체를 Y축을 기준으로 180도 회전
+        transform.Rotate(0, 180, 0); // 揶쏆빘猿쒐몴?Y?곕벡??疫꿸퀣???곗쨮 180?????읈
     }
 
-    // 입력 값에 따라 적의 방향을 전환하는 함수
+    // ??낆젾 揶쏅?肉??怨뺤뵬 ?怨몄벥 獄쎻뫚堉???袁れ넎??롫뮉 ??λ땾
     private void FlipController(float xInput)
     {
         if (xInput > 0 && !facingRight) Flip();
@@ -200,7 +200,7 @@ public class EnemyObject : CharacterObject
 
     #region [Velocity Control]
     /// <summary>
-    /// Rigidbody의 속도를 0으로 설정하는 함수
+    /// Rigidbody????얜즲??0??곗쨮 ??쇱젟??롫뮉 ??λ땾
     /// </summary>
     public void SetZeroVelocity()
     {
@@ -208,19 +208,19 @@ public class EnemyObject : CharacterObject
     }
 
     /// <summary>
-    /// Rigidbody의 속도를 설정하는 함수
+    /// Rigidbody????얜즲????쇱젟??롫뮉 ??λ땾
     /// </summary>
-    /// <param name="xVelocity">X축 속도</param>
-    /// <param name="yVelocity">Y축 속도</param>
+    /// <param name="xVelocity">X????얜즲</param>
+    /// <param name="yVelocity">Y????얜즲</param>
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
-        FlipController(xVelocity); // X축 입력 값에 따라 적의 방향을 전환
+        FlipController(xVelocity); // X????낆젾 揶쏅?肉??怨뺤뵬 ?怨몄벥 獄쎻뫚堉???袁れ넎
     }
     #endregion
 
     #region [Gizmos]
-    // Gizmos로 각종 감지 범위와 경로를 시각적으로 표시
+    // Gizmos嚥?揶쏄낯伊?揶쏅Ŋ? 甕곕뗄??? 野껋럥以덄몴???볦퍟?怨몄몵嚥???뽯뻻
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -242,32 +242,34 @@ public class EnemyObject : CharacterObject
     #endregion
 
     /// <summary>
-    /// 적이 피해를 받을 때 호출되는 함수
+    /// ?怨몄뵠 ??노퉸??獄쏆룇?????紐꾪뀱??롫뮉 ??λ땾
     /// </summary>
-    /// <param name="_damage">입력된 피해 값</param>
+    /// <param name="_damage">??낆젾????노퉸 揶?/param>
     public override void TakeDamage(float _damage)
     {
-        // 피해 값에 따라 현재 체력 감소
+        if (CurrentHp <= 0) return;
+
+        // ??노퉸 揶쏅?肉??怨뺤뵬 ?袁⑹삺 筌ｋ???揶쏅Ŋ??
         CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
 
         if (soundTrigger != null)
-            soundTrigger.PlayHitSound(); // 맞을 때 소리 재생
+            soundTrigger.PlayHitSound(); // 筌띿쉸???????봺 ??源?
 
-        flashEffect.Flash(); // 플래시 효과 실행
+        flashEffect.Flash(); // ???삋????ｋ궢 ??쎈뻬
 
-        if (CurrentHp <= 0)  // 체력이 0 이하로 떨어지면 죽음 상태로 전환
+        if (CurrentHp <= 0)  // 筌ｋ????0 ??꾨릭嚥???λ선筌왖筌?雅뚯럩???怨밴묶嚥??袁れ넎
         {
             CurrentHp = 0;
             stateMachine.ChangeState(deadState);
         }
-        else // 체력이 남아 있으면 히트 상태로 전환
+        else // 筌ｋ??????λ툡 ??됱몵筌???딅뱜 ?怨밴묶嚥??袁れ넎
         {
             if (!stateMachine.isAttacking)
                 stateMachine.ChangeState(hitState);
         }
     }
 
-    // 적이 죽었을 때 호출되는 함수 (EnemyObject에서는 사용 X)
+    // ?怨몄뵠 雅뚯럩肉?????紐꾪뀱??롫뮉 ??λ땾 (EnemyObject?癒?퐣??????X)
     protected override void Die()
     {
     }

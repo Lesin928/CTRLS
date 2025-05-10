@@ -1,41 +1,44 @@
 using UnityEngine;
 
 /// <summary>
-/// 적이 죽었을 때의 상태를 처리하는 클래스
+/// ?怨몄뵠 雅뚯럩肉?????벥 ?怨밴묶??筌ｌ꼶???롫뮉 ?????
 /// </summary>
 public class EnemyDeadState : EnemyState
 {
-    // 생성자: 상태머신, 애니메이션 bool 이름을 기반으로 Dead 상태를 초기화
+    // ??밴쉐?? ?怨밴묶?믩챷?? ?醫딅빍筌롫뗄???bool ??已??疫꿸퀡而??곗쨮 Dead ?怨밴묶???λ뜃由??
     public EnemyDeadState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName)
         : base(enemyBase, stateMachine, animBoolName)
     {
     }
 
     /// <summary>
-    /// 적이 Dead 상태에 진입할 때 호출
+    /// ?怨몄뵠 Dead ?怨밴묶??筌욊쑴??????紐꾪뀱
     /// </summary>
     public override void Enter()
     {
         base.Enter();
 
-        // 죽었으므로 적의 속도를 0으로 설정
+        // 雅뚯럩肉???嚥??怨몄벥 ??얜즲??0??곗쨮 ??쇱젟
         enemyBase.SetZeroVelocity();
+
+        GameManager.Instance.OnMonsterDead();
+        GameManager.Instance.SetGold(10);
     }
 
     /// <summary>
-    /// 매 프레임마다 상태를 갱신함. 트리거가 호출되면 오브젝트를 제거함.
+    /// 筌??袁⑥쟿?袁⑥춳???怨밴묶??揶쏄퉮??? ?紐꺿봺椰꾧퀗? ?紐꾪뀱??롢늺 ??삵닏??븍뱜????볤탢??
     /// </summary>
     public override void Update()
     {
         base.Update();
 
-        // 적 오브젝트 제거 조건 확인
+        // ????삵닏??븍뱜 ??볤탢 鈺곌퀗援??類ㅼ뵥
         if (triggerCalled)
             GameObject.Destroy(enemyBase.gameObject);
     }
 
     /// <summary>
-    /// 적이 Dead 상태에서 나갈 때 호출
+    /// ?怨몄뵠 Dead ?怨밴묶?癒?퐣 ??띿퍦 ???紐꾪뀱
     /// </summary>
     public override void Exit()
     {

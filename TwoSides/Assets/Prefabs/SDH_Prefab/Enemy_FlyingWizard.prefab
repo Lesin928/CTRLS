@@ -168,10 +168,10 @@ MonoBehaviour:
   attackCheckRadius: 4
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 3840
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 3840
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
@@ -382,7 +382,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2082586565
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -411378906735354078, guid: 8f95855ee20f76c4aa4f8fa4bf1edfad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -458,11 +458,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSoundClips:
-  - {fileID: 8300000, guid: 6cb9d7e8e55d7dd4090a41f0dbdf2d05, type: 3}
-  - {fileID: 8300000, guid: 42814fdd944b47646ab06d58d51bc1c2, type: 3}
-  - {fileID: 8300000, guid: 52d52e61e6af4d14e994329bc59cfb47, type: 3}
+  - {fileID: 8300000, guid: 94733c5a963c41b44a7af9b566a427c6, type: 3}
+  - {fileID: 8300000, guid: ed7cac4f9a139fb4897c8a5655b7d128, type: 3}
+  - {fileID: 8300000, guid: 031ada0db6b09094faf73834a2f71d14, type: 3}
+  - {fileID: 8300000, guid: 80a2ff3028f790540b1cdac3b76b5dba, type: 3}
+  - {fileID: 8300000, guid: 67fcc9b7a15698a47ad5b8567e00ab49, type: 3}
+  - {fileID: 8300000, guid: 9bf546e3a8e252c48a4c5297e477049b, type: 3}
   hitSoundVolume: 0.3
-  attackSoundClip: {fileID: 8300000, guid: ccf329bf38364894d9b834e7bad8958b, type: 3}
+  attackSoundClip: {fileID: 8300000, guid: 1aa3978259f99f2408dc6f7485aebddf, type: 3}
   attackSoundVolume: 0.3
 --- !u!82 &4644242747429293488
 AudioSource:

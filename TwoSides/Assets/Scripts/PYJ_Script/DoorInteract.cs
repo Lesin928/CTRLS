@@ -47,7 +47,11 @@ public class DoorInteract : Interactive
             Debug.Log("문 개방! 다음 맵으로 이동합니다.");//지도 열리게 
             Mapbutton.Instance.activeButton = true;
             Map.Instance.doorConnected = true;
-            Mapbutton.Instance.GameClearAutoButton();
+
+            if (Map.Instance.LEVEL == 16)
+                GameManager.Instance.OnMonsterDead();
+            else
+                Mapbutton.Instance.GameClearAutoButton();
         }
         else
         {
