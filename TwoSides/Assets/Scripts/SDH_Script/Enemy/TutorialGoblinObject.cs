@@ -57,7 +57,7 @@ public class TutorialGoblinObject : EnemyObject
     }
 
     /// <summary>
-    /// 호출 시 공격 상태로 전환합니다.
+    /// 호출 시 공격 상태로 전환합니다. (튜토리얼에서 호출)
     /// </summary>
     public override void CallAttackState()
     {
