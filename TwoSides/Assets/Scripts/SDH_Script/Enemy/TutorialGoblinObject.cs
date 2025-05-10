@@ -1,21 +1,21 @@
 using UnityEngine;
 
 /// <summary>
-/// TutorialGoblin Àû ¿ÀºêÁ§Æ®ÀÇ »óÅÂ ¹× Çàµ¿À» Á¤ÀÇÇÑ Å¬·¡½ºÀÔ´Ï´Ù.
-/// EnemyObject¸¦ »ó¼ÓÇÏ¸ç, »óÅÂ ¸Ó½ÅÀ» ÅëÇØ Idle, Attack »óÅÂ¸¦ °ü¸®ÇÕ´Ï´Ù.
+/// TutorialGoblin ì  ì˜¤ë¸Œì íŠ¸ì˜ ìƒíƒœ ë° í–‰ë™ì„ ì •ì˜í•œ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// EnemyObjectë¥¼ ìƒì†í•˜ë©°, ìƒíƒœ ë¨¸ì‹ ì„ í†µí•´ Idle, Attack ìƒíƒœë¥¼ ê´€ë¦¬í•©ë‹ˆë‹¤.
 /// </summary>
 public class TutorialGoblinObject : EnemyObject
 {
     #region State
-    public EnemyIdleState idleState { get; private set; }     // ´ë±â »óÅÂ
-    public EnemyAttackState attackState { get; private set; } // °ø°İ »óÅÂ
+    public EnemyIdleState idleState { get; private set; }     // ëŒ€ê¸° ìƒíƒœ
+    public EnemyAttackState attackState { get; private set; } // ê³µê²© ìƒíƒœ
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
 
-        // »óÅÂ ÀÎ½ºÅÏ½º¸¦ ÃÊ±âÈ­
+        // ìƒíƒœ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì´ˆê¸°í™”
         idleState = new EnemyIdleState(this, stateMachine, "Idle");
         attackState = new EnemyAttackState(this, stateMachine, "Attack");
     }
@@ -24,7 +24,7 @@ public class TutorialGoblinObject : EnemyObject
     {
         base.Start();
 
-        // ½ÃÀÛ ½Ã ±âº» »óÅÂ¸¦ Idle·Î ¼³Á¤
+        // ì‹œì‘ ì‹œ ê¸°ë³¸ ìƒíƒœë¥¼ Idleë¡œ ì„¤ì •
         stateMachine.Initialize(idleState);
     }
 
@@ -38,16 +38,10 @@ public class TutorialGoblinObject : EnemyObject
             Flip();
         else if (playerX < transform.position.x && facingRight)
             Flip();
-
-        /*
-        // L Å°¸¦ ´©¸£¸é °ø°İ »óÅÂ·Î ÀüÈ¯
-        if (Input.GetKeyDown(KeyCode.L))
-            CallAttackState();
-        */
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ Å½ÁöµÇ¾úÀ» ¶§ Ãß°İ »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// í”Œë ˆì´ì–´ê°€ íƒì§€ë˜ì—ˆì„ ë•Œ ì¶”ê²© ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public override void EnterPlayerDetection()
     {
@@ -55,7 +49,7 @@ public class TutorialGoblinObject : EnemyObject
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î¸¦ Å½ÁöÇÏÁö ¸øÇÒ °æ¿ì ¼øÂû »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// í”Œë ˆì´ì–´ë¥¼ íƒì§€í•˜ì§€ ëª»í•  ê²½ìš° ìˆœì°° ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public override void ExitPlayerDetection()
     {
@@ -63,7 +57,7 @@ public class TutorialGoblinObject : EnemyObject
     }
 
     /// <summary>
-    /// È£Ãâ ½Ã °ø°İ »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// í˜¸ì¶œ ì‹œ ê³µê²© ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public override void CallAttackState()
     {
@@ -71,7 +65,7 @@ public class TutorialGoblinObject : EnemyObject
     }
 
     /// <summary>
-    /// È£Ãâ ½Ã ´ë±â »óÅÂ·Î ÀüÈ¯ÇÕ´Ï´Ù.
+    /// í˜¸ì¶œ ì‹œ ëŒ€ê¸° ìƒíƒœë¡œ ì „í™˜í•©ë‹ˆë‹¤.
     /// </summary>
     public override void CallIdleState()
     {

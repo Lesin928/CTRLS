@@ -32107,6 +32107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_EvilEye
       objectReference: {fileID: 0}
+    - target: {fileID: 3233722705961177068, guid: 43015e33402c1c6439cfba8570385efe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7174759529611810744, guid: 43015e33402c1c6439cfba8570385efe, type: 3}
       propertyPath: m_SortingOrder
       value: -1
@@ -32153,11 +32157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7530176414113814505, guid: 43015e33402c1c6439cfba8570385efe, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7530176414113814505, guid: 43015e33402c1c6439cfba8570385efe, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35366,6 +35370,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_GreenBlob
       objectReference: {fileID: 0}
+    - target: {fileID: 4816874653729754621, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254098981219074127, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254098981219074127, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35438,6 +35454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_DemonBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 1328175195732327875, guid: 2a44e682604650e4c9eac11bc61dbb52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4731286796453905683, guid: 2a44e682604650e4c9eac11bc61dbb52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -35477,6 +35497,14 @@ PrefabInstance:
     - target: {fileID: 4731286796453905683, guid: 2a44e682604650e4c9eac11bc61dbb52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091923777580493441, guid: 2a44e682604650e4c9eac11bc61dbb52, type: 3}
+      propertyPath: wallCheckDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091923777580493441, guid: 2a44e682604650e4c9eac11bc61dbb52, type: 3}
+      propertyPath: closeAttackCheckSize.x
+      value: 2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35911,6 +35939,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6160976785845308576, guid: 508320ddaef994a4dba51934b6a013c5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160976785845308576, guid: 508320ddaef994a4dba51934b6a013c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6683136404302582783, guid: 508320ddaef994a4dba51934b6a013c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8
@@ -35954,6 +35990,10 @@ PrefabInstance:
     - target: {fileID: 8437432274645563675, guid: 508320ddaef994a4dba51934b6a013c5, type: 3}
       propertyPath: m_Name
       value: Enemy_SlimeBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437432274645563675, guid: 508320ddaef994a4dba51934b6a013c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36134,11 +36174,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 51960087246803775, guid: 06148c4239a5c1041921560a6a90daf6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 51960087246803775, guid: 06148c4239a5c1041921560a6a90daf6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2645302858550119814, guid: 06148c4239a5c1041921560a6a90daf6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36188,6 +36228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_FlyingWizard
       objectReference: {fileID: 0}
+    - target: {fileID: 6696287364730080268, guid: 06148c4239a5c1041921560a6a90daf6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36201,6 +36245,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5041602704611669985, guid: 2c8576a9f05a6784a8b63d30a7687ad8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041602704611669985, guid: 2c8576a9f05a6784a8b63d30a7687ad8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7117944211852291607, guid: 2c8576a9f05a6784a8b63d30a7687ad8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.84
@@ -36245,6 +36297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 8387256126538433478, guid: 2c8576a9f05a6784a8b63d30a7687ad8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36276,6 +36332,18 @@ PrefabInstance:
     - target: {fileID: 399434928831750892, guid: 006262ad625fbf34b8967c365bf6d282, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 399434928831750892, guid: 006262ad625fbf34b8967c365bf6d282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498507545225430825, guid: 006262ad625fbf34b8967c365bf6d282, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 498507545225430825, guid: 006262ad625fbf34b8967c365bf6d282, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3573068792563095497, guid: 006262ad625fbf34b8967c365bf6d282, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36333,6 +36401,18 @@ PrefabInstance:
     - target: {fileID: 2459775239629170286, guid: fa10424c1c9adeb47843eca195146124, type: 3}
       propertyPath: m_Name
       value: Enemy_TutorialGoblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459775239629170286, guid: fa10424c1c9adeb47843eca195146124, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081130005210872007, guid: fa10424c1c9adeb47843eca195146124, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7081130005210872007, guid: fa10424c1c9adeb47843eca195146124, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9051985444885287601, guid: fa10424c1c9adeb47843eca195146124, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36568,17 +36648,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_SpeedBuffWizard
       objectReference: {fileID: 0}
+    - target: {fileID: 2808491922744026832, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3564881296303950274, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
       propertyPath: m_SortingOrder
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7951202712812836870, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7951202712812836870, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8977591093202265335, guid: e59a4c3e196b47a4896f54e3ad638dd1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36814,11 +36898,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 904162883146421109, guid: 0f7328cb93d9fdf4dbb11e91e6864e9c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 904162883146421109, guid: 0f7328cb93d9fdf4dbb11e91e6864e9c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2966299509456941130, guid: 0f7328cb93d9fdf4dbb11e91e6864e9c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36867,6 +36951,10 @@ PrefabInstance:
     - target: {fileID: 3613045291569468588, guid: 0f7328cb93d9fdf4dbb11e91e6864e9c, type: 3}
       propertyPath: m_Name
       value: Enemy_Gollux
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613045291569468588, guid: 0f7328cb93d9fdf4dbb11e91e6864e9c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37164,11 +37252,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 380653653063357377, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 380653653063357377, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341031769245392677, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37217,6 +37305,10 @@ PrefabInstance:
     - target: {fileID: 8636950096466825703, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
       propertyPath: m_Name
       value: Enemy_HealBuffWizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636950096466825703, guid: 413e9b5382f53b54ba90c16a10467c38, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37274,6 +37366,18 @@ PrefabInstance:
     - target: {fileID: 7836738871771977974, guid: db1a9b3f083b03f4eb5d1fb92ad407e6, type: 3}
       propertyPath: m_Name
       value: Enemy_Sicklezeep
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836738871771977974, guid: db1a9b3f083b03f4eb5d1fb92ad407e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040109317313631109, guid: db1a9b3f083b03f4eb5d1fb92ad407e6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040109317313631109, guid: db1a9b3f083b03f4eb5d1fb92ad407e6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37454,11 +37558,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3826276085330295853, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3826276085330295853, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6414322412413722042, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
       propertyPath: m_SortingOrder
@@ -37467,6 +37571,10 @@ PrefabInstance:
     - target: {fileID: 8009925599877200457, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
       propertyPath: m_Name
       value: Enemy_AttackBuffWizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009925599877200457, guid: 34c60f31f7b794e44bf0fdfb525f6a5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37525,17 +37633,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Cthulu
       objectReference: {fileID: 0}
+    - target: {fileID: 2562816632848288800, guid: a51f2448e49cce84a901cb62a94a10c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2951102148227979901, guid: a51f2448e49cce84a901cb62a94a10c3, type: 3}
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4404556943247229452, guid: a51f2448e49cce84a901cb62a94a10c3, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4404556943247229452, guid: a51f2448e49cce84a901cb62a94a10c3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

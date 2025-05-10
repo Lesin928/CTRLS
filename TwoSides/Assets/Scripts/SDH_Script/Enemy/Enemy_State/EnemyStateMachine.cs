@@ -1,17 +1,18 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ »óÅÂ ÀüÀÌ¸¦ Á¦¾îÇÏ´Â ½ºÅ×ÀÌÆ® ¸Ó½Å Å¬·¡½º
+/// ì ì˜ ìƒíƒœ ì „ì´ë¥¼ ì œì–´í•˜ëŠ” ìŠ¤í…Œì´íŠ¸ ë¨¸ì‹  í´ë˜ìŠ¤
 /// </summary>
 public class EnemyStateMachine
 {
-    public EnemyState currentState { get; private set; } // ÇöÀç È°¼ºÈ­µÈ »óÅÂ
+    public EnemyState currentState { get; private set; } // í˜„ì¬ í™œì„±í™”ëœ ìƒíƒœ
     public bool isAttacking;
+    public bool isBeingHit;
 
     /// <summary>
-    /// »óÅÂ ¸Ó½ÅÀ» ÃÊ±â »óÅÂ·Î ¼³Á¤ÇÏ°í »óÅÂ¸¦ ÁøÀÔ½ÃÅ´
+    /// ìƒíƒœ ë¨¸ì‹ ì„ ì´ˆê¸° ìƒíƒœë¡œ ì„¤ì •í•˜ê³  ìƒíƒœë¥¼ ì§„ì…ì‹œí‚´
     /// </summary>
-    /// <param name="startState">ÃÊ±â »óÅÂ</param>
+    /// <param name="startState">ì´ˆê¸° ìƒíƒœ</param>
     public void Initialize(EnemyState startState)
     {
         currentState = startState;
@@ -19,9 +20,9 @@ public class EnemyStateMachine
     }
 
     /// <summary>
-    /// ÇöÀç »óÅÂ¿¡¼­ »õ·Î¿î »óÅÂ·Î ÀüÀÌÇÏ°í ÁøÀÔ½ÃÅ´
+    /// í˜„ì¬ ìƒíƒœì—ì„œ ìƒˆë¡œìš´ ìƒíƒœë¡œ ì „ì´í•˜ê³  ì§„ì…ì‹œí‚´
     /// </summary>
-    /// <param name="newState">ÀüÀÌÇÒ »õ »óÅÂ</param>
+    /// <param name="newState">ì „ì´í•  ìƒˆ ìƒíƒœ</param>
     public void ChangeState(EnemyState newState)
     {
         currentState.Exit();
