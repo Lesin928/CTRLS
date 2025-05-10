@@ -147,16 +147,19 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnShift(InputAction.CallbackContext context)
     {
+        if (context.phase != InputActionPhase.Performed) return;
         if (playerObject.IsDeath) return; //사망 상태 
         Debug.Log("무적 모드 (Shift 버튼)");  
-        if(!playerObject.IsInvincibility)
+        if(!playerObject.Isgod)
         {
-           playerObject.IsInvincibility = true; // 무적모드
+           playerObject.Isgod = true; // 무적모드
+           playerObject.GOD.SetActive(true);
         }
-        else if(playerObject.IsInvincibility)
+        else if(playerObject.Isgod)
         {
-            playerObject.IsInvincibility = false; // 무적모드 해제
-        }   
+            playerObject.Isgod = false; // 무적모드 해제
+            playerObject.GOD.SetActive(false);
+        }     
     } 
     /// <summary>
     /// 키보드 F 입력을 처리하는 메서드
