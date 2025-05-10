@@ -8,30 +8,33 @@ public class Mapbutton : MonoBehaviour
     public GameObject map;
     public float animationDuration = 0.3f;
     public static Mapbutton Instance;
+
     private bool isVisible = false;
     private Coroutine animationCoroutine;
     public Button aButton; // 인스펙터에서 연결
     public bool activeButton = false;
+
+    [Header("사운드")]
+    public AudioSource audioSource; // 인스펙터에서 연결
+    public AudioClip openSound;     // 맵 열릴 때
+    public AudioClip closeSound;    // 맵 닫힐 때
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
-        {
             return;
-        }
+
         Instance = this;
     }
+
     private void Start()
     {
         if (map == null) return;
 
-        // 실제 활성화 상태를 반영해서 스케일 세팅
         isVisible = map.activeSelf;
-
         RectTransform rect = map.GetComponent<RectTransform>();
         rect.localScale = isVisible ? Vector3.one : new Vector3(0f, 1f, 1f);
-
     }
-
 
     void Update()
     {
@@ -40,23 +43,27 @@ public class Mapbutton : MonoBehaviour
 
     public void GameClearAutoButton()
     {
-        //조건이 만족되면 A 버튼 클릭
+        /*activeButton = true;
+        GameManager.Instance.isClear = true;*/
         if (GameManager.Instance.isClear && activeButton && !map.activeSelf)
         {
-            aButton.onClick.Invoke(); //코드에서 클릭 실행
+            aButton.onClick.Invoke();
             activeButton = false;
         }
     }
+    public void onclickivoke()
+    {
 
+        aButton.onClick.Invoke();
+    }
     public void mapsetting()
     {
         if (map == null) return;
 
-        // map의 실제 활성화 상태 기반으로 갱신 (씬 로드 후 상태 꼬임 방지)
         if (!map.activeSelf)
         {
             isVisible = false;
-            map.SetActive(true); // 반드시 켜고 애니메이션 시작
+            map.SetActive(true);
         }
 
         if (animationCoroutine != null)
@@ -76,6 +83,9 @@ public class Mapbutton : MonoBehaviour
 
     private IEnumerator ShowMap()
     {
+        if (audioSource != null && openSound != null)
+            audioSource.PlayOneShot(openSound); // 열리는 소리 재생
+
         RectTransform rect = map.GetComponent<RectTransform>();
         float time = 0f;
         Vector3 startScale = new Vector3(0f, 1f, 1f);
@@ -97,6 +107,9 @@ public class Mapbutton : MonoBehaviour
 
     private IEnumerator HideMap()
     {
+        if (audioSource != null && closeSound != null)
+            audioSource.PlayOneShot(closeSound); // 닫히는 소리 재생
+
         RectTransform rect = map.GetComponent<RectTransform>();
         float time = 0f;
         Vector3 startScale = Vector3.one;
@@ -111,6 +124,6 @@ public class Mapbutton : MonoBehaviour
         }
 
         rect.localScale = endScale;
-        map.SetActive(false); // 확실히 꺼준다
+        map.SetActive(false);
     }
 }
