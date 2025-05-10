@@ -221,6 +221,7 @@ public class GameManager : MonoBehaviour
         GameObject fadeObj = Instantiate(fadeCanvasPrefab);
         FadeController fade = fadeObj.GetComponent<FadeController>();
 
+        AudioManager.Instance.ChangeBGM("OverBGM");
         yield return StartCoroutine(fade.FadeOut());
 
         AsyncOperation op = SceneManager.LoadSceneAsync("GameOver");
@@ -237,6 +238,8 @@ public class GameManager : MonoBehaviour
     IEnumerator GameClearRoutine()
     {
         yield return new WaitForSeconds(1f);
+
+        AudioManager.Instance.ChangeBGM("ClearBGM");
 
         AsyncOperation op = SceneManager.LoadSceneAsync("GameClear");
         yield return new WaitUntil(() => op.isDone);
