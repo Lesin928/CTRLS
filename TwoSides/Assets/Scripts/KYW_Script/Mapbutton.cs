@@ -38,6 +38,11 @@ public class Mapbutton : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            mapsetting();
+        }
+
         GameClearAutoButton();
     }
 

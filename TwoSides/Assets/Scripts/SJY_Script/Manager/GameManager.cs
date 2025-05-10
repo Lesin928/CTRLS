@@ -187,7 +187,9 @@ public class GameManager : MonoBehaviour
         isClear = true;
         currentStage++;
 
-        if (currentStage > maxStage && Map.Instance.doorConnected)
+        //if ()
+
+        if (Map.Instance.LEVEL == 16 && Map.Instance.doorConnected)
         {
             GameClear();
         }
