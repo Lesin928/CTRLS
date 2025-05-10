@@ -256,11 +256,7 @@ public class EnemyObject : CharacterObject
     public override void TakeDamage(float _damage)
     {
         if (CurrentHp <= 0)  // 체력이 0 이하로 떨어지면 사망 처리
-        {
-            CurrentHp = 0;
-            stateMachine.ChangeState(deadState); // 사망 상태로 변경
             return;
-        }
 
         // 피해를 입은 만큼 체력을 감소시키며, 방어력을 고려한 피해 계산
         CurrentHp -= (float)((Mathf.Pow(_damage, 2f) / ((double)Armor + (double)_damage)));
@@ -270,7 +266,12 @@ public class EnemyObject : CharacterObject
 
         flashEffect.Flash(); // 피격 시 플래시 이펙트
 
-        if (!stateMachine.isAttacking && !stateMachine.isBeingHit)
+        if (CurrentHp <= 0)  // 체력이 0 이하로 떨어지면 사망 처리
+        {
+            CurrentHp = 0;
+            stateMachine.ChangeState(deadState); // 사망 상태로 변경
+        }
+        else if (!stateMachine.isAttacking && !stateMachine.isBeingHit)
         {
             stateMachine.isBeingHit = true;
             stateMachine.ChangeState(hitState); // 피격 상태로 전환

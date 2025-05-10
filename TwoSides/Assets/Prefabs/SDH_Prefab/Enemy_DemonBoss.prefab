@@ -590,7 +590,7 @@ MonoBehaviour:
   closeAttackCheck: {fileID: 6585661258646407055}
   midAttackCheck: {fileID: 3231517490566501794}
   longAttackCheck: {fileID: 3212903648840652397}
-  closeAttackCheckSize: {x: 1.5, y: 4}
+  closeAttackCheckSize: {x: 2.3, y: 4}
   midAttackCheckSize: {x: 10, y: 4}
   longAttackCheckSize: {x: 20, y: 4}
   healthBar: {fileID: 4288437340468795717, guid: 814f6f2f199495a45bbe309ab460a1fd, type: 3}
