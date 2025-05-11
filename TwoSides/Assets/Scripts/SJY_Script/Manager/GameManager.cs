@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public bool isStoreReset;
     public Dictionary<StatType, int> itemPriceMap = new Dictionary<StatType, int>();
 
+    private bool isClearFuncCheck = true;
+
     #region PlayerStat
     [Header("PlayerStat")]
     public int playerGold;
@@ -136,6 +138,7 @@ public class GameManager : MonoBehaviour
         currentStage = 1;
         isClear = false;
         isStoreReset = true;
+        isClearFuncCheck = true;
 
         //HUDManager
         if (HUDManager.Instance != null)
@@ -202,8 +205,6 @@ public class GameManager : MonoBehaviour
         isClear = true;
         currentStage++;
 
-        //if ()
-
         if (Map.Instance.LEVEL == 16 && Map.Instance.doorConnected)
         {
             GameClear();
@@ -255,9 +256,15 @@ public class GameManager : MonoBehaviour
 
     public void GameClear()
     {
-        HUDManager.Instance.HideHUD();
-        HideMapController.shouldShowHideMap = false;
-        StartCoroutine(GameClearRoutine());
+        if (isClearFuncCheck)
+        {
+            isClearFuncCheck = false;
+            HUDManager.Instance.HideHUD();
+            HideMapController.shouldShowHideMap = false;
+            StartCoroutine(GameClearRoutine());
+        }
+
+
     }
 
     IEnumerator GameClearRoutine()
