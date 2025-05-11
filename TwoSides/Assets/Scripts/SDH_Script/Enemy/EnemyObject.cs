@@ -36,6 +36,7 @@ public class EnemyObject : CharacterObject
     [SerializeField] protected LayerMask whatIsWall;      // 벽 레이어
     [SerializeField] protected LayerMask whatIsPlayer;    // 플레이어 레이어
     public float colliderWidth { get; private set; }      // Collider의 너비
+    public float colliderLength { get; private set; }     // Collider의 높이
     #endregion
 
     #region [Flash Effect]
@@ -86,6 +87,7 @@ public class EnemyObject : CharacterObject
         col = GetComponent<Collider2D>(); // Collider2D 컴포넌트를 가져옵니다.
         soundTrigger = GetComponentInChildren<EnemySoundTrigger>(); // 자식 객체에서 EnemySoundTrigger 컴포넌트를 가져옵니다.
         colliderWidth = col.bounds.size.x; // Collider의 너비를 가져옵니다.
+        colliderLength = col.bounds.size.y; // Collider의 높이를 가져옵니다.
     }
 
     // 상태 머신의 현재 상태를 업데이트합니다.
