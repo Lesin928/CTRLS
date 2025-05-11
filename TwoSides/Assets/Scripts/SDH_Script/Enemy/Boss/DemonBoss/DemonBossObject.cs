@@ -100,52 +100,35 @@ public class DemonBossObject : EnemyObject
     /// </summary>
     public override void CallAttackState()
     {
-        int rand;
+        float rand = Random.value; // 0.0f ~ 1.0f
 
         if (closeRangeDetected())
         {
-            rand = Random.Range(0, 2);
-            switch (rand)
-            {
-                case 0:
-                    stateMachine.ChangeState(attack4State);
-                    break;
-                case 1:
-                    stateMachine.ChangeState(attack6State);
-                    break;
-            }
+            // Smash: 70%, CircleBullet: 30%
+            if (rand < 0.7f)
+                stateMachine.ChangeState(attack4State); // Smash
+            else
+                stateMachine.ChangeState(attack6State); // CircleBullet
         }
         else if (midRangeDetected())
         {
-            rand = Random.Range(0, 3);
-            switch (rand)
-            {
-                case 0:
-                    stateMachine.ChangeState(attack1State);
-                    break;
-                case 1:
-                    stateMachine.ChangeState(attack2State);
-                    break;
-                case 2:
-                    stateMachine.ChangeState(attack3State);
-                    break;
-            }
+            // Slash: 40%, Hammer: 20%, Meteor: 40%
+            if (rand < 0.4f)
+                stateMachine.ChangeState(attack1State); // Slash
+            else if (rand < 0.6f)
+                stateMachine.ChangeState(attack2State); // Hammer
+            else
+                stateMachine.ChangeState(attack3State); // Meteor
         }
         else if (longRangeDetected())
         {
-            rand = Random.Range(0, 3);
-            switch (rand)
-            {
-                case 0:
-                    stateMachine.ChangeState(attack2State);
-                    break;
-                case 1:
-                    stateMachine.ChangeState(attack5State);
-                    break;
-                case 2:
-                    stateMachine.ChangeState(attack6State);
-                    break;
-            }
+            // Hammer: 20%, Bullet: 60%, CircleBullet: 20%
+            if (rand < 0.2f)
+                stateMachine.ChangeState(attack2State); // Hammer
+            else if (rand < 0.8f)
+                stateMachine.ChangeState(attack5State); // Bullet
+            else
+                stateMachine.ChangeState(attack6State); // CircleBullet
         }
     }
 

@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabc0af1a8bb17741acb54a7e7df0f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currentHp: 100
+  maxHp: 50
+  currentHp: 50
   armor: 0
   attack: 10
   attackSpeed: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   criticalDamage: 0
   defaultMoveSpeed: 3
   chaseSpeed: 10
-  attackCooldown: 0
+  attackCooldown: 1
   lastTimeAttacked: 0
   groundCheck: {fileID: 4665345172996485987}
   groundCheckDistance: 0.2
@@ -382,7 +382,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2082586565
   m_SortingLayer: 5
-  m_SortingOrder: -1
+  m_SortingOrder: -4
   m_Sprite: {fileID: -411378906735354078, guid: 8f95855ee20f76c4aa4f8fa4bf1edfad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
