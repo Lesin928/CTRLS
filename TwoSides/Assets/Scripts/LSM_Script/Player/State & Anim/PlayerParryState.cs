@@ -1,11 +1,11 @@
 using UnityEngine;
 
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾îÀÇ ÆĞ¸µ »óÅÂ¸¦ ³ªÅ¸³»´Â Å¬·¡½º
+/// í”Œë ˆì´ì–´ì˜ íŒ¨ë§ ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class PlayerParryState : PlayerState
 {
@@ -19,7 +19,7 @@ public class PlayerParryState : PlayerState
     }
     public override void Update()
     {
-        //ÇöÀç »óÅÂ µğ¹ö±×
+        //í˜„ì¬ ìƒíƒœ ë””ë²„ê·¸
         Debug.Log("ParryState");
         base.Update(); 
         if (!playerObject.IsCanParry)
@@ -44,7 +44,5 @@ public class PlayerParryState : PlayerState
     public override void Exit()
     {
         base.Exit();
-    }
-
-
+    } 
 }
