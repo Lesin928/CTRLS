@@ -1,11 +1,11 @@
 using UnityEngine;
 
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
 
 /// <summary>
-/// Á¡ÇÁ »óÅÂ¸¦ °ü¸®ÇÏ´Â Å¬·¡½º
+/// ì í”„ ìƒíƒœë¥¼ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class PlayerJumpState : PlayerState
 { 
@@ -13,6 +13,7 @@ public class PlayerJumpState : PlayerState
         : base(_playerAnim, _stateMachine, _playerObject, _animBoolName) { }
     public override void Enter()
     {
+        playerAnimation.playerSFX.PlayClip(playerAnimation.playerSFX.jumpClip); //ëŒ€ì‰¬ ì†Œë¦¬ ì¬ìƒ  
         playerObject.IsAttack = false;
         base.Enter();
         if (Mathf.Abs(rb.linearVelocity.y) < 0.01f)

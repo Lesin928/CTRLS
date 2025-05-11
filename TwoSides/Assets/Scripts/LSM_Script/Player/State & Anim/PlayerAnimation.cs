@@ -1,11 +1,11 @@
 using UnityEngine;
 
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ŞÀÌ¼ÇÀ» °ü¸®ÇÏ´Â Å¬·¡½º
+/// í”Œë ˆì´ì–´ ì• ë‹ˆë©”ì´ì…˜ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class PlayerAnimation : MonoBehaviour
 {
@@ -13,19 +13,23 @@ public class PlayerAnimation : MonoBehaviour
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; } 
     public SpriteRenderer sr { get; private set; }
-     
+
+    public AudioSource audioSource { get; private set; } // ì˜¤ë””ì˜¤ ì†ŒìŠ¤ ì»´í¬ë„ŒíŠ¸
+
+    public PlayerSFX playerSFX { get; private set; } // í”Œë ˆì´ì–´ SFX ì»´í¬ë„ŒíŠ¸
+
     #endregion
 
-    #region Playerfacing //ÇÃ·¹ÀÌ¾îÀÇ ¹æÇâÀ» ³ªÅ¸³»´Â º¯¼ö
+    #region Playerfacing //í”Œë ˆì´ì–´ì˜ ë°©í–¥ì„ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜
     public int facingDir { get; private set; } = 1;
     protected bool facingRight = true;
     #endregion
 
     #region States 
-    public PlayerStateMachine stateMachine { get; private set; } // ÇÃ·¹ÀÌ¾îÀÇ »óÅÂ¸¦ °ü¸®ÇÏ´Â »óÅÂ ¸Ó½Å
-    public PlayerObject playerObject { get; private set; } // ÇÃ·¹ÀÌ¾îÀÇ ¼Ó¼ºÀ» °ü¸®ÇÏ´Â °´Ã¼ 
+    public PlayerStateMachine stateMachine { get; private set; } // í”Œë ˆì´ì–´ì˜ ìƒíƒœë¥¼ ê´€ë¦¬í•˜ëŠ” ìƒíƒœ ë¨¸ì‹ 
+    public PlayerObject playerObject { get; private set; } // í”Œë ˆì´ì–´ì˜ ì†ì„±ì„ ê´€ë¦¬í•˜ëŠ” ê°ì²´ 
 
-    // ÇÃ·¹ÀÌ¾îÀÇ »óÅÂ 
+    // í”Œë ˆì´ì–´ì˜ ìƒíƒœ 
     public PlayerDashState dashState { get; private set; }
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }
@@ -44,12 +48,14 @@ public class PlayerAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+        playerSFX = GetComponent<PlayerSFX>(); // í”Œë ˆì´ì–´ SFX ì»´í¬ë„ŒíŠ¸ ìƒì„±
 
-        // »óÅÂ ¸Ó½Å ÀÎ½ºÅÏ½º »ı¼º
+        // ìƒíƒœ ë¨¸ì‹  ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
         stateMachine = new PlayerStateMachine();
-        playerObject = GetComponentInParent<PlayerObject>(); // ÇÃ·¹ÀÌ¾îÀÇ ¼Ó¼ºÀ» °ü¸®ÇÏ´Â °´Ã¼ »ı¼º
+        playerObject = GetComponentInParent<PlayerObject>(); // í”Œë ˆì´ì–´ì˜ ì†ì„±ì„ ê´€ë¦¬í•˜ëŠ” ê°ì²´ ìƒì„±
 
-        // °¢ »óÅÂ ÀÎ½ºÅÏ½º »ı¼º (this: ÇÃ·¹ÀÌ¾î °´Ã¼, stateMachine: »óÅÂ ¸Ó½Å, "Idle"/"Move": »óÅÂ ÀÌ¸§)
+        // ê° ìƒíƒœ ì¸ìŠ¤í„´ìŠ¤ ìƒì„± (this: í”Œë ˆì´ì–´ ê°ì²´, stateMachine: ìƒíƒœ ë¨¸ì‹ , "Idle"/"Move": ìƒíƒœ ì´ë¦„)
         dashState = new PlayerDashState(this, stateMachine, playerObject, "Dash"); 
         idleState = new PlayerIdleState(this, stateMachine, playerObject, "Idle");
         moveState = new PlayerMoveState(this, stateMachine, playerObject, "Move");
@@ -64,14 +70,14 @@ public class PlayerAnimation : MonoBehaviour
      
     protected void Start()
     { 
-        // °ÔÀÓ ½ÃÀÛ ½Ã ÃÊ±â »óÅÂ¸¦ ´ë±â »óÅÂ(idleState)·Î ¼³Á¤
+        // ê²Œì„ ì‹œì‘ ì‹œ ì´ˆê¸° ìƒíƒœë¥¼ ëŒ€ê¸° ìƒíƒœ(idleState)ë¡œ ì„¤ì •
         stateMachine.Initialize(idleState); 
     } 
     protected void Update()
     { 
         stateMachine.currentState.Update();  
     }
-    #region ÇÃ¸³
+    #region í”Œë¦½
     public void Flip()
     {
         facingDir = facingDir * -1;
