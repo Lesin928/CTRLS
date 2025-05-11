@@ -63,6 +63,7 @@ public class PauseOnSignal : MonoBehaviour
         // 백스페이스 입력 받으면 게임 시작
         if (Input.GetKeyDown(KeyCode.Backspace) && director != null)
         {
+            GameManager.Instance.isTutoSkip = true; // 튜토리얼 스킵
             GameManager.Instance.StartNewGame();
         }
 

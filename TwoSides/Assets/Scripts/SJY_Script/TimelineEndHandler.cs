@@ -34,7 +34,10 @@ public class TimelineEndHandler : MonoBehaviour
 
     void OnTimelineStopped(PlayableDirector pd)
     {
-        GameManager.Instance.StartNewGame();
+        if (!GameManager.Instance.isTutoSkip)
+        {
+            GameManager.Instance.StartNewGame();
+        }        
     }
 
     void OnDestroy()

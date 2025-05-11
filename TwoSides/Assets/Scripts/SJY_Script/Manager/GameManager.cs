@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public StageData currentStageData;
     private int deadMonsterCount = 0;
     public bool isClear = false;
+    public bool isTutoSkip = false;
 
     public GameObject playerPrefab;
     public PlayerObject playerObject;
