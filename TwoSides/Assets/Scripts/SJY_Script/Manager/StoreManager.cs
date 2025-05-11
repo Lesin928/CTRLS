@@ -32,6 +32,28 @@ public class StoreManager : MonoBehaviour
         GameManager.Instance.OnStageClear();
     }
 
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        ResetAllStoreData();
+    //    }
+    //}
+
+    //void ResetAllStoreData()
+    //{
+    //    Debug.Log(":boom: F키로 상점 정보 전체 초기화");
+
+    //    foreach (var item in itemDataList)
+    //        item.price = 100;
+
+    //    GameManager.Instance.itemPriceMap.Clear();
+    //    GameManager.Instance.SetGold(1000);
+    //    currentSelection.Clear();
+
+    //    UpdateItemUI();
+    //}
+
     public void OpenStore()
     {
         RerollItems();
@@ -81,6 +103,9 @@ public class StoreManager : MonoBehaviour
             Text[] text = itemButton[i].GetComponentsInChildren<Text>();
             var icon = itemButton[i].transform.Find("IconImage").GetComponent<Image>();
 
+            int realPrice = GameManager.Instance.GetItemPrice(item.statType);
+            item.price = realPrice;
+
             text[0].text = $"{item.statType.ToString()}";
             text[1].text = $"{item.price.ToString()}";
             icon.sprite = item.icon;
@@ -98,11 +123,13 @@ public class StoreManager : MonoBehaviour
         if (GameManager.Instance.playerGold - item.price < 0)
             return;
 
-        Debug.Log($"구매한 아이템: {item.statType.ToString()}");
+        Debug.Log($"구매한 아이템: {item.statType}");
 
         GameManager.Instance.SetGold(-item.price);
 
-        item.price += 50;
+        // :white_check_mark: 가격 증가는 GameManager에 반영
+        GameManager.Instance.IncreaseItemPrice(item.statType, 50);
+
         ApplyItemEffect(item);
         UpdateItemUI();
     }
@@ -149,6 +176,7 @@ public class StoreManager : MonoBehaviour
     public void ResetPrice()
     {
         Debug.Log("Reset!");
+        GameManager.Instance.itemPriceMap.Clear();
         foreach (var item in itemDataList)
         {
             item.price = 100;

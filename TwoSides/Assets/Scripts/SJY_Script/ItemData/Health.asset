@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Health
   m_EditorClassIdentifier: 
   statType: 0
-  value: 10
+  value: 20
   icon: {fileID: -4814613244366653045, guid: 200755b642a37214cb9703a5e50736a6, type: 3}
   price: 100
