@@ -120,6 +120,13 @@ public class GameManager : MonoBehaviour
             playerObj.ResetSpawnPosition();
     }
 
+    public void StartTimeLine()
+    {
+        HUDManager.Instance.HideHUD();
+
+        LoadingSceneController.Instance.LoadScene("TimeLine");
+    }
+
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
@@ -151,6 +158,8 @@ public class GameManager : MonoBehaviour
         EventScriptManager.Init();
 
         AudioManager.Instance.ChangeBGM("IngameBGM");
+
+        HideMapController.shouldShowHideMap = true;
 
         LoadingSceneController.Instance.LoadScene("Tutorial");
     }
