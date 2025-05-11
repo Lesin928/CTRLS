@@ -14,9 +14,11 @@ public class StoreManager : MonoBehaviour
     public List<ItemData> itemDataList;
     private List<ItemData> currentSelection = new List<ItemData>();
 
+    [SerializeField] private int reRollPrice;
+
     void Start()
     {
-        isStoreOpen = false;
+        reRollPrice = 5;
 
         rerollButton.onClick.AddListener(RerollItems);
         exitButton.onClick.AddListener(ExitStore);
@@ -26,15 +28,22 @@ public class StoreManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
-        {
-            OpenStore();
-        }
+        //if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
+        //{
+        //    OpenStore();
+        //}
     }
 
     public void OpenStore()
     {
+        if (GameManager.Instance.isStoreReset)
+        {
+            ResetPrice();
+            GameManager.Instance.isStoreReset = false;
+        }
         RerollItems();
+        UpdateItemUI();
+
         Store.SetActive(true);
         HUDManager.Instance.PauseGame();
         Debug.Log("Store");
@@ -46,10 +55,10 @@ public class StoreManager : MonoBehaviour
     {
         if (isStoreOpen)
         {
-            if (GameManager.Instance.playerGold - 10 < 0)
+            if (GameManager.Instance.playerGold - reRollPrice < 0)
                 return;
             else
-                GameManager.Instance.SetGold(-10);
+                GameManager.Instance.SetGold(-reRollPrice);
         }
 
         currentSelection = GetRandomItems();
@@ -76,10 +85,11 @@ public class StoreManager : MonoBehaviour
         for (int i = 0; i < itemButton.Length; i++)
         {
             var item = currentSelection[i];
-            var text = itemButton[i].GetComponentInChildren<Text>();
+            Text[] text = itemButton[i].GetComponentsInChildren<Text>();
             var icon = itemButton[i].transform.Find("IconImage").GetComponent<Image>();
 
-            text.text = $"{item.statType.ToString()}";
+            text[0].text = $"{item.statType.ToString()}";
+            text[1].text = $"{item.price.ToString()}";
             icon.sprite = item.icon;
 
             int index = i; // 클로저 문제 방지
@@ -92,12 +102,14 @@ public class StoreManager : MonoBehaviour
 
     void OnItemSelected(ItemData item)
     {
-        if (GameManager.Instance.playerGold - 50 < 0)   //임시로 50    경고음 추가하기
+        if (GameManager.Instance.playerGold - item.price < 0)
             return;
 
         Debug.Log($"구매한 아이템: {item.statType.ToString()}");
 
-        GameManager.Instance.SetGold(-50);
+        item.price += 50;
+
+        GameManager.Instance.SetGold(-item.price);
         ApplyItemEffect(item);
         UpdateItemUI();
     }
@@ -138,6 +150,15 @@ public class StoreManager : MonoBehaviour
                 Debug.Log($"CriticalDamage +{item.value}");
                 GameManager.Instance.SetPlayerCriticalDamage(item.value);
                 break;
+        }
+    }
+
+    public void ResetPrice()
+    {
+        Debug.Log("Reset!");
+        for (int i = 0; i < itemDataList.Count; i++)
+        {
+            itemDataList[i].price = 100;
         }
     }
 
