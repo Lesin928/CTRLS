@@ -15,3 +15,4 @@ MonoBehaviour:
   statType: 7
   value: 10
   icon: {fileID: -103129149858821352, guid: b9c47a2159c17fe47b738f28749f9ff2, type: 3}
+  price: 100

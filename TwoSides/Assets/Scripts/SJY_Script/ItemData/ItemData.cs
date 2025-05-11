@@ -18,4 +18,5 @@ public class ItemData : ScriptableObject
     public StatType statType;
     public float value;
     public Sprite icon;
+    public int price;
 }
