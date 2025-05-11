@@ -32,28 +32,6 @@ public class StoreManager : MonoBehaviour
         GameManager.Instance.OnStageClear();
     }
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.F))
-    //    {
-    //        ResetAllStoreData();
-    //    }
-    //}
-
-    //void ResetAllStoreData()
-    //{
-    //    Debug.Log(":boom: F키로 상점 정보 전체 초기화");
-
-    //    foreach (var item in itemDataList)
-    //        item.price = 100;
-
-    //    GameManager.Instance.itemPriceMap.Clear();
-    //    GameManager.Instance.SetGold(1000);
-    //    currentSelection.Clear();
-
-    //    UpdateItemUI();
-    //}
-
     public void OpenStore()
     {
         RerollItems();
@@ -127,7 +105,6 @@ public class StoreManager : MonoBehaviour
 
         GameManager.Instance.SetGold(-item.price);
 
-        // :white_check_mark: 가격 증가는 GameManager에 반영
         GameManager.Instance.IncreaseItemPrice(item.statType, 50);
 
         ApplyItemEffect(item);

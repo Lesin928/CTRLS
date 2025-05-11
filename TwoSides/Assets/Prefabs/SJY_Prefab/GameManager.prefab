@@ -64,9 +64,9 @@ MonoBehaviour:
   - stageName: Battle7
     monsterCount: 9
   - stageName: Battle8
-    monsterCount: 8
+    monsterCount: 9
   - stageName: Battle9
-    monsterCount: 5
+    monsterCount: 4
   - stageName: Boss
     monsterCount: 1
   - stageName: Puzzle0
@@ -108,6 +108,7 @@ MonoBehaviour:
   go: {fileID: 0}
   fadeCanvasPrefab: {fileID: 652154436532790244, guid: 55aa1a501532e2544897aff3c44ceb65, type: 3}
   hitEffectUIPrefab: {fileID: 5190647351312058720, guid: c3ae6b0cee982874cbad99ba6fed100e, type: 3}
+  isStoreReset: 0
   playerGold: 0
   playerHealth: 0
   playerMaxHealth: 0
