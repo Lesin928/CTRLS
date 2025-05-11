@@ -12,7 +12,7 @@ public class EnemyBossSprayBulletAttackTrigger : EnemyAnimationTrigger
     // 총알 생성 후 발사 (애니메이션 이벤트에서 호출)
     void SprayBulletAttackTrigger()
     {
-        int bulletCount = 12;
+        int bulletCount = 10;
         float angleStep = 360f / bulletCount;
 
         for (int i = 0; i < bulletCount; i++)
