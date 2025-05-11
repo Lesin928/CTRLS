@@ -5647,6 +5647,7 @@ MonoBehaviour:
     - {fileID: -6765078678776490541}
     - {fileID: -153922256137322290}
     - {fileID: -3020987960048223665}
+    - {fileID: 9058801274907130632}
 --- !u!114 &-3105992702446089649
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -33280,6 +33281,22 @@ MonoBehaviour:
     color: {r: 0.6650944, g: 1, b: 1, a: 1}
     fontSize: 32
     text: "\uC801\uB300\uC801 \uC0DD\uBA85\uCCB4 \uD655\uC778"
+--- !u!114 &9058801274907130632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 0
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 3e8667b17e588c147a73b36aa8d9c47f, type: 2}
 --- !u!74 &9065309480472125040
 AnimationClip:
   m_ObjectHideFlags: 0
