@@ -307,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447e8ee81e627444b8514d6d8bed74b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 250
-  currentHp: 250
+  maxHp: 100
+  currentHp: 100
   armor: 0
   attack: 0
   attackSpeed: 0
