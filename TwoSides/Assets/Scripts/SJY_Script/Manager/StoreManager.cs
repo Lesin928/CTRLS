@@ -18,6 +18,12 @@ public class StoreManager : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance.isStoreReset)
+        {
+            ResetPrice();
+            GameManager.Instance.isStoreReset = false;
+        }
+
         reRollPrice = 5;
 
         rerollButton.onClick.AddListener(RerollItems);
@@ -26,23 +32,10 @@ public class StoreManager : MonoBehaviour
         GameManager.Instance.OnStageClear();
     }
 
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.S) && !isStoreOpen)
-        //{
-        //    OpenStore();
-        //}
-    }
-
     public void OpenStore()
     {
-        if (GameManager.Instance.isStoreReset)
-        {
-            ResetPrice();
-            GameManager.Instance.isStoreReset = false;
-        }
         RerollItems();
-        UpdateItemUI();
+        //UpdateItemUI();
 
         Store.SetActive(true);
         HUDManager.Instance.PauseGame();
@@ -107,9 +100,9 @@ public class StoreManager : MonoBehaviour
 
         Debug.Log($"구매한 아이템: {item.statType.ToString()}");
 
-        item.price += 50;
-
         GameManager.Instance.SetGold(-item.price);
+
+        item.price += 50;
         ApplyItemEffect(item);
         UpdateItemUI();
     }
@@ -156,9 +149,9 @@ public class StoreManager : MonoBehaviour
     public void ResetPrice()
     {
         Debug.Log("Reset!");
-        for (int i = 0; i < itemDataList.Count; i++)
+        foreach (var item in itemDataList)
         {
-            itemDataList[i].price = 100;
+            item.price = 100;
         }
     }
 
