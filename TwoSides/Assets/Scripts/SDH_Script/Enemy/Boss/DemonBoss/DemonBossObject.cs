@@ -106,8 +106,8 @@ public class DemonBossObject : EnemyObject
 
         if (closeRangeDetected())
         {
-            // Smash: 40%, CircleBullet: 10%, SprayBullet: 50%
-            if (rand < 0.4f)
+            // Smash: 30%, CircleBullet: 20%, SprayBullet: 50%
+            if (rand < 0.3f)
                 stateMachine.ChangeState(attack4State); // Smash
             else if (rand < 0.5f)
                 stateMachine.ChangeState(attack6State); // CircleBullet
@@ -117,12 +117,14 @@ public class DemonBossObject : EnemyObject
         else if (midRangeDetected())
         {
             // Slash: 35%, Hammer: 30%, Meteor: 35%
-            if (rand < 0.35f)
+            if (rand < 0.25f)
                 stateMachine.ChangeState(attack1State); // Slash
-            else if (rand < 0.65f)
+            else if (rand < 0.50f)
                 stateMachine.ChangeState(attack2State); // Hammer
-            else
+            else if(rand < 0.75f)
                 stateMachine.ChangeState(attack3State); // Meteor
+            else
+                stateMachine.ChangeState(attack7State); // SprayBullet
         }
         else if (longRangeDetected())
         {

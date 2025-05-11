@@ -584,7 +584,7 @@ MonoBehaviour:
   criticalDamage: 0
   defaultMoveSpeed: 2
   chaseSpeed: 4
-  attackCooldown: 1
+  attackCooldown: 0.5
   lastTimeAttacked: 0
   groundCheck: {fileID: 3650178651091985573}
   groundCheckDistance: 0.2
