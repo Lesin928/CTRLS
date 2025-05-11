@@ -40,7 +40,7 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Title")
+        if (SceneManager.GetActiveScene().name == "Title" || SceneManager.GetActiveScene().name == "TimeLine")
             HideHUD();
 
         if (isTrackingTime)

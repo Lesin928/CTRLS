@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private Image hitEffectImage;
 
     public bool isStoreReset;
+    public Dictionary<StatType, int> itemPriceMap = new Dictionary<StatType, int>();
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -120,6 +121,13 @@ public class GameManager : MonoBehaviour
             playerObj.ResetSpawnPosition();
     }
 
+    public void StartTimeLine()
+    {
+        HUDManager.Instance.HideHUD();
+
+        LoadingSceneController.Instance.LoadScene("TimeLine");
+    }
+
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
@@ -152,6 +160,8 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.ChangeBGM("IngameBGM");
 
+        HideMapController.shouldShowHideMap = true;
+
         LoadingSceneController.Instance.LoadScene("Tutorial");
     }
 
@@ -159,8 +169,8 @@ public class GameManager : MonoBehaviour
     {
         playerMaxHealth = 100;
         playerHealth = playerMaxHealth;
-        playerAttack = 5f;
-        playerArmor = 3f;
+        playerAttack = 10f;
+        playerArmor = 5f;
         playerAttackSpeed = 1f;
         playerCritical = 0.1f;
         playerCriticalDamage = 2f;
@@ -179,7 +189,7 @@ public class GameManager : MonoBehaviour
         playerObject.JumpForce = playerjumpForce;
         playerObject.DashForce = playerDashForce;
 
-        playerGold = 0;
+        playerGold = 100;
 
         HUDManager.Instance.SetMaxHealth(playerMaxHealth);
         HUDManager.Instance.SetHealth(playerHealth);
@@ -257,6 +267,22 @@ public class GameManager : MonoBehaviour
 
         AsyncOperation op = SceneManager.LoadSceneAsync("GameClear");
         yield return new WaitUntil(() => op.isDone);
+    }
+
+    public int GetItemPrice(StatType type)
+    {
+        if (!itemPriceMap.ContainsKey(type))
+            itemPriceMap[type] = 100; // 기본 가격
+
+        return itemPriceMap[type];
+    }
+
+    public void IncreaseItemPrice(StatType type, int amount)
+    {
+        if (!itemPriceMap.ContainsKey(type))
+            itemPriceMap[type] = 100;
+
+        itemPriceMap[type] += amount;
     }
 
     #region PlayerStat

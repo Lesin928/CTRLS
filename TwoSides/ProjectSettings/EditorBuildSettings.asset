@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SJY_Scene/Title.unity
     guid: 0b2a49d5d1f8cc9429dda97a591c1b13
   - enabled: 1
+    path: Assets/Scenes/SJY_Scene/TimeLine.unity
+    guid: afc1dc4d13453f14698c583c1f09d5a5
+  - enabled: 1
     path: Assets/Scenes/SJY_Scene/Tutorial.unity
     guid: edd27611d17a31f4983f1b5cbf197ac3
   - enabled: 1

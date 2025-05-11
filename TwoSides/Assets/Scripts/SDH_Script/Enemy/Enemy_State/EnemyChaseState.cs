@@ -31,7 +31,7 @@ public class EnemyChaseState : EnemyState
 
         // Y축 거리 차이가 크고 땅이 없으면 추적 포기
         float yDistance = Mathf.Abs(enemyBase.transform.position.y - player.position.y);
-        if (!enemyBase.IsGroundDetected() && yDistance > 0.3f)
+        if (!enemyBase.IsGroundDetected() && yDistance > enemyBase.colliderLength / 2)
         {
             enemyBase.CallIdleState();
             return;
@@ -53,7 +53,7 @@ public class EnemyChaseState : EnemyState
         float yDistance = Mathf.Abs(enemyBase.transform.position.y - player.position.y);
 
         // 땅이 없고 Y축 거리 차이가 크면 대기 상태로 전환
-        if (!enemyBase.IsGroundDetected() && yDistance > 0.3f)
+        if (!enemyBase.IsGroundDetected() && yDistance > enemyBase.colliderLength / 2)
         {
             enemyBase.CallIdleState();
             return;
