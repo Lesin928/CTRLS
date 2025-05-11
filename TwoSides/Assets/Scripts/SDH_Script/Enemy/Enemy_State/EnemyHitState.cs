@@ -1,46 +1,47 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ ÇÇ°İ »óÅÂ Å¬·¡½º
+/// ì ì˜ í”¼ê²© ìƒíƒœ í´ë˜ìŠ¤
 /// </summary>
 public class EnemyHitState : EnemyState
 {
-    // EnemyHitState »ı¼ºÀÚ
+    // EnemyHitState ìƒì„±ì
     public EnemyHitState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName) 
         : base(enemyBase, stateMachine, animBoolName)
     {
     }
 
     /// <summary>
-    /// »óÅÂ ÁøÀÔ ½Ã ½ÇÇà
+    /// ìƒíƒœ ì§„ì… ì‹œ ì‹¤í–‰
     /// </summary>
     public override void Enter()
     {
         base.Enter();
 
-        // Á¤Áö »óÅÂ·Î ÀüÈ¯
+        // ì •ì§€ ìƒíƒœë¡œ ì „í™˜
         enemyBase.SetZeroVelocity();
 
-        // ´ë±â ½Ã°£ ¼³Á¤
+        // ëŒ€ê¸° ì‹œê°„ ì„¤ì •
         stateTimer = 1f;
     }
 
     /// <summary>
-    /// ¸Å ÇÁ·¹ÀÓ ´ë±â »óÅÂ ·ÎÁ÷ ½ÇÇà
+    /// ë§¤ í”„ë ˆì„ ëŒ€ê¸° ìƒíƒœ ë¡œì§ ì‹¤í–‰
     /// </summary>
     public override void Update()
     {
         base.Update();
 
-        if (triggerCalled || stateTimer < 0) // stateTimer < 0 Á¶°ÇÀº Hit State °íÁ¤ ¹ö±× ¶§¹®¿¡ ³ÖÀ½
+        if (triggerCalled || stateTimer < 0) // stateTimer < 0 ì¡°ê±´ì€ Hit State ê³ ì • ë²„ê·¸ ë•Œë¬¸ì— ë„£ìŒ
             enemyBase.ExitPlayerDetection();
     }
 
     /// <summary>
-    /// »óÅÂ Á¾·á ½Ã ½ÇÇà
+    /// ìƒíƒœ ì¢…ë£Œ ì‹œ ì‹¤í–‰
     /// </summary>
     public override void Exit()
     {
         base.Exit();
+        enemyBase.stateMachine.isBeingHit = false;
     }
 }

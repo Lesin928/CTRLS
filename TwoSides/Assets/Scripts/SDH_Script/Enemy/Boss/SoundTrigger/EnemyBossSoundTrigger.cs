@@ -4,20 +4,30 @@ public class EnemyBossSoundTrigger : MonoBehaviour
 {
     [SerializeField] private AudioClip magicSoundClip;
     [SerializeField] private float magicSoundVolume;
+    [Space]
     [SerializeField] private AudioClip attack1SoundClip;
     [SerializeField] private float attack1SoundVolume;
+    [Space]
     [SerializeField] private AudioClip attack2SoundClip;
     [SerializeField] private float attack2SoundVolume;
+    [Space]
     [SerializeField] private AudioClip attack3SoundClip;
     [SerializeField] private float attack3SoundVolume;
+    [Space]
     [SerializeField] private AudioClip attack4SoundClip;
     [SerializeField] private float attack4SoundVolume;
+    [Space]
     [SerializeField] private AudioClip attack5SoundClip;
     [SerializeField] private float attack5SoundVolume;
+    [Space]
     [SerializeField] private AudioClip attack6SoundClip;
     [SerializeField] private float attack6SoundVolume;
+    [Space]
     [SerializeField] private AudioClip[] screamSoundClip;
     [SerializeField] private float screamSoundVolume;
+    [Space]
+    [SerializeField] private AudioClip deadSoundClip;
+    [SerializeField] private float deadSoundVolume;
 
     private AudioSource audioSource;
 
@@ -82,12 +92,20 @@ public class EnemyBossSoundTrigger : MonoBehaviour
         }
     }
 
-    public void PlayScreamSound()
+    private void PlayScreamSound()
     {
         if (screamSoundClip != null && screamSoundClip.Length > 0)
         {
             int index = Random.Range(0, screamSoundClip.Length);
             audioSource.PlayOneShot(screamSoundClip[index], screamSoundVolume);
+        }
+    }
+
+    private void PlayDead6Sound()
+    {
+        if (deadSoundClip != null)
+        {
+            audioSource.PlayOneShot(deadSoundClip, deadSoundVolume);
         }
     }
 }
