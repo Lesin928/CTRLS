@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 1039003353297207277}
   - component: {fileID: 2994131763496562126}
   - component: {fileID: 2027801676147690420}
+  - component: {fileID: 6320930249608388365}
   - component: {fileID: 6246459777351027517}
   - component: {fileID: 9089749398404269929}
   - component: {fileID: 5850664469140416091}
@@ -239,6 +240,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7475696652984398703, guid: 21276b3b56047c742a94752a93d0337c, type: 3}
   firePoint: {fileID: 7215332083280232538}
+--- !u!114 &6320930249608388365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106506966089593230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99543d887637e67438cc1eea671d8f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1751961384052433322, guid: e8ff30a164480f34ab955e157631afa9, type: 3}
+  firePoint: {fileID: 4731286796453905683}
 --- !u!114 &6246459777351027517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,10 +574,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1df5ca11d989941821b6191e52fd55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 2000
-  currentHp: 2000
+  maxHp: 4000
+  currentHp: 4000
   armor: 0
-  attack: 10
+  attack: 25
   attackSpeed: 0
   moveSpeed: 2
   critical: 0

@@ -30,6 +30,7 @@ public class DemonBossObject : EnemyObject
     public EnemyAttackState attack4State { get; private set; } // 공격 4
     public EnemyAttackState attack5State { get; private set; } // 공격 5
     public EnemyAttackState attack6State { get; private set; } // 공격 6
+    public EnemyAttackState attack7State { get; private set; } // 공격 7
     #endregion
 
     protected override void Awake()
@@ -46,6 +47,7 @@ public class DemonBossObject : EnemyObject
         attack4State = new EnemyAttackState(this, stateMachine, "Attack4");
         attack5State = new EnemyAttackState(this, stateMachine, "Attack5");
         attack6State = new EnemyAttackState(this, stateMachine, "Attack6");
+        attack7State = new EnemyAttackState(this, stateMachine, "Attack7");
     }
 
     protected override void Start()
@@ -104,11 +106,13 @@ public class DemonBossObject : EnemyObject
 
         if (closeRangeDetected())
         {
-            // Smash: 70%, CircleBullet: 30%
-            if (rand < 0.7f)
+            // Smash: 40%, CircleBullet: 10%, SprayBullet: 50%
+            if (rand < 0.4f)
                 stateMachine.ChangeState(attack4State); // Smash
-            else
+            else if (rand < 0.5f)
                 stateMachine.ChangeState(attack6State); // CircleBullet
+            else
+                stateMachine.ChangeState(attack7State); // SprayBullet
         }
         else if (midRangeDetected())
         {
