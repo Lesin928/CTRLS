@@ -307,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2232957179544904d9431a7ba937bc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 2000
-  currentHp: 2000
+  maxHp: 250
+  currentHp: 250
   armor: 0
   attack: 0
   attackSpeed: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   flashEffect: {fileID: 1685404673845392221}
-  supportRange: 8
+  supportRange: 15
   buffPrefab: {fileID: 8694827050933505737, guid: 10e67d06776532543a6262c64a429ef0, type: 3}
 --- !u!50 &2641929702100298990
 Rigidbody2D:
