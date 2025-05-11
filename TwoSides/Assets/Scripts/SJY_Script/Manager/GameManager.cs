@@ -169,8 +169,8 @@ public class GameManager : MonoBehaviour
     {
         playerMaxHealth = 100;
         playerHealth = playerMaxHealth;
-        playerAttack = 5f;
-        playerArmor = 3f;
+        playerAttack = 10f;
+        playerArmor = 5f;
         playerAttackSpeed = 1f;
         playerCritical = 0.1f;
         playerCriticalDamage = 2f;
@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
         playerObject.JumpForce = playerjumpForce;
         playerObject.DashForce = playerDashForce;
 
-        playerGold = 0;
+        playerGold = 100;
 
         HUDManager.Instance.SetMaxHealth(playerMaxHealth);
         HUDManager.Instance.SetHealth(playerHealth);
