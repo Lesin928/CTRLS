@@ -148,6 +148,12 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.ChangeBGM("IngameBGM");
 
+        //if (Mapbutton.Instance.isVisible)
+        //{
+        //    Debug.Log("Mapbutton isVisible");
+        //    Mapbutton.Instance.HideMapNoAnim();
+        //}
+
         LoadingSceneController.Instance.LoadScene("Tutorial");
     }
 
@@ -212,6 +218,14 @@ public class GameManager : MonoBehaviour
     {
         HUDManager.Instance.HideHUD();
         HideMapController.shouldShowHideMap = false;
+        GameObject map = GameObject.Find("MapScrollArea");
+        if (map != null)
+        {
+            if (map.activeSelf)
+            {
+                map.SetActive(false);
+            }
+        }
 
         StartCoroutine(GameOverRoutine());
     }

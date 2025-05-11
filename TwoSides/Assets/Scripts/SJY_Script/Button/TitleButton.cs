@@ -3,18 +3,10 @@ using UnityEngine.UI;
 
 public class TitleButton : MonoBehaviour
 {
-    public GameObject map;
     public GameObject playerPrefab;
 
     public void StartTitle()
     {
-        map = GameObject.Find("MapScrollArea");
-
-        if (map.activeSelf)
-        {
-            map.SetActive(false);
-        }
-
         LoadingSceneController.Instance.LoadScene("Title");
 
         playerPrefab = GameObject.Find("PlayerSet(Clone)");
@@ -39,14 +31,17 @@ public class TitleButton : MonoBehaviour
         {
             AudioManager.Instance.ChangeBGM("TitleBGM");
         }
-        GameObject Mapbtn = GameObject.Find("HideMap");
+
         GameObject go = GameObject.Find("OptionUI(Clone)");
+        GameObject Mapbtn = GameObject.Find("HideMap");
+        GameObject map = GameObject.Find("MapScrollArea");
         if (go != null)
         {
             if (go.activeSelf)
             {
                 go.SetActive(false);
                 Mapbtn.SetActive(false);
+                map.SetActive(false);
             }
         }
     }
