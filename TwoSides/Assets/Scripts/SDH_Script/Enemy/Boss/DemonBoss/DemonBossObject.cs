@@ -112,10 +112,10 @@ public class DemonBossObject : EnemyObject
         }
         else if (midRangeDetected())
         {
-            // Slash: 40%, Hammer: 20%, Meteor: 40%
-            if (rand < 0.4f)
+            // Slash: 35%, Hammer: 30%, Meteor: 35%
+            if (rand < 0.35f)
                 stateMachine.ChangeState(attack1State); // Slash
-            else if (rand < 0.6f)
+            else if (rand < 0.65f)
                 stateMachine.ChangeState(attack2State); // Hammer
             else
                 stateMachine.ChangeState(attack3State); // Meteor
