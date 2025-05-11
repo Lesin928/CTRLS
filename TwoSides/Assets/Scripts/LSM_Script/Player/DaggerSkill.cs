@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾îÀÇ ±ÙÁ¢ ½ºÅ³ µ¥¹ÌÁö¸¦ °ü¸®ÇÏ´Â Å¬·¡½º
+/// í”Œë ˆì´ì–´ì˜ ê·¼ì ‘ ìŠ¤í‚¬ ë°ë¯¸ì§€ë¥¼ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class DaggerSkill : MonoBehaviour
 {    
@@ -19,7 +19,7 @@ public class DaggerSkill : MonoBehaviour
         playerObject = GetComponentInParent<PlayerObject>();     
     }
 
-    //±ÙÁ¢ °ø°İ½Ã Ãæµ¹ÇÑ ¸ó½ºÅÍ¿¡ ´ëÇÑ Ãæµ¹Ã³¸® 
+    //ê·¼ì ‘ ê³µê²©ì‹œ ì¶©ëŒí•œ ëª¬ìŠ¤í„°ì— ëŒ€í•œ ì¶©ëŒì²˜ë¦¬ 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -29,24 +29,24 @@ public class DaggerSkill : MonoBehaviour
                 collision.gameObject.GetComponent<EnemyObject>().TakeDamage(IsCritical());
             }
             else if (collision.gameObject.GetComponent<TestObject>() != null)
-            {   //Å×½ºÆ®¿ë ÄÚµå
+            {   //í…ŒìŠ¤íŠ¸ìš© ì½”ë“œ
                 collision.gameObject.GetComponent<TestObject>().TakeDamage(IsCritical());
             }
-            //¹Ğ±â
+            //ë°€ê¸°
             PushAttack(collision);
 
-            // ÇÇ°İ ÀÌÆåÆ®  
+            // í”¼ê²© ì´í™íŠ¸  
             HitPoint(collision);
         }
     }
 
     /// <summary>
-    /// Ä¡¸íÅ¸ ÆÇÁ¤À» ¼öÇàÇÏ´Â ¸Ş¼­µå
+    /// ì¹˜ëª…íƒ€ íŒì •ì„ ìˆ˜í–‰í•˜ëŠ” ë©”ì„œë“œ
     /// </summary>
     private float IsCritical()
     {
-        float finalDamage = playerObject.Attack * 1.4f; // ±âº» µ¥¹ÌÁö * ½ºÅ³ °è¼ö
-        //Ä¡¸íÅ¸ ÆÇÁ¤
+        float finalDamage = playerObject.Attack * 1.5f; // ê¸°ë³¸ ë°ë¯¸ì§€ * ìŠ¤í‚¬ ê³„ìˆ˜
+        //ì¹˜ëª…íƒ€ íŒì •
         if (Random.Range(0f, 1f) < playerObject.Critical)
         {
             finalDamage *= playerObject.CriticalDamage;
@@ -55,25 +55,25 @@ public class DaggerSkill : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹Ğ±â Ã³¸® ¸Ş¼­µå
+    /// ë°€ê¸° ì²˜ë¦¬ ë©”ì„œë“œ
     /// </summary>
     private void PushAttack(Collider2D collision)
     {
-        //¹Ğ±â
+        //ë°€ê¸°
         if (collision.GetComponent<PushableObject>() != null)
         {
-            Vector2 collisionDirection = (collision.transform.position - transform.position).normalized; // Ãæµ¹ ¹æÇâº¤ÅÍ
-            collision.gameObject.GetComponent<PushableObject>().Push(collisionDirection * playerObject.Attack * 0.2f); // µ¥¹ÌÁö ºñ·Ê ³Ë¹é
+            Vector2 collisionDirection = (collision.transform.position - transform.position).normalized; // ì¶©ëŒ ë°©í–¥ë²¡í„°
+            collision.gameObject.GetComponent<PushableObject>().Push(collisionDirection * playerObject.Attack * 0.2f); // ë°ë¯¸ì§€ ë¹„ë¡€ ë„‰ë°±
         }
     }
 
     /// <summary>
-    /// ÇÇ°İ ÀÌÆåÆ® À§Ä¡¸¦ Ã³¸®ÇÏ´Â ¸Ş¼­µå
+    /// í”¼ê²© ì´í™íŠ¸ ìœ„ì¹˜ë¥¼ ì²˜ë¦¬í•˜ëŠ” ë©”ì„œë“œ
     /// </summary>
     private void HitPoint(Collider2D collision)
     {
         Vector3 effectPosition = collision.ClosestPoint(transform.position);
-        //effectPosition.y = transform.position.y; // ³ôÀÌ¸¦ °ø°İ ÁÖÃ¼ÀÇ ³ôÀÌ·Î ¼³Á¤  
+        //effectPosition.y = transform.position.y; // ë†’ì´ë¥¼ ê³µê²© ì£¼ì²´ì˜ ë†’ì´ë¡œ ì„¤ì •  
         GameObject hit = Instantiate(effect, effectPosition, Quaternion.identity);
         //GameObject hit = Instantiate(effect, collision.gameObject.transform.position, gameObject.transform.rotation);
     }
