@@ -21,7 +21,6 @@ public class PauseOnSignal : MonoBehaviour
         { SignalType.C, KeyCode.C },
         { SignalType.Space, KeyCode.Space },
         { SignalType.RightArrow, KeyCode.RightArrow },
-        { SignalType.Backspace, KeyCode.Backspace },
     };
 
     // Signal 타입 정의
@@ -31,26 +30,15 @@ public class PauseOnSignal : MonoBehaviour
         X,
         C,
         Space,
-        RightArrow,
-        Backspace
-    }
-
-
+        RightArrow
+    } 
 
     // Signal Receiver에서 바인딩할 메서드들
     public void OnSignalZ() => HandleSignal(SignalType.Z);
     public void OnSignalX() => HandleSignal(SignalType.X);
     public void OnSignalC() => HandleSignal(SignalType.C);
     public void OnSignalSpace() => HandleSignal(SignalType.Space);
-    public void OnSignalRight() => HandleSignal(SignalType.RightArrow);
-
-    public void OnSignalBackSpace() => HandleEndSignal(SignalType.Backspace);    
-
-    private void HandleEndSignal(SignalType signal)
-    {
-        GameManager.Instance.StartNewGame();
-    }
-
+    public void OnSignalRight() => HandleSignal(SignalType.RightArrow);          
 
     private void HandleSignal(SignalType signal)
     {
@@ -72,6 +60,12 @@ public class PauseOnSignal : MonoBehaviour
 
     private void Update()
     {
+        // 백스페이스 입력 받으면 게임 시작
+        if (Input.GetKeyDown(KeyCode.Backspace) && director != null)
+        {
+            GameManager.Instance.StartNewGame();
+        }
+
         if (isPaused && director != null)
         {
             var desiredKey = signalKeyMap[currentSignal];

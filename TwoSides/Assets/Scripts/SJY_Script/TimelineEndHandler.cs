@@ -18,6 +18,7 @@ public class TimelineEndHandler : MonoBehaviour
 
     void Update()
     {/*
+        // legacy code
         if (Input.GetKeyDown(KeyCode.Backspace) && director != null)
         {
             // 타임라인이 재생 중일 때만 처리
