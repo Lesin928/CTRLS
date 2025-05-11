@@ -1,11 +1,11 @@
 using UnityEngine; 
 
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î°¡ ´ë½¬ÇÏ´Â »óÅÂ¸¦ ³ªÅ¸³»´Â Å¬·¡½º
+/// í”Œë ˆì´ì–´ê°€ ëŒ€ì‰¬í•˜ëŠ” ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class PlayerDashState : PlayerState
 {
@@ -14,22 +14,23 @@ public class PlayerDashState : PlayerState
 
     public override void Enter()
     {
-        base.Enter(); 
-        playerObject.IsInvincibility = true; //´ë½¬ Áß ¹«Àû
+        base.Enter();  
+        playerAnimation.playerSFX.PlayClip(playerAnimation.playerSFX.dashClip); //ëŒ€ì‰¬ ì†Œë¦¬ ì¬ìƒ   
+        playerObject.IsInvincibility = true; //ëŒ€ì‰¬ ì¤‘ ë¬´ì 
         playerObject.IsDashing = true;
-        //È¸ÇÇ °¡´ÉÀÌ¸é ±ØÇÑÈ¸ÇÇ
+        //íšŒí”¼ ê°€ëŠ¥ì´ë©´ ê·¹í•œíšŒí”¼
         if (playerObject.IsEvasion)
         {
             playerAnimation.GetComponent<VignetteControllerURP>().TriggerVignette(); 
-            playerAnimation.GetComponent<ParryAfterImage>().StartDodgeEffect(); //ÀÜ»ó
-            //È¸ÇÇ ¿¬Ãâ
-            playerObject.IsCanParry = true; //ÆĞ¸µ °¡´É 
+            playerAnimation.GetComponent<ParryAfterImage>().StartDodgeEffect(); //ì”ìƒ
+            //íšŒí”¼ ì—°ì¶œ
+            playerObject.IsCanParry = true; //íŒ¨ë§ ê°€ëŠ¥ 
         }
     } 
     public override void Update()
     { 
         base.Update();
-        //´ë½¬¿¡¼­ÀÇ »óÅÂ ÀüÀÌ 
+        //ëŒ€ì‰¬ì—ì„œì˜ ìƒíƒœ ì „ì´ 
         if (!playerObject.IsDashing)
         {
             if (playerObject.IsGroundDetected()) 
@@ -53,7 +54,7 @@ public class PlayerDashState : PlayerState
 
     public override void Exit()
     {        
-        playerObject.IsInvincibility = false; //´ë½¬ Áß ¹«Àû ÇØÁ¦
+        playerObject.IsInvincibility = false; //ëŒ€ì‰¬ ì¤‘ ë¬´ì  í•´ì œ
         playerObject.IsEvasion = false; 
         base.Exit();
     } 

@@ -1,11 +1,11 @@
 using UnityEngine;
 
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î°¡ °øÁß¿¡ ÀÖÀ» ¶§ÀÇ »óÅÂ¸¦ °ü¸®ÇÏ´Â Å¬·¡½º
+/// í”Œë ˆì´ì–´ê°€ ê³µì¤‘ì— ìˆì„ ë•Œì˜ ìƒíƒœë¥¼ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class PlayerAirState : PlayerState
 {
@@ -13,13 +13,13 @@ public class PlayerAirState : PlayerState
         : base(_playerAnim, _stateMachine, _playerObject, _animBoolName) { }
     public override void Enter()
     {
-        base.Enter();
+        base.Enter();        
     }
      
     public override void Update()
     { 
         base.Update();
-        //Air¿¡¼­ÀÇ »óÅÂ ÀüÀÌ
+        //Airì—ì„œì˜ ìƒíƒœ ì „ì´
         if (playerObject.IsGroundDetected())
         {
             if (playerObject.MoveInput.x == 0)
