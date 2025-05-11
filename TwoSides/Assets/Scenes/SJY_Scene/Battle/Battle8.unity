@@ -634,7 +634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.77
+      value: 16.71
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -707,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.77
+      value: 16.7
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -858,7 +858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.79
+      value: 16.7
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1196,7 +1196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.79
+      value: 16.7
       objectReference: {fileID: 0}
     - target: {fileID: 3786341034938842979, guid: 343ba1ba10553f7469ae751b9b7bbf28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1257,7 +1257,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4955974930439699251, guid: db1a9b3f083b03f4eb5d1fb92ad407e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.04
+      value: -1.78
       objectReference: {fileID: 0}
     - target: {fileID: 4955974930439699251, guid: db1a9b3f083b03f4eb5d1fb92ad407e6, type: 3}
       propertyPath: m_LocalPosition.y
