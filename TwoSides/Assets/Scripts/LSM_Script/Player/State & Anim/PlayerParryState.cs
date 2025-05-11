@@ -43,13 +43,11 @@ public class PlayerParryState : PlayerState
     }
     public override void Exit()
     {
-        base.Exit();
+        base.Exit();  
         if (playerObject.parryCollider.activeSelf)
         {
             playerObject.parryCollider.SetActive(false);
         }
         playerObject.IsCanParry = false; //패링 불가
-    }
-
-
+    } 
 }
