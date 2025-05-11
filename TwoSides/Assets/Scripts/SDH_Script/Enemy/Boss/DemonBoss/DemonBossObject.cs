@@ -30,6 +30,7 @@ public class DemonBossObject : EnemyObject
     public EnemyAttackState attack4State { get; private set; } // 공격 4
     public EnemyAttackState attack5State { get; private set; } // 공격 5
     public EnemyAttackState attack6State { get; private set; } // 공격 6
+    public EnemyAttackState attack7State { get; private set; } // 공격 7
     #endregion
 
     protected override void Awake()
@@ -46,6 +47,7 @@ public class DemonBossObject : EnemyObject
         attack4State = new EnemyAttackState(this, stateMachine, "Attack4");
         attack5State = new EnemyAttackState(this, stateMachine, "Attack5");
         attack6State = new EnemyAttackState(this, stateMachine, "Attack6");
+        attack7State = new EnemyAttackState(this, stateMachine, "Attack7");
     }
 
     protected override void Start()
@@ -104,21 +106,25 @@ public class DemonBossObject : EnemyObject
 
         if (closeRangeDetected())
         {
-            // Smash: 70%, CircleBullet: 30%
-            if (rand < 0.7f)
+            // Smash: 30%, CircleBullet: 20%, SprayBullet: 50%
+            if (rand < 0.3f)
                 stateMachine.ChangeState(attack4State); // Smash
-            else
+            else if (rand < 0.5f)
                 stateMachine.ChangeState(attack6State); // CircleBullet
+            else
+                stateMachine.ChangeState(attack7State); // SprayBullet
         }
         else if (midRangeDetected())
         {
-            // Slash: 35%, Hammer: 30%, Meteor: 35%
-            if (rand < 0.35f)
+            // Slash: 25%, Hammer: 25%, Meteor: 25%, SprayBullet: 25%
+            if (rand < 0.25f)
                 stateMachine.ChangeState(attack1State); // Slash
-            else if (rand < 0.65f)
+            else if (rand < 0.50f)
                 stateMachine.ChangeState(attack2State); // Hammer
-            else
+            else if(rand < 0.75f)
                 stateMachine.ChangeState(attack3State); // Meteor
+            else
+                stateMachine.ChangeState(attack7State); // SprayBullet
         }
         else if (longRangeDetected())
         {
