@@ -471,17 +471,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b126410eaa600f41b7a3e1c8c12cc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currentHp: 100
+  maxHp: 75
+  currentHp: 75
   armor: 0
-  attack: 5
+  attack: 14
   attackSpeed: 0
   moveSpeed: 3
   critical: 0
   criticalDamage: 0
   defaultMoveSpeed: 3
   chaseSpeed: 4
-  attackCooldown: 2
+  attackCooldown: 1.5
   lastTimeAttacked: 0
   groundCheck: {fileID: 2952059135854301084}
   groundCheckDistance: 0.2

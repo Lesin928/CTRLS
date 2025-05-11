@@ -307,6 +307,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9f225ae2b95b78c4c90f74b4ab5da86c, type: 3}
   - {fileID: 8300000, guid: 4d3b44101c961004c9323f20bc2a1868, type: 3}
   screamSoundVolume: 0.3
+  deadSoundClip: {fileID: 8300000, guid: 37f50ced6dd28b44da7dbdb73540a76f, type: 3}
+  deadSoundVolume: 1
 --- !u!82 &8312288448961077504
 AudioSource:
   m_ObjectHideFlags: 0
@@ -590,7 +592,7 @@ MonoBehaviour:
   closeAttackCheck: {fileID: 6585661258646407055}
   midAttackCheck: {fileID: 3231517490566501794}
   longAttackCheck: {fileID: 3212903648840652397}
-  closeAttackCheckSize: {x: 2.3, y: 4}
+  closeAttackCheckSize: {x: 2.5, y: 4}
   midAttackCheckSize: {x: 10, y: 4}
   longAttackCheckSize: {x: 20, y: 4}
   healthBar: {fileID: 4288437340468795717, guid: 814f6f2f199495a45bbe309ab460a1fd, type: 3}

@@ -8,6 +8,7 @@ public class EnemyStateMachine
     public EnemyState currentState { get; private set; } // 현재 활성화된 상태
     public bool isAttacking;
     public bool isBeingHit;
+    public bool isChasing;
 
     /// <summary>
     /// 상태 머신을 초기 상태로 설정하고 상태를 진입시킴

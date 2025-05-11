@@ -1,28 +1,27 @@
 using UnityEngine;
 
 /// <summary>
-/// Àû¿¡°Ô ¹öÇÁ(°ø°İ·Â Áõ°¡, ÀÌµ¿ ¼Óµµ Áõ°¡, È¸º¹)¸¦ Àû¿ëÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
-/// ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®¸¦ ÅëÇØ ¹öÇÁ°¡ Àû¿ëµË´Ï´Ù.
+/// ì ì—ê²Œ ë²„í”„(ê³µê²©ë ¥ ì¦ê°€, ì´ë™ ì†ë„ ì¦ê°€, íšŒë³µ)ë¥¼ ì ìš©í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
+/// ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ë¥¼ í†µí•´ ë²„í”„ê°€ ì ìš©ë©ë‹ˆë‹¤.
 /// </summary>
 public class EnemyBuff : MonoBehaviour
 {
-    // ¹öÇÁ Á¾·ù ¿­°ÅÇü
+    // ë²„í”„ ì¢…ë¥˜ ì—´ê±°í˜•
     enum BuffType { Attack, Speed, Heal }
 
-    [SerializeField] private BuffType buffType; // Àû¿ëÇÒ ¹öÇÁ Å¸ÀÔ
-    [SerializeField] private float amount;      // ¹öÇÁÀÇ ¼öÄ¡
+    [SerializeField] private BuffType buffType; // ì ìš©í•  ë²„í”„ íƒ€ì…
 
-    private EnemyObject enemy; // ¹öÇÁ¸¦ ¹ŞÀ» Àû ¿ÀºêÁ§Æ® ÂüÁ¶
+    private EnemyObject enemy; // ë²„í”„ë¥¼ ë°›ì„ ì  ì˜¤ë¸Œì íŠ¸ ì°¸ì¡°
 
-    bool isBuffApplied = false; // Áßº¹ Àû¿ë ¹æÁö ÇÃ·¡±×
+    bool isBuffApplied = false; // ì¤‘ë³µ ì ìš© ë°©ì§€ í”Œë˜ê·¸
 
-    // ¿ø·¡ÀÇ ´É·ÂÄ¡ ÀúÀå¿ë º¯¼ö
+    // ì›ë˜ì˜ ëŠ¥ë ¥ì¹˜ ì €ì¥ìš© ë³€ìˆ˜
     private float originalAttack;
     private float originalMoveSpeed;
     private float originalDefaultMoveSpeed;
     private float originalChaseSpeed;
 
-    // ½ÃÀÛ ½Ã EnemyObject ÂüÁ¶ ¹× ¿ø·¡ ´É·ÂÄ¡ ÀúÀå
+    // ì‹œì‘ ì‹œ EnemyObject ì°¸ì¡° ë° ì›ë˜ ëŠ¥ë ¥ì¹˜ ì €ì¥
     private void Start()
     {
         enemy = GetComponentInParent<EnemyObject>();
@@ -36,8 +35,8 @@ public class EnemyBuff : MonoBehaviour
         }
     }
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâµÇ¾î ¹öÇÁ¸¦ ½ÇÁ¦·Î Àû¿ë
-    // Áßº¹ Àû¿ëÀº ¹æÁö
+    // ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œë˜ì–´ ë²„í”„ë¥¼ ì‹¤ì œë¡œ ì ìš©
+    // ì¤‘ë³µ ì ìš©ì€ ë°©ì§€
     private void buffAnimationTrigger()
     {
         switch (buffType)
@@ -45,35 +44,32 @@ public class EnemyBuff : MonoBehaviour
             case BuffType.Attack:
                 if (isBuffApplied || enemy == null) return;
 
-                // °ø°İ·Â Áõ°¡
+                // ê³µê²©ë ¥ ì¦ê°€
                 originalAttack = enemy.Attack;
-                enemy.Attack = originalAttack + amount;
+                enemy.Attack = originalAttack + originalAttack * 0.2f;
                 break;
 
             case BuffType.Speed:
                 if (isBuffApplied || enemy == null) return;
 
-                // ÀÌµ¿ ¼Óµµ °ü·Ã °ªµéÀ» °¢°¢ Áõ°¡
+                // ì´ë™ ì†ë„ ê´€ë ¨ ê°’ë“¤ì„ ê°ê° ì¦ê°€
                 originalMoveSpeed = enemy.MoveSpeed;
-                enemy.MoveSpeed = originalMoveSpeed + amount;
+                enemy.MoveSpeed = originalMoveSpeed + originalMoveSpeed * 0.2f;
 
                 originalDefaultMoveSpeed = enemy.defaultMoveSpeed;
-                enemy.defaultMoveSpeed = originalDefaultMoveSpeed + amount;
+                enemy.defaultMoveSpeed = originalDefaultMoveSpeed + originalDefaultMoveSpeed * 0.2f;
 
                 originalChaseSpeed = enemy.chaseSpeed;
-                enemy.chaseSpeed = originalChaseSpeed + amount;
+                enemy.chaseSpeed = originalChaseSpeed + originalChaseSpeed * 0.2f;
                 break;
 
             case BuffType.Heal:
-                // ÃÖ´ë Ã¼·ÂÀ» ÃÊ°úÇÏÁö ¾Êµµ·Ï È¸º¹
-                if (enemy.CurrentHp + amount > enemy.MaxHp)
-                    enemy.CurrentHp = enemy.MaxHp;
-                else
-                    enemy.CurrentHp += amount;
+                // ìµœëŒ€ ì²´ë ¥ì„ ì´ˆê³¼í•˜ì§€ ì•Šë„ë¡ íšŒë³µ
+                enemy.CurrentHp = Mathf.Min(enemy.CurrentHp + enemy.MaxHp * 0.2f, enemy.MaxHp);
                 break;
         }
 
-        isBuffApplied = true; // ¹öÇÁ Àû¿ë ¿Ï·á Ç¥½Ã
+        isBuffApplied = true; // ë²„í”„ ì ìš© ì™„ë£Œ í‘œì‹œ
     }
 
     private void OnDestroy()
@@ -86,7 +82,11 @@ public class EnemyBuff : MonoBehaviour
                 enemy.Attack = originalAttack;
                 break;
             case BuffType.Speed:
-                enemy.MoveSpeed = originalMoveSpeed;
+                if(enemy.stateMachine.isChasing)
+                    enemy.MoveSpeed = originalChaseSpeed;
+                else
+                    enemy.MoveSpeed = originalMoveSpeed;
+
                 enemy.defaultMoveSpeed = originalDefaultMoveSpeed;
                 enemy.chaseSpeed = originalChaseSpeed;
                 break;
