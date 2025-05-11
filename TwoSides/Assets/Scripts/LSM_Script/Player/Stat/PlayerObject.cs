@@ -182,6 +182,7 @@ public class PlayerObject : CharacterObject
         IsInvincibility = true; //���� ���·� ����
         base.TakeDamage(damage);
 
+        playerAnimation.playerSFX.PlayClip(playerAnimation.playerSFX.hurtClip);
         GameManager.Instance.TakeDamage(CurrentHp);
         GetComponentInChildren<HitAnim>().Flash();
     }

@@ -337,7 +337,7 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: 9d3770c9f9d7a834797616c9591120d2, type: 3}
   fallClip: {fileID: 0}
   jumpClip: {fileID: 8300000, guid: 0cc2a6adee2550f43994dc0f05ac0540, type: 3}
-  hurtClip: {fileID: 8300000, guid: 653a282dc4c06ef4d866114f0a6d4e1f, type: 3}
+  hurtClip: {fileID: 8300000, guid: c4256b752bfe5ee46a08c3f881ae2b1e, type: 3}
   move1Clip: {fileID: 8300000, guid: 656ca2d590155144c9cd19da9a538aef, type: 3}
   move2Clip: {fileID: 8300000, guid: 8df6f1a23c736c24a9c914473f353e6e, type: 3}
   skill1Clip: {fileID: 8300000, guid: d491256939852db4ca479e06386aac36, type: 3}
