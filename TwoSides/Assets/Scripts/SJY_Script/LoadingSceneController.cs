@@ -81,7 +81,8 @@ public class LoadingSceneController : MonoBehaviour
         if (arg0.name == loadSceneName)
         {
             if (GameManager.Instance != null && loadSceneName != "Title"
-                && loadSceneName != "GameClear" && loadSceneName != "GameOver")
+                && loadSceneName != "GameClear" && loadSceneName != "GameOver"
+                && loadSceneName != "TimeLine")
             {
                 GameManager.Instance.InitStageData(loadSceneName);
             }

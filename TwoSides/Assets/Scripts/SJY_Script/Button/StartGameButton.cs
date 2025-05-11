@@ -13,12 +13,13 @@ public class StartGameButton : MonoBehaviour
             Destroy(playerPrefab);
         }
 
-        GameManager.Instance.StartNewGame();
+        //GameManager.Instance.StartNewGame();
+        GameManager.Instance.StartTimeLine();
         HUDManager.Instance.ResumGame();
 
 
 
-        HideMapController.shouldShowHideMap = true;
+        //HideMapController.shouldShowHideMap = true;
         if (Map.Instance != null)
         {
             Map.Instance.ResetMap();
