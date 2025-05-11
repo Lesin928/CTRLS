@@ -1842,6 +1842,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1465283944}
   - component: {fileID: 1465283943}
+  - component: {fileID: 1465283946}
+  - component: {fileID: 1465283945}
   m_Layer: 0
   m_Name: TurotialTimeline
   m_TagString: Untagged
@@ -1896,6 +1898,8 @@ PlayableDirector:
     value: {fileID: 144779214}
   - key: {fileID: 2180812887693665571, guid: b790de0c52b0da84c9e6e75aeff27be0, type: 2}
     value: {fileID: 87231284}
+  - key: {fileID: -3250461251644565114, guid: b790de0c52b0da84c9e6e75aeff27be0, type: 2}
+    value: {fileID: 1465283946}
   m_ExposedReferences:
     m_References:
     - d20b7fb3871f837439571365ddca2b58: {fileID: 4199940568865561911}
@@ -1916,6 +1920,109 @@ Transform:
   m_Children: []
   m_Father: {fileID: 803252687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1465283945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465283942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8788ce2ab6cf97042afe27b41741cf74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 1465283943}
+--- !u!114 &1465283946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465283942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1e80cf8e348d30046a3accd9056642e1, type: 2}
+    - {fileID: 11400000, guid: 6997f48da14b94e43ab704ad5241b45f, type: 2}
+    - {fileID: 11400000, guid: f64db82690525114180a527ac164d56a, type: 2}
+    - {fileID: 11400000, guid: e91d98a1f979e0c4f86dc81a1ce273f2, type: 2}
+    - {fileID: 11400000, guid: 9902b544f98a8644f973c5b291aa7dba, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1465283945}
+          m_TargetAssemblyTypeName: PauseOnSignal, Assembly-CSharp
+          m_MethodName: OnSignalRight
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1465283945}
+          m_TargetAssemblyTypeName: PauseOnSignal, Assembly-CSharp
+          m_MethodName: OnSignalC
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1465283945}
+          m_TargetAssemblyTypeName: PauseOnSignal, Assembly-CSharp
+          m_MethodName: OnSignalSpace
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1465283945}
+          m_TargetAssemblyTypeName: PauseOnSignal, Assembly-CSharp
+          m_MethodName: OnSignalX
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1465283945}
+          m_TargetAssemblyTypeName: PauseOnSignal, Assembly-CSharp
+          m_MethodName: OnSignalZ
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1495564448
 GameObject:
   m_ObjectHideFlags: 0

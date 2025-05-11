@@ -74,12 +74,6 @@ public class HUDManager : MonoBehaviour
         gold = GameManager.Instance.playerGold;
 
         UpdateHUD();
-
-        //if (canvasGroup != null && gameObject.activeSelf)
-        //{
-        //    canvasGroup.alpha = 0f;
-        //    StartCoroutine(FadeInHUD());
-        //}
     }
 
     public void ShowHUD() =>

@@ -23,7 +23,7 @@ public class EnemyDeadState : EnemyState
 
         // 게임 매니저에 적 사망을 알리고, 골드를 증가시킵니다.
         GameManager.Instance.OnMonsterDead();
-        GameManager.Instance.SetGold(10);
+        GameManager.Instance.SetGold(50);
     }
 
     /// <summary>

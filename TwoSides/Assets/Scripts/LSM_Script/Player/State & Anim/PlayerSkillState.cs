@@ -1,11 +1,11 @@
 using UnityEngine;
 
-// TODO: (Ãß°¡ÇÒÀÏ Àû´ÂºÎºĞ)
-// FIXME: (°íÄ¥°Å Àû´ÂºÎºĞ)
-// NOTE : (±âÅ¸ ÀÛ¼º)
+// TODO: (ì¶”ê°€í• ì¼ ì ëŠ”ë¶€ë¶„)
+// FIXME: (ê³ ì¹ ê±° ì ëŠ”ë¶€ë¶„)
+// NOTE : (ê¸°íƒ€ ì‘ì„±)
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î°¡ ½ºÅ³À» »ç¿ëÇÏ´Â »óÅÂ¸¦ ³ªÅ¸³»´Â Å¬·¡½º
+/// í”Œë ˆì´ì–´ê°€ ìŠ¤í‚¬ì„ ì‚¬ìš©í•˜ëŠ” ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class PlayerSkillState : PlayerState
 {
@@ -15,12 +15,12 @@ public class PlayerSkillState : PlayerState
     {
         base.Enter();
         playerObject.IsSkill = true;
-        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); //¹Ì²ô·¯Áü ¹æÁö 
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); //ë¯¸ë„ëŸ¬ì§ ë°©ì§€ 
     }
     public override void Update()
     {
         base.Update();
-        //½ºÅ³¿¡¼­ÀÇ »óÅÂ ÀüÀÌ
+        //ìŠ¤í‚¬ì—ì„œì˜ ìƒíƒœ ì „ì´
         if (!playerObject.IsSkill)
         {
             if (playerObject.IsGroundDetected())
@@ -42,6 +42,10 @@ public class PlayerSkillState : PlayerState
     } 
     public override void Exit()
     {
+        if (playerObject.skillCollider.activeSelf)
+        {
+            playerObject.skillCollider.SetActive(false);
+        }
         playerObject.IsSkill = false;
         base.Exit();
     }
