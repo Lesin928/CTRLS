@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 using JetBrains.Annotations;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject hitEffectUIPrefab;
     private Image hitEffectImage;
+
+    public bool isStoreReset;
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -123,6 +126,7 @@ public class GameManager : MonoBehaviour
 
         currentStage = 1;
         isClear = false;
+        isStoreReset = true;
 
         //HUDManager
         if (HUDManager.Instance != null)
@@ -212,6 +216,14 @@ public class GameManager : MonoBehaviour
     {
         HUDManager.Instance.HideHUD();
         HideMapController.shouldShowHideMap = false;
+        GameObject map = GameObject.Find("MapScrollArea");
+        if (map != null)
+        {
+            if (map.activeSelf)
+            {
+                map.SetActive(false);
+            }
+        }
 
         StartCoroutine(GameOverRoutine());
     }
@@ -390,10 +402,10 @@ public class GameManager : MonoBehaviour
         //{
         //    SetHealth(-10);
         //}
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    SetGold(1000);
-        //}
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            SetGold(1000);
+        }
 
         //if (Input.GetKeyDown(KeyCode.R))
         //{

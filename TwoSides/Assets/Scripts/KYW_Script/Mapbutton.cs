@@ -9,7 +9,7 @@ public class Mapbutton : MonoBehaviour
     public float animationDuration = 0.3f;
     public static Mapbutton Instance;
 
-    private bool isVisible = false;
+    public bool isVisible = false;
     private Coroutine animationCoroutine;
     public Button aButton; // 인스펙터에서 연결
     public bool activeButton = false;
@@ -129,6 +129,11 @@ public class Mapbutton : MonoBehaviour
         }
 
         rect.localScale = endScale;
+        map.SetActive(false);
+    }
+
+    public void HideMapNoAnim()
+    {
         map.SetActive(false);
     }
 }

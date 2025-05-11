@@ -1,34 +1,35 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀûÀÇ Ãß°İ »óÅÂ¸¦ ´ã´çÇÏ´Â Å¬·¡½º
+/// ì ì˜ ì¶”ê²© ìƒíƒœë¥¼ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class EnemyChaseState : EnemyState
 {
-    private Transform player; // ÇÃ·¹ÀÌ¾î À§Ä¡ Á¤º¸
+    private Transform player; // í”Œë ˆì´ì–´ ìœ„ì¹˜ ì •ë³´
 
-    // EnemyChaseState »ı¼ºÀÚ
+    // EnemyChaseState ìƒì„±ì
     public EnemyChaseState(EnemyObject enemyBase, EnemyStateMachine stateMachine, string animBoolName)
         : base(enemyBase, stateMachine, animBoolName)
     {
     }
 
     /// <summary>
-    /// »óÅÂ ÁøÀÔ ½Ã ½ÇÇàµÇ´Â ÇÔ¼ö
+    /// ìƒíƒœ ì§„ì… ì‹œ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
     /// </summary>
     public override void Enter()
     {
         player = PlayerManager.instance.player.transform;
         enemyBase.MoveSpeed = enemyBase.chaseSpeed;
+        enemyBase.stateMachine.isChasing = true;
 
-        // º®ÀÌ »çÀÌ¿¡ ÀÖÀ¸¸é ÃßÀû Á¾·á
+        // ë²½ì´ ì‚¬ì´ì— ìˆìœ¼ë©´ ì¶”ì  ì¢…ë£Œ
         if (enemyBase.IsWallBetweenPlayer())
         {
             enemyBase.ExitPlayerDetection();
             return;
         }
 
-        // YÃà °Å¸® Â÷ÀÌ°¡ Å©°í ¶¥ÀÌ ¾øÀ¸¸é ÃßÀû Æ÷±â
+        // Yì¶• ê±°ë¦¬ ì°¨ì´ê°€ í¬ê³  ë•…ì´ ì—†ìœ¼ë©´ ì¶”ì  í¬ê¸°
         float yDistance = Mathf.Abs(enemyBase.transform.position.y - player.position.y);
         if (!enemyBase.IsGroundDetected() && yDistance > 0.3f)
         {
@@ -41,7 +42,7 @@ public class EnemyChaseState : EnemyState
     }
 
     /// <summary>
-    /// Ãß°İ »óÅÂÀÇ ¸Å ÇÁ·¹ÀÓ Ã³¸®
+    /// ì¶”ê²© ìƒíƒœì˜ ë§¤ í”„ë ˆì„ ì²˜ë¦¬
     /// </summary>
     public override void Update()
     {
@@ -51,21 +52,21 @@ public class EnemyChaseState : EnemyState
         float xDiff = player.position.x - enemyBase.transform.position.x;
         float yDistance = Mathf.Abs(enemyBase.transform.position.y - player.position.y);
 
-        // ¶¥ÀÌ ¾ø°í YÃà °Å¸® Â÷ÀÌ°¡ Å©¸é ´ë±â »óÅÂ·Î ÀüÈ¯
+        // ë•…ì´ ì—†ê³  Yì¶• ê±°ë¦¬ ì°¨ì´ê°€ í¬ë©´ ëŒ€ê¸° ìƒíƒœë¡œ ì „í™˜
         if (!enemyBase.IsGroundDetected() && yDistance > 0.3f)
         {
             enemyBase.CallIdleState();
             return;
         }
 
-        // º®ÀÌ³ª ¶¥ÀÌ ¾øÀ¸¸é ¹æÇâ ÀüÈ¯ ÈÄ ´ë±â
+        // ë²½ì´ë‚˜ ë•…ì´ ì—†ìœ¼ë©´ ë°©í–¥ ì „í™˜ í›„ ëŒ€ê¸°
         if (enemyBase.IsWallDetected() || !enemyBase.IsGroundDetected())
         {
             enemyBase.Flip();
             enemyBase.CallIdleState();
             return;
         }
-        // ÇÃ·¹ÀÌ¾î¸¦ ´õ ÀÌ»ó °¨ÁöÇÏÁö ¸øÇÏ°Å³ª º® »çÀÌ¿¡ ÀÖÀ» °æ¿ì ÃßÀû Á¾·á
+        // í”Œë ˆì´ì–´ë¥¼ ë” ì´ìƒ ê°ì§€í•˜ì§€ ëª»í•˜ê±°ë‚˜ ë²½ ì‚¬ì´ì— ìˆì„ ê²½ìš° ì¶”ì  ì¢…ë£Œ
         else if (!enemyBase.IsPlayerDetected() || enemyBase.IsWallBetweenPlayer())
         {
             enemyBase.ExitPlayerDetection();
@@ -74,14 +75,13 @@ public class EnemyChaseState : EnemyState
         {
             if (enemyBase.IsAttackDetectable() != null)
             {
-                // °ø°İ Á¶°Ç ¸¸Á· ½Ã °ø°İ »óÅÂ·Î ÀüÈ¯
+                // ê³µê²© ì¡°ê±´ ë§Œì¡± ì‹œ ê³µê²© ìƒíƒœë¡œ ì „í™˜
                 if (CanAttack() && !enemyBase.IsWallBetweenPlayer())
                 {
                     int dir = xDiff > 0 ? 1 : -1;
 
-                    // ¹æÇâ ´Ù¸£¸é ÀüÈ¯
-                    // XÃà °Å¸® Â÷ÀÌ°¡ EnemyÀÇ colliderÀÇ x Å©±â ÀÌ»óÀÏ ¶§¸¸ ÀÌµ¿
-                    if (dir != enemyBase.facingDir && Mathf.Abs(xDiff) > enemyBase.colliderWidth)
+                    // ë°©í–¥ ë‹¤ë¥´ë©´ ì „í™˜
+                    if (dir != enemyBase.facingDir)
                         enemyBase.Flip();
 
                     enemyBase.CallAttackState();
@@ -95,24 +95,25 @@ public class EnemyChaseState : EnemyState
             return;
         }
 
-        // XÃà °Å¸® Â÷ÀÌ°¡ EnemyÀÇ colliderÀÇ x Å©±â ÀÌ»óÀÏ ¶§¸¸ ÀÌµ¿
+        // Xì¶• ê±°ë¦¬ ì°¨ì´ê°€ Enemyì˜ colliderì˜ x í¬ê¸° ì´ìƒì¼ ë•Œë§Œ ì´ë™
         if (Mathf.Abs(xDiff) > enemyBase.colliderWidth)
         {
-            int moveDir = xDiff > 0 ? 1 : -1; // ÀÌµ¿ ¹æÇâ
+            int moveDir = xDiff > 0 ? 1 : -1; // ì´ë™ ë°©í–¥
             enemyBase.SetVelocity(enemyBase.MoveSpeed * moveDir, rb.linearVelocityY);
         }
     }
 
     /// <summary>
-    /// »óÅÂ Á¾·á ½Ã ½ÇÇà
+    /// ìƒíƒœ ì¢…ë£Œ ì‹œ ì‹¤í–‰
     /// </summary>
     public override void Exit()
     {
         base.Exit();
         enemyBase.MoveSpeed = enemyBase.defaultMoveSpeed;
+        enemyBase.stateMachine.isChasing = false;
     }
 
-    // °ø°İ °¡´É ¿©ºÎ ÆÇ´Ü
+    // ê³µê²© ê°€ëŠ¥ ì—¬ë¶€ íŒë‹¨
     private bool CanAttack()
     {
         if (Time.time >= enemyBase.lastTimeAttacked + enemyBase.attackCooldown)
