@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private Image hitEffectImage;
 
     public bool isStoreReset;
+    public Dictionary<StatType, int> itemPriceMap = new Dictionary<StatType, int>();
 
     #region PlayerStat
     [Header("PlayerStat")]
@@ -266,6 +267,22 @@ public class GameManager : MonoBehaviour
 
         AsyncOperation op = SceneManager.LoadSceneAsync("GameClear");
         yield return new WaitUntil(() => op.isDone);
+    }
+
+    public int GetItemPrice(StatType type)
+    {
+        if (!itemPriceMap.ContainsKey(type))
+            itemPriceMap[type] = 100; // 기본 가격
+
+        return itemPriceMap[type];
+    }
+
+    public void IncreaseItemPrice(StatType type, int amount)
+    {
+        if (!itemPriceMap.ContainsKey(type))
+            itemPriceMap[type] = 100;
+
+        itemPriceMap[type] += amount;
     }
 
     #region PlayerStat

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Armor
   m_EditorClassIdentifier: 
   statType: 2
-  value: 10
+  value: 5
   icon: {fileID: 1515527853077761214, guid: 3062a15e905dc4145a7576ae949ee807, type: 3}
   price: 100

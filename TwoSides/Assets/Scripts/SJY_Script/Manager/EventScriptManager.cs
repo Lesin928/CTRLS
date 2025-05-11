@@ -102,114 +102,114 @@ public class EventScriptManager : MonoBehaviour
                 if (num == 1)
                 {
                     GameManager.Instance.SetMaxHealth(10);
-                    text = "°íÇÂ ¹è°¡ Á¶±İÀº Ã¡´Ù.  ÀÌ¼º +10 Ã¼·Â +10";
+                    text = "ê³ í”ˆ ë°°ê°€ ì¡°ê¸ˆì€ ì°¼ë‹¤.  ì´ì„±+ ì²´ë ¥+";
                 }
                 else
                 {
-                    text = "³²ÀÇ °ÍÀ» »©¾Ñ°í ½ÍÁø ¾Ê´Ù.  °¨¼º +20";
+                    text = "ë‚¨ì˜ ê²ƒì„ ë¹¼ì•—ê³  ì‹¶ì§„ ì•Šë‹¤.  ê°ì„±+";
                 }
                 break;
             case 1:
                 if (num == 1)
                 {
-                    text = "´ç½ÅÀº ²Ï³ª Ãæµ¿ÀûÀÎ »ç¶÷ÀÌ´Ù.  °¨¼º +20";
+                    text = "ë‹¹ì‹ ì€ ê½¤ë‚˜ ì¶©ë™ì ì¸ ì‚¬ëŒì´ë‹¤.  ê°ì„±+";
                 }
                 else
                 {
-                    text = "¼ö»óÇÑ °ÍÀº °Çµå¸®Áö ¾Ê´Â °Ô »óÃ¥.  ÀÌ¼º+20";
+                    text = "ìˆ˜ìƒí•œ ê²ƒì€ ê±´ë“œë¦¬ì§€ ì•ŠëŠ” ê²Œ ìƒì±….  ì´ì„±+";
                 }
                 break;
             case 2:
                 if (num == 1)
                 {
                     GameManager.Instance.SetPlayerAttackSpeed(10);
-                    GameManager.Instance.SetPlayerMoveSpeed(10);
-                    text = "Ã¥¿¡´Â À¯¿ëÇÑ Áö½ÄÀÌ ¸¹¾Ò´Ù.  ÀÌ¼º +10 °ø°İ¼Óµµ+10 ÀÌµ¿¼Óµµ+10";
+                    GameManager.Instance.SetPlayerMoveSpeed(2);
+                    text = "ì±…ì—ëŠ” ìœ ìš©í•œ ì§€ì‹ì´ ë§ì•˜ë‹¤.  ì´ì„±+ ê³µê²©ì†ë„+ ì´ë™ì†ë„+";
                 }
                 else
                 {
                     GameManager.Instance.SetHealth(10);
-                    text = "ÀÌ¾ß±â¸¦ µè´Â µ¿¾È ±â¿îÀ» Á¶±İ È¸º¹Çß´Ù.  °¨¼º +20 Ã¼·Â+10";
+                    text = "ì´ì•¼ê¸°ë¥¼ ë“£ëŠ” ë™ì•ˆ ê¸°ìš´ì„ ì¡°ê¸ˆ íšŒë³µí–ˆë‹¤.  ê°ì„±+ ì²´ë ¥+";
                 }
                 break;
             case 3:
                 if (num == 1)
                 {
                     GameManager.Instance.SetHealth(-10);
-                    text = "»óÀÚ¸¦ ¿©´Â µ¥ ÈûÀÌ ºÎÃÆ´Ù.  ÀÌ¼º +10 Ã¼·Â -10";
+                    text = "ìƒìë¥¼ ì—¬ëŠ” ë° í˜ì´ ë¶€ì³¤ë‹¤.  ì´ì„±+ ì²´ë ¥-";
                 }
                 else
                 {
-                    text = "³²ÀÇ °ÍÀº ¼Õ´ë¼± ¾È µÈ´Ù.  °¨¼º +10";
+                    text = "ë‚¨ì˜ ê²ƒì€ ì†ëŒ€ì„  ì•ˆ ëœë‹¤.  ê°ì„±+";
                 }
                 break;
             case 4:
                 if (num == 1)
                 {
                     GameManager.Instance.SetHealth(10);
-                    text = "±â¿îÀÌ Á¶±İ È¸º¹µÇ¾ú´Ù. Ã¼·Â +10 °¨¼º+10";
+                    text = "ê¸°ìš´ì´ ì¡°ê¸ˆ íšŒë³µë˜ì—ˆë‹¤. ì²´ë ¥+ ê°ì„±+";
                 }
                 else
                 {
-                    text = "Àß ¸ğ¸£´Â °ÍÀº ¸¶½ÃÁö ¸»ÀÚ. ÀÌ¼º +20";
+                    text = "ì˜ ëª¨ë¥´ëŠ” ê²ƒì€ ë§ˆì‹œì§€ ë§ì. ì´ì„±+";
                 }
                 break;
             case 5:
                 if (num == 1)
                 {
-                    text = "ÇÔ²² ¾ÖµµÇÏÀÚ.  °¨¼º +20";
+                    text = "í•¨ê»˜ ì• ë„í•˜ì.  ê°ì„±+";
                 }
                 else
                 {
-                    text = "´ç½ÅÀº ¾²·¹±â´Ù.  ÀÌ¼º +20";
+                    text = "ë‹¹ì‹ ì€ ì“°ë ˆê¸°ë‹¤.  ì´ì„±+";
                 }
                 break;
             case 6:
                 if (num == 1)
                 {
                     GameManager.Instance.SetHealth(10);
-                    text = "¾àÀ» ¸¶½Ã°í ±â¿îÀ» È¸º¹Çß´Ù.  Ã¼·Â +10 °¨¼º +10";
+                    text = "ì•½ì„ ë§ˆì‹œê³  ê¸°ìš´ì„ íšŒë³µí–ˆë‹¤.  ì²´ë ¥+ ê°ì„±+";
                 }
                 else
                 {
-                    text = "¼ö»óÇÑ »ç¶÷ÀÌ ÁÖ´Â °ÍÀº °ÅÀıÇÏ°Ú¾î.  ÀÌ¼º +20";
+                    text = "ìˆ˜ìƒí•œ ì‚¬ëŒì´ ì£¼ëŠ” ê²ƒì€ ê±°ì ˆí•˜ê² ì–´.  ì´ì„±+";
                 }
                 break;
             case 7:
                 if (num == 1)
                 {
                     GameManager.Instance.SetPlayerArmor(10);
-                    text = "´Ü´ÜÇÑ ±â¿îÀÌ ¸öÀ» °¨½Ñ´Ù.  °¨¼º +10 ¹æ¾î·Â +10";
+                    text = "ë‹¨ë‹¨í•œ ê¸°ìš´ì´ ëª¸ì„ ê°ì‹¼ë‹¤.  ê°ì„±+ ë°©ì–´ë ¥+";
                 }
                 else
                 {
-                    text = "¼ö»óÇÑ °ÍÀº °Çµå¸®Áö ¾Ê´Â °Ô »óÃ¥.  ÀÌ¼º +20";
+                    text = "ìˆ˜ìƒí•œ ê²ƒì€ ê±´ë“œë¦¬ì§€ ì•ŠëŠ” ê²Œ ìƒì±….  ì´ì„±+";
                 }
                 break;
             case 8:
                 if (num == 1)
                 {
-                    GameManager.Instance.SetPlayerMoveSpeed(10);
-                    text = "½Ã°è¸¦ µÚÁıÀ½°ú µ¿½Ã¿¡ ¸öÀÌ °¡º­¿öÁüÀ» ´À³¤´Ù.  °¨¼º +10 ÀÌµ¿¼Óµµ+10";
+                    GameManager.Instance.SetPlayerMoveSpeed(2);
+                    text = "ì‹œê³„ë¥¼ ë’¤ì§‘ìŒê³¼ ë™ì‹œì— ëª¸ì´ ê°€ë²¼ì›Œì§ì„ ëŠë‚€ë‹¤.  ê°ì„±+ ì´ë™ì†ë„+";
                 }
                 else
                 {
-                    text = "±»ÀÌ ³ª¼­¼­ µÚÁıÁö´Â ¸»ÀÚ.  ÀÌ¼º +20";
+                    text = "êµ³ì´ ë‚˜ì„œì„œ ë’¤ì§‘ì§€ëŠ” ë§ì.  ì´ì„±+";
                 }
                 break;
             case 9:
                 if (num == 1)
                 {
-                    GameManager.Instance.SetPlayerCritical(10);
+                    GameManager.Instance.SetPlayerCritical(0.1f);
                     GameManager.Instance.SetPlayerCriticalDamage(10);
-                    text = "ÀÖÀ» ¸® ¾ø´Â ´«µ¿ÀÚ¿Í ¸¶ÁÖÄ£ °Í °°Àº ±âºĞÀÌ´Ù.  °¨¼º +10 Ä¡¸íÅ¸ÇÇÇØ +10 Ä¡¸íÅ¸È®·ü +10";
+                    text = "ìˆì„ ë¦¬ ì—†ëŠ” ëˆˆë™ìì™€ ë§ˆì£¼ì¹œ ê²ƒ ê°™ì€ ê¸°ë¶„ì´ë‹¤.  ê°ì„±+ ì¹˜ëª…íƒ€í”¼í•´+ ì¹˜ëª…íƒ€í™•ë¥ +";
                 }
                 else
                 {
                     GameManager.Instance.SetHealth(-10);
-                    GameManager.Instance.SetPlayerAttack(-10);
+                    GameManager.Instance.SetPlayerAttack(-6);
                     GameManager.Instance.SetPlayerArmor(-10);
-                    text = "¾îµò°¡ ºÒ±æÇÑ ÇØ°ñÀÌ´Ù.  ÀÌ¼º +10 Ã¼·Â -10 °ø°İ·Â -10 ¹æ¾î·Â -10";
+                    text = "ì–´ë”˜ê°€ ë¶ˆê¸¸í•œ í•´ê³¨ì´ë‹¤.  ì´ì„±+ ì²´ë ¥- ê³µê²©ë ¥- ë°©ì–´ë ¥-";
                 }
                 break;
         }
