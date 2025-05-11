@@ -740,8 +740,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 100}
+  m_AnchoredPosition: {x: 0, y: -60}
+  m_SizeDelta: {x: 70, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &637447807
 MonoBehaviour:
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6249838950478982285, guid: e1e77e79d3404314baccd4e66f970e75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f80bf296459267a479e8b144ad3d7846, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -813,8 +813,8 @@ MonoBehaviour:
   rockPrefab: {fileID: 5222328162114872457, guid: 8ff83d25db952804d9198ce40fdd9cfb, type: 3}
   spawnInterval: 0.3
   spawnHeight: 5
-  spawnXMin: 20
-  spawnXMax: 40
+  spawnXMin: 0
+  spawnXMax: 80
   hp: 3
   hpText: {fileID: 471661662}
   gameOverPanel: {fileID: 637447805}
@@ -1907,7 +1907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1896507922
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1924,8 +1924,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 160}
+  m_AnchoredPosition: {x: 0, y: -90}
+  m_SizeDelta: {x: 100, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1896507923
 MonoBehaviour:
@@ -1947,7 +1947,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5905358785927170718, guid: 016221f441043194a8e7123d6c0145dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54237a16bfd096745a8a6e807afd0828, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
