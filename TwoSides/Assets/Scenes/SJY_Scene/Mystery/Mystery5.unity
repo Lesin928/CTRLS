@@ -634,6 +634,73 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1001 &608271179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 916748354}
+    m_Modifications:
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111290948303789846, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+      propertyPath: m_Name
+      value: F
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+--- !u!1 &608271180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8111290948303789846, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+  m_PrefabInstance: {fileID: 608271179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &608271181 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4497898810429022465, guid: 726450b7d8f972040be879f9c679482e, type: 3}
+  m_PrefabInstance: {fileID: 608271179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &742078051
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +828,7 @@ GameObject:
   - component: {fileID: 916748355}
   - component: {fileID: 916748353}
   - component: {fileID: 916748356}
+  - component: {fileID: 916748357}
   m_Layer: 0
   m_Name: GraveStone
   m_TagString: Interactive
@@ -835,7 +903,8 @@ Transform:
   m_LocalPosition: {x: 28.74, y: -0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 608271181}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &916748355
@@ -888,6 +957,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.8, y: 1}
   m_Direction: 0
+--- !u!114 &916748357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916748352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50278bb12e48494489ffd5e82345ed4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  F: {fileID: 608271180}
 --- !u!1 &1065430117
 GameObject:
   m_ObjectHideFlags: 0
