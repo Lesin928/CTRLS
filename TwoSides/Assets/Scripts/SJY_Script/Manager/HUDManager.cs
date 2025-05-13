@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// HUD 관리하는 스크립트
+// 켜고 끄기, UI 업데이트, TimeScale 관리
 public class HUDManager : MonoBehaviour
 {
     public static HUDManager Instance;

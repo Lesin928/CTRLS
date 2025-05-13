@@ -7,6 +7,7 @@ public class EventScriptManager : MonoBehaviour
 
     public List<EventData> eventList;
 
+    //EventData를 받기 위한 딕셔너리 Key: 이벤트 번호, Value: 스크립트
     private Dictionary<int, string[]> EventScript;
     private bool[] idCheck;
     private int maxScriptCount = 3;
@@ -71,6 +72,8 @@ public class EventScriptManager : MonoBehaviour
         return EventScript[id].Length;
     }
 
+    // 이벤트방 들어갈때마다 랜덤으로 스크립트를 선택하기 위해 만든
+    // 방마다 스크립트가 정해져있기때문에 사용하지 않음음
     public int GetScriptId()
     {
         int id;

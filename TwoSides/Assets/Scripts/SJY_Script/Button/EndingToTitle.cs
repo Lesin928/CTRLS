@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// 사용하지 않는 스크립트 입니다
 public class EndingToTile : MonoBehaviour
 {
     public GameObject playerPrefab;

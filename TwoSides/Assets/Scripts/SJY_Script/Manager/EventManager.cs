@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// ?방 이벤트 관리하는 스크립트트
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance { get; private set; }
@@ -17,6 +18,7 @@ public class EventManager : MonoBehaviour
     //이벤트 아닌 일반대화 전용
     public static int TUTORIAL = 101;
 
+    //이벤트방 번호마다 fixedEventId를 지정해줌줌
     public int fixedEventId = -1;
     private int id;
     public bool isEventFinished;
@@ -36,6 +38,7 @@ public class EventManager : MonoBehaviour
 
     private void Start()
     {
+        //튜토리얼 전용 이벤트, 타임라인으로 대체함함
         if (GameManager.Instance.currentStage == 1)
         {
             id = TUTORIAL;
@@ -43,7 +46,7 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            //id = EventScriptManager.Instance.GetScriptId();
+            //씬이름이 'Mystery0'일때 숫자부분만 가져옴옴
             string sceneName = SceneManager.GetActiveScene().name;
             sceneName.Substring(8);
 
@@ -75,6 +78,14 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    // 전체적인 흐름
+    // f키를 눌러 상호작용 할때마다 StartEvent() 호출
+    // StartEvent()에서 일반 대화/이지선다 이벤트 구분
+    // 1. 일반대화 이면 다음 대화 스크립트가 남아있는지 확인후
+    // 남아있으면 isEventFinished = false; 
+    // 남아있지 않으면 isEventFinished = true;로로 스테이지클리어
+    // 2. 이지선다 이벤트면 버튼을 활성화
+    // 버튼 클릭시 isEventFinished = true;로 스테이지클리어
     public void StartEvent()
     {
         EventPanel.SetActive(true);
@@ -96,6 +107,7 @@ public class EventManager : MonoBehaviour
             scriptIndex = 0;
             isEventFinished = false;
 
+            // 다음 스크립트가 없으면 대화가 종료됨됨
             if (EventScriptManager.Instance.GetEventScript(id, scriptIndex) == null)
             {
                 Debug.Log("저스트이벤트 종료");
@@ -114,6 +126,7 @@ public class EventManager : MonoBehaviour
             EventTalk(id);
     }
 
+    // f 한번 누를때마다 스크립트 하나씩 출력력
     private void Talk(int id)
     {
         int maxIndex = EventScriptManager.Instance.GetMaxScriptCount(id);
@@ -131,6 +144,7 @@ public class EventManager : MonoBehaviour
 
         if (text == null)
         {
+            // 스크립트가 끝나면 선택지 버튼 활성화화
             EventButton1.gameObject.SetActive(true);
             EventButton2.gameObject.SetActive(true);
 

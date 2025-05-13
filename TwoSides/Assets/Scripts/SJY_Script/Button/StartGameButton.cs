@@ -7,19 +7,16 @@ public class StartGameButton : MonoBehaviour
 
     public void OnClickStartGame()
     {
+        //새 게임이 시작될때마다 기존 플레이어 삭제
         playerPrefab = GameObject.Find("PlayerSet(Clone)");
         if (playerPrefab != null)
         {
             Destroy(playerPrefab);
         }
 
-        //GameManager.Instance.StartNewGame();
         GameManager.Instance.StartTimeLine();
         HUDManager.Instance.ResumGame();
 
-
-
-        //HideMapController.shouldShowHideMap = true;
         if (Map.Instance != null)
         {
             Map.Instance.ResetMap();

@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
+// 페이드인 페이드아웃 스크립트트
 public class FadeController : MonoBehaviour
 {
     public Image fadeImage;
@@ -16,7 +16,7 @@ public class FadeController : MonoBehaviour
         Color color = fadeImage.color;
 
         if (color.a == 1f)
-        {
+        {   //페이드아웃
             while (time < fadeDuration)
             {
                 time += Time.deltaTime;
@@ -26,7 +26,7 @@ public class FadeController : MonoBehaviour
             }
         }
         else
-        {
+        {   //페이드인인
             while (time < fadeDuration)
             {
                 time += Time.deltaTime;

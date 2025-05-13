@@ -22,6 +22,9 @@ public class MysteryButton : MonoBehaviour
     {
         sceneName = "Mystery";
 
+        // 랜덤으로 0부터 9까지의 숫자 중에서 사용되지 않은 숫자를 선택
+        // MysteryButton이 DontDestroy가 아니라
+        // isUsed 배열이 생성될때마다 초기화되서 사실상 랜덤이 아님...
         int rand = Random.Range(0, 10);
         while (isUsed[rand])
         {
@@ -44,7 +47,6 @@ public class MysteryButton : MonoBehaviour
             Debug.LogError("비상사태 불러박자박사 (AudioSource or Clip 없음)");
         }
         StartCoroutine(PlayerAndLoad());
-        //map.SetActive(false); //로딩이끝났을때로 걸면 가능할듯
     }
 
     private IEnumerator PlayerAndLoad()

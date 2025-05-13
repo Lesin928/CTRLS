@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// 씬 전환이나 특정 씬에서 키보드 입력을 막기 위한 스크립트
 public class InputBlockerManager : MonoBehaviour
 {
     private static InputBlockerManager Instance;

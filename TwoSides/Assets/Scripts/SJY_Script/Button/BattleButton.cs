@@ -4,7 +4,6 @@ using UnityEngine;
 public class BattleButton : MonoBehaviour
 {
     public GameObject map;
-    //private bool[] isUsed = new bool[10];
     public string sceneName;
     [Header("사운드")]
     public AudioSource audioSource;   // 인스펙터에서 연결
@@ -18,23 +17,10 @@ public class BattleButton : MonoBehaviour
 
     public void Onclick()
     {
+        // 배틀방 들어갈때마다 0부터 9까지 순차적으로 증가가
         sceneName = "Battle" + Map.Instance.battleNum.ToString();
         if (Map.Instance.battleNum < 9)
             Map.Instance.battleNum++;
-
-        //int rand = Random.Range(0, 10);
-        //while (isUsed[rand])
-        //{
-        //    rand = Random.Range(0, 10);
-        //}
-        //isUsed[rand] = true;
-
-        //int rand = 0;
-        //while (isUsed[rand])
-        //{
-        //    rand++;
-        //}
-        //isUsed[rand] = true;
 
         GameManager.Instance.isClear = false;
         Mapbutton.Instance.activeButton = false;
@@ -49,11 +35,11 @@ public class BattleButton : MonoBehaviour
             Debug.LogError("비상사태 불러박자박사 (AudioSource or Clip 없음)");
         }
         StartCoroutine(PlayerAndLoad());
-        //map.SetActive(false); //로딩이끝났을때로 걸면 가능할듯
     }
 
     private IEnumerator PlayerAndLoad()
     {
+        // 방진입 클릭소리가 끝날때까지 기다렸다가 씬 로드
         yield return new WaitForSeconds(clickSound.length);
         map.SetActive(false); //로딩이끝났을때로 걸면 가능할듯
         LoadingSceneController.Instance.LoadScene(sceneName);
