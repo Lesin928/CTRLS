@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using Unity.Collections;
 
+// 씬 로드를 관리하는 스크립트트
 public class LoadingSceneController : MonoBehaviour
 {
     private static LoadingSceneController instance;
@@ -63,19 +64,24 @@ public class LoadingSceneController : MonoBehaviour
     {
         yield return StartCoroutine(Fade(true));
 
+        // 비동기로 씬을 로딩하는 함수
         AsyncOperation op = SceneManager.LoadSceneAsync(loadSceneName);
+        // 씬 로딩이 완료되어도 로딩장면을 유지하기 위해 자동으로 씬이 전환되지 않게 설정
         op.allowSceneActivation = false;
 
+        // 로딩이 완료될때까지 대기
         while (op.progress < 0.9f)
         {
             yield return null;
         }
 
+        // 로딩이 완료된 후 로딩장면을 1.5초간 보여줌
         yield return new WaitForSecondsRealtime(1.5f);
 
         op.allowSceneActivation = true;
     }
 
+    // 씬이 로드되자마자 가장 먼저 호출되는 함수수
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         if (arg0.name == loadSceneName)
@@ -84,12 +90,14 @@ public class LoadingSceneController : MonoBehaviour
                 && loadSceneName != "GameClear" && loadSceneName != "GameOver"
                 && loadSceneName != "TimeLine")
             {
+                //InitStageData에서 Stage마다 몇마리의 적이 있는지 설정하고 플레이어 스폰 위치 설정
                 GameManager.Instance.InitStageData(loadSceneName);
             }
 
             StartCoroutine(Fade(false));
             SceneManager.sceneLoaded -= OnSceneLoaded;
 
+            // isClear 초기화화
             Debug.Log(GameManager.Instance.isClear);
             if (GameManager.Instance.isClear)
             {

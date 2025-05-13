@@ -26,17 +26,6 @@ public class PuzzleButton : MonoBehaviour
         if (Map.Instance.puzzleNum < 3)
             Map.Instance.puzzleNum++;
 
-        //int rand = Random.Range(0, 3);
-        //while (isUsed[rand])
-        //{
-        //    rand = Random.Range(0, 3);
-        //}
-        //isUsed[rand] = true;
-
-        //rand = 0;
-
-        //sceneName += rand.ToString();
-
         GameManager.Instance.isClear = false;
         Mapbutton.Instance.activeButton = false;
         Map.Instance.doorConnected = false;

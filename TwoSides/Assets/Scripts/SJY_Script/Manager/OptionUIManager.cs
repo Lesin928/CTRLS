@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// ì˜µì…˜ UIë¥¼ ê´€ë¦¬í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
 public class OptionUIManager : MonoBehaviour
 {
     public static OptionUIManager Instance { get; private set; }
@@ -41,7 +42,7 @@ public class OptionUIManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("OptionUI ·Îµù ½ÇÆĞ!");
+            Debug.LogError("OptionUI ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½!");
         }
     }
 
@@ -49,7 +50,7 @@ public class OptionUIManager : MonoBehaviour
     {
         if (optionUIInstance == null)
         {
-            Debug.LogWarning("Option UI°¡ ¾ÆÁ÷ ·ÎµùµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("Option UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 

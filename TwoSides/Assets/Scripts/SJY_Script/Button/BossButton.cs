@@ -31,7 +31,6 @@ public class BossButton : MonoBehaviour
             Debug.LogError("비상사태 불러박자박사 (AudioSource or Clip 없음)");
         }
         StartCoroutine(PlayerAndLoad());
-        //map.SetActive(false); //로딩이끝났을때로 걸면 가능할듯
     }
 
     private IEnumerator PlayerAndLoad()

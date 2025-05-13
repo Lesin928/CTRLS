@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
+// 게임 상태와 플레이어 상태 관리를 위한 스크립트트
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -90,11 +91,13 @@ public class GameManager : MonoBehaviour
         };
     }
 
+    //스테이지마다 다른 데이터 초기화
     public void InitStageData(string sceneName)
     {
         deadMonsterCount = 0;
         isClear = false;
 
+        // 스테이지마다 정해진 몬스터 수를 가져옴
         currentStageData = stageDataList.Find(data => data.stageName == sceneName);
 
         if (currentStageData == null)
@@ -102,9 +105,9 @@ public class GameManager : MonoBehaviour
         else
             Debug.Log($"[GameManager] {sceneName} 스테이지 데이터 초기화 완료 - 몬스터 수: {currentStageData.monsterCount}");
 
+        // 게임 시작시 플레이어 생성
         if (currentStageData.stageName == "Tutorial")
         {
-            //플레이어 프리팹 생성
             GameObject spawnPoint = GameObject.Find("Starting_Point");
 
             go = Instantiate(playerPrefab, spawnPoint.transform.position, Quaternion.identity);
@@ -119,6 +122,7 @@ public class GameManager : MonoBehaviour
             SetUpPlayerStats();
         }
 
+        // 플레이어 스폰위치 지정정
         var playerObj = go.GetComponent<PlayerDontDestroyOnLoad>();
         if (playerObj != null)
             playerObj.ResetSpawnPosition();
@@ -131,6 +135,7 @@ public class GameManager : MonoBehaviour
         LoadingSceneController.Instance.LoadScene("TimeLine");
     }
 
+    // GameStart, ReStart 할때마다 필요한 모든 정보 초기화화
     public void StartNewGame()
     {
         Debug.Log("Start New Game");
@@ -211,6 +216,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //방에 있는 모든 몬스터를 처치해야지 넘어가게 하기 위한 함수
+    //몬스터가 죽을때마다 호출되어 확인함함
     public void OnMonsterDead()
     {
         if (currentStageData == null) return;
@@ -236,7 +243,6 @@ public class GameManager : MonoBehaviour
                 map.SetActive(false);
             }
         }
-
         StartCoroutine(GameOverRoutine());
     }
 
@@ -263,8 +269,6 @@ public class GameManager : MonoBehaviour
             HideMapController.shouldShowHideMap = false;
             StartCoroutine(GameClearRoutine());
         }
-
-
     }
 
     IEnumerator GameClearRoutine()
@@ -277,6 +281,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => op.isDone);
     }
 
+    // 새로운 게임이 시작될때마다 아이템 가격 초기화
     public int GetItemPrice(StatType type)
     {
         if (!itemPriceMap.ContainsKey(type))
@@ -285,6 +290,7 @@ public class GameManager : MonoBehaviour
         return itemPriceMap[type];
     }
 
+    // 아이템 구매시 가격 증가
     public void IncreaseItemPrice(StatType type, int amount)
     {
         if (!itemPriceMap.ContainsKey(type))
@@ -414,37 +420,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        //키입력 차단단
         if (InputBlocker.blockKeyboardInput) return;
 
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    SetPlayerAttack(10);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    SetMaxHealth(10);
-        //}
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    SetMaxHealth(-10);
-        //}
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    SetHealth(10);
-        //}
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    SetHealth(-10);
-        //}
         if (Input.GetKeyDown(KeyCode.G))
         {
             SetGold(1000);
         }
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    StartNewGame();
-        //}
 
         if (Input.GetKeyDown(KeyCode.T))
         {

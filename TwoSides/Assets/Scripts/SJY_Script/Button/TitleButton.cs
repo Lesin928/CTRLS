@@ -9,21 +9,11 @@ public class TitleButton : MonoBehaviour
     {
         LoadingSceneController.Instance.LoadScene("Title");
 
+        // 타이틀 화면으로 돌아갈때마다 기존 플레이어 삭제
         playerPrefab = GameObject.Find("PlayerSet(Clone)");
-
         if (playerPrefab != null)
         {
             Destroy(playerPrefab);
-        }
-
-        if (HUDManager.Instance != null)
-        {
-            Debug.Log(HUDManager.Instance.gameObject.activeSelf + "1");
-        }
-
-        if (HUDManager.Instance != null)
-        {
-            Debug.Log(HUDManager.Instance.gameObject.activeSelf + "2");
         }
 
         HideMapController.shouldShowHideMap = false;

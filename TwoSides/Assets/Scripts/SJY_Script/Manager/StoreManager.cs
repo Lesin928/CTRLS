@@ -18,6 +18,7 @@ public class StoreManager : MonoBehaviour
 
     void Start()
     {
+        // 새로운 게임이 시작되면 가격을 초기화
         if (GameManager.Instance.isStoreReset)
         {
             ResetPrice();
@@ -34,8 +35,8 @@ public class StoreManager : MonoBehaviour
 
     public void OpenStore()
     {
+        // 상점이 열릴때 마다 새로운 아이템 가져오기기
         RerollItems();
-        //UpdateItemUI();
 
         Store.SetActive(true);
         HUDManager.Instance.PauseGame();
@@ -58,6 +59,9 @@ public class StoreManager : MonoBehaviour
         UpdateItemUI();
     }
 
+    //ItemData에서 4개를 랜덤으로 가져오는 함수
+    // copy는 원본의 복사본
+    // result는 랜덤으로 가져올 아이템 리스트트
     List<ItemData> GetRandomItems()
     {
         List<ItemData> copy = new List<ItemData>(itemDataList);
@@ -67,6 +71,7 @@ public class StoreManager : MonoBehaviour
         {
             int rand = Random.Range(0, copy.Count);
             result.Add(copy[rand]);
+            //중복 방지를 위해 가져온 아이템은 복사본에서 제거거
             copy.RemoveAt(rand);
         }
 
@@ -105,6 +110,7 @@ public class StoreManager : MonoBehaviour
 
         GameManager.Instance.SetGold(-item.price);
 
+        // 구매할때마다 아이템 가격 증가
         GameManager.Instance.IncreaseItemPrice(item.statType, 50);
 
         ApplyItemEffect(item);

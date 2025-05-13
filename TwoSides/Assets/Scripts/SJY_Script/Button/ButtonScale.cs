@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 버튼 클릭시 텍스트 크기를 애니메이션으로 변경하는 스크립트
 public class ButtonScale : MonoBehaviour
 {
     public Button button;
@@ -19,10 +20,10 @@ public class ButtonScale : MonoBehaviour
 
     IEnumerator AnimateTextScale()
     {
-        // �۰�
+        // �۰�
         yield return ScaleText(minScale, scaleDuration);
 
-        // �������
+        // �������
         yield return ScaleText(1f, scaleDuration);
     }
 
